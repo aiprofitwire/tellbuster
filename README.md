@@ -34,10 +34,12 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 | Piece | What it does | Get it |
 |---|---|---|
 | Web demo | Paste text, see the tells. Nothing to install. | [Open the demo](https://aiprofitwire.github.io/tellbuster/) |
-| Chrome extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | Coming soon to the Chrome Web Store. [Try it now from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
+| Browser extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | Coming soon to the Chrome Web Store, Edge Add-ons and Firefox Add-ons. [Try it now from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
 | `tellbuster` on npm | The rule engine, for developers to use in their own tools | `npm install tellbuster`. [How to use it](packages/core/README.md) |
 
 ![With Check as I type on, the Tellbuster badge counts 3 tells in a post box, and its panel explains each one](docs/media/badge.png)
+
+The extension works in **Chrome**, **Edge** and **Firefox** (version 140 or newer). **Brave**, **Opera**, **Vivaldi** and **Arc** run Chrome extensions, so they install it from the Chrome Web Store too. Safari is not supported yet.
 
 It checks English and French, with more than 90 rules. You can turn off any rule, and add a strict mode for common filler words.
 
@@ -45,12 +47,12 @@ It checks English and French, with more than 90 rules. You can turn off any rule
 
 - No servers, no accounts, no tracking. Read the [privacy policy](https://aiprofitwire.github.io/tellbuster/privacy.html).
 - Your text is checked on your own device and never sent anywhere.
-- The Chrome extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
+- The extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
 - The rules are plain, readable data in [`rules/`](rules/). No hidden AI model making guesses.
 
 ## Publishing
 
-The steps to put Tellbuster on npm and the Chrome Web Store are in [docs/PUBLISHING.md](docs/PUBLISHING.md).
+The steps to put Tellbuster on npm, the Chrome Web Store, Edge Add-ons and Firefox Add-ons are in [docs/PUBLISHING.md](docs/PUBLISHING.md).
 
 ## Help build the list
 

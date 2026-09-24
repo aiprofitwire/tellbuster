@@ -58,6 +58,13 @@ To try the badge without logging in anywhere, see [test/pages](../../test/pages/
 3. Click **Load unpacked** and pick the `packages/extension` folder.
 4. To try the badge, open the settings and tick **Check as I type**.
 
+## Other browsers
+
+- **Edge:** works as it is. Open `edge://extensions`, turn on **Developer mode**, click **Load unpacked** and pick this folder.
+- **Brave, Opera, Vivaldi and Arc:** they run Chrome extensions. Install from the Chrome Web Store, or load this folder the same way as in Chrome.
+- **Firefox (140 or newer):** Firefox needs a slightly different manifest, so load the Firefox zip instead of this folder. In the repo folder, run `node scripts/zip-firefox.js`. In Firefox, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on...** and pick `tellbuster-firefox.zip`. Firefox forgets it when you close the browser. In Firefox, settings are saved with Firefox Sync instead of Chrome sync.
+- **Safari:** not supported yet. See [PUBLISHING.md](../../docs/PUBLISHING.md) (Part 6).
+
 ## Copied files
 
 These files are copies. Do not edit them here. Edit the original, then run `node scripts/sync-extension.js` from the repo root.
