@@ -139,7 +139,7 @@ mark {
 .sev-high { text-decoration-style: solid; text-decoration-color: var(--high); }
 .sev-medium { text-decoration-style: wavy; text-decoration-color: var(--medium); text-decoration-thickness: 1.5px; }
 .sev-low { text-decoration-style: dotted; text-decoration-color: var(--low); }
-mark.flash { background: var(--accent-soft); }
+mark.flash, mark.is-open { background: var(--accent-soft); }
 
 .popover {
   position: absolute;
