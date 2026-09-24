@@ -38,6 +38,10 @@ The maintainer (GitHub: aiprofitwire) reviews every pull request but has limited
 6. Commit with a short, clear message and open a pull request.
 7. The pull request description must end with a section called **How to test this**: numbered steps a non-developer can follow in under 5 minutes (what to click, what he should see). No jargon.
 
+## Leave starter issues to newcomers
+
+Issues labeled `good first issue` (the rules proposed in `docs/first-issues.md`) are reserved for outside contributors. Never add those rules yourself, even if a step touches the same file. If a newcomer opens a pull request for one, review it kindly and explain any fix in plain words.
+
 ## Budget rules (this project runs on a limited credit)
 
 - Default to the smallest working solution. No frameworks. No build tools unless the step asks for one.
