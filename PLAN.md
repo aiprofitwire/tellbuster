@@ -1,24 +1,26 @@
 # PLAN.md: the Tellbuster build plan
 
-**How this file works:** each session, Claude Code does the first unchecked step, ticks it, adds a dated note, and opens a pull request. One step per session. Model: **Sonnet 5** unless the step says otherwise.
+**How this file works:** each session, Claude Code does the first unchecked step, ticks it, adds a dated note, and opens a pull request. One step per session. Moe picks the model in the session settings using the **Model** column below.
 
 **Deadline:** the $100 cloud credit expires **November 5, 2026 at 2:59 AM Eastern**. All build steps must be merged before then.
 
 **Budget guide:** estimates are rough. After each session, Moe checks the credit balance on claude.ai. If less than $15 is left, skip to Step 9 (publish prep) so what exists ships.
 
-| Step | What | Est. credit |
-|---|---|---|
-| 0 | Starter files | done (free) |
-| 1 | Core engine and tests | $6 to $10 |
-| 2 | English rules to 40 | $6 to $10 |
-| 3 | Web demo page | $8 to $12 |
-| 4 | Chrome extension: popup checker | $8 to $12 |
-| 5 | Chrome extension: check as you type | $10 to $15 |
-| 6 | Settings: turn rules on and off | $5 to $8 |
-| 7 | French rules | $6 to $10 |
-| 8 | Contributor setup and automatic tests | $4 to $6 |
-| 9 | Publish prep | $5 to $8 |
-| | **Total** | **about $60 to $90** |
+| Step | What | Model | Est. credit |
+|---|---|---|---|
+| 0 | Starter files | none | done (free) |
+| 1 | Core engine and tests | Opus 5.5, medium effort | $8 to $14 |
+| 2 | English rules to 40 | Sonnet 5 | $6 to $10 |
+| 3 | Web demo page | Opus 5.5, medium effort | $10 to $16 |
+| 4 | Chrome extension: popup checker | Sonnet 5 | $8 to $12 |
+| 5 | Chrome extension: check as you type | Opus 5.5, medium effort | $12 to $20 |
+| 6 | Settings: turn rules on and off | Sonnet 5 | $5 to $8 |
+| 7 | French rules | Sonnet 5 | $6 to $10 |
+| 8 | Contributor setup and automatic tests | Sonnet 5 | $4 to $6 |
+| 9 | Publish prep | Sonnet 5 | $5 to $8 |
+| | **Total** | | **about $64 to $104** |
+
+Opus goes on the three steps where mistakes are expensive: the engine everything else depends on, in-place highlighting in the demo, and reading other sites' editors (LinkedIn, Gmail). The other steps are mostly data and forms, where Sonnet is plenty. If Step 1 costs more than $14, switch Steps 3 and 5 to Sonnet 5.
 
 ---
 
