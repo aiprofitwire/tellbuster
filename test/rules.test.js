@@ -36,3 +36,14 @@ for (const file of files) {
     });
   }
 }
+
+test('en-strict.json: a strict pack, all low severity, no ids shared with en.json', () => {
+  const read = (f) => JSON.parse(readFileSync(new URL(f, dir), 'utf8'));
+  const strict = read('en-strict.json');
+  const base = new Set(read('en.json').rules.map((r) => r.id));
+  assert.equal(strict.strict, true, 'en-strict.json must have "strict": true so it stays off by default');
+  for (const rule of strict.rules) {
+    assert.equal(rule.severity, 'low', `${rule.id} must be low severity`);
+    assert.ok(!base.has(rule.id), `${rule.id} is also in en.json`);
+  }
+});

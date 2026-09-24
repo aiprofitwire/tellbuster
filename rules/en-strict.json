@@ -1,0 +1,179 @@
+{
+  "language": "en",
+  "version": 1,
+  "strict": true,
+  "rules": [
+    {
+      "id": "en-strict-connectors",
+      "name": "Formal linking word",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(additionally|alternatively|consequently|subsequently|thus|indeed|notably|importantly|crucially|ultimately|arguably|essentially)\\b",
+      "flags": "i",
+      "message": "This linking word can read as AI (strict mode).",
+      "why": "Words like \"additionally\", \"ultimately\" and \"notably\" are normal, but AI writing uses them far more than people do. Strict house styles ask for plainer links.",
+      "fix": "Try \"also\", \"so\", \"in the end\", or just drop the word.",
+      "examples": {
+        "flag": [
+          "Additionally, the fee is waived.",
+          "Ultimately, the choice is yours.",
+          "Prices rose, thus sales fell."
+        ],
+        "pass": [
+          "Also, the fee is waived.",
+          "In the end, the choice is yours."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-stiff-words",
+      "name": "Stiff old-fashioned word",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(amongst|shall|whilst)\\b",
+      "flags": "i",
+      "message": "This stiff word can read as AI (strict mode).",
+      "why": "Old-fashioned words like \"amongst\" and \"shall\" make writing sound formal. AI writing uses them to sound official.",
+      "fix": "Try \"among\", \"will\" or \"while\".",
+      "examples": {
+        "flag": [
+          "We shall begin at noon.",
+          "It was amongst the best."
+        ],
+        "pass": [
+          "We will begin at noon.",
+          "It was among the best."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-big-adjectives",
+      "name": "Big adjective",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(compelling|crucial|daunting|immense|paramount|profound(ly)?|relentless(ly)?|transformative|unprecedented|vibrant|vital|essential|meticulous(ly)?|robust)\\b",
+      "flags": "i",
+      "message": "This big adjective can read as AI (strict mode).",
+      "why": "Words like \"crucial\", \"vibrant\" and \"robust\" have real uses, but AI writing adds them everywhere to make things sound important.",
+      "fix": "Pick a plainer word, or show the size with a number or an example.",
+      "examples": {
+        "flag": [
+          "This is a crucial step.",
+          "We built a robust system.",
+          "The task felt daunting."
+        ],
+        "pass": [
+          "This is a key step.",
+          "We built a system that has not failed in a year."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-fancy-verbs",
+      "name": "Fancy verb",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(excels|excelled|excelling|foster(s|ed|ing)?|orchestrat(e|es|ed|ing)|reshap(e|es|ed|ing)|underpin(s|ned|ning)?|unpack(s|ed|ing)?|navigat(e|es|ed|ing)|leverag(e|es|ed|ing))\\b",
+      "flags": "i",
+      "message": "This verb can read as AI (strict mode).",
+      "why": "Verbs like \"leverage\", \"unpack\" and \"navigate\" sound polished, but AI writing uses them for ordinary actions.",
+      "fix": "Use the plain verb: \"use\", \"explain\", \"handle\", \"build\", \"change\".",
+      "examples": {
+        "flag": [
+          "We leverage data to grow.",
+          "Let's unpack this idea.",
+          "She excels at sales."
+        ],
+        "pass": [
+          "We use data to grow.",
+          "I emptied my suitcase."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-stock-words",
+      "name": "Stock AI word",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(dilemma|pursuit|keen|thrilled)\\b",
+      "flags": "i",
+      "message": "This word can read as AI (strict mode).",
+      "why": "These words are fine on their own, but they turn up in AI writing so often that strict house styles avoid them.",
+      "fix": "Try \"problem\", \"goal\", \"eager\" or \"glad\".",
+      "examples": {
+        "flag": [
+          "We are thrilled to announce our launch.",
+          "She is keen to help.",
+          "The pursuit of growth drives us."
+        ],
+        "pass": [
+          "We are glad to announce our launch.",
+          "She wants to help."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-softeners",
+      "name": "Softener or intensifier",
+      "category": "filler",
+      "severity": "low",
+      "pattern": "\\b(really|just|literally|genuinely|honestly|simply|actually|deeply|truly|fundamentally|inherently|inevitably)\\b",
+      "flags": "i",
+      "message": "This softener or intensifier can read as AI (strict mode).",
+      "why": "Words like \"really\", \"truly\" and \"honestly\" add emphasis without adding meaning. AI writing stacks them up; strict styles cut most of them.",
+      "fix": "Delete the word and read the sentence again. It is usually stronger.",
+      "examples": {
+        "flag": [
+          "This is really important.",
+          "I truly believe in this.",
+          "It is simply the best choice."
+        ],
+        "pass": [
+          "This is important.",
+          "I believe in this."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-in-order-to",
+      "name": "\"In order to\"",
+      "category": "filler",
+      "severity": "low",
+      "pattern": "\\bin\\s+order\\s+to\\b",
+      "flags": "i",
+      "message": "\"In order to\" can read as AI (strict mode).",
+      "why": "In almost every sentence, \"in order to\" means the same as \"to\". AI writing uses the longer form a lot.",
+      "fix": "Use \"to\".",
+      "examples": {
+        "flag": [
+          "We met in order to plan the trip."
+        ],
+        "pass": [
+          "We met to plan the trip.",
+          "Put the files in order."
+        ]
+      }
+    },
+    {
+      "id": "en-strict-so-opener",
+      "name": "\"So,\" to open a paragraph",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "(?<=(^|\\n)[ \\t]*)So,",
+      "flags": "",
+      "message": "Opening a paragraph with \"So,\" can read as AI (strict mode).",
+      "why": "Chatty AI writing often starts a paragraph with \"So,\" to sound casual. It is a habit more than a link.",
+      "fix": "Start with the point itself.",
+      "examples": {
+        "flag": [
+          "So, what does this mean for you?",
+          "We tested it.\n\nSo, here is what we found."
+        ],
+        "pass": [
+          "It rained, so we stayed in.",
+          "We tested it. So we know."
+        ]
+      }
+    }
+  ]
+}

@@ -31,6 +31,7 @@ function validate(rule, index) {
   if (!CATEGORIES.includes(rule.category)) fail(id, `unknown category "${rule.category}"`);
   if (!SEVERITIES.includes(rule.severity)) fail(id, `unknown severity "${rule.severity}"`);
   if (rule.flags !== undefined && typeof rule.flags !== 'string') fail(id, '"flags" must be text');
+  if (rule.strict !== undefined && typeof rule.strict !== 'boolean') fail(id, '"strict" must be true or false');
   const ex = rule.examples;
   if (!Array.isArray(ex.flag) || ex.flag.length === 0) fail(id, 'needs at least one "examples.flag" sentence');
   if (!Array.isArray(ex.pass) || ex.pass.length === 0) fail(id, 'needs at least one "examples.pass" sentence');
@@ -39,6 +40,7 @@ function validate(rule, index) {
 
 /**
  * Validates a parsed rules file ({ language, rules: [...] }) and returns its rules.
+ * If the file has "strict": true (a strict style pack), every rule it returns is marked strict.
  * Throws an error naming the rule and the problem if anything is wrong.
  */
 export function loadRules(json) {
@@ -50,22 +52,24 @@ export function loadRules(json) {
     if (seen.has(rule.id)) fail(rule.id, 'duplicate id');
     seen.add(rule.id);
   });
-  return json.rules;
+  if (json.strict !== undefined && typeof json.strict !== 'boolean') throw new Error('Tellbuster rules file: "strict" must be true or false');
+  return json.strict ? json.rules.map((rule) => ({ ...rule, strict: true })) : json.rules;
 }
 
 /**
  * Checks text and returns findings sorted by position.
  * options.rules: array of rule objects (required).
  * options.disabled: array of rule ids to skip.
+ * options.strictStyle: also use strict rules (off by default).
  */
 export function check(text, options = {}) {
-  const { rules, disabled = [] } = options;
+  const { rules, disabled = [], strictStyle = false } = options;
   if (!Array.isArray(rules)) throw new Error('Tellbuster check: options.rules must be an array');
   if (typeof text !== 'string' || text === '') return [];
   const skip = new Set(disabled);
   const findings = [];
   for (const rule of rules) {
-    if (skip.has(rule.id)) continue;
+    if (skip.has(rule.id) || (rule.strict && !strictStyle)) continue;
     for (const m of text.matchAll(compile(rule))) {
       if (m[0].length === 0) continue;
       findings.push({

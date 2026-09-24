@@ -39,7 +39,7 @@ test('extension: every file the manifest and popup point to exists', () => {
     ...manifest.content_scripts.flatMap((cs) => cs.js),
     ...Object.values(manifest.icons),
     ...Object.values(manifest.action.default_icon),
-    'popup.js', 'popup.css', 'app.js', 'style.css', 'vendor/tellbuster.js', 'vendor/en.json',
+    'popup.js', 'popup.css', 'app.js', 'style.css', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/en-strict.json',
   ];
   for (const f of files) assert.ok(existsSync(new URL(f, dir)), `missing ${f}`);
 });

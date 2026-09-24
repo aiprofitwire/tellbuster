@@ -22,20 +22,35 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
   }
 });
 
-// The rules ship inside the extension, so this reads a local file, not the internet.
-let rulesReady = null;
-function getRules() {
-  rulesReady ??= fetch(chrome.runtime.getURL('vendor/en.json'))
+// The rules ship inside the extension, so this reads local files, not the internet.
+// The strict pack (common filler words) loads only when the strictStyle setting is on.
+const cache = {};
+function loadFile(name) {
+  cache[name] ??= fetch(chrome.runtime.getURL(`vendor/${name}`))
     .then((res) => res.json())
     .then(loadRules)
-    .catch((err) => { rulesReady = null; throw err; });
-  return rulesReady;
+    .catch((err) => { delete cache[name]; throw err; });
+  return cache[name];
+}
+
+async function getRules(strictStyle) {
+  const base = await loadFile('en.json');
+  return strictStyle ? base.concat(await loadFile('en-strict.json')) : base;
+}
+
+// Off unless the user turns it on. The settings page (Step 6) will add the switch.
+async function strictStyleOn() {
+  const { strictStyle } = await chrome.storage.sync.get({ strictStyle: false });
+  return strictStyle === true;
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
   if (msg?.type !== 'tellbuster-check' || typeof msg.text !== 'string') return false;
-  getRules()
-    .then((rules) => reply({ findings: check(msg.text, { rules, disabled: msg.disabled || [] }) }))
+  strictStyleOn()
+    .then(async (strictStyle) => {
+      const rules = await getRules(strictStyle);
+      reply({ findings: check(msg.text, { rules, disabled: msg.disabled || [], strictStyle }) });
+    })
     .catch(() => reply({ error: true }));
   return true; // the reply comes later
 });

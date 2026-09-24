@@ -10,6 +10,7 @@ Open an issue with the phrase, why it reads as AI, and one example sentence. We 
 
 1. Open the rules file for your language, for example [`rules/en.json`](rules/en.json).
 2. Copy an existing rule and change it. The format is explained in [`rules/schema.md`](rules/schema.md).
+   If the word has normal everyday uses (like "really" or "robust"), it goes in [`rules/en-strict.json`](rules/en-strict.json) instead. That pack is off unless the user turns on strict mode.
 3. Include at least one `flag` example (must be caught) and one `pass` example (a near miss that must not be caught).
 4. Run `node --test` if you can. If not, the automatic checks will run on your pull request.
 5. Open a pull request.

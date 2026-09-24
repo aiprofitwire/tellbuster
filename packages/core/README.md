@@ -29,8 +29,8 @@ The rule files live in the `rules/` folder of the [Tellbuster repo](https://gith
 
 ## API
 
-- `loadRules(json)`: checks a parsed rules file and returns its rules. Throws an error naming the rule and the problem if something is wrong, including a bad pattern.
-- `check(text, { rules, disabled })`: returns findings sorted by position. Each finding has `ruleId`, `name`, `category`, `severity`, `start`, `end`, `match`, `message`, `why` and `fix`.
+- `loadRules(json)`: checks a parsed rules file and returns its rules. Rules from a file with `"strict": true` come back marked strict. Throws an error naming the rule and the problem if something is wrong, including a bad pattern.
+- `check(text, { rules, disabled, strictStyle })`: returns findings sorted by position. Rules marked strict (from `rules/en-strict.json`) only run when `strictStyle` is `true`. It is `false` by default. Each finding has `ruleId`, `name`, `category`, `severity`, `start`, `end`, `match`, `message`, `why` and `fix`.
 - `summarize(findings, text)`: returns `{ total, bySeverity, perHundredWords }`.
 
 ## License
