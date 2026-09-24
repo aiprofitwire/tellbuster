@@ -45,7 +45,11 @@ a { color: var(--accent); }
 
 .top, .layout, .bottom { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 .top { padding-top: 40px; padding-bottom: 24px; }
-.top h1 { margin: 0 0 4px; font-size: 1.8rem; letter-spacing: -0.01em; }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; margin: 0; font-weight: 700; font-size: 1.15rem; }
+.mark { color: var(--accent); flex: none; }
+.gh { display: inline-flex; align-items: center; text-decoration: none; color: var(--text); }
+.top h1 { margin: 0 0 8px; font-size: 2.1rem; line-height: 1.2; letter-spacing: -0.015em; }
 .tagline { margin: 0; color: var(--muted); max-width: 720px; }
 
 .layout {

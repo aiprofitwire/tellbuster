@@ -54,8 +54,12 @@ function highlightHtml(text) {
 
 function cardHtml(f, i, { jump }) {
   const sevLabel = f.severity[0].toUpperCase() + f.severity.slice(1);
-  const head = `<p class="card-name"><span>${escapeHtml(f.name)}</span><span class="sev sev-${f.severity}">${sevLabel}</span></p>
-    <p class="card-match">“${escapeHtml(f.match.trim() || f.match)}”</p>`;
+  // Show the exact words only when the rule name does not already say them.
+  const norm = (t) => t.toLowerCase().replace(/[^a-z0-9\u00c0-\u017f]+/g, ' ').trim();
+  const match = f.match.trim() || f.match;
+  const showMatch = !norm(f.name).includes(norm(match));
+  const head = `<p class="card-name"><span>${escapeHtml(f.name)}</span><span class="sev sev-${f.severity}">${sevLabel}</span></p>${
+    showMatch ? `\n    <p class="card-match">“${escapeHtml(match)}”</p>` : ''}`;
   return `${jump ? `<button type="button" class="jump" data-jump="${i}">${head}</button>` : head}
     <p>${escapeHtml(f.message)}</p>
     <p class="card-why">${escapeHtml(f.why)}</p>

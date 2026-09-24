@@ -243,7 +243,7 @@
       "name": "Stiff transition openers",
       "category": "structure",
       "severity": "low",
-      "pattern": "(^|[.!?]\\s+)(Moreover|Furthermore|Additionally),",
+      "pattern": "(?<=^|[.!?]\\s+)(Moreover|Furthermore|Additionally),",
       "flags": "",
       "message": "Opening with \"Moreover\" or \"Furthermore\" reads as AI.",
       "why": "Formal transition words at the start of sentences are much more common in AI text than in natural writing.",
