@@ -1435,6 +1435,25 @@
           "My friend Sam is here."
         ]
       }
+    },
+    {
+      "id": "en-double-edged-sword",
+      "name": "\"A double-edged sword\"",
+      "category": "phrase",
+      "severity": "low",
+      "pattern": "\\bdouble[- ]edged\\s+sword\\b",
+      "flags": "i",
+      "message": "\"A double-edged sword\" reads as AI.",
+      "why": "\"Double-edged sword\" is a worn metaphor used to say something has both pros and cons without saying which.",
+      "fix": "Say the good and the bad: \"Social media finds you readers, but it eats your mornings.\"",
+      "examples": {
+        "flag": [
+          "Social media is a double-edged sword."
+        ],
+        "pass": [
+          "The knife has a double edge."
+        ]
+      }
     }
   ]
 }
