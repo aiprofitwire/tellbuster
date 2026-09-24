@@ -69,7 +69,8 @@ How Moe tests: open `rules/en.json` on GitHub and skim 5 random rules. Each shou
 How Moe tests (after merge): on GitHub, go to **Settings > Pages**, under **Source** pick **Deploy from a branch**, branch `main`, folder `/docs`, click **Save**. Wait 2 minutes, then open `https://aiprofitwire.github.io/tellbuster/`. Click **Try an example**. Tells should light up with explanations.
 
 ## Step 4: Chrome extension, popup checker
-- [ ] Build `packages/extension` with a popup checker.
+- [x] Build `packages/extension` with a popup checker.
+  - Done 2026-09-24. Added packages/extension (manifest, popup reusing the web demo's app.js and style.css, right-click "Check with Tellbuster", icons), scripts/sync-extension.js, and tests for the copies and the permissions. Loaded and checked in Chromium.
 
 - Manifest V3. Name "Tellbuster". Permissions: only `storage` and `activeTab` for now. No host permissions yet.
 - Clicking the toolbar icon opens a popup with a text box: paste text, see findings (same look as the web demo, compact).

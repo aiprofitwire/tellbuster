@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tellbuster</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js"></script>
+</head>
+<body>
+  <header class="top">
+    <p class="brand">
+      <svg class="mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 24l-2 5 7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 14.5h16" stroke="var(--high)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
+      <span>Tellbuster</span>
+    </p>
+  </header>
+
+  <main class="layout">
+    <section class="writing" aria-label="Your writing">
+      <div class="toolbar">
+        <label for="text" class="label">Your writing</label>
+        <div class="actions">
+          <button type="button" id="copy" class="btn">Copy text</button>
+          <button type="button" id="clear" class="btn">Clear</button>
+        </div>
+      </div>
+      <div class="editor" id="editor">
+        <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+        <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here." autofocus></textarea>
+        <div class="popover" id="popover" hidden></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Results">
+      <div class="empty" id="empty">
+        <p>Paste some writing to see which phrases might read as AI.</p>
+        <button type="button" id="example" class="btn btn-accent">Try an example</button>
+      </div>
+      <div id="results" hidden>
+        <p class="summary" id="summary" aria-live="polite"></p>
+        <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
+        <ul class="legend" aria-label="Legend">
+          <li><span class="sample sev-high">High</span> strong tell</li>
+          <li><span class="sample sev-medium">Medium</span> common tell</li>
+          <li><span class="sample sev-low">Low</span> style note</li>
+        </ul>
+        <p class="turned-off" id="turned-off" hidden></p>
+        <ol class="list" id="list"></ol>
+      </div>
+      <p class="status" id="status" hidden></p>
+    </section>
+  </main>
+
+  <footer class="bottom">
+    <p>Nothing leaves your device. <a href="https://github.com/aiprofitwire/tellbuster" target="_blank" rel="noopener">About Tellbuster</a></p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
