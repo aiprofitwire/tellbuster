@@ -25,7 +25,9 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 
 > Tellbuster is a linter, not a detector. It never claims your text "is AI". People use these phrases too. It shows you what readers notice, so you can decide.
 
-![Tellbuster underlines the tells in a sample post, opens a card with the why and the fix, and shows no tells after a plain rewrite](docs/media/demo.gif)
+<p align="center">
+  <img src="docs/media/demo.gif" alt="Tellbuster underlines the tells in a sample post, opens a card with the why and the fix, and shows no tells after a plain rewrite" width="540">
+</p>
 
 ## Get it
 
