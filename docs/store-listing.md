@@ -90,12 +90,6 @@ Tellbuster checks the text you write for phrases that read as AI and explains wh
 Saves the user's settings (languages, strict mode, rules turned off, sites where the badge is off) and holds text picked with the right-click menu in memory until the popup opens. The user's text is never saved.
 ```
 
-`activeTab`:
-
-```
-Used only on the tab the user is on, only when they click the Tellbuster icon.
-```
-
 `contextMenus`:
 
 ```

@@ -12,7 +12,7 @@ test('extension: Manifest V3 named Tellbuster', () => {
 });
 
 test('extension: only the allowed permissions', () => {
-  assert.deepEqual([...manifest.permissions].sort(), ['activeTab', 'contextMenus', 'scripting', 'storage']);
+  assert.deepEqual([...manifest.permissions].sort(), ['contextMenus', 'scripting', 'storage']);
   assert.equal(manifest.host_permissions, undefined, 'installing must not ask for access to any site');
   assert.deepEqual([...manifest.optional_host_permissions].sort(), ['http://*/*', 'https://*/*'],
     'site access is only asked for when the user turns on "Check as I type"');

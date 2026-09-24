@@ -31,7 +31,6 @@ Settings apply to the popup and to the badge. They are saved with `chrome.storag
 ## Permissions
 
 - `storage`: holds the text you picked with the right-click menu for a moment, in memory only, until the popup opens. It also keeps your settings: languages, strict mode, the rules you turned off, and the sites where the badge is off.
-- `activeTab`: reserved for checking the page you are on, only when you click the icon.
 - `contextMenus`: adds **Check with Tellbuster** to the right-click menu.
 - `scripting`: lets Tellbuster add its badge script to pages, but only after you allow site access below. Chrome shows no warning for it.
 
