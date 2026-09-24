@@ -58,7 +58,7 @@ That is it. A maintainer reviews it and merges it.
 
 Create `rules/<code>.json` (for example `rules/es.json`) with the same format. Start small: 10 good rules beat 50 noisy ones.
 
-To let Tellbuster guess your language, add a line of short common words for it to `COMMON_WORDS` in `packages/core/src/index.js`. Pick words that are frequent in your language and rare in the others. Then add the file to `LANGUAGES` in `packages/extension/settings.js` and to the web demo in `docs/app.js`, and run `node scripts/sync-docs.js` and `node scripts/sync-extension.js`.
+To let Tellbuster guess your language, add a line of short common words for it to `COMMON_WORDS` in `packages/core/src/index.js`. Pick words that are frequent in your language and rare in the others. Then add the file to `LANGUAGES` in `packages/extension/settings.js` and to the web demo in `docs/app.js`, and run `node scripts/sync-docs.js` and `node scripts/sync-extension.js` if you work on your own computer. If you edit on the GitHub website, skip that: the copies update themselves after your change is merged.
 
 ## House style
 

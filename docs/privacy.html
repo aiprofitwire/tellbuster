@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy policy: Tellbuster</title>
+  <meta name="description" content="Tellbuster collects no data. Your text is checked on your own device and never sent anywhere.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc { max-width: 720px; margin: 0 auto; padding: 40px 24px 64px; }
+    .doc h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; }
+    .doc h2 { font-size: 1.25rem; margin: 36px 0 8px; }
+    .doc .updated { color: var(--muted); margin: 0 0 24px; }
+    .doc .summary { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; }
+    .doc li { margin-bottom: 6px; }
+    .doc code { font-size: 0.9em; }
+    @media (max-width: 600px) { .doc { padding: 24px 16px 48px; } body { font-size: 16px; } }
+  </style>
+</head>
+<body>
+  <main class="doc">
+    <p><a href="./">Back to Tellbuster</a></p>
+    <h1>Privacy policy</h1>
+    <p class="updated">Last updated: September 24, 2026</p>
+
+    <p class="summary"><strong>Short version:</strong> Tellbuster collects nothing. Your text is checked on your own device and is never sent anywhere, saved, or shared. There are no accounts, no analytics and no ads.</p>
+
+    <p>This policy covers the Tellbuster web page, the Tellbuster browser extension and the <code>tellbuster</code> code package. All three are free and open source, so you can read every line of code on <a href="https://github.com/aiprofitwire/tellbuster">GitHub</a>.</p>
+
+    <h2>What we collect</h2>
+    <p>Nothing. Tellbuster has no server. It makes no network calls with your text, sets no tracking cookies, and uses no analytics or third-party scripts.</p>
+
+    <h2>How your text is checked</h2>
+    <p>Tellbuster compares your text with a list of rules that ships inside the page or the extension. The check runs in your browser, on your device. Your text stays there.</p>
+
+    <h2>What the extension stores</h2>
+    <ul>
+      <li><strong>Your settings</strong>, such as languages, strict mode, the rules you turned off and the sites where the badge is off. They are saved with Chrome's own storage (<code>chrome.storage.sync</code>). If you use Chrome sync, Chrome may copy these settings to your other computers. Your text is never part of them.</li>
+      <li><strong>Text you pick with the right-click menu</strong> is held in memory for a moment, only so the popup can open with it. It is not written to disk and is gone when you close the browser.</li>
+    </ul>
+    <p>The web page does not store your text either. If you turn off a rule there, it stays off only until you leave the page.</p>
+
+    <h2>Permissions the extension asks for</h2>
+    <ul>
+      <li><strong>storage:</strong> keeps your settings, as described above.</li>
+      <li><strong>activeTab:</strong> works only on the tab you are on, only when you click the Tellbuster icon.</li>
+      <li><strong>contextMenus:</strong> adds "Check with Tellbuster" to the right-click menu.</li>
+      <li><strong>scripting:</strong> adds the small badge to pages, only after you allow site access below.</li>
+      <li><strong>Access to the sites you visit (optional):</strong> asked for only if you turn on "Check as I type" in the settings. It lets Tellbuster read what you type in text boxes so the badge can count phrases. The text is checked on your device and never sent or saved. You can take this access back at any time in Chrome.</li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>Tellbuster collects no data from anyone, including children.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes, the new version will be posted on this page with a new date. The history of every change is public on GitHub.</p>
+
+    <h2>Questions</h2>
+    <p>Open an issue on <a href="https://github.com/aiprofitwire/tellbuster/issues">GitHub</a>.</p>
+  </main>
+</body>
+</html>

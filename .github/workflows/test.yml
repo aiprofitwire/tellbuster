@@ -11,4 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      # Contributors editing a rule on the GitHub website cannot run the copy scripts.
+      # Refresh the copies here so their pull request is tested as it will be after merge.
+      - run: node scripts/sync-docs.js && node scripts/sync-extension.js && node scripts/sync-core-rules.js
       - run: node --test

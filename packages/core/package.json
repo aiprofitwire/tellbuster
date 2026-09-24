@@ -2,9 +2,33 @@
   "name": "tellbuster",
   "version": "0.1.0",
   "description": "Find the phrases that make writing read like AI, with a reason and a fix for each. Runs on your device.",
+  "keywords": [
+    "ai-writing",
+    "writing",
+    "linter",
+    "prose",
+    "style",
+    "ai-tells",
+    "chatgpt",
+    "editing"
+  ],
+  "homepage": "https://aiprofitwire.github.io/tellbuster/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiprofitwire/tellbuster.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/aiprofitwire/tellbuster/issues"
+  },
   "type": "module",
   "license": "MIT",
-  "exports": "./src/index.js",
-  "main": "./src/index.js",
-  "files": ["src"]
+  "exports": {
+    ".": "./src/main.js",
+    "./engine": "./src/index.js"
+  },
+  "main": "./src/main.js",
+  "files": [
+    "src"
+  ]
 }

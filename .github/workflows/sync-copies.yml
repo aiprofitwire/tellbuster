@@ -1,0 +1,31 @@
+name: Sync copies
+# After a merge, refresh the rule and engine copies used by the web demo, the extension and the npm package,
+# so contributors never have to run the copy scripts themselves.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rules/**'
+      - 'packages/core/src/index.js'
+      - 'docs/app.js'
+      - 'docs/style.css'
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/sync-docs.js && node scripts/sync-extension.js && node scripts/sync-core-rules.js
+      - name: Commit updated copies
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Sync copies of rules and engine"
+            git push
+          fi
