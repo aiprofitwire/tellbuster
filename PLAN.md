@@ -93,11 +93,16 @@ How to test: on the repo page click **Code > Download ZIP**, unzip it. In Chrome
 
 How to test: reload the extension on `chrome://extensions` (circular arrow on the Tellbuster card). Open LinkedIn, start a post, type "Let's delve into this game-changer." The badge should show tells.
 
+## Rules expansion (before Step 6)
+- [x] Add the sorted candidates from `rules/candidates.md`.
+  - Done 2026-09-24. Tiers A and B: 28 new rules in rules/en.json (69 total) and 9 existing rules widened (for example "harness the potential of", "navigate uncertainty", "plays a paramount role"). Tier C: new rules/en-strict.json with 8 low-severity rules, off by default. The engine skips strict rules unless `strictStyle` is on; the extension reads `strictStyle` from chrome.storage.sync (default off) and only loads the strict file then. Tier D skipped. Step 6 still needs the switch: "Strict mode: also flag common filler words". All 108 tests pass.
+
 ## Step 6: Settings
 - [ ] Add an options page.
 
 - Turn individual rules on and off. Turn whole categories on and off. Pick languages (English now, French after Step 7).
 - Turn the as-you-type badge off for specific sites.
+- A switch "Strict mode: also flag common filler words" that saves `strictStyle: true` in `chrome.storage.sync`. The engine and extension already read it (see the rules expansion note above).
 - Saved with `chrome.storage.sync`. Nothing else stored.
 
 How to test: right-click the Tellbuster icon > **Options**. Turn off "Em dash". Type an em dash in a text box. It should no longer be flagged.

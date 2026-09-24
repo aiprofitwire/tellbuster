@@ -23,6 +23,7 @@ const EXAMPLE = [
 const SEVERITY_ORDER = ['high', 'medium', 'low'];
 const off = new Set(); // rules turned off for this visit only
 let rules = [];
+let strictStyle = false; // the strict pack of common filler words, off unless a host page turns it on
 let findings = [];
 let hideTimer = 0;
 let shownMark = null;
@@ -83,7 +84,7 @@ function grow() {
 
 function render() {
   const text = ta.value;
-  findings = check(text, { rules, disabled: [...off] });
+  findings = check(text, { rules, disabled: [...off], strictStyle });
   backdrop.innerHTML = highlightHtml(text);
   grow();
   hidePopover();
@@ -236,6 +237,9 @@ addEventListener('resize', () => {
 try {
   const res = await fetch('./vendor/en.json');
   rules = loadRules(await res.json());
+  // The extension popup can switch on the strict pack. The web demo leaves it off.
+  strictStyle = (await globalThis.tellbusterStrictStyle?.()) === true;
+  if (strictStyle) rules = rules.concat(loadRules(await (await fetch('./vendor/en-strict.json')).json()));
   // The extension popup can hand over starting text (from the right-click menu).
   const start = await globalThis.tellbusterStartText?.();
   if (start) ta.value = start;

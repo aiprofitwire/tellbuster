@@ -44,6 +44,12 @@ Each file in `rules/` holds the rules for one language, named with its language 
 | `examples.flag` | yes | At least one sentence the pattern MUST match. |
 | `examples.pass` | yes | At least one sentence the pattern must NOT match. Pick a near miss. |
 
+## The strict pack
+
+`rules/en-strict.json` has the same format plus `"strict": true` at the top. Its rules flag common filler words (like "really" or "robust") that strict house styles avoid. They are all `low` severity and stay off unless the `strictStyle` option is on. Words with normal everyday uses belong here, not in `en.json`.
+
+A single rule can also carry `"strict": true` to join the strict pack.
+
 ## Writing a good rule
 
 - Match the tell, not ordinary language. "Robust" alone is fine in engineering. Prefer phrases over single words when a word has normal uses.

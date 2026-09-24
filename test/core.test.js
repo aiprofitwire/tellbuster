@@ -26,7 +26,7 @@ test('finds known tells', () => {
 test('every rule finds its own flag examples', () => {
   for (const rule of rules) {
     for (const s of rule.examples.flag) {
-      assert.ok(check(s, { rules: [rule] }).length > 0, `${rule.id} should flag: ${s}`);
+      assert.ok(check(s, { rules: [rule], strictStyle: true }).length > 0, `${rule.id} should flag: ${s}`);
     }
   }
 });
@@ -95,4 +95,15 @@ test('loadRules rejects a malformed rule and names it', () => {
 
 test('loadRules rejects an invalid regex', () => {
   assert.throws(() => loadRules({ rules: [{ ...goodRule(), pattern: '(unclosed' }] }), /en-test.*invalid pattern/);
+});
+
+test('strict rules stay off unless strictStyle is on', () => {
+  const strictFile = JSON.parse(readFileSync(new URL('../rules/en-strict.json', import.meta.url), 'utf8'));
+  const strict = loadRules(strictFile);
+  assert.ok(strict.every((r) => r.strict === true), 'rules from a strict file are marked strict');
+  const all = rules.concat(strict);
+  const text = 'This is really important.';
+  assert.ok(!check(text, { rules: all }).some((f) => f.ruleId === 'en-strict-softeners'));
+  assert.ok(check(text, { rules: all, strictStyle: true }).some((f) => f.ruleId === 'en-strict-softeners'));
+  assert.throws(() => loadRules({ rules: [{ ...goodRule(), strict: 'yes' }] }), /en-test.*strict/);
 });

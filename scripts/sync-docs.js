@@ -6,6 +6,7 @@ const root = new URL('../', import.meta.url);
 const COPIES = [
   ['packages/core/src/index.js', 'docs/vendor/tellbuster.js'],
   ['rules/en.json', 'docs/vendor/en.json'],
+  ['rules/en-strict.json', 'docs/vendor/en-strict.json'],
 ];
 
 mkdirSync(new URL('docs/vendor/', root), { recursive: true });

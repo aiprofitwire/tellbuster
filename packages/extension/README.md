@@ -15,7 +15,7 @@ Everything runs on your device. The extension makes no network calls and keeps n
 
 ## Permissions
 
-- `storage`: holds the text you picked with the right-click menu for a moment, in memory only, until the popup opens.
+- `storage`: holds the text you picked with the right-click menu for a moment, in memory only, until the popup opens. It also reads your settings, like the strict mode switch (off unless you turn it on).
 - `activeTab`: reserved for checking the page you are on, only when you click the icon.
 - `contextMenus`: adds **Check with Tellbuster** to the right-click menu.
 - **Read and change all your data on all websites** (Chrome shows this warning when you install): this is needed to read what you type in text boxes on any site so the badge can count the tells. Your text is checked inside the extension, on your device, and is never sent anywhere or saved. Tellbuster never changes your text. The only thing it adds to a page is its own badge. You can check this in `content.js`, and the tests fail if that file ever gains a network call.
@@ -47,3 +47,4 @@ These files are copies. Do not edit them here. Edit the original, then run `node
 | `style.css` | `docs/style.css` |
 | `vendor/tellbuster.js` | `packages/core/src/index.js` |
 | `vendor/en.json` | `rules/en.json` |
+| `vendor/en-strict.json` | `rules/en-strict.json` |
