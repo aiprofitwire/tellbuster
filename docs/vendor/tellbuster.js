@@ -56,20 +56,52 @@ export function loadRules(json) {
   return json.strict ? json.rules.map((rule) => ({ ...rule, strict: true })) : json.rules;
 }
 
+// Short, common words that are frequent in one language and rare in the other.
+const COMMON_WORDS = {
+  en: 'the and is are of to that this it with for you your was were what have has not be but they we',
+  fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais',
+};
+const WORD_SETS = Object.fromEntries(Object.entries(COMMON_WORDS).map(([code, words]) => [code, new Set(words.split(' '))]));
+
+// A rule's language is the start of its id: "fr-plongeons" is French.
+const languageOf = (rule) => String(rule.id).split('-')[0];
+
+/**
+ * Guesses the language of a text by counting common words.
+ * Returns one of the candidate codes. With no clear signal, returns the first candidate.
+ */
+export function guessLanguage(text, candidates = Object.keys(COMMON_WORDS)) {
+  const counts = new Map(candidates.map((code) => [code, 0]));
+  for (const word of String(text).toLowerCase().match(/\p{L}+/gu) || []) {
+    for (const code of candidates) if (WORD_SETS[code]?.has(word)) counts.set(code, counts.get(code) + 1);
+  }
+  let best = candidates[0];
+  for (const code of candidates) if (counts.get(code) > counts.get(best)) best = code;
+  return best;
+}
+
 /**
  * Checks text and returns findings sorted by position.
  * options.rules: array of rule objects (required).
  * options.disabled: array of rule ids to skip.
  * options.strictStyle: also use strict rules (off by default).
+ * options.language: a language code ("en", "fr") to use only that language's rules,
+ *   or "auto" to guess it from the text. Left out, every rule is used.
  */
 export function check(text, options = {}) {
-  const { rules, disabled = [], strictStyle = false } = options;
+  const { rules, disabled = [], strictStyle = false, language } = options;
   if (!Array.isArray(rules)) throw new Error('Tellbuster check: options.rules must be an array');
   if (typeof text !== 'string' || text === '') return [];
+  let lang = language;
+  if (lang === 'auto') {
+    const codes = [...new Set(rules.map(languageOf))];
+    lang = codes.length > 1 ? guessLanguage(text, codes) : undefined;
+  }
   const skip = new Set(disabled);
   const findings = [];
   for (const rule of rules) {
     if (skip.has(rule.id) || (rule.strict && !strictStyle)) continue;
+    if (lang && languageOf(rule) !== lang) continue;
     for (const m of text.matchAll(compile(rule))) {
       if (m[0].length === 0) continue;
       findings.push({

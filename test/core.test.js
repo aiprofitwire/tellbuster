@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { check, summarize, loadRules } from '../packages/core/src/index.js';
+import { check, summarize, loadRules, guessLanguage } from '../packages/core/src/index.js';
 
 const en = JSON.parse(readFileSync(new URL('../rules/en.json', import.meta.url), 'utf8'));
 const rules = loadRules(en);
@@ -106,4 +106,33 @@ test('strict rules stay off unless strictStyle is on', () => {
   assert.ok(!check(text, { rules: all }).some((f) => f.ruleId === 'en-strict-softeners'));
   assert.ok(check(text, { rules: all, strictStyle: true }).some((f) => f.ruleId === 'en-strict-softeners'));
   assert.throws(() => loadRules({ rules: [{ ...goodRule(), strict: 'yes' }] }), /en-test.*strict/);
+});
+
+const fr = loadRules(JSON.parse(readFileSync(new URL('../rules/fr.json', import.meta.url), 'utf8')));
+
+test('guessLanguage tells English from French', () => {
+  assert.equal(guessLanguage("Dans le monde d'aujourd'hui, il est important de noter que les prix montent."), 'fr');
+  assert.equal(guessLanguage('It is important to note that the prices are going up.'), 'en');
+  assert.equal(guessLanguage('', ['en', 'fr']), 'en');
+  assert.equal(guessLanguage('', ['fr', 'en']), 'fr');
+});
+
+test('language "auto" uses the rules of the guessed language only', () => {
+  const both = [...rules, ...fr];
+  const frText = "Dans le monde d'aujourd'hui, il est important de noter que tout change \u2014 vite.";
+  const frIds = check(frText, { rules: both, language: 'auto' }).map((f) => f.ruleId);
+  assert.ok(frIds.includes('fr-monde-aujourdhui'));
+  assert.ok(frIds.includes('fr-important-de-noter'));
+  assert.ok(frIds.includes('fr-em-dash'));
+  assert.ok(frIds.every((id) => id.startsWith('fr-')));
+  const enIds = check("Let's delve into it \u2014 now.", { rules: both, language: 'auto' }).map((f) => f.ruleId);
+  assert.ok(enIds.includes('en-delve') && enIds.includes('en-em-dash'));
+  assert.ok(enIds.every((id) => id.startsWith('en-')));
+});
+
+test('a manual language wins over the guess, and no language means every rule', () => {
+  const both = [...rules, ...fr];
+  const text = 'Le plan a fonctionné \u2014 en partie.';
+  assert.deepEqual(check(text, { rules: both, language: 'en' }).map((f) => f.ruleId), ['en-em-dash']);
+  assert.deepEqual(check(text, { rules: both }).map((f) => f.ruleId), ['en-em-dash', 'fr-em-dash']);
 });

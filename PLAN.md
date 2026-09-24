@@ -109,7 +109,8 @@ How to test: reload the extension on `chrome://extensions` (circular arrow on th
 How to test: right-click the Tellbuster icon > **Options**. Turn off "Em dash". Type an em dash in a text box. It should no longer be flagged.
 
 ## Step 7: French rules
-- [ ] Create `rules/fr.json` with about 20 French rules.
+- [x] Create `rules/fr.json` with about 20 French rules.
+  - Done 2026-09-24. Added rules/fr.json (24 rules, including the long dash, English curly quotes and emoji bullets; Quebec and France notes in the why text where they differ). The engine has `guessLanguage` and a `language` option on `check` ("auto" or a code). The web demo loads English and French and says which one it checked as. Settings: French is on by default, plus "Which language is my text in?" (guess, always English, always French). Checked in Chromium. All 153 tests pass. Limit: a text with both languages is checked as one language.
 
 - Cover common AI tells in French: "Dans le monde d'aujourd'hui", "Il est important de noter que", "Plongeons dans", "En conclusion", "Il ne s'agit pas seulement de X, mais de Y", "un véritable levier", "incontournable", "force est de constater", "à l'ère du numérique", "n'hésitez pas à", plus French typographic tells used in AI output.
 - Where Quebec French and France French differ, note it in the `why` text.

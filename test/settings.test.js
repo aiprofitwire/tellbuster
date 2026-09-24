@@ -52,8 +52,31 @@ test('settings: no language picked means no rules', async () => {
 test('settings: a turned off rule is skipped', async () => {
   const rules = await activeRules({ ...DEFAULTS });
   const text = 'Fast \u2014 and cheap.';
-  assert.equal(check(text, { rules }).filter((f) => f.ruleId === 'en-em-dash').length, 1);
-  assert.equal(check(text, { rules, disabled: ['en-em-dash'] }).length, 0);
+  assert.equal(check(text, { rules, language: 'auto' }).filter((f) => f.ruleId === 'en-em-dash').length, 1);
+  assert.equal(check(text, { rules, language: 'auto', disabled: ['en-em-dash'] }).length, 0);
+});
+
+test('settings: English and French are on by default, and the language is guessed', async () => {
+  stored = {};
+  const s = await readSettings();
+  assert.deepEqual(s.languages, ['en', 'fr']);
+  assert.equal(s.language, 'auto');
+  const ids = (await activeRules(s)).map((r) => r.id);
+  assert.ok(ids.some((id) => id.startsWith('fr-')) && ids.some((id) => id.startsWith('en-')));
+});
+
+test('settings: a picked language is kept, an unknown one falls back to guessing', async () => {
+  stored = { language: 'fr' };
+  assert.equal((await readSettings()).language, 'fr');
+  stored = { language: 'xx' };
+  assert.equal((await readSettings()).language, 'auto');
+  stored = {};
+});
+
+test('settings: French text gets the French rules', async () => {
+  const rules = await activeRules({ ...DEFAULTS });
+  const ids = check("Dans le monde d'aujourd'hui, n'h\u00e9sitez pas \u00e0 innover.", { rules, language: 'auto' }).map((f) => f.ruleId);
+  assert.ok(ids.includes('fr-monde-aujourdhui') && ids.includes('fr-nhesitez-pas'));
 });
 
 test('settings: website names are cleaned up', () => {

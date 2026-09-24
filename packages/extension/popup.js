@@ -11,7 +11,12 @@ window.tellbusterStartText = async () => {
 // Gives app.js the rules picked on the settings page.
 window.tellbusterRules = async () => {
   const settings = await readSettings();
-  return { rules: await activeRules(settings), disabled: settings.disabledRules, strictStyle: settings.strictStyle };
+  return {
+    rules: await activeRules(settings),
+    disabled: settings.disabledRules,
+    strictStyle: settings.strictStyle,
+    language: settings.language,
+  };
 };
 
 document.getElementById('settings').addEventListener('click', (e) => {

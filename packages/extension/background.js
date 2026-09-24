@@ -59,14 +59,14 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
   }
 });
 
-// Uses your settings for each check: languages, strict mode, and rules or categories you turned off.
+// Uses your settings for each check: languages (guessed from the text unless you picked one), strict mode, and rules or categories you turned off.
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
   if (msg?.type !== 'tellbuster-check' || typeof msg.text !== 'string') return false;
   readSettings()
     .then(async (settings) => {
       const rules = await activeRules(settings);
       const disabled = settings.disabledRules.concat(msg.disabled || []);
-      reply({ findings: check(msg.text, { rules, disabled, strictStyle: settings.strictStyle }) });
+      reply({ findings: check(msg.text, { rules, disabled, strictStyle: settings.strictStyle, language: settings.language }) });
     })
     .catch(() => reply({ error: true }));
   return true; // the reply comes later

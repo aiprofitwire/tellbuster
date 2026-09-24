@@ -4,6 +4,7 @@
 .top .brand { font-size: 1.3rem; margin-bottom: 8px; }
 .box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 20px 16px; margin-bottom: 20px; }
 .box h2 { margin: 16px 0 4px; font-size: 1.15rem; }
+.box h3 { margin: 20px 0 4px; font-size: 1rem; }
 .hint { margin: 0 0 12px; color: var(--muted); font-size: 0.94rem; }
 .row .hint { margin: 0; }
 .warn { margin: 8px 0 0; color: var(--text); font-size: 0.94rem; border-left: 3px solid var(--medium); padding-left: 10px; }
