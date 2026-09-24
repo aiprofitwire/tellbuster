@@ -2,6 +2,15 @@
 
 Click the Tellbuster icon, paste your writing, and see which phrases might read as AI. You can also select text on any page, right-click, and pick **Check with Tellbuster**.
 
+## Check as you type
+
+When you write in a text box on any site (LinkedIn, X, Gmail and most others), a small badge appears in its bottom right corner once you pause typing, for example **3 tells**. Click it, or press **Alt+Shift+T**, to see each phrase with why it stands out and a plainer way to say it. Press **Esc** to close the panel.
+
+- The badge only shows up when something is found. Its underline matches the strongest finding: solid for high, wavy for medium, dotted for low.
+- It only reads your text. It never changes what you type.
+- **Turn off this rule on this page** hides a rule until you reload the page. Lasting settings come in a later version.
+- The badge does not underline words inside other sites' editors. That is fragile, so it is left out on purpose.
+
 Everything runs on your device. The extension makes no network calls and keeps no history.
 
 ## Permissions
@@ -9,6 +18,7 @@ Everything runs on your device. The extension makes no network calls and keeps n
 - `storage`: holds the text you picked with the right-click menu for a moment, in memory only, until the popup opens.
 - `activeTab`: reserved for checking the page you are on, only when you click the icon.
 - `contextMenus`: adds **Check with Tellbuster** to the right-click menu.
+- **Read and change all your data on all websites** (Chrome shows this warning when you install): this is needed to read what you type in text boxes on any site so the badge can count the tells. Your text is checked inside the extension, on your device, and is never sent anywhere or saved. Tellbuster never changes your text. The only thing it adds to a page is its own badge. You can check this in `content.js`, and the tests fail if that file ever gains a network call.
 
 ## Try it without the Chrome Web Store
 
