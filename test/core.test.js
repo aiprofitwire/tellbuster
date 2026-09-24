@@ -26,7 +26,7 @@ test('finds known tells', () => {
 test('every rule finds its own flag examples', () => {
   for (const rule of rules) {
     for (const s of rule.examples.flag) {
-      assert.ok(check(s, { rules: [rule] }).length > 0, `${rule.id} should flag: ${s}`);
+      assert.ok(check(s, { rules: [rule], strictStyle: true }).length > 0, `${rule.id} should flag: ${s}`);
     }
   }
 });

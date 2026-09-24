@@ -826,7 +826,7 @@
       "name": "Throat-clearing opener",
       "category": "filler",
       "severity": "medium",
-      "pattern": "\\b(the\\s+(uncomfortable|hard|brutal|harsh|simple|honest)\\s+truth\\s+is|let\\s+me\\s+be\\s+(clear|honest)|can\\s+we\\s+talk\\s+about|make\\s+no\\s+mistake|think\\s+about\\s+it\\s*:|what\\s+if\\s+i\\s+told\\s+you|picture\\s+this\\b\\s*[:.,!]|here['’]s\\s+what\\s+i\\s+mean\\s*:)",
+      "pattern": "\\b(the\\s+(uncomfortable|hard|brutal|harsh|simple|honest)\\s+truth\\s+is|let\\s+me\\s+be\\s+(clear|honest)\\s*[:,.]|can\\s+we\\s+talk\\s+about|make\\s+no\\s+mistake|think\\s+about\\s+it\\s*:|what\\s+if\\s+i\\s+told\\s+you|picture\\s+this\\b\\s*[:.,!]|here['’]s\\s+what\\s+i\\s+mean\\s*:)",
       "flags": "i",
       "message": "This opener reads as AI.",
       "why": "Lines like \"Make no mistake\" or \"Picture this:\" warm up the reader before the point. AI writing leans on them so often that readers skim past them.",
@@ -837,12 +837,14 @@
           "Make no mistake, this will be hard.",
           "Picture this: a quiet office at 7 AM.",
           "What if I told you sleep beats coffee?",
-          "Here's what I mean: the team never met."
+          "Here's what I mean: the team never met.",
+          "Let me be clear: this plan works."
         ],
         "pass": [
           "The truth about sleep is simple.",
           "Try to picture this room with new paint.",
-          "I told you what I mean."
+          "I told you what I mean.",
+          "Let me be clear about the price: it is $40."
         ]
       }
     },
@@ -865,7 +867,8 @@
           "We told the truth. It is not easy.",
           "The lamp turns out to be broken, says the note inside the box."
         ]
-      }
+      },
+      "strict": true
     },
     {
       "id": "en-full-stop",
@@ -1032,7 +1035,8 @@
           "She is the best in the world at chess.",
           "Most of the world was asleep."
         ]
-      }
+      },
+      "strict": true
     },
     {
       "id": "en-when-it-comes-to",
@@ -1204,7 +1208,7 @@
       "name": "Business jargon",
       "category": "phrase",
       "severity": "low",
-      "pattern": "\\b(lean(s|ed|ing)?\\s+into\\s+(it|this|that|your|our|their|his|her|the\\s+(discomfort|chaos|change|challenge|moment|uncertainty|mess))\\b|double(s|d)?\\s+down\\s+on|doubling\\s+down\\s+on|circl(e|es|ed|ing)\\s+back\\b|on\\s+the\\s+same\\s+page\\b|(?<=^|[.!?]\\s+|\\n\\s*)Moving\\s+forward,)",
+      "pattern": "\\b(lean(s|ed|ing)?\\s+into\\s+(it|this|that|your|our|their|his|her|the\\s+(discomfort|chaos|change|challenge|moment|uncertainty|mess))\\b|double(s|d)?\\s+down\\s+on|doubling\\s+down\\s+on|circl(e|es|ed|ing)\\s+back\\b|on\\s+the\\s+same\\s+page\\b)",
       "flags": "i",
       "message": "This business phrase reads as AI.",
       "why": "\"Lean into\", \"double down\" and \"circle back\" are office jargon that AI writing uses a lot. They can make plain ideas sound like a meeting.",
@@ -1213,12 +1217,32 @@
         "flag": [
           "We need to lean into the discomfort.",
           "Let us circle back next week.",
-          "Moving forward, we will ship on Fridays.",
           "They doubled down on ads."
         ],
         "pass": [
           "She leaned into the wind.",
           "The page is on the same shelf.",
+          "The car kept moving forward.",
+          "Moving forward, I will check the drains every month."
+        ]
+      }
+    },
+    {
+      "id": "en-moving-forward",
+      "name": "\"Moving forward\"",
+      "category": "filler",
+      "severity": "low",
+      "strict": true,
+      "pattern": "(?<=^|[.!?]\\s+|\\n\\s*)Moving\\s+forward,",
+      "flags": "",
+      "message": "\"Moving forward\" as an opener reads as AI to strict editors.",
+      "why": "Corporate and AI writing often open with \"Moving forward\". Plenty of people say it too, so this only shows in strict mode.",
+      "fix": "Name the time: \"From now on\" or \"Starting Monday\".",
+      "examples": {
+        "flag": [
+          "Moving forward, we will ship on Fridays."
+        ],
+        "pass": [
           "The car kept moving forward."
         ]
       }
