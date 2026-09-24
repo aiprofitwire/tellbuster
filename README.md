@@ -1,4 +1,23 @@
-# Tellbuster
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/media/banner-dark.png">
+    <img src="docs/media/banner-light.png" alt="Tellbuster: find the phrases that make your writing read like AI" width="720">
+  </picture>
+</h1>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/tellbuster"><img src="https://img.shields.io/npm/v/tellbuster?color=2c6b5a&label=npm" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2c6b5a" alt="MIT license"></a>
+  <a href="https://github.com/aiprofitwire/tellbuster/actions/workflows/test.yml"><img src="https://github.com/aiprofitwire/tellbuster/actions/workflows/test.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/aiprofitwire/tellbuster/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"><img src="https://img.shields.io/github/issues/aiprofitwire/tellbuster/good%20first%20issue?color=7057ff&label=good%20first%20issues" alt="Good first issues"></a>
+</p>
+
+<p align="center">
+  <a href="https://aiprofitwire.github.io/tellbuster/"><b>Try it in your browser</b></a> ·
+  <a href="#get-it">Install</a> ·
+  <a href="CONTRIBUTING.md">Add a rule</a> ·
+  <a href="https://github.com/aiprofitwire/tellbuster/issues/new?template=false-positive.yml">Report a wrong flag</a>
+</p>
 
 **Find the phrases that make your writing sound like AI.** Free, open source, and nothing leaves your device.
 
@@ -6,7 +25,9 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 
 > Tellbuster is a linter, not a detector. It never claims your text "is AI". People use these phrases too. It shows you what readers notice, so you can decide.
 
-![Tellbuster underlines the tells in a sample post, opens a card with the why and the fix, and shows no tells after a plain rewrite](docs/media/demo.gif)
+<p align="center">
+  <img src="docs/media/demo.gif" alt="Tellbuster underlines the tells in a sample post, opens a card with the why and the fix, and shows no tells after a plain rewrite" width="540">
+</p>
 
 ## Get it
 
@@ -14,9 +35,9 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 |---|---|---|
 | Web demo | Paste text, see the tells. Nothing to install. | [Open the demo](https://aiprofitwire.github.io/tellbuster/) |
 | Chrome extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | Coming soon to the Chrome Web Store. [Try it now from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
-| `tellbuster` on npm | The rule engine, for developers to use in their own tools | Coming soon: `npm install tellbuster`. [How to use it](packages/core/README.md) |
+| `tellbuster` on npm | The rule engine, for developers to use in their own tools | `npm install tellbuster`. [How to use it](packages/core/README.md) |
 
-<!-- Screenshot: the extension badge and its panel open on a post box. Save as docs/img/badge.png and replace this line with: ![The Tellbuster badge showing 3 tells in a post box](docs/img/badge.png) -->
+![With Check as I type on, the Tellbuster badge counts 3 tells in a post box, and its panel explains each one](docs/media/badge.png)
 
 It checks English and French, with more than 90 rules. You can turn off any rule, and add a strict mode for common filler words.
 
