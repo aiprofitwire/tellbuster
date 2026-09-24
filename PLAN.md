@@ -158,7 +158,8 @@ How to test: read `docs/PUBLISHING.md` top to bottom. Every step should be clear
 How to test: open the GitHub Pages site on a computer and a phone. It should look like the approved design, the demo should work, and pasting the link into a LinkedIn post draft should show the preview card.
 
 ## Step 10: Launch video
-- [ ] A 30 to 45 second launch video built with Remotion in `video/` (kept out of the extension and the npm package).
+- [x] A 30 to 45 second launch video built with Remotion in `video/` (kept out of the extension and the npm package).
+  - Done 2026-09-24. Added video/ (Remotion, 36 seconds, square 1080x1080 and tall 1080x1920) with `npm run render`, video/out/ in .gitignore, docs/media/demo.gif (1.4 MB) at the top of README.md, and test/video.test.js (captions have no tells, the underlines come from the real engine, nothing in packages/ or docs/ uses video/). The MP4 files are not committed: they were sent to the maintainer in the session, and video/README.md explains how to render them. All 177 tests pass.
 
 - Scene: a sloppy AI-style paragraph gets underlined live, a card opens with the why and the fix, the text gets rewritten plainly, then the end card: "Tellbuster. Free, open source, nothing leaves your browser." plus the landing page address `aiprofitwire.github.io/tellbuster` (never the store link, which can change).
 - Captions only, no voiceover. Uses the demo's real colors and logo. Exports 1080x1080 (LinkedIn, X) and 1080x1920 (Shorts), plus a short GIF for the README.
