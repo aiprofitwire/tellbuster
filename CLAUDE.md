@@ -77,7 +77,7 @@ Tellbuster must look calm, trustworthy and simple enough for someone who has nev
 
 - **Calm and clean.** Lots of white space, one accent color, no gradients, no clutter. It should feel like a good writing tool, not a security scanner.
 - **Light and dark mode**, following the user's system setting. Define colors once as CSS variables.
-- **Readable text.** System font stack only (no external fonts). Body text 17px on desktop, 16px minimum on phones. Line height about 1.6. Writing area no wider than about 720px.
+- **Readable text.** System font stack only (no external fonts). The one exception is the landing page (`docs/index.html`), which uses the approved design's fonts, self-hosted in `docs/fonts/`. Body text 17px on desktop, 16px minimum on phones. Line height about 1.6. Writing area no wider than about 720px.
 - **Highlights by severity, never alarming.** High: soft red underline. Medium: amber underline. Low: gray dotted underline. Show a small legend. No red backgrounds, no warning icons.
 - **Explain on the spot.** Hovering or tapping a highlight shows a small card: the rule name, the why, and the fix. The side list shows the same cards.
 - **Friendly words.** The count reads "3 phrases might read as AI", never "AI detected" or a percentage score. Zero findings reads "No tells found. Nice work."

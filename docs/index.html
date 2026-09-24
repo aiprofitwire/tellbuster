@@ -3,64 +3,232 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tellbuster</title>
-  <meta name="description" content="Find the phrases that make your writing sound like AI. Free, open source, and nothing leaves your browser.">
-  <link rel="icon" href="data:,">
+  <title>Tellbuster: does your writing sound like AI?</title>
+  <meta name="description" content="Tellbuster underlines the phrases readers now link to AI, tells you why each one stands out, and suggests a plainer way to say it. Free, open source, and your text never leaves your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tellbuster">
+  <meta property="og:url" content="https://aiprofitwire.github.io/tellbuster/">
+  <meta property="og:title" content="Tellbuster: does your writing sound like AI?">
+  <meta property="og:description" content="Find the phrases. Know why. Fix them. Free, open source, and nothing leaves your browser.">
+  <meta property="og:image" content="https://aiprofitwire.github.io/tellbuster/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tellbuster: Does your writing sound like AI? A sample sentence with phrases underlined.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tellbuster: does your writing sound like AI?">
+  <meta name="twitter:description" content="Find the phrases. Know why. Fix them. Free, open source, and nothing leaves your browser.">
+  <meta name="twitter:image" content="https://aiprofitwire.github.io/tellbuster/og.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='4' width='28' height='20' rx='6' fill='none' stroke='%232C6B5A' stroke-width='2.5'/%3E%3Cpath d='M10 24l-2 5 7-5' fill='none' stroke='%232C6B5A' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M8 14.5h16' stroke='%23C8412F' stroke-width='2.5' stroke-linecap='round' stroke-dasharray='3 3'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="landing.css">
 </head>
-<body>
-  <header class="top">
-    <div class="brand-row">
-      <p class="brand">
-        <svg class="mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 24l-2 5 7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 14.5h16" stroke="var(--high)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
-        <span>Tellbuster</span>
-      </p>
-      <a class="btn gh" href="https://github.com/aiprofitwire/tellbuster">Star on GitHub</a>
-    </div>
-    <h1>Does your writing sound like AI?</h1>
-    <p class="tagline">Paste your text. Tellbuster underlines the phrases readers link to AI, explains why, and suggests a plainer way to say it. Free, open source, and nothing leaves your browser.</p>
+<body class="landing">
+  <header class="site-head wrap">
+    <a class="logo" href="#top" aria-label="Tellbuster, back to top">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/><path d="M10 24l-2 5 7-5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 14.5h16" stroke="var(--high)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
+      <span>Tellbuster</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#privacy">Privacy</a>
+      <a class="nav-link" href="#contribute">Contribute</a>
+      <a class="pill pill-light pill-sm" href="https://github.com/aiprofitwire/tellbuster">
+        <svg class="desk" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.3l6-.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span class="desk">Star on GitHub</span><span class="phone">GitHub</span>
+      </a>
+    </nav>
   </header>
 
-  <main class="layout">
-    <section class="writing" aria-label="Your writing">
-      <div class="toolbar">
-        <label for="text" class="label">Your writing</label>
-        <div class="actions">
-          <button type="button" id="copy" class="btn">Copy text</button>
-          <button type="button" id="clear" class="btn">Clear</button>
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span>Free and open source. No account.</p>
+        <h1>Does your writing sound like <span class="u-high">AI</span>?</h1>
+        <p class="lead desk">Tellbuster underlines the phrases readers now link to AI, tells you why each one stands out, and suggests a plainer way to say it. Your text never leaves your browser.</p>
+        <p class="lead phone">Tellbuster underlines the phrases readers link to AI, tells you why, and suggests a plainer way to say it. Your text never leaves your browser.</p>
+        <div class="buttons desk">
+          <a class="pill pill-dark" href="#install">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3h8M8.5 14l-4.5 5.5M15.5 14l2 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Add to Chrome, it's free</a>
+          <a class="pill pill-light" href="#checker" data-focus-editor>Try it without installing</a>
         </div>
+        <a class="pill pill-dark pill-block phone" href="#checker" data-focus-editor>Try it now, free</a>
+        <p class="works desk">
+          <span>Works where you write:</span>
+          <strong>LinkedIn</strong> <strong>X</strong> <strong>Gmail</strong> <strong>any text box</strong>
+        </p>
       </div>
-      <div class="editor" id="editor">
-        <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-        <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here."></textarea>
-        <div class="popover" id="popover" hidden></div>
+
+      <div class="hero-demo">
+        <section class="post" id="checker" aria-label="Try Tellbuster on your own writing">
+          <div class="post-head">
+            <div class="post-who">
+              <span class="avatar" aria-hidden="true"></span>
+              <label for="text">New post</label>
+            </div>
+            <div class="switch" role="group" aria-label="Sample text">
+              <button type="button" id="show-before" aria-pressed="true">Before</button>
+              <button type="button" id="show-after" aria-pressed="false">After</button>
+            </div>
+          </div>
+          <div class="editor" id="editor">
+            <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+            <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here.">Certainly! In today's fast-paced world, it's not just about posting more, it's about posting smarter. Let's delve into how you can harness the power of storytelling. Here's the thing: consistency plays a crucial role. Let that sink in.</textarea>
+            <div class="popover" id="popover" hidden></div>
+          </div>
+          <div class="post-foot">
+            <div class="foot-empty" id="empty" hidden>
+              <span>Paste or type some writing to check it.</span>
+              <button type="button" id="example" class="pill pill-dark pill-xs">Try an example</button>
+            </div>
+            <div class="foot-results" id="results">
+              <p class="summary" id="summary" aria-live="polite">9 phrases might read as AI</p>
+              <div class="foot-actions">
+                <button type="button" id="copy" class="quiet">Copy text</button>
+                <button type="button" id="clear" class="quiet">Clear</button>
+                <button type="button" id="badge" class="badge" aria-controls="all">
+                  <svg width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M8 14.5h16" stroke="var(--badge-dash)" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
+                  <span id="badge-text">9 tells</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <details class="all" id="all">
+          <summary id="all-label">See all 9 notes</summary>
+          <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
+          <ul class="legend" aria-label="Legend">
+            <li><span class="sample sev-high">High</span> strong tell</li>
+            <li><span class="sample sev-medium">Medium</span> common tell</li>
+            <li><span class="sample sev-low">Low</span> style note</li>
+          </ul>
+          <p class="turned-off" id="turned-off" hidden></p>
+          <ol class="list" id="list"></ol>
+        </details>
+        <p class="status" id="status" hidden></p>
+
+        <p class="phone-notes phone">
+          <span>Works on LinkedIn, X, Gmail and any text box.</span>
+          <span>No servers. No tracking. MIT license.</span>
+        </p>
       </div>
     </section>
 
-    <aside class="panel" aria-label="Results">
-      <div class="empty" id="empty">
-        <p>Paste or type some writing to see which phrases might read as AI.</p>
-        <button type="button" id="example" class="btn btn-accent">Try an example</button>
+    <section class="wrap" aria-label="Tellbuster in numbers">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-big" id="rule-count">94</span>
+          <span>AI tells, each with the why and a fix</span>
+        </div>
+        <div class="stat">
+          <span class="stat-big">0 bytes</span>
+          <span>of your text sent anywhere</span>
+        </div>
+        <div class="stat">
+          <span class="stat-big">English, Français</span>
+          <span>with more languages from the community</span>
+        </div>
       </div>
-      <div id="results" hidden>
-        <p class="summary" id="summary" aria-live="polite"></p>
-        <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
-        <ul class="legend" aria-label="Legend">
-          <li><span class="sample sev-high">High</span> strong tell</li>
-          <li><span class="sample sev-medium">Medium</span> common tell</li>
-          <li><span class="sample sev-low">Low</span> style note</li>
+    </section>
+
+    <section id="how" class="wrap block how">
+      <div class="section-head">
+        <p class="eyebrow">HOW IT WORKS</p>
+        <h2>Write like you. Tellbuster points at the rest.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num" aria-hidden="true">1</span>
+          <h3>Write as usual</h3>
+          <p>Draft your post, email or reply on LinkedIn, X, Gmail or any site. Nothing changes about how you type.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">2</span>
+          <h3>See what stands out</h3>
+          <p>A small badge counts the phrases that read as AI. <span class="u-high">Red</span> is a strong tell, <span class="u-medium">amber</span> a common one, <span class="u-low">gray</span> a style note.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">3</span>
+          <h3>Fix it your way</h3>
+          <p>Each card explains why readers notice the phrase and suggests a plainer version. You decide what to keep.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="wrap block split">
+      <div class="split-copy">
+        <p class="eyebrow">A LINTER, NOT A DETECTOR</p>
+        <h2>It never says "this is AI."</h2>
+        <p class="body">AI detectors guess, and they wrongly accuse real people. Tellbuster does something simpler and more honest: it shows the exact phrases readers link to machine writing and explains each one. People use these phrases too. You see the pattern and make the call.</p>
+      </div>
+      <div class="compare">
+        <p class="compare-row compare-no">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span><span class="visually-hidden">What a detector says: </span>"87% likely AI-generated"</span>
+        </p>
+        <p class="compare-row compare-yes">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><span class="visually-hidden">What Tellbuster says: </span>"3 phrases might read as AI. Here is why."</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="privacy" class="wrap block">
+      <div class="privacy">
+        <div class="privacy-head">
+          <p class="eyebrow">PRIVATE BY DESIGN</p>
+          <h2>Your words stay on your computer.</h2>
+        </div>
+        <ul class="checks">
+          <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>No servers, no accounts, no tracking.</span></li>
+          <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Checks run inside your browser, in plain rules anyone can read.</span></li>
+          <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Site access only if you turn on "Check as I type".</span></li>
+          <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>100% open source under the MIT license.</span></li>
         </ul>
-        <p class="turned-off" id="turned-off" hidden></p>
-        <ol class="list" id="list"></ol>
       </div>
-      <p class="status" id="status" hidden></p>
-    </aside>
+    </section>
+
+    <section id="contribute" class="wrap block split contribute">
+      <pre class="code" aria-label="A sample rule">{
+  <span class="k">"id"</span>: <span class="v">"en-let-that-sink-in"</span>,
+  <span class="k">"message"</span>: <span class="v">"This reads as AI."</span>,
+  <span class="k">"why"</span>: <span class="v">"A social media habit that..."</span>,
+  <span class="k">"fix"</span>: <span class="v">"Trust the point to land."</span>
+}</pre>
+      <div class="split-copy">
+        <p class="eyebrow">BUILT BY THE PEOPLE WHO READ IT</p>
+        <h2>Spotted a tell we miss? Add it.</h2>
+        <p class="body">Every rule is a few lines of plain text. Suggest one with a simple form, or add one yourself, no real coding needed. New languages are the most welcome contribution of all.</p>
+        <div class="buttons">
+          <a class="pill pill-accent" href="https://github.com/aiprofitwire/tellbuster/issues/new?template=new-rule.yml">Suggest a tell</a>
+          <a class="pill pill-light" href="https://github.com/aiprofitwire/tellbuster">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="wrap install">
+      <h2>Sound like yourself again.</h2>
+      <p>Free forever. Takes 10 seconds to install.</p>
+      <div class="buttons">
+        <a class="pill pill-dark pill-lg" href="https://github.com/aiprofitwire/tellbuster/blob/main/packages/extension/README.md#try-it-without-the-chrome-web-store">Add to Chrome</a>
+        <span class="pill pill-light pill-lg">Firefox and Edge soon</span>
+      </div>
+    </section>
   </main>
 
-  <footer class="bottom">
-    <p>Tellbuster is free and open source (MIT license). Your text stays in this browser tab. <a href="https://github.com/aiprofitwire/tellbuster">See the code on GitHub</a>.</p>
+  <footer class="site-foot wrap">
+    <p>Tellbuster is free and open source (MIT). Built by <a href="https://metadatamarketer.com">The AI Profit Wire</a>.</p>
+    <p class="foot-links">
+      <a href="https://github.com/aiprofitwire/tellbuster">GitHub</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="#contribute">Contribute</a>
+    </p>
   </footer>
 
   <script type="module" src="app.js"></script>
+  <script type="module" src="landing.js"></script>
 </body>
 </html>

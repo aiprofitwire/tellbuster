@@ -147,7 +147,8 @@ How to test: read `docs/PUBLISHING.md` top to bottom. Every step should be clear
 ---
 
 ## Step 9b: Landing page from the approved design
-- [ ] Rebuild `docs/index.html` to match `design/landing/` exactly (see its README).
+- [x] Rebuild `docs/index.html` to match `design/landing/` exactly (see its README).
+  - Done 2026-09-24. New docs/index.html, landing.css and landing.js. The hero's post box is the real checker (Before and After load the design's two texts, Clear then Try an example still works, the badge opens a list of all notes). Fonts self-hosted in docs/fonts/ with their licenses. docs/og.png rendered from the social card, with og: and twitter: tags. Rule count is 94 (English plus French), updated from the rules at load. app.js now tells the page after each check; extension copies synced. Dark mode added. Checked in Chromium at 1440, 900 and 390 px, no outside requests. New test/landing.test.js. All 167 tests pass.
 
 - Keep the working checker: the hero's Before / After demo becomes the real editor with live underlines, and "Try an example" still works.
 - Self-host the fonts in `docs/fonts/` (no Google Fonts link). Add the social card as `docs/og.png` (render `design/landing/social-card.html` at 1200x630) with `og:` and `twitter:` meta tags.

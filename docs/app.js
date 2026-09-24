@@ -101,11 +101,16 @@ function render() {
   hidePopover();
 
   const hasText = text.trim() !== '';
+  // Lets a host page (like the landing page) update its own badge and counts.
+  document.dispatchEvent(new CustomEvent('tellbuster:checked', {
+    detail: { count: findings.length, hasText, ruleCount: rules.length },
+  }));
   $('empty').hidden = hasText;
   $('results').hidden = !hasText;
   if (!hasText) return;
 
-  $('summary').textContent = summaryText() + languageNote(text);
+  const summary = summaryText();
+  $('summary').textContent = (languageNote(text) && !summary.endsWith('.') ? `${summary}.` : summary) + languageNote(text);
   const note = $('turned-off');
   note.hidden = off.size === 0;
   if (off.size) {
@@ -119,7 +124,9 @@ function render() {
 function showPopover(mark) {
   clearTimeout(hideTimer);
   if (mark === shownMark && !popover.hidden) return;
+  shownMark?.classList.remove('is-open');
   shownMark = mark;
+  mark.classList.add('is-open');
   const ids = mark.dataset.f.split(' ').map(Number);
   popover.innerHTML = ids.map((i) => `<div class="card">${cardHtml(findings[i], i, { jump: false })}</div>`).join('');
   popover.hidden = false;
@@ -133,6 +140,7 @@ function showPopover(mark) {
 function hidePopover() {
   clearTimeout(hideTimer);
   popover.hidden = true;
+  shownMark?.classList.remove('is-open');
   shownMark = null;
 }
 
