@@ -1,0 +1,10 @@
+{
+  "name": "tellbuster",
+  "version": "0.1.0",
+  "description": "Find the phrases that make writing read like AI, with a reason and a fix for each. Runs on your device.",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./src/index.js",
+  "main": "./src/index.js",
+  "files": ["src"]
+}

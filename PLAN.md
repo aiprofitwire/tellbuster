@@ -28,7 +28,8 @@ Opus goes on the three steps where mistakes are expensive: the engine everything
 - [x] Done 2026-09-24. Added CLAUDE.md, PLAN.md, README.md, CONTRIBUTING.md, LICENSE, rules/schema.md, rules/en.json (15 rules, all examples verified), and test/rules.test.js.
 
 ## Step 1: Core engine and tests
-- [ ] Build `packages/core`.
+- [x] Build `packages/core`.
+  - Done 2026-09-24. Added packages/core (package.json, src/index.js with check, summarize, loadRules, README) and test/core.test.js. All 28 tests pass.
 
 What to build:
 - `packages/core/package.json`: name `tellbuster`, version `0.1.0`, `"type": "module"`, MIT license, no dependencies, `exports` pointing to `src/index.js`.
