@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tellbuster settings</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="top">
+    <p class="brand">
+      <svg class="mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 24l-2 5 7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 14.5h16" stroke="var(--high)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
+      <span>Tellbuster settings</span>
+    </p>
+    <p class="tagline">Changes save on their own. They are kept in your Chrome profile, and nothing else is stored.</p>
+  </header>
+
+  <main class="settings">
+    <p class="saved" id="saved" role="status" aria-live="polite"></p>
+
+    <section class="box" aria-labelledby="type-title">
+      <h2 id="type-title">Check as you type</h2>
+      <label class="row">
+        <input type="checkbox" id="as-you-type">
+        <span><strong>Check as I type</strong><br>
+        <span class="hint">Chrome will ask to let Tellbuster read the sites you visit so it can check what you type, and your text never leaves this device.</span></span>
+      </label>
+      <p class="warn" id="type-denied" hidden>Chrome did not allow it, so check as you type stays off. The popup and the right-click menu still work.</p>
+      <div id="site-settings" hidden>
+        <h3 class="sub">Sites where the badge is off</h3>
+        <form class="add-site" id="add-site">
+          <label for="site" class="label">Website</label>
+          <div class="add-row">
+            <input type="text" id="site" placeholder="linkedin.com" autocomplete="off" spellcheck="false" inputmode="url">
+            <button type="submit" class="btn">Turn off here</button>
+          </div>
+          <p class="warn" id="site-error" hidden>That does not look like a website. Try something like linkedin.com.</p>
+        </form>
+        <p class="hint" id="no-sites">The badge is on for every site.</p>
+        <ul class="sites" id="sites"></ul>
+      </div>
+    </section>
+
+    <section class="box" aria-labelledby="lang-title">
+      <h2 id="lang-title">Languages</h2>
+      <p class="hint">Check writing in these languages.</p>
+      <div id="languages"></div>
+      <p class="warn" id="no-lang" hidden>No language is picked, so nothing will be checked.</p>
+    </section>
+
+    <section class="box" aria-labelledby="strict-title">
+      <h2 id="strict-title">Strict mode</h2>
+      <label class="row">
+        <input type="checkbox" id="strict">
+        <span><strong>Strict mode: also flag common filler words</strong><br>
+        <span class="hint">Words like "crucial" or "robust" that people use every day, but that show up a lot in AI writing. Off by default.</span></span>
+      </label>
+    </section>
+
+    <section class="box" aria-labelledby="rules-title">
+      <h2 id="rules-title">Rules</h2>
+      <p class="hint">Turn off a whole group, or open it to turn off single rules.</p>
+      <div id="rules"><p class="hint">Loading the rules...</p></div>
+    </section>
+
+    <p><button type="button" class="link" id="reset">Put all settings back to how they started</button></p>
+  </main>
+
+  <footer class="bottom">
+    <p>Nothing leaves your device. <a href="https://github.com/aiprofitwire/tellbuster" target="_blank" rel="noopener">About Tellbuster</a></p>
+  </footer>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

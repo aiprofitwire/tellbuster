@@ -1,3 +1,6 @@
+// Runs before app.js (both are modules, so they run in page order).
+import { readSettings, activeRules } from './settings.js';
+
 // Gives app.js the text picked with "Check with Tellbuster", then forgets it.
 window.tellbusterStartText = async () => {
   const { startText = '' } = await chrome.storage.session.get('startText');
@@ -5,8 +8,13 @@ window.tellbusterStartText = async () => {
   return startText;
 };
 
-// Tells app.js whether to add the strict pack. Off unless the user turns it on in settings.
-window.tellbusterStrictStyle = async () => {
-  const { strictStyle } = await chrome.storage.sync.get({ strictStyle: false });
-  return strictStyle === true;
+// Gives app.js the rules picked on the settings page.
+window.tellbusterRules = async () => {
+  const settings = await readSettings();
+  return { rules: await activeRules(settings), disabled: settings.disabledRules, strictStyle: settings.strictStyle };
 };
+
+document.getElementById('settings').addEventListener('click', (e) => {
+  e.preventDefault();
+  chrome.runtime.openOptionsPage();
+});
