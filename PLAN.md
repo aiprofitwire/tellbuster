@@ -134,6 +134,35 @@ How Moe tests: read `docs/PUBLISHING.md` top to bottom. Every step should be cle
 
 ---
 
+## Step 10: Launch video
+- [ ] A 30 to 45 second launch video built with Remotion in `video/` (kept out of the extension and the npm package).
+
+- Scene: a sloppy AI-style paragraph gets underlined live, a card opens with the why and the fix, the text gets rewritten plainly, then the end card: "Tellbuster. Free, open source, nothing leaves your browser." plus the demo URL.
+- Captions only, no voiceover. Uses the demo's real colors and logo. Exports 1080x1080 (LinkedIn, X) and 1080x1920 (Shorts), plus a short GIF for the README.
+- Render the files and commit them to `video/out/`.
+
+How Moe tests: open the files in `video/out/` on GitHub and watch them. They should play smoothly and read clearly with the sound off.
+
+## Step 11: Feedback link
+- [ ] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
+
+How Moe tests: click the link on any card. A GitHub issue form opens with the rule name filled in.
+
+## Step 12: More browsers
+- [ ] Make the extension work in Firefox and Edge.
+
+- Edge runs Chrome extensions as they are: write the Edge Add-ons publishing steps in `docs/PUBLISHING.md`.
+- Firefox: add what Manifest V3 on Firefox needs (for example `browser_specific_settings`), test in Firefox, add a zip script for addons.mozilla.org.
+
+How Moe tests: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
+
+## Step 13: More languages
+- [ ] Add Spanish (`rules/es.json`), then German and Portuguese if credit allows, about 15 careful rules each, same schema and tests. Update the language guess to cover them.
+
+How Moe tests: paste a Spanish sample into the demo. Spanish tells should show.
+
+---
+
 ## After the build (done with Moe outside Claude Code)
 
 Launch kit: Show HN post, LinkedIn post with a demo GIF, X thread, AI Profit Wire newsletter feature, and a submission to relevant awesome lists. Prepared in chat, not with cloud credit.
