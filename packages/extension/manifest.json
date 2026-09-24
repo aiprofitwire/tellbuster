@@ -3,7 +3,7 @@
   "name": "Tellbuster",
   "version": "0.1.0",
   "description": "Underlines phrases that read as AI, explains why, and suggests a plainer way to say it. Nothing leaves your device.",
-  "permissions": ["storage", "activeTab", "contextMenus", "scripting"],
+  "permissions": ["storage", "contextMenus", "scripting"],
   "optional_host_permissions": ["https://*/*", "http://*/*"],
   "action": {
     "default_title": "Tellbuster",

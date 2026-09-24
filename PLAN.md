@@ -72,7 +72,7 @@ How to test (after merge): on GitHub, go to **Settings > Pages**, under **Source
 - [x] Build `packages/extension` with a popup checker.
   - Done 2026-09-24. Added packages/extension (manifest, popup reusing the web demo's app.js and style.css, right-click "Check with Tellbuster", icons), scripts/sync-extension.js, and tests for the copies and the permissions. Loaded and checked in Chromium.
 
-- Manifest V3. Name "Tellbuster". Permissions: only `storage` and `activeTab` for now. No host permissions yet.
+- Manifest V3. Name "Tellbuster". Permissions: only `storage` for now. No host permissions yet. (`activeTab` was later removed as unused, 2026-09-24.)
 - Clicking the toolbar icon opens a popup with a text box: paste text, see findings (same look as the web demo, compact).
 - A right-click menu item "Check with Tellbuster" on selected text opens the popup pre-filled with the selection (add `contextMenus` permission for this).
 - The extension folder must work when loaded directly (no build step for the maintainer). If core and rules must be copied in, add `scripts/sync-extension.js`, run it, and commit the copied files in `packages/extension/vendor/`.
