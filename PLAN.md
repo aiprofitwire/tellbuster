@@ -83,6 +83,7 @@ How to test: on the repo page click **Code > Download ZIP**, unzip it. In Chrome
 ## Step 5: Chrome extension, check as you type
 - [x] Check text boxes on any site while the user writes.
   - Done 2026-09-24. Added packages/extension/content.js (badge and panel in a closed shadow root, checks after a 500 ms pause, Alt+Shift+T and Esc for keyboard users), background.js now does the checking, site access explained in both READMEs, new tests for the permissions and for no network calls in content.js. Checked in Chromium on a textarea, a contenteditable, an editor inside a shadow root, and a page with a strict security policy. Not tried on the real LinkedIn or Gmail (no login in the test browser).
+  - Fix 2026-09-24 after real-site testing: LinkedIn's post box is in a modal dialog, so the badge now moves inside it (with a fix for dialogs that use a transform). X's editor redraws text without an "input" event, so the badge now also watches the text itself and notices focus through selectionchange. Added a debug log (localStorage tellbusterDebug = 1), test pages in test/pages/ and scripts/serve-test-pages.js.
 
 - A content script watches the focused text box (textarea and contenteditable, which covers LinkedIn, X, Gmail and most sites).
 - A small floating badge near the box shows the count ("3 tells"). Clicking it opens a panel listing findings with the why and the fix.

@@ -90,6 +90,36 @@ button { font: inherit; color: inherit; cursor: pointer; }
   let seq = 0;
   let host = null;
   let ui = null;
+  let layer = null; // the open modal or popover that holds the text box, if any
+  let htmlUnsafe = false; // true once the page removed the badge from <html>
+  let lastValue = null; // textarea text at the last check
+  let why = ''; // what started the next check, for the debug log
+  let lastPlaced = '';
+  const changes = new MutationObserver(() => schedule('the text changed'));
+
+  // Debug log, off by default. Turn it on for a site by running this in its console, then reload:
+  //   localStorage.setItem('tellbusterDebug', '1')
+  // It writes to this browser's console only. It logs lengths and rule ids, never your words.
+  let debug = false;
+  function readDebug() {
+    try { debug = localStorage.getItem('tellbusterDebug') === '1'; } catch { debug = false; }
+  }
+  const where = window === window.top ? 'page' : `frame ${location.host}`;
+  const log = (...args) => { if (debug) console.log('TB-DEBUG', `[${where}]`, ...args); };
+
+  // A short label for an element, like div#main[role=textbox][data-testid=tweetTextarea_0].
+  function describe(el) {
+    if (!el || el.nodeType !== 1) return String(el);
+    if (el === host) return 'the Tellbuster badge';
+    let label = el.tagName.toLowerCase();
+    if (el.id) label += `#${el.id}`;
+    for (const a of ['role', 'data-testid', 'aria-label']) {
+      const v = el.getAttribute(a);
+      if (v) label += `[${a}=${v.slice(0, 40)}]`;
+    }
+    if (el.isContentEditable) label += '[editable]';
+    return label;
+  }
 
   // ---- Finding the text box ----
 
@@ -108,6 +138,38 @@ button { font: inherit; color: inherit; cursor: pointer; }
     let el = document.activeElement;
     while (el && el !== host && el.shadowRoot?.activeElement) el = el.shadowRoot.activeElement;
     return el;
+  }
+
+  function matches(el, selector) {
+    try { return el.matches(selector); } catch { return false; } // older Chrome lacks some selectors
+  }
+
+  // Modal dialogs, popovers and full screen elements sit in the browser's "top layer",
+  // above everything else on the page. A badge outside them is hidden behind them, so find
+  // the one holding the text box (walking out of shadow roots too) and put the badge inside it.
+  function topLayerOf(el) {
+    for (let node = el; node; node = node.parentElement || node.getRootNode().host) {
+      if (node.isContentEditable) continue; // never put the badge inside the writing itself
+      if (node === document.fullscreenElement || matches(node, ':modal') || matches(node, ':popover-open')) return node;
+    }
+    return null;
+  }
+
+  function mount() {
+    if (!host) return;
+    const parent = (layer?.isConnected && topLayerOf(field) === layer && layer) || (htmlUnsafe ? document.body : document.documentElement);
+    if (host.parentNode === parent) return;
+    if (host.parentNode === null && parent === document.documentElement && host.dataset.mounted) {
+      // We put it on <html> and the page took it off, so use <body> from now on.
+      htmlUnsafe = true;
+      log('the page removed the badge from <html>, moving it to <body>');
+      return mount();
+    }
+    parent.append(host);
+    host.dataset.mounted = '1';
+    log(`badge moved into ${describe(parent)}`);
+    // Some pages remove nodes they did not add. Look again on the next frame.
+    requestAnimationFrame(() => { if (field && !host.isConnected) place(); });
   }
 
   function readText(el) {
@@ -175,7 +237,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
     on(wrap, 'keydown', (e) => {
       if (e.key === 'Escape') { e.stopPropagation(); closePanel(); field?.focus(); }
     });
-    document.documentElement.append(host);
   }
 
   function summaryText() {
@@ -266,38 +327,59 @@ button { font: inherit; color: inherit; cursor: pointer; }
     if (!findings.length) ui.badge.hidden = true;
   }
 
+  // Sets a fixed position in screen pixels. If an ancestor has a transform (common on modals),
+  // "fixed" is measured from that ancestor instead of the screen, so measure and correct.
+  function setPos(el, left, top) {
+    el.style.left = `${left}px`;
+    el.style.top = `${top}px`;
+    const r = el.getBoundingClientRect();
+    const dx = r.left - left;
+    const dy = r.top - top;
+    if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+      el.style.left = `${left - dx}px`;
+      el.style.top = `${top - dy}px`;
+    }
+    return [Math.round(dx), Math.round(dy)];
+  }
+
   // Puts the badge in the bottom right corner of the text box, and the panel next to it.
   function place() {
     if (!ui || ui.badge.hidden || !field) return;
-    if (!field.isConnected) { stop(); return; }
+    if (!field.isConnected) { stop('the text box was removed from the page'); return; }
+    mount();
     const { badge, panel } = ui;
     const r = field.getBoundingClientRect();
-    const vw = document.documentElement.clientWidth || innerWidth;
-    const vh = document.documentElement.clientHeight || innerHeight;
-    const gone = r.width === 0 || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw;
+    // Stay on screen, and inside the modal if there is one (it may cut off anything outside it).
+    let b = { left: 0, top: 0, right: document.documentElement.clientWidth || innerWidth, bottom: document.documentElement.clientHeight || innerHeight };
+    if (host.parentNode === layer && layer) {
+      const d = layer.getBoundingClientRect();
+      b = { left: Math.max(b.left, d.left), top: Math.max(b.top, d.top), right: Math.min(b.right, d.right), bottom: Math.min(b.bottom, d.bottom) };
+    }
+    const gone = r.width === 0 || r.bottom < b.top || r.top > b.bottom || r.right < b.left || r.left > b.right;
     badge.classList.toggle('offscreen', gone);
-    if (gone) { closePanel(); return; }
+    if (gone) {
+      closePanel();
+      if (lastPlaced !== 'off') log('text box is off screen, badge hidden');
+      lastPlaced = 'off';
+      return;
+    }
     const bw = badge.offsetWidth;
     const bh = badge.offsetHeight;
-    const left = Math.max(4, Math.min(r.right, vw) - bw - 8);
-    const top = Math.max(4, Math.min(r.bottom, vh) - bh - 8);
-    badge.style.left = `${left}px`;
-    badge.style.top = `${top}px`;
+    const left = Math.max(b.left + 4, Math.min(r.right, b.right) - bw - 8);
+    const top = Math.max(b.top + 4, Math.min(r.bottom, b.bottom) - bh - 8);
+    const shift = setPos(badge, left, top);
+    const spot = `badge at ${Math.round(left)},${Math.round(top)} in ${describe(host.parentNode)}${shift[0] || shift[1] ? `, corrected by ${shift.join(',')} for a transform` : ''}`;
+    if (spot !== lastPlaced) log(spot);
+    lastPlaced = spot;
     if (panel.hidden) return;
-    const width = Math.min(380, vw - 16);
+    const width = Math.min(380, b.right - b.left - 16);
     panel.style.width = `${width}px`;
-    panel.style.left = `${Math.max(8, Math.min(left + bw - width, vw - width - 8))}px`;
-    const above = top - 14;
-    const below = vh - (top + bh) - 14;
-    if (below >= 320 || below >= above) {
-      panel.style.top = `${top + bh + 6}px`;
-      panel.style.bottom = 'auto';
-      panel.style.maxHeight = `${Math.max(120, below)}px`;
-    } else {
-      panel.style.top = 'auto';
-      panel.style.bottom = `${vh - top + 6}px`;
-      panel.style.maxHeight = `${Math.max(120, above)}px`;
-    }
+    const above = top - b.top - 14;
+    const below = b.bottom - (top + bh) - 14;
+    const down = below >= 320 || below >= above;
+    panel.style.maxHeight = `${Math.max(120, down ? below : above)}px`;
+    const panelLeft = Math.max(b.left + 8, Math.min(left + bw - width, b.right - width - 8));
+    setPos(panel, panelLeft, down ? top + bh + 6 : top - 6 - panel.offsetHeight);
   }
 
   function placeSoon() {
@@ -312,97 +394,133 @@ button { font: inherit; color: inherit; cursor: pointer; }
     const el = field;
     const id = ++seq;
     const text = readText(el);
+    if (el.tagName === 'TEXTAREA') lastValue = el.value;
+    log(`checking ${text.length} characters (${why || 'no reason noted'})`);
+    why = '';
     let next = [];
     if (text.trim()) {
       let res;
       try {
         res = await chrome.runtime.sendMessage({ type: 'tellbuster-check', text, disabled: [...off] });
-      } catch {
+      } catch (err) {
+        log('could not reach the checker:', err?.message);
         if (!chrome.runtime?.id) shutdown(); // the extension was reloaded or removed
         return;
       }
-      if (!res || res.error) return;
+      if (!res || res.error) { log('the checker returned an error'); return; }
       next = res.findings;
     }
-    if (id !== seq || el !== field) return; // a newer check has started
+    if (id !== seq || el !== field) { log('result skipped, a newer check started'); return; }
     findings = next;
+    log(`${plural(findings.length, 'finding', 'findings')}${findings.length ? `: ${findings.map((f) => f.ruleId).join(', ')}` : ''}`);
     render();
   }
 
-  function schedule() {
+  function schedule(reason) {
+    if (!field) return;
+    if (!why) why = reason;
     clearTimeout(timer);
     timer = setTimeout(run, PAUSE_MS);
   }
 
   function runNow() {
     clearTimeout(timer);
+    why = 'a rule was turned off or on';
     run();
   }
 
-  function watch(el) {
+  function watch(el, reason) {
     field = el;
     findings = [];
+    lastValue = null;
+    lastPlaced = '';
     seq++;
+    readDebug();
     hideAll();
-    schedule();
+    layer = topLayerOf(el);
+    log(`watching ${describe(el)} (${reason})${layer ? `, inside top layer ${describe(layer)}` : ''}`);
+    changes.disconnect();
+    // Some editors (and some sites) change the text without an "input" event, so also watch the text itself.
+    if (el.tagName !== 'TEXTAREA') changes.observe(el, { childList: true, subtree: true, characterData: true });
+    why = '';
+    schedule('started watching');
     clearInterval(watchTimer);
-    // Text boxes grow, move and disappear without telling anyone, so check the spot now and then.
-    watchTimer = setInterval(place, 1000);
+    // Text boxes grow, move and disappear without telling anyone, so check now and then.
+    watchTimer = setInterval(() => {
+      syncFocus('regular check');
+      if (field?.tagName === 'TEXTAREA' && field.value !== lastValue && lastValue !== null) schedule('the text changed');
+      place();
+    }, 1000);
   }
 
-  function stop() {
+  function stop(reason) {
+    if (field) log(`stopped watching (${reason})`);
     field = null;
+    layer = null;
     findings = [];
     seq++;
+    changes.disconnect();
     clearTimeout(timer);
     clearInterval(watchTimer);
     hideAll();
+    mount(); // back out of any modal
   }
 
   function shutdown() {
-    stop();
+    stop('the extension was reloaded or removed');
     ctrl.abort();
     host?.remove();
     globalThis.tellbusterWatching = false;
   }
 
+  // Starts or stops watching based on what has focus now. Safe to call often.
+  function syncFocus(reason) {
+    const now = focused();
+    if (host && now === host) return; // focus is in the panel
+    const el = editableOf(now);
+    if (el === field) return;
+    if (el) watch(el, reason);
+    else if (field) stop(`focus moved to ${describe(now)}`);
+    else if (reason === 'focusin') log(`focus on ${describe(now)}: not a text box, ignored`);
+  }
+
   // ---- Listening (all passive: nothing here blocks or changes your typing) ----
+  // Listeners sit on window so they run before most of the page's own. Sites can still swallow
+  // events, so selectionchange, the text watcher and the regular check back them up.
 
-  on(document, 'focusin', (e) => {
-    const path = e.composedPath();
-    if (host && path.includes(host)) return; // focus moved into the panel
-    const el = editableOf(path[0]);
-    if (el && el !== field) watch(el);
+  on(window, 'focusin', (e) => {
+    if (host && e.composedPath().includes(host)) return; // focus moved into the panel
+    syncFocus('focusin');
   }, { capture: true });
 
-  on(document, 'focusout', () => {
-    setTimeout(() => {
-      if (!field) return;
-      const now = focused();
-      if (now === host || editableOf(now) === field) return;
-      stop();
-    }, 150);
+  on(window, 'focusout', () => setTimeout(() => syncFocus('focusout'), 150), { capture: true });
+
+  on(document, 'selectionchange', () => syncFocus('selectionchange'));
+
+  on(window, 'input', (e) => {
+    if (field && editableOf(e.composedPath()[0]) === field) schedule('input');
   }, { capture: true });
 
-  on(document, 'input', (e) => {
-    if (field && editableOf(e.composedPath()[0]) === field) schedule();
-  }, { capture: true });
-
-  on(document, 'pointerdown', (e) => {
+  on(window, 'pointerdown', (e) => {
     if (ui && !ui.panel.hidden && !e.composedPath().includes(host)) closePanel();
   }, { capture: true });
 
-  on(document, 'keydown', (e) => {
+  on(window, 'keydown', (e) => {
     if (!field || !e.altKey || !e.shiftKey || e.code !== 'KeyT') return;
     if (!ui || ui.badge.hidden) return;
     e.preventDefault();
     if (ui.panel.hidden) openPanel(true); else { closePanel(); field.focus(); }
   }, { capture: true });
 
+  on(window, 'keyup', () => {
+    if (field?.tagName === 'TEXTAREA' && field.value !== lastValue && lastValue !== null) schedule('keyup');
+  }, { capture: true });
+
   on(window, 'scroll', placeSoon, { capture: true, passive: true });
   on(window, 'resize', placeSoon, { passive: true });
 
   // The page may have opened with the cursor already in a text box.
-  const start = editableOf(focused());
-  if (start) watch(start);
+  readDebug();
+  log(`ready on ${location.host}`);
+  syncFocus('already focused at load');
 })();

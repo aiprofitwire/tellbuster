@@ -43,3 +43,17 @@ test('extension: every file the manifest and popup point to exists', () => {
   ];
   for (const f of files) assert.ok(existsSync(new URL(f, dir)), `missing ${f}`);
 });
+
+test('extension: the as-you-type checker only logs through the debug switch, which is off by default', () => {
+  const src = readFileSync(new URL('content.js', dir), 'utf8');
+  assert.equal(src.match(/console\./g)?.length, 1, 'content.js must have one console call, inside log()');
+  assert.match(src, /const log = \(\.\.\.args\) => \{ if \(debug\) console\.log\('TB-DEBUG'/);
+  assert.match(src, /let debug = false;/);
+  assert.match(src, /localStorage\.getItem\('tellbusterDebug'\) === '1'/);
+});
+
+test('extension: test pages for the badge exist', () => {
+  for (const f of ['x-style.html', 'linkedin-style.html', 'gmail-style.html']) {
+    assert.ok(existsSync(new URL(`../test/pages/${f}`, import.meta.url)), `missing test/pages/${f}`);
+  }
+});
