@@ -145,6 +145,16 @@ How to test: read `docs/PUBLISHING.md` top to bottom. Every step should be clear
 
 ---
 
+## Step 9b: Landing page from the approved design
+- [ ] Rebuild `docs/index.html` to match `design/landing/` exactly (see its README).
+
+- Keep the working checker: the hero's Before / After demo becomes the real editor with live underlines, and "Try an example" still works.
+- Self-host the fonts in `docs/fonts/` (no Google Fonts link). Add the social card as `docs/og.png` (render `design/landing/social-card.html` at 1200x630) with `og:` and `twitter:` meta tags.
+- Match desktop (1440px) and phone (390px, left-aligned). Replace `[RULE COUNT]` with the real default rule count, read from the rules file at load time.
+- Keep all existing tests passing and the demo's copy tests in sync.
+
+How to test: open the GitHub Pages site on a computer and a phone. It should look like the approved design, the demo should work, and pasting the link into a LinkedIn post draft should show the preview card.
+
 ## Step 10: Launch video
 - [ ] A 30 to 45 second launch video built with Remotion in `video/` (kept out of the extension and the npm package).
 
@@ -164,11 +174,14 @@ How to test: click the link on any card. A GitHub issue form opens with the rule
 
 - Edge runs Chrome extensions as they are: write the Edge Add-ons publishing steps in `docs/PUBLISHING.md`.
 - Firefox: add what Manifest V3 on Firefox needs (for example `browser_specific_settings`), test in Firefox, add a zip script for addons.mozilla.org.
+- Brave, Opera, Arc and Vivaldi run Chrome extensions from the Chrome Web Store: confirm in the README that they are supported.
+- Safari needs Apple's Xcode converter and a paid Apple developer account: write the steps in `docs/PUBLISHING.md` as a later option, do not build it now.
 
 How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
 
 ## Step 13: More languages
 - [ ] Add Spanish (`rules/es.json`), then German and Portuguese if credit allows, about 15 careful rules each, same schema and tests. Update the language guess to cover them.
+- Translate the `why` and `fix` text of the French rules into French, and show the interface in French when the browser language is French (popup, badge panel, settings, web demo). Plain Quebec-friendly French.
 
 How to test: paste a Spanish sample into the demo. Spanish tells should show.
 
