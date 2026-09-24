@@ -44,7 +44,8 @@ What to build:
 How Moe tests: open the pull request, click **Checks** or read the test output Claude Code posts. It must say all tests pass. Nothing to install.
 
 ## Step 2: English rules to 40
-- [ ] Grow `rules/en.json` from 15 to about 40 rules.
+- [x] Grow `rules/en.json` from 15 to about 40 rules.
+  - Done 2026-09-24. Added 26 rules (41 total) covering chatbot openers and sign-offs, hedges, hype lines, stock metaphors, emoji bullets and abstract lists of three. All 54 tests pass.
 
 - Cover the common AI tells: stock openers and closers, hedging filler ("It's important to remember"), "Not only X but also Y", rule-of-three lists with abstract nouns, "In the realm of", "embark on a journey", "ever-evolving", "a myriad of", "foster", "resonate", "unleash", "harness the power", "Certainly!", "Great question", "As an AI", overuse of "Imagine...", emoji bullet headers, "Let that sink in", "Read that again", "This changes everything".
 - Each rule written in our own words, with flag and pass examples, following `rules/schema.md`.
