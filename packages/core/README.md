@@ -30,7 +30,8 @@ The rule files live in the `rules/` folder of the [Tellbuster repo](https://gith
 ## API
 
 - `loadRules(json)`: checks a parsed rules file and returns its rules. Rules from a file with `"strict": true` come back marked strict. Throws an error naming the rule and the problem if something is wrong, including a bad pattern.
-- `check(text, { rules, disabled, strictStyle })`: returns findings sorted by position. Rules marked strict (from `rules/en-strict.json`) only run when `strictStyle` is `true`. It is `false` by default. Each finding has `ruleId`, `name`, `category`, `severity`, `start`, `end`, `match`, `message`, `why` and `fix`.
+- `check(text, { rules, disabled, strictStyle, language })`: returns findings sorted by position. With `language: 'auto'`, it guesses the language of the text and uses only that language's rules (a rule's language is the start of its id, like `fr-`). With a code like `language: 'fr'`, it always uses that language. Left out, every rule runs. Rules marked strict (from `rules/en-strict.json`) only run when `strictStyle` is `true`. It is `false` by default. Each finding has `ruleId`, `name`, `category`, `severity`, `start`, `end`, `match`, `message`, `why` and `fix`.
+- `guessLanguage(text, candidates)`: guesses the language by counting common words. Returns one of the candidate codes (`['en', 'fr']` by default), or the first one when it cannot tell.
 - `summarize(findings, text)`: returns `{ total, bySeverity, perHundredWords }`.
 
 ## License

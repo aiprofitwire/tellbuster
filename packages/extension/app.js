@@ -1,6 +1,6 @@
 // Tellbuster web demo. Everything runs in this tab: no network calls except loading
 // the page's own files, no storage, no tracking.
-import { check, loadRules } from './vendor/tellbuster.js';
+import { check, loadRules, guessLanguage } from './vendor/tellbuster.js';
 
 const $ = (id) => document.getElementById(id);
 const ta = $('text');
@@ -25,6 +25,8 @@ const off = new Set(); // rules turned off for this visit only
 let rules = [];
 let strictStyle = false; // the strict pack of common filler words, off unless a host page turns it on
 let savedOff = []; // rules turned off in the extension's settings (the web demo has none)
+let language = 'auto'; // guess the language of the text, unless the extension's settings pick one
+const LANGUAGE_NAMES = { en: 'English', fr: 'French' };
 let findings = [];
 let hideTimer = 0;
 let shownMark = null;
@@ -69,6 +71,14 @@ function cardHtml(f, i, { jump }) {
     <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">Turn off this rule</button>`;
 }
 
+// With rules in more than one language and no language picked, say which one the text was checked as.
+function languageNote(text) {
+  const codes = [...new Set(rules.map((r) => r.id.split('-')[0]))];
+  if (language !== 'auto' || codes.length < 2) return '';
+  const code = guessLanguage(text, codes);
+  return ` Checked as ${LANGUAGE_NAMES[code] || code}.`;
+}
+
 function summaryText() {
   if (!findings.length) return 'No tells found. Nice work.';
   const counts = SEVERITY_ORDER
@@ -85,7 +95,7 @@ function grow() {
 
 function render() {
   const text = ta.value;
-  findings = check(text, { rules, disabled: [...savedOff, ...off], strictStyle });
+  findings = check(text, { rules, disabled: [...savedOff, ...off], strictStyle, language });
   backdrop.innerHTML = highlightHtml(text);
   grow();
   hidePopover();
@@ -95,7 +105,7 @@ function render() {
   $('results').hidden = !hasText;
   if (!hasText) return;
 
-  $('summary').textContent = summaryText();
+  $('summary').textContent = summaryText() + languageNote(text);
   const note = $('turned-off');
   note.hidden = off.size === 0;
   if (off.size) {
@@ -236,13 +246,16 @@ addEventListener('resize', () => {
 // ---- Start ----
 
 try {
-  // The extension popup hands over the rules picked in its settings. The web demo uses English.
+  // The extension popup hands over the rules picked in its settings.
+  // The web demo uses English and French, and guesses which one the text is in.
   const picked = await globalThis.tellbusterRules?.();
   if (picked) {
     ({ rules, strictStyle } = picked);
     savedOff = picked.disabled;
+    language = picked.language || 'auto';
   } else {
-    rules = loadRules(await (await fetch('./vendor/en.json')).json());
+    const files = await Promise.all(['en.json', 'fr.json'].map(async (f) => (await fetch(`./vendor/${f}`)).json()));
+    rules = files.flatMap(loadRules);
   }
   // The extension popup can hand over starting text (from the right-click menu).
   const start = await globalThis.tellbusterStartText?.();

@@ -2,13 +2,15 @@
 // Only these choices are stored. Never your text.
 import { loadRules } from './vendor/tellbuster.js';
 
-// One entry per rules file in vendor/. Step 7 adds French here.
+// One entry per rules file in vendor/.
 export const LANGUAGES = [
   { code: 'en', name: 'English', file: 'en.json', strictFile: 'en-strict.json' },
+  { code: 'fr', name: 'French', file: 'fr.json' },
 ];
 
 export const DEFAULTS = {
-  languages: ['en'],
+  languages: ['en', 'fr'],
+  language: 'auto', // "auto" guesses the language of each text; a code like "fr" always uses that language
   strictStyle: false,
   disabledRules: [],
   disabledCategories: [],
@@ -21,6 +23,7 @@ export async function readSettings() {
   const list = (v) => (Array.isArray(v) ? v.filter((x) => typeof x === 'string') : []);
   return {
     languages: list(s.languages),
+    language: LANGUAGES.some((l) => l.code === s.language) ? s.language : 'auto',
     strictStyle: s.strictStyle === true,
     disabledRules: list(s.disabledRules),
     disabledCategories: list(s.disabledCategories),

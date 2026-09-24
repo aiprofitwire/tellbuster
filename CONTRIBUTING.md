@@ -19,6 +19,8 @@ Open an issue with the phrase, why it reads as AI, and one example sentence. We 
 
 Create `rules/<code>.json` (for example `rules/es.json`) with the same format. Start small: 10 good rules beat 50 noisy ones.
 
+To let Tellbuster guess your language, add a line of short common words for it to `COMMON_WORDS` in `packages/core/src/index.js`. Pick words that are frequent in your language and rare in the others. Then add the file to `LANGUAGES` in `packages/extension/settings.js` and to the web demo in `docs/app.js`, and run `node scripts/sync-docs.js` and `node scripts/sync-extension.js`.
+
 ## House style
 
 - Messages say a phrase "reads as AI". Never that text "is AI".

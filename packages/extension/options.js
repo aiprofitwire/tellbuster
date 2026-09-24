@@ -56,6 +56,12 @@ function drawLanguages() {
     return checkRow(box, l.name);
   }));
   $('no-lang').hidden = settings.languages.length > 0;
+  const choices = [['auto', 'Guess from the text (recommended)'], ...LANGUAGES.map((l) => [l.code, `Always ${l.name}`])];
+  $('language-mode').replaceChildren(...choices.map(([code, label]) => {
+    const radio = make('input', { type: 'radio', name: 'language-mode', value: code, checked: settings.language === code });
+    radio.addEventListener('change', () => save({ language: code }));
+    return checkRow(radio, label);
+  }));
 }
 
 // ---- Rules ----

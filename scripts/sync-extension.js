@@ -8,6 +8,7 @@ const COPIES = [
   ['packages/core/src/index.js', 'packages/extension/vendor/tellbuster.js'],
   ['rules/en.json', 'packages/extension/vendor/en.json'],
   ['rules/en-strict.json', 'packages/extension/vendor/en-strict.json'],
+  ['rules/fr.json', 'packages/extension/vendor/fr.json'],
   ['docs/app.js', 'packages/extension/app.js'],
   ['docs/style.css', 'packages/extension/style.css'],
 ];

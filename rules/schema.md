@@ -1,6 +1,6 @@
 # Rule format
 
-Each file in `rules/` holds the rules for one language, named with its language code (`en.json`, `fr.json`). The file is a JSON object:
+Each file in `rules/` holds the rules for one language, named with its language code (`en.json`, `fr.json`). The engine picks rules by the start of their id, so every id must begin with the file's language code. The file is a JSON object:
 
 ```json
 {

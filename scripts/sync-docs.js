@@ -7,6 +7,7 @@ const COPIES = [
   ['packages/core/src/index.js', 'docs/vendor/tellbuster.js'],
   ['rules/en.json', 'docs/vendor/en.json'],
   ['rules/en-strict.json', 'docs/vendor/en-strict.json'],
+  ['rules/fr.json', 'docs/vendor/fr.json'],
 ];
 
 mkdirSync(new URL('docs/vendor/', root), { recursive: true });

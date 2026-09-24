@@ -8,9 +8,11 @@ const pairs = [
   ['packages/core/src/index.js', 'docs/vendor/tellbuster.js', 'sync-docs'],
   ['rules/en.json', 'docs/vendor/en.json', 'sync-docs'],
   ['rules/en-strict.json', 'docs/vendor/en-strict.json', 'sync-docs'],
+  ['rules/fr.json', 'docs/vendor/fr.json', 'sync-docs'],
   ['packages/core/src/index.js', 'packages/extension/vendor/tellbuster.js', 'sync-extension'],
   ['rules/en.json', 'packages/extension/vendor/en.json', 'sync-extension'],
   ['rules/en-strict.json', 'packages/extension/vendor/en-strict.json', 'sync-extension'],
+  ['rules/fr.json', 'packages/extension/vendor/fr.json', 'sync-extension'],
   ['docs/app.js', 'packages/extension/app.js', 'sync-extension'],
   ['docs/style.css', 'packages/extension/style.css', 'sync-extension'],
 ];
