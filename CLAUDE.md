@@ -66,3 +66,19 @@ test/                tests, run with `node --test`
 ## Rule format
 
 See `rules/schema.md`. Each rule is an object with `id`, `name`, `category`, `severity`, `pattern`, `flags`, `message`, `why`, `fix`, and `examples` (`flag` and `pass` arrays).
+
+## Design rules (web demo, extension popup, panel, settings)
+
+Tellbuster must look calm, trustworthy and simple enough for someone who has never installed an extension. Every screen follows these rules.
+
+- **Calm and clean.** Lots of white space, one accent color, no gradients, no clutter. It should feel like a good writing tool, not a security scanner.
+- **Light and dark mode**, following the user's system setting. Define colors once as CSS variables.
+- **Readable text.** System font stack only (no external fonts). Body text 17px on desktop, 16px minimum on phones. Line height about 1.6. Writing area no wider than about 720px.
+- **Highlights by severity, never alarming.** High: soft red underline. Medium: amber underline. Low: gray dotted underline. Show a small legend. No red backgrounds, no warning icons.
+- **Explain on the spot.** Hovering or tapping a highlight shows a small card: the rule name, the why, and the fix. The side list shows the same cards.
+- **Friendly words.** The count reads "3 phrases might read as AI", never "AI detected" or a percentage score. Zero findings reads "No tells found. Nice work."
+- **Helpful empty state.** Before anything is typed, show a one-line hint and a "Try an example" button.
+- **Small useful actions:** Clear, Copy text, and a "Turn off this rule" link on each card (the web demo can hide the rule for the session).
+- **Works on phones.** Test at 375px wide. Tap targets at least 44px. Panels stack under the text on small screens.
+- **Accessible.** Color contrast meets WCAG AA. Everything works with the keyboard. Highlights are not shown by color alone (use underline style too).
+- **Same look everywhere.** The extension popup, badge panel and settings page reuse the web demo's colors and card style.
