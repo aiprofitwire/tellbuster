@@ -16,7 +16,7 @@ The rules live in `rules/*.json` as plain data, one file per language, so non-co
 
 ## Who you are working for
 
-The owner is Moe (GitHub: aiprofitwire). He has a web development diploma but has never used Claude Code, runs four businesses, and has limited time. He follows instructions exactly. Everything you tell him must be step by step, in plain language, with no guessing required.
+The maintainer (GitHub: aiprofitwire) reviews every pull request but has limited time. Everything you tell them must be step by step, in plain language, with no guessing required. This repo is public: write PR descriptions and notes as if anyone can read them, and never include personal details about the maintainer.
 
 ## The non-negotiable rules
 
@@ -36,7 +36,7 @@ The owner is Moe (GitHub: aiprofitwire). He has a web development diploma but ha
 4. Run the tests: `node --test` from the repo root. They must pass before you finish.
 5. Tick the step's box in `PLAN.md` (`- [x]`) and add a one-line note under it with the date and what was done.
 6. Commit with a short, clear message and open a pull request.
-7. The pull request description must end with a section called **How Moe tests this**: numbered steps a non-developer can follow in under 5 minutes (what to click, what he should see). No jargon.
+7. The pull request description must end with a section called **How to test this**: numbered steps a non-developer can follow in under 5 minutes (what to click, what he should see). No jargon.
 
 ## Budget rules (this project runs on a limited credit)
 

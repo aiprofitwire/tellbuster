@@ -4,7 +4,7 @@
 
 **Deadline:** the $100 cloud credit expires **November 5, 2026 at 2:59 AM Eastern**. All build steps must be merged before then.
 
-**Budget guide:** estimates are rough. After each session, Moe checks the credit balance on claude.ai. If less than $15 is left, skip to Step 9 (publish prep) so what exists ships.
+**Budget guide:** estimates are rough. After each session, the maintainer checks the credit balance on claude.ai. If less than $15 is left, skip to Step 9 (publish prep) so what exists ships.
 
 | Step | What | Model | Est. credit |
 |---|---|---|---|
@@ -41,7 +41,7 @@ What to build:
 - `packages/core/README.md`: install and a 10-line usage example.
 - Tests in `test/core.test.js` using `node:test`: finds known tells, respects `disabled`, positions are correct, handles empty text, handles curly apostrophes, `loadRules` rejects a malformed rule.
 
-How Moe tests: open the pull request, click **Checks** or read the test output Claude Code posts. It must say all tests pass. Nothing to install.
+How to test: open the pull request, click **Checks** or read the test output Claude Code posts. It must say all tests pass. Nothing to install.
 
 ## Step 2: English rules to 40
 - [x] Grow `rules/en.json` from 15 to about 40 rules.
@@ -52,7 +52,7 @@ How Moe tests: open the pull request, click **Checks** or read the test output C
 - Prefer phrases over single words when a word has normal uses. Keep `severity` honest.
 - All tests must pass.
 
-How Moe tests: open `rules/en.json` on GitHub and skim 5 random rules. Each should read like a friendly note, not a scolding.
+How to test: open `rules/en.json` on GitHub and skim 5 random rules. Each should read like a friendly note, not a scolding.
 
 ## Step 3: Web demo page
 - [x] Build `docs/index.html`, a one-page demo anyone can use without installing anything.
@@ -66,7 +66,7 @@ How Moe tests: open `rules/en.json` on GitHub and skim 5 random rules. Each shou
 - Clean, readable design. Works on phones. Header says: "Tellbuster: find the phrases that make your writing sound like AI. Free, open source, and nothing leaves your browser." Footer links to the GitHub repo.
 - No external scripts, fonts or trackers.
 
-How Moe tests (after merge): on GitHub, go to **Settings > Pages**, under **Source** pick **Deploy from a branch**, branch `main`, folder `/docs`, click **Save**. Wait 2 minutes, then open `https://aiprofitwire.github.io/tellbuster/`. Click **Try an example**. Tells should light up with explanations.
+How to test (after merge): on GitHub, go to **Settings > Pages**, under **Source** pick **Deploy from a branch**, branch `main`, folder `/docs`, click **Save**. Wait 2 minutes, then open `https://aiprofitwire.github.io/tellbuster/`. Click **Try an example**. Tells should light up with explanations.
 
 ## Step 4: Chrome extension, popup checker
 - [x] Build `packages/extension` with a popup checker.
@@ -78,7 +78,7 @@ How Moe tests (after merge): on GitHub, go to **Settings > Pages**, under **Sour
 - The extension folder must work when loaded directly (no build step for Moe). If core and rules must be copied in, add `scripts/sync-extension.js`, run it, and commit the copied files in `packages/extension/vendor/`.
 - Simple icon set (16, 48, 128 px). A plain magnifying glass over a speech bubble is fine.
 
-How Moe tests: on the repo page click **Code > Download ZIP**, unzip it. In Chrome go to `chrome://extensions`, turn on **Developer mode** (top right), click **Load unpacked**, pick the `packages/extension` folder. Click the Tellbuster icon, paste a sloppy paragraph, see the findings.
+How to test: on the repo page click **Code > Download ZIP**, unzip it. In Chrome go to `chrome://extensions`, turn on **Developer mode** (top right), click **Load unpacked**, pick the `packages/extension` folder. Click the Tellbuster icon, paste a sloppy paragraph, see the findings.
 
 ## Step 5: Chrome extension, check as you type
 - [ ] Check text boxes on any site while the user writes.
@@ -89,7 +89,7 @@ How Moe tests: on the repo page click **Code > Download ZIP**, unzip it. In Chro
 - Checks run after the user pauses typing (debounce about 500 ms). Must never slow down typing or change the user's text.
 - Needs host permission for all sites. Explain this in the README: it is required to read what you type, and the text never leaves your device.
 
-How Moe tests: reload the extension on `chrome://extensions` (circular arrow on the Tellbuster card). Open LinkedIn, start a post, type "Let's delve into this game-changer." The badge should show tells.
+How to test: reload the extension on `chrome://extensions` (circular arrow on the Tellbuster card). Open LinkedIn, start a post, type "Let's delve into this game-changer." The badge should show tells.
 
 ## Step 6: Settings
 - [ ] Add an options page.
@@ -98,7 +98,7 @@ How Moe tests: reload the extension on `chrome://extensions` (circular arrow on 
 - Turn the as-you-type badge off for specific sites.
 - Saved with `chrome.storage.sync`. Nothing else stored.
 
-How Moe tests: right-click the Tellbuster icon > **Options**. Turn off "Em dash". Type an em dash in a text box. It should no longer be flagged.
+How to test: right-click the Tellbuster icon > **Options**. Turn off "Em dash". Type an em dash in a text box. It should no longer be flagged.
 
 ## Step 7: French rules
 - [ ] Create `rules/fr.json` with about 20 French rules.
@@ -108,7 +108,7 @@ How Moe tests: right-click the Tellbuster icon > **Options**. Turn off "Em dash"
 - The engine picks rules by language: add a simple language guess (share of common French words) with a manual override in settings.
 - All tests pass.
 
-How Moe tests: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il est important de noter que..." The French tells should show.
+How to test: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il est important de noter que..." The French tells should show.
 
 ## Step 8: Contributor setup and automatic tests
 - [ ] Make contributing easy and safe.
@@ -120,7 +120,7 @@ How Moe tests: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il 
 - Update `CONTRIBUTING.md` with a "your first rule in 5 minutes" walkthrough.
 - Create 10 issues labeled `good first issue`, each proposing one specific missing rule (write them as a markdown list in `docs/first-issues.md` so Moe can paste them into GitHub if Claude Code cannot create issues directly).
 
-How Moe tests: open the repo's **Issues > New issue**. The "Suggest a new tell" form should appear.
+How to test: open the repo's **Issues > New issue**. The "Suggest a new tell" form should appear.
 
 ## Step 9: Publish prep
 - [ ] Get everything ready to go public.
@@ -131,7 +131,7 @@ How Moe tests: open the repo's **Issues > New issue**. The "Suggest a new tell" 
 - `docs/store-listing.md`: Chrome Web Store title, short description (132 characters max, count it), long description, and a list of 5 screenshots to take.
 - Final README pass: screenshots placeholders, install links, credits.
 
-How Moe tests: read `docs/PUBLISHING.md` top to bottom. Every step should be clear enough to follow without asking anyone.
+How to test: read `docs/PUBLISHING.md` top to bottom. Every step should be clear enough to follow without asking anyone.
 
 ---
 
@@ -142,12 +142,12 @@ How Moe tests: read `docs/PUBLISHING.md` top to bottom. Every step should be cle
 - Captions only, no voiceover. Uses the demo's real colors and logo. Exports 1080x1080 (LinkedIn, X) and 1080x1920 (Shorts), plus a short GIF for the README.
 - Render the files and commit them to `video/out/`.
 
-How Moe tests: open the files in `video/out/` on GitHub and watch them. They should play smoothly and read clearly with the sound off.
+How to test: open the files in `video/out/` on GitHub and watch them. They should play smoothly and read clearly with the sound off.
 
 ## Step 11: Feedback link
 - [ ] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
 
-How Moe tests: click the link on any card. A GitHub issue form opens with the rule name filled in.
+How to test: click the link on any card. A GitHub issue form opens with the rule name filled in.
 
 ## Step 12: More browsers
 - [ ] Make the extension work in Firefox and Edge.
@@ -155,15 +155,15 @@ How Moe tests: click the link on any card. A GitHub issue form opens with the ru
 - Edge runs Chrome extensions as they are: write the Edge Add-ons publishing steps in `docs/PUBLISHING.md`.
 - Firefox: add what Manifest V3 on Firefox needs (for example `browser_specific_settings`), test in Firefox, add a zip script for addons.mozilla.org.
 
-How Moe tests: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
+How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
 
 ## Step 13: More languages
 - [ ] Add Spanish (`rules/es.json`), then German and Portuguese if credit allows, about 15 careful rules each, same schema and tests. Update the language guess to cover them.
 
-How Moe tests: paste a Spanish sample into the demo. Spanish tells should show.
+How to test: paste a Spanish sample into the demo. Spanish tells should show.
 
 ---
 
-## After the build (done with Moe outside Claude Code)
+## After the build (done by the maintainer outside Claude Code)
 
 Launch kit: Show HN post, LinkedIn post with a demo GIF, X thread, AI Profit Wire newsletter feature, and a submission to relevant awesome lists. Prepared in chat, not with cloud credit.
