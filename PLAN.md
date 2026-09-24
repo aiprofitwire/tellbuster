@@ -186,6 +186,37 @@ How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it tempora
 
 How to test: paste a Spanish sample into the demo. Spanish tells should show.
 
+## Step 14: Command-line tool
+- [ ] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
+
+- `npx tellbuster README.md docs/*.md` checks files and prints each finding as `file:line:column  severity  name: message`.
+- `echo "text" | npx tellbuster` checks text from standard input.
+- Options: `--strict`, `--lang en|fr|auto`, `--disable id1,id2`, `--json` (machine-readable output), `--max-severity low|medium|high` (fail only at or above this level).
+- Exit code 1 when a finding at or above the threshold is found (for scripts and CI), 0 otherwise.
+- Tests for each option. Document it in `packages/core/README.md`.
+
+How to test: in the repo folder, run `echo "Let's delve into this." | node packages/core/bin/tellbuster.js`. It should list the tell.
+
+## Step 15: GitHub Action
+- [ ] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action that runs the command-line tool with `npx tellbuster@latest`).
+
+- Inputs: `files` (glob, default `**/*.md`), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).
+- Posts findings as GitHub annotations (`::warning file=...,line=...::message`) so they show on the pull request's changed lines.
+- An example workflow in `docs/github-action.md` that anyone can copy. Use it on this repo's own docs as the first user.
+- Check that it runs green on this repo.
+
+How to test: open a pull request that adds "Let's delve into this" to a markdown file. The Action should add a warning on that line.
+
+## Step 16: Tellbuster for AI agents (MCP server and Claude Code skill)
+- [ ] Let AI agents check their own writing before showing it.
+
+- `packages/mcp`: a small MCP server (npm name `tellbuster-mcp`, stdio transport) with one tool, `check_writing(text, strict?, lang?)`, returning findings with the why and the fix. Keep dependencies to the official MCP SDK only.
+- `skills/tellbuster/SKILL.md`: a Claude Code skill that tells the agent to run `npx tellbuster` on any draft it writes for publishing and to rewrite flagged phrases.
+- Setup instructions for Claude Code, Claude Desktop and Cursor in `packages/mcp/README.md`.
+- Tests for the tool's output shape.
+
+How to test: follow the Claude Code setup in `packages/mcp/README.md`, ask Claude to write a LinkedIn post, and ask it to check the post with Tellbuster.
+
 ---
 
 ## After the build (done by the maintainer outside Claude Code)
