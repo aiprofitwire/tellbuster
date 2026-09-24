@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Speech bubble with a dashed underline, as in the web demo logo -->
+  <rect x="6" y="10" width="96" height="70" rx="18" fill="#2c6b5a"/>
+  <path d="M26 78 L18 106 L50 78 Z" fill="#2c6b5a"/>
+  <path d="M24 36 H84" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M24 56 H54" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  <!-- Magnifying glass, with a white halo so it shows on dark toolbars -->
+  <path d="M100 98 L118 116" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="84" cy="82" r="28.5" fill="#ffffff"/>
+  <path d="M100 98 L118 116" stroke="#1f2328" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="84" cy="82" r="24" fill="#ffffff" stroke="#1f2328" stroke-width="9"/>
+  <path d="M72 84 H96" stroke="#d0473b" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 6"/>
+</svg>

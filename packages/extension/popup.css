@@ -1,0 +1,11 @@
+/* Popup layout. Colors, buttons, underlines and cards come from vendor/style.css,
+   a copy of the web demo's styles, so both look the same. */
+body { width: 400px; margin: 0; padding: 0 16px; font-size: 16px; }
+.pop-top { padding: 14px 0 10px; }
+.pop-top .brand { font-size: 1.05rem; }
+.backdrop, textarea { padding: 14px; }
+textarea { min-height: 9rem; }
+.empty { margin-top: 12px; padding: 16px; }
+#results { margin-top: 16px; }
+.list { max-height: none; overflow: visible; }
+.pop-bottom { padding: 8px 0 16px; color: var(--muted); font-size: 0.85rem; }

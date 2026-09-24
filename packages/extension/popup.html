@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tellbuster</title>
+  <link rel="stylesheet" href="vendor/style.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="pop-top">
+    <p class="brand">
+      <svg class="mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 24l-2 5 7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 14.5h16" stroke="var(--high)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
+      <span>Tellbuster</span>
+    </p>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <label for="text" class="label">Your writing</label>
+      <div class="actions">
+        <button type="button" id="copy" class="btn">Copy text</button>
+        <button type="button" id="clear" class="btn">Clear</button>
+      </div>
+    </div>
+    <div class="editor">
+      <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+      <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here."></textarea>
+    </div>
+
+    <div class="empty" id="empty">
+      <p>Paste some writing to see which phrases might read as AI. You can also select text on any page, right-click it and pick <strong>Check with Tellbuster</strong>.</p>
+      <button type="button" id="example" class="btn btn-accent">Try an example</button>
+    </div>
+
+    <div id="results" hidden>
+      <p class="summary" id="summary" aria-live="polite"></p>
+      <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
+      <ul class="legend" aria-label="Legend">
+        <li><span class="sample sev-high">High</span> strong tell</li>
+        <li><span class="sample sev-medium">Medium</span> common tell</li>
+        <li><span class="sample sev-low">Low</span> style note</li>
+      </ul>
+      <p class="turned-off" id="turned-off" hidden></p>
+      <ol class="list" id="list"></ol>
+    </div>
+    <p class="status" id="status" hidden></p>
+  </main>
+
+  <footer class="pop-bottom">Your text is checked on this device and never sent anywhere.</footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
