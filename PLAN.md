@@ -160,11 +160,13 @@ How to test: open the GitHub Pages site on a computer and a phone. It should loo
 ## Step 10: Launch video
 - [ ] A 30 to 45 second launch video built with Remotion in `video/` (kept out of the extension and the npm package).
 
-- Scene: a sloppy AI-style paragraph gets underlined live, a card opens with the why and the fix, the text gets rewritten plainly, then the end card: "Tellbuster. Free, open source, nothing leaves your browser." plus the demo URL.
+- Scene: a sloppy AI-style paragraph gets underlined live, a card opens with the why and the fix, the text gets rewritten plainly, then the end card: "Tellbuster. Free, open source, nothing leaves your browser." plus the landing page address `aiprofitwire.github.io/tellbuster` (never the store link, which can change).
 - Captions only, no voiceover. Uses the demo's real colors and logo. Exports 1080x1080 (LinkedIn, X) and 1080x1920 (Shorts), plus a short GIF for the README.
-- Render the files and commit them to `video/out/`.
+- Keep the repo small: add `video/out/` to `.gitignore` so the MP4 files are never committed. Commit only the README GIF, at `docs/media/demo.gif`, under 3 MB (lower the frame rate or size if needed), and show it near the top of `README.md`.
+- The MP4 files are handed to the maintainer, not committed. The pull request says where to find them (for example, attached to a draft GitHub Release named "Launch video"), or explains how to render them locally with one command.
+- Remotion is not MIT licensed: it is free for individuals and companies of up to 3 people, and bigger companies need a paid license. Say this in one line in `video/README.md`. The `video/` folder must stay separate: nothing in `packages/` or `docs/` may depend on it.
 
-How to test: open the files in `video/out/` on GitHub and watch them. They should play smoothly and read clearly with the sound off.
+How to test: open `README.md` on GitHub and check that the GIF plays and reads clearly. Then watch both MP4 files with the sound off: they should play smoothly and every caption should be readable.
 
 ## Step 11: Feedback link
 - [ ] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
