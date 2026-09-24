@@ -1,6 +1,6 @@
 # PLAN.md: the Tellbuster build plan
 
-**How this file works:** each session, Claude Code does the first unchecked step, ticks it, adds a dated note, and opens a pull request. One step per session. Moe picks the model in the session settings using the **Model** column below.
+**How this file works:** each session, Claude Code does the first unchecked step, ticks it, adds a dated note, and opens a pull request. One step per session. The maintainer picks the model in the session settings using the **Model** column below.
 
 **Deadline:** the $100 cloud credit expires **November 5, 2026 at 2:59 AM Eastern**. All build steps must be merged before then.
 
@@ -75,7 +75,7 @@ How to test (after merge): on GitHub, go to **Settings > Pages**, under **Source
 - Manifest V3. Name "Tellbuster". Permissions: only `storage` and `activeTab` for now. No host permissions yet.
 - Clicking the toolbar icon opens a popup with a text box: paste text, see findings (same look as the web demo, compact).
 - A right-click menu item "Check with Tellbuster" on selected text opens the popup pre-filled with the selection (add `contextMenus` permission for this).
-- The extension folder must work when loaded directly (no build step for Moe). If core and rules must be copied in, add `scripts/sync-extension.js`, run it, and commit the copied files in `packages/extension/vendor/`.
+- The extension folder must work when loaded directly (no build step for the maintainer). If core and rules must be copied in, add `scripts/sync-extension.js`, run it, and commit the copied files in `packages/extension/vendor/`.
 - Simple icon set (16, 48, 128 px). A plain magnifying glass over a speech bubble is fine.
 
 How to test: on the repo page click **Code > Download ZIP**, unzip it. In Chrome go to `chrome://extensions`, turn on **Developer mode** (top right), click **Load unpacked**, pick the `packages/extension` folder. Click the Tellbuster icon, paste a sloppy paragraph, see the findings.
@@ -118,14 +118,14 @@ How to test: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il es
 - `.github/ISSUE_TEMPLATE/false-positive.yml`: report a phrase flagged by mistake.
 - `.github/pull_request_template.md`: checklist for rule PRs.
 - Update `CONTRIBUTING.md` with a "your first rule in 5 minutes" walkthrough.
-- Create 10 issues labeled `good first issue`, each proposing one specific missing rule (write them as a markdown list in `docs/first-issues.md` so Moe can paste them into GitHub if Claude Code cannot create issues directly).
+- Create 10 issues labeled `good first issue`, each proposing one specific missing rule (write them as a markdown list in `docs/first-issues.md` so the maintainer can paste them into GitHub if Claude Code cannot create issues directly).
 
 How to test: open the repo's **Issues > New issue**. The "Suggest a new tell" form should appear.
 
 ## Step 9: Publish prep
 - [ ] Get everything ready to go public.
 
-- `packages/core`: confirm package.json fields (description, keywords, repository, homepage). Write the exact commands Moe runs to publish to npm in `docs/PUBLISHING.md`.
+- `packages/core`: confirm package.json fields (description, keywords, repository, homepage). Write the exact commands the maintainer runs to publish to npm in `docs/PUBLISHING.md`.
 - `scripts/zip-extension.js`: creates `tellbuster-extension.zip` for the Chrome Web Store.
 - `docs/privacy.html`: plain privacy policy (no data collected, nothing leaves the device). The Chrome Web Store requires one.
 - `docs/store-listing.md`: Chrome Web Store title, short description (132 characters max, count it), long description, and a list of 5 screenshots to take.
