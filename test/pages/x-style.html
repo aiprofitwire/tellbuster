@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tellbuster test: X-style composer</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 32px; }
+  .DraftEditor-root { position: relative; width: 560px; max-width: 100%; border: 1px solid #ccc; border-radius: 8px; padding: 12px; font-size: 20px; }
+  .public-DraftEditorPlaceholder-root { position: absolute; color: #777; pointer-events: none; }
+  .public-DraftEditor-content { min-height: 60px; outline: none; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>X-style composer</h1>
+<p>Built like the X home composer: an editable box with role="textbox" and nested spans. Like Draft.js, it cancels the browser's own typing and redraws the text itself, so the page never fires an "input" event.</p>
+<p>Add <code>?swallow</code> to the address to also block focus and input events before any extension sees them, or <code>?strip</code> to make the page remove anything added to &lt;html&gt;.</p>
+<div class="DraftEditor-root">
+  <div class="public-DraftEditorPlaceholder-root" id="ph">What's happening?</div>
+  <div class="DraftEditor-editorContainer">
+    <div class="public-DraftEditor-content" id="ed" contenteditable="true" role="textbox" aria-label="Post text" aria-multiline="true" data-testid="tweetTextarea_0" spellcheck="true"><div data-contents="true"><div data-block="true" data-offset-key="a-0-0"><div class="public-DraftStyleDefault-block" data-offset-key="a-0-0"><span data-offset-key="a-0-0"><br data-text="true"></span></div></div></div></div>
+  </div>
+</div>
+<script>
+  const ed = document.getElementById('ed');
+  const ph = document.getElementById('ph');
+  let text = '';
+
+  function draw() {
+    const span = ed.querySelector('span[data-offset-key]');
+    const inner = document.createElement('span');
+    inner.dataset.text = 'true';
+    if (text) inner.textContent = text; else inner.append(document.createElement('br'));
+    span.replaceChildren(inner);
+    ph.hidden = text !== '';
+    const range = document.createRange();
+    range.selectNodeContents(inner);
+    range.collapse(false);
+    getSelection().removeAllRanges();
+    getSelection().addRange(range);
+  }
+
+  ed.addEventListener('beforeinput', (e) => {
+    e.preventDefault();
+    if (e.inputType === 'insertText') text += e.data;
+    else if (e.inputType === 'insertFromPaste') text += e.dataTransfer.getData('text/plain');
+    else if (e.inputType === 'insertParagraph' || e.inputType === 'insertLineBreak') text += '\n';
+    else if (e.inputType.startsWith('delete')) text = text.slice(0, -1);
+    draw();
+  });
+
+  if (location.search.includes('swallow')) {
+    for (const t of ['focusin', 'focusout', 'input']) window.addEventListener(t, (e) => e.stopImmediatePropagation(), true);
+  }
+  if (location.search.includes('strip')) {
+    new MutationObserver(() => {
+      for (const n of [...document.documentElement.children]) if (n !== document.head && n !== document.body) n.remove();
+    }).observe(document.documentElement, { childList: true });
+  }
+</script>
+</body>
+</html>

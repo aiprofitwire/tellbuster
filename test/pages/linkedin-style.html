@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tellbuster test: LinkedIn-style post dialog</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 32px; min-height: 1600px; }
+  /* Centered with a transform, like many site modals. This moves "fixed" positioning inside it. */
+  dialog { position: fixed; top: 50%; left: 50%; margin: 0; transform: translate(-50%, -50%); width: 640px; max-width: calc(100vw - 32px); height: 520px; max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 8px; overflow: hidden; }
+  dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+  .bar { padding: 16px; border-bottom: 1px solid #ddd; }
+  .scroll { height: 380px; max-height: calc(100% - 120px); overflow: auto; padding: 16px; }
+  .ql-editor { min-height: 260px; outline: none; font-size: 18px; }
+</style>
+</head>
+<body>
+<h1>LinkedIn-style feed</h1>
+<p>The post box opens in a modal &lt;dialog&gt;, which sits above everything else on the page and blocks clicks outside it.</p>
+<button type="button" id="start">Start a post</button>
+<dialog id="dlg" aria-labelledby="title">
+  <div class="bar" id="title">Create a post</div>
+  <div class="scroll">
+    <div class="ql-container">
+      <div class="ql-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Text editor for creating content"><p><br></p></div>
+    </div>
+  </div>
+  <div class="bar"><button type="button" id="close">Close</button></div>
+</dialog>
+<script>
+  const dlg = document.getElementById('dlg');
+  document.getElementById('start').onclick = () => { dlg.showModal(); document.querySelector('.ql-editor').focus(); };
+  document.getElementById('close').onclick = () => dlg.close();
+</script>
+</body>
+</html>
