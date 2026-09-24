@@ -32,7 +32,7 @@ If Pages is already on from an earlier step, just do steps 4 and 5.
 
 This publishes the `tellbuster` package so developers can run `npm install tellbuster`. The name was free on September 24, 2026.
 
-**One thing to know first:** the package holds the engine only, not the rule files. A developer who installs it has to get `rules/en.json` from this repo. That works, but it is less handy. If you want the rules inside the package, ask for that change before you publish (it is a small change). Once a version is published, it cannot be changed, only replaced by a newer version.
+The package includes the engine and all the rule files, so `npm install tellbuster` works on its own. Before publishing, run `node scripts/sync-core-rules.js` so the bundled rules match the `rules/` folder (a test also checks this).
 
 1. Make a free account at [npmjs.com/signup](https://www.npmjs.com/signup). Confirm your email.
 2. Turn on two-factor login: click your avatar > **Account** > **Two-Factor Authentication**. npm asks for it when you publish.
@@ -55,7 +55,7 @@ This publishes the `tellbuster` package so developers can run `npm install tellb
    npm pack --dry-run
    ```
 
-   Check the list under **Tarball Contents**. It must show exactly 3 files: `README.md`, `package.json` and `src/index.js`. The name must be `tellbuster` and the version `0.1.0`.
+   Check the list under **Tarball Contents**. It must show exactly 5 files: `README.md`, `package.json`, `src/index.js`, `src/main.js` and `src/rules.js`. The name must be `tellbuster` and the version `0.1.0`.
 6. Publish:
 
    ```
