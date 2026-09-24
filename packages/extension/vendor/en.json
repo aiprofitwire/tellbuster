@@ -1,0 +1,811 @@
+{
+  "language": "en",
+  "version": 1,
+  "rules": [
+    {
+      "id": "en-em-dash",
+      "name": "Em dash",
+      "category": "punctuation",
+      "severity": "low",
+      "pattern": "—",
+      "flags": "",
+      "message": "The em dash reads as AI to many readers.",
+      "why": "Em dashes are a normal punctuation mark, but AI models use them so often that many readers now treat them as a sign of machine writing.",
+      "fix": "Use a comma, a colon or parentheses, or split the sentence in two.",
+      "examples": {
+        "flag": [
+          "The plan worked — mostly."
+        ],
+        "pass": [
+          "The plan worked, mostly."
+        ]
+      }
+    },
+    {
+      "id": "en-delve",
+      "name": "\"Delve\"",
+      "category": "word-choice",
+      "severity": "medium",
+      "pattern": "\\bdelv(e|es|ed|ing)\\b",
+      "flags": "i",
+      "message": "\"Delve\" reads as AI.",
+      "why": "AI models use \"delve\" far more often than people do, so readers now link it to machine writing.",
+      "fix": "Try \"look at\", \"dig into\" or \"explore\".",
+      "examples": {
+        "flag": [
+          "Let's delve into the numbers.",
+          "She delved deeper."
+        ],
+        "pass": [
+          "Let's dig into the numbers."
+        ]
+      }
+    },
+    {
+      "id": "en-not-x-its-y",
+      "name": "\"It's not X, it's Y\"",
+      "category": "structure",
+      "severity": "high",
+      "pattern": "\\b(it['’]s|this is|that['’]s)\\s+not\\s+(just\\s+)?[^.!?\\n]{1,60}?[,;:]\\s*(it['’]s|this is|that['’]s)\\b",
+      "flags": "i",
+      "message": "The \"it's not X, it's Y\" setup reads as AI.",
+      "why": "Setting up a contrast just to knock it down is one of the most common AI sentence shapes. Readers spot it quickly.",
+      "fix": "Say the point directly: keep the Y part and drop the X part.",
+      "examples": {
+        "flag": [
+          "It's not a tool, it's a movement.",
+          "This is not just about money; it's about trust."
+        ],
+        "pass": [
+          "It's not ready yet, so we wait."
+        ]
+      }
+    },
+    {
+      "id": "en-fast-paced-world",
+      "name": "\"In today's fast-paced world\"",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "\\bin today['’]s\\s+(fast[- ]paced|digital|ever[- ]changing|rapidly[- ]evolving|modern)\\s+(\\w+\\s+)?(world|landscape|age|era|environment)\\b",
+      "flags": "i",
+      "message": "This opener reads as AI.",
+      "why": "Generic scene-setting openers are a classic sign of filler writing, and AI models reach for them constantly.",
+      "fix": "Start with your actual point or a specific fact.",
+      "examples": {
+        "flag": [
+          "In today's fast-paced world, time is money.",
+          "In today’s digital landscape, brands must adapt."
+        ],
+        "pass": [
+          "Today the store opens at nine."
+        ]
+      }
+    },
+    {
+      "id": "en-tapestry",
+      "name": "\"Tapestry\"",
+      "category": "word-choice",
+      "severity": "medium",
+      "pattern": "\\b(rich|vibrant|intricate)?\\s?tapestr(y|ies)\\b",
+      "flags": "i",
+      "message": "\"Tapestry\" used as a metaphor reads as AI.",
+      "why": "Describing things as a \"rich tapestry\" is a favorite AI metaphor and rarely adds meaning.",
+      "fix": "Name the actual things you mean.",
+      "examples": {
+        "flag": [
+          "The city is a rich tapestry of cultures."
+        ],
+        "pass": [
+          "The museum restored a medieval rug."
+        ]
+      }
+    },
+    {
+      "id": "en-testament",
+      "name": "\"A testament to\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\b(is|stands as|serves as)\\s+a\\s+testament\\s+to\\b",
+      "flags": "i",
+      "message": "\"A testament to\" reads as AI.",
+      "why": "This phrase shows up constantly in AI writing to add weight without adding facts.",
+      "fix": "Say what the thing proves, with a specific detail.",
+      "examples": {
+        "flag": [
+          "The award is a testament to our team's hard work."
+        ],
+        "pass": [
+          "The team won the award after two years of work."
+        ]
+      }
+    },
+    {
+      "id": "en-navigate-landscape",
+      "name": "\"Navigate the landscape\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bnavigat(e|es|ing)\\s+the\\s+(complex\\s+|ever[- ]changing\\s+|evolving\\s+)?(landscape|complexities|intricacies)\\b",
+      "flags": "i",
+      "message": "\"Navigate the landscape\" reads as AI.",
+      "why": "Abstract travel metaphors like this are common in AI text and vague for readers.",
+      "fix": "Say what the person actually has to do.",
+      "examples": {
+        "flag": [
+          "We help you navigate the complex landscape of taxes."
+        ],
+        "pass": [
+          "We help you file your taxes on time."
+        ]
+      }
+    },
+    {
+      "id": "en-hype-words",
+      "name": "Hype words",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(game[- ]changer|game[- ]changing|revolutioniz(e|es|ed|ing)|unlock(s|ing)?\\s+the\\s+(full\\s+)?potential)\\b",
+      "flags": "i",
+      "message": "This hype phrase reads as AI.",
+      "why": "Big claims with no evidence are common in AI marketing copy. Readers skim past them.",
+      "fix": "Replace the claim with a number or a concrete result.",
+      "examples": {
+        "flag": [
+          "This app is a game-changer for teams.",
+          "Unlock the full potential of your data."
+        ],
+        "pass": [
+          "This app cut our meeting time in half."
+        ]
+      }
+    },
+    {
+      "id": "en-dive-in",
+      "name": "\"Let's dive in\"",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\b(let['’]s|we['’]ll|let\\s+us)\\s+(dive|delve|jump)\\s+(in|into|deeper|right\\s+in)\\b",
+      "flags": "i",
+      "message": "\"Let's dive in\" reads as AI.",
+      "why": "Announcing that you are about to start is filler, and AI models open with it all the time.",
+      "fix": "Delete it and start with the first real point.",
+      "examples": {
+        "flag": [
+          "Let's dive into the details.",
+          "We'll jump right in."
+        ],
+        "pass": [
+          "The details are below."
+        ]
+      }
+    },
+    {
+      "id": "en-closing-filler",
+      "name": "Closing filler",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\b(i\\s+hope\\s+this\\s+(helps|finds\\s+you\\s+well)|in\\s+conclusion|in\\s+summary|feel\\s+free\\s+to\\s+reach\\s+out)\\b",
+      "flags": "i",
+      "message": "This stock phrase reads as AI.",
+      "why": "Stock openers and sign-offs are the first thing readers notice in AI emails and posts.",
+      "fix": "End with the next step or simply stop when you are done.",
+      "examples": {
+        "flag": [
+          "I hope this helps!",
+          "In conclusion, the plan works."
+        ],
+        "pass": [
+          "Call me Tuesday to confirm."
+        ]
+      }
+    },
+    {
+      "id": "en-reveal-setup",
+      "name": "Reveal setups",
+      "category": "structure",
+      "severity": "medium",
+      "pattern": "(here['’]s\\s+the\\s+(thing|kicker|catch|truth)|the\\s+(kicker|catch|twist)\\?|spoiler(\\s+alert)?:)",
+      "flags": "i",
+      "message": "This reveal setup reads as AI.",
+      "why": "Teasing a point before making it (\"Here's the thing\") is a common AI hook, especially on social media.",
+      "fix": "Make the point without the drumroll.",
+      "examples": {
+        "flag": [
+          "Here's the thing: nobody reads the manual.",
+          "The kicker? It was free."
+        ],
+        "pass": [
+          "Nobody reads the manual."
+        ]
+      }
+    },
+    {
+      "id": "en-buzzwords",
+      "name": "Corporate buzzwords",
+      "category": "word-choice",
+      "severity": "low",
+      "pattern": "\\b(seamless(ly)?|leverag(e|es|ed|ing)|empower(s|ed|ing)?|elevat(e|es|ed|ing)\\s+your|streamlin(e|es|ed|ing)\\s+your)\\b",
+      "flags": "i",
+      "message": "This buzzword reads as AI.",
+      "why": "These words are everywhere in AI business writing and say very little on their own.",
+      "fix": "Use a plain verb and say exactly what changes.",
+      "examples": {
+        "flag": [
+          "Seamlessly integrate your tools.",
+          "Leverage our platform to grow."
+        ],
+        "pass": [
+          "Connect your tools in two clicks."
+        ]
+      }
+    },
+    {
+      "id": "en-transition-openers",
+      "name": "Stiff transition openers",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "(?<=^|[.!?]\\s+)(Moreover|Furthermore|Additionally),",
+      "flags": "",
+      "message": "Opening with \"Moreover\" or \"Furthermore\" reads as AI.",
+      "why": "Formal transition words at the start of sentences are much more common in AI text than in natural writing.",
+      "fix": "Drop the transition, or use \"Also\" or \"And\".",
+      "examples": {
+        "flag": [
+          "It is fast. Moreover, it is cheap.",
+          "Furthermore, the team agreed."
+        ],
+        "pass": [
+          "It is fast and it is cheap."
+        ]
+      }
+    },
+    {
+      "id": "en-worth-noting",
+      "name": "\"It's worth noting\"",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\bit['’]s\\s+(worth\\s+noting|important\\s+to\\s+note|worth\\s+mentioning)\\s+that\\b",
+      "flags": "i",
+      "message": "\"It's worth noting that\" reads as AI.",
+      "why": "This phrase adds words before the point without adding meaning. AI models use it constantly.",
+      "fix": "Delete the phrase and state the fact.",
+      "examples": {
+        "flag": [
+          "It's worth noting that prices rose."
+        ],
+        "pass": [
+          "Prices rose 4 percent in May."
+        ]
+      }
+    },
+    {
+      "id": "en-crucial-role",
+      "name": "\"Plays a crucial role\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bplay(s|ed|ing)?\\s+an?\\s+(crucial|pivotal|vital|key|significant)\\s+role\\b",
+      "flags": "i",
+      "message": "\"Plays a crucial role\" reads as AI.",
+      "why": "This is one of the most frequent AI phrases. It sounds important but hides what actually happens.",
+      "fix": "Say what the thing does, specifically.",
+      "examples": {
+        "flag": [
+          "Sleep plays a crucial role in health."
+        ],
+        "pass": [
+          "Sleep repairs muscle and fixes memories."
+        ]
+      }
+    },
+    {
+      "id": "en-certainly-opener",
+      "name": "\"Certainly!\"",
+      "category": "filler",
+      "severity": "high",
+      "pattern": "(^|[.!?\\n]\\s*)(certainly|absolutely|of course|sure thing)!",
+      "flags": "i",
+      "message": "Opening with \"Certainly!\" reads as AI.",
+      "why": "Chat assistants start replies this way all the time. In an email or a post it sounds like a pasted chatbot answer.",
+      "fix": "Delete it and start with the answer.",
+      "examples": {
+        "flag": [
+          "Certainly! Here is the list you asked for.",
+          "Absolutely! Let me explain."
+        ],
+        "pass": [
+          "She will certainly be there on Friday."
+        ]
+      }
+    },
+    {
+      "id": "en-great-question",
+      "name": "\"Great question\"",
+      "category": "filler",
+      "severity": "high",
+      "pattern": "\\b(great|excellent|fantastic|wonderful)\\s+question\\s*[!.]",
+      "flags": "i",
+      "message": "\"Great question!\" reads as AI.",
+      "why": "Praising the question before answering it is a chatbot habit. Readers notice it right away.",
+      "fix": "Skip the praise and answer the question.",
+      "examples": {
+        "flag": [
+          "Great question! The short answer is yes.",
+          "That's an excellent question."
+        ],
+        "pass": [
+          "The great question of our time is energy."
+        ]
+      }
+    },
+    {
+      "id": "en-as-an-ai",
+      "name": "\"As an AI\"",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "\\bas\\s+an\\s+ai(\\s+language\\s+model|\\s+assistant)?\\b",
+      "flags": "i",
+      "message": "\"As an AI\" reads as a leftover from a chatbot reply.",
+      "why": "This phrase comes straight from chatbot answers. If it stays in your text, readers will assume the whole piece was pasted.",
+      "fix": "Delete the sentence, or rewrite it in your own voice.",
+      "examples": {
+        "flag": [
+          "As an AI language model, I cannot give legal advice."
+        ],
+        "pass": [
+          "As an artist, I see color everywhere."
+        ]
+      }
+    },
+    {
+      "id": "en-important-to-remember",
+      "name": "\"It's important to remember\"",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\bit(['’]s|\\s+is)\\s+(important|crucial|essential|vital)\\s+to\\s+(remember|keep\\s+in\\s+mind|understand|recognize)\\b",
+      "flags": "i",
+      "message": "\"It's important to remember\" reads as AI.",
+      "why": "This hedge tells the reader something matters instead of showing why. AI models add it to almost every answer.",
+      "fix": "Drop the phrase and state the point. If it matters, the reason will show it.",
+      "examples": {
+        "flag": [
+          "It's important to remember that every child is different.",
+          "It is crucial to keep in mind the budget."
+        ],
+        "pass": [
+          "Remember to bring your ID."
+        ]
+      }
+    },
+    {
+      "id": "en-not-only-but-also",
+      "name": "\"Not only X but also Y\"",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "\\bnot\\s+only\\b[^.!?\\n]{1,80}?\\bbut\\s+(also|even)\\b",
+      "flags": "i",
+      "message": "The \"not only X but also Y\" shape reads as AI when used often.",
+      "why": "People use this shape too, but AI text leans on it to sound balanced and thorough. Several in one piece stand out.",
+      "fix": "Try \"X and Y\", or give each point its own sentence.",
+      "examples": {
+        "flag": [
+          "The app is not only fast but also secure."
+        ],
+        "pass": [
+          "The app is fast and secure.",
+          "Not only that, it ships today."
+        ]
+      }
+    },
+    {
+      "id": "en-realm",
+      "name": "\"In the realm of\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\b(in|into|within)\\s+the\\s+realm\\s+of\\b",
+      "flags": "i",
+      "message": "\"In the realm of\" reads as AI.",
+      "why": "It is a grand way to say \"in\" and shows up far more in AI text than in normal writing.",
+      "fix": "Use \"in\" or name the field directly.",
+      "examples": {
+        "flag": [
+          "In the realm of digital marketing, trust is key."
+        ],
+        "pass": [
+          "The king ruled the realm for forty years."
+        ]
+      }
+    },
+    {
+      "id": "en-embark-journey",
+      "name": "\"Embark on a journey\"",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "\\bembark(s|ed|ing)?\\s+on\\s+(a|an|this|your|our|the)\\s+([\\w-]+\\s+){0,2}(journey|quest|adventure|voyage)\\b",
+      "flags": "i",
+      "message": "\"Embark on a journey\" reads as AI.",
+      "why": "Turning a normal task into a journey is one of the most familiar AI metaphors.",
+      "fix": "Say what the person will actually do: \"start\", \"learn\", \"try\".",
+      "examples": {
+        "flag": [
+          "Embark on a journey of self-discovery.",
+          "We embarked on an exciting new adventure."
+        ],
+        "pass": [
+          "We boarded the ferry at noon."
+        ]
+      }
+    },
+    {
+      "id": "en-ever-evolving",
+      "name": "\"Ever-evolving\"",
+      "category": "word-choice",
+      "severity": "medium",
+      "pattern": "\\bever[- ](evolving|changing|growing|shifting|expanding)\\b",
+      "flags": "i",
+      "message": "\"Ever-evolving\" reads as AI.",
+      "why": "It is a stock way to sound current without saying what changed. AI models use it a lot.",
+      "fix": "Say what changed and when, or drop it.",
+      "examples": {
+        "flag": [
+          "The ever-evolving world of tech moves fast.",
+          "An ever changing market needs new ideas."
+        ],
+        "pass": [
+          "The market changed twice this year."
+        ]
+      }
+    },
+    {
+      "id": "en-myriad",
+      "name": "\"A myriad of\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\ba\\s+(myriad|plethora|multitude)\\s+of\\b",
+      "flags": "i",
+      "message": "\"A myriad of\" reads as AI.",
+      "why": "Fancy words for \"many\" are common in AI text and make the sentence heavier.",
+      "fix": "Use \"many\", \"lots of\", or give the real number.",
+      "examples": {
+        "flag": [
+          "The course covers a myriad of topics.",
+          "There is a plethora of options."
+        ],
+        "pass": [
+          "The course covers twelve topics."
+        ]
+      }
+    },
+    {
+      "id": "en-foster",
+      "name": "\"Foster a sense of\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bfoster(s|ed|ing)?\\s+(a\\s+)?(sense|culture|growth|innovation|collaboration|connection|community|engagement|creativity|trust|relationships?)\\b",
+      "flags": "i",
+      "message": "\"Foster\" in this sense reads as AI.",
+      "why": "AI writing loves to \"foster\" abstract things like community and growth. It sounds warm but says little.",
+      "fix": "Say what you do: \"we meet weekly\", \"we answer every email\".",
+      "examples": {
+        "flag": [
+          "These events foster a sense of belonging.",
+          "We aim to foster collaboration."
+        ],
+        "pass": [
+          "They foster kittens for the shelter."
+        ]
+      }
+    },
+    {
+      "id": "en-resonate",
+      "name": "\"Resonates with\"",
+      "category": "phrase",
+      "severity": "low",
+      "pattern": "\\bresonat(e|es|ed|ing)\\s+(deeply\\s+|strongly\\s+)?with\\b",
+      "flags": "i",
+      "message": "\"Resonates with\" reads as AI.",
+      "why": "This is a common AI way to say people like something, without saying who or why.",
+      "fix": "Say who liked it and what they did: \"readers shared it 200 times\".",
+      "examples": {
+        "flag": [
+          "This message resonates deeply with our audience."
+        ],
+        "pass": [
+          "The bell resonated through the hall."
+        ]
+      }
+    },
+    {
+      "id": "en-unleash",
+      "name": "\"Unleash your potential\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bunleash(es|ed|ing)?\\s+(the\\s+|your\\s+|its\\s+|their\\s+|our\\s+)?(full\\s+|true\\s+|inner\\s+|creative\\s+)?(potential|power|creativity|genius|magic)\\b",
+      "flags": "i",
+      "message": "\"Unleash your potential\" reads as AI.",
+      "why": "This is a stock AI marketing line. Readers have seen it so often it no longer means anything.",
+      "fix": "Say the concrete result: what can the reader do after?",
+      "examples": {
+        "flag": [
+          "Unleash your full potential with our app.",
+          "Unleash the power of AI."
+        ],
+        "pass": [
+          "She unleashed the dog in the yard."
+        ]
+      }
+    },
+    {
+      "id": "en-harness-power",
+      "name": "\"Harness the power of\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bharness(es|ed|ing)?\\s+the\\s+(full\\s+)?power\\s+of\\b",
+      "flags": "i",
+      "message": "\"Harness the power of\" reads as AI.",
+      "why": "This phrase is everywhere in AI product copy and hides what the product actually does.",
+      "fix": "Replace it with \"use\" and add what it does for the reader.",
+      "examples": {
+        "flag": [
+          "Harness the power of data to grow your sales."
+        ],
+        "pass": [
+          "Put the harness on the horse before the ride."
+        ]
+      }
+    },
+    {
+      "id": "en-imagine-opener",
+      "name": "\"Imagine...\" opener",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "(^|[.!?\\n]\\s*)Imagine\\s+(a|an|if|this|that|you|your|being|having|waking|walking|what)\\b",
+      "flags": "",
+      "message": "Opening with \"Imagine...\" reads as AI when overused.",
+      "why": "AI hooks often ask the reader to picture a scene before making the point. One is fine; a habit of it stands out.",
+      "fix": "Start with the real example or fact instead.",
+      "examples": {
+        "flag": [
+          "Imagine a world where meetings end on time.",
+          "Picture it. Imagine waking up with no alarm."
+        ],
+        "pass": [
+          "I can't imagine a better day."
+        ]
+      }
+    },
+    {
+      "id": "en-emoji-bullets",
+      "name": "Emoji bullet headers",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "^[ \\t]*\\p{Extended_Pictographic}\\uFE0F?[ \\t]+[^\\n]+\\n(?:[ \\t]*\\n)?[ \\t]*\\p{Extended_Pictographic}",
+      "flags": "mu",
+      "message": "Lines that start with emoji bullets read as AI.",
+      "why": "Stacks of lines that each begin with an emoji (🚀, ✅, 💡) are a common look in AI social posts.",
+      "fix": "Use plain bullets or short sentences. Keep an emoji only where it adds something.",
+      "examples": {
+        "flag": [
+          "🚀 Fast setup\n✅ No code needed",
+          "💡 Tip one\n\n🔥 Tip two"
+        ],
+        "pass": [
+          "We shipped it today 🚀",
+          "- Fast setup\n- No code needed"
+        ]
+      }
+    },
+    {
+      "id": "en-let-that-sink-in",
+      "name": "\"Let that sink in\"",
+      "category": "filler",
+      "severity": "high",
+      "pattern": "\\blet\\s+that\\s+sink\\s+in\\b",
+      "flags": "i",
+      "message": "\"Let that sink in\" reads as AI.",
+      "why": "Telling readers to pause and be impressed is a worn-out social media line, and AI posts use it constantly.",
+      "fix": "Delete it. If the fact is striking, readers will notice on their own.",
+      "examples": {
+        "flag": [
+          "Only 3 percent finish the course. Let that sink in."
+        ],
+        "pass": [
+          "Let the paint dry overnight."
+        ]
+      }
+    },
+    {
+      "id": "en-read-that-again",
+      "name": "\"Read that again\"",
+      "category": "filler",
+      "severity": "high",
+      "pattern": "(^|[.!?\\n]\\s*)read\\s+that\\s+(again|twice)[.!]",
+      "flags": "i",
+      "message": "\"Read that again.\" reads as AI.",
+      "why": "This line tells the reader how to react instead of letting the point land. It is a common AI and engagement-bait habit.",
+      "fix": "Delete it and trust your point.",
+      "examples": {
+        "flag": [
+          "You are not behind. Read that again."
+        ],
+        "pass": [
+          "I read that again last night."
+        ]
+      }
+    },
+    {
+      "id": "en-changes-everything",
+      "name": "\"This changes everything\"",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "\\bthis\\s+changes\\s+everything\\b",
+      "flags": "i",
+      "message": "\"This changes everything\" reads as AI.",
+      "why": "Big claims with no proof are a hallmark of AI hype posts. Readers tune them out.",
+      "fix": "Say what changes, for whom, and by how much.",
+      "examples": {
+        "flag": [
+          "A new model just dropped. This changes everything."
+        ],
+        "pass": [
+          "This changes the schedule for Monday."
+        ]
+      }
+    },
+    {
+      "id": "en-abstract-triplet",
+      "name": "Rule of three with abstract nouns",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "\\b\\w+(tion|ity|ness|ment|ance|ence)s?,\\s+\\w+(tion|ity|ness|ment|ance|ence)s?,?\\s+and\\s+\\w+(tion|ity|ness|ment|ance|ence)s?\\b",
+      "flags": "i",
+      "message": "A list of three abstract nouns reads as AI.",
+      "why": "AI text likes neat lists of three big ideas (\"clarity, alignment and resilience\"). They sound nice but are hard to picture.",
+      "fix": "Keep the one that matters most and give a concrete example.",
+      "examples": {
+        "flag": [
+          "It brings clarity, alignment, and resilience.",
+          "We value innovation, excellence and commitment."
+        ],
+        "pass": [
+          "We bought apples, bread, and milk."
+        ]
+      }
+    },
+    {
+      "id": "en-ever-wondered",
+      "name": "\"Have you ever wondered\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bhave\\s+you\\s+ever\\s+wondered\\b",
+      "flags": "i",
+      "message": "\"Have you ever wondered\" reads as AI.",
+      "why": "This question opener is a stock AI hook for blog posts and videos.",
+      "fix": "Start with the answer or the most interesting fact.",
+      "examples": {
+        "flag": [
+          "Have you ever wondered why cats purr?"
+        ],
+        "pass": [
+          "I wondered why the cat was purring."
+        ]
+      }
+    },
+    {
+      "id": "en-closer-offer",
+      "name": "\"Let me know if you have any questions\"",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\b(let\\s+me\\s+know\\s+if\\s+you\\s+(have\\s+any\\s+(other\\s+|further\\s+|more\\s+)?questions|need\\s+anything\\s+else|would\\s+like|['’]d\\s+like)|i['’]d\\s+be\\s+(happy|glad)\\s+to\\s+help)\\b",
+      "flags": "i",
+      "message": "This sign-off reads as AI.",
+      "why": "Chat assistants end nearly every reply with an offer to help more. In your own writing it sounds like a template.",
+      "fix": "End with a specific next step, or just stop.",
+      "examples": {
+        "flag": [
+          "Let me know if you have any other questions!",
+          "I'd be happy to help with that."
+        ],
+        "pass": [
+          "Let me know if Tuesday works."
+        ]
+      }
+    },
+    {
+      "id": "en-whether-youre",
+      "name": "\"Whether you're a X or a Y\"",
+      "category": "structure",
+      "severity": "medium",
+      "pattern": "\\bwhether\\s+you['’]re\\s+an?\\s+[^,.!?\\n]{1,40}?\\s+or\\s+an?\\b",
+      "flags": "i",
+      "message": "\"Whether you're a beginner or a pro\" reads as AI.",
+      "why": "Trying to speak to everyone at once is a common AI opener. It makes the piece feel generic.",
+      "fix": "Pick the reader you are really writing for and speak to them.",
+      "examples": {
+        "flag": [
+          "Whether you're a beginner or a pro, this guide helps."
+        ],
+        "pass": [
+          "Whether it rains or not, we go."
+        ]
+      }
+    },
+    {
+      "id": "en-key-takeaways",
+      "name": "\"Key takeaways\"",
+      "category": "structure",
+      "severity": "low",
+      "pattern": "\\bkey\\s+takeaways?\\s*:",
+      "flags": "i",
+      "message": "A \"Key takeaways:\" header reads as AI.",
+      "why": "AI summaries often end with a labeled list of takeaways, even in short posts that do not need one.",
+      "fix": "In short pieces, drop the header. The main point should already be clear.",
+      "examples": {
+        "flag": [
+          "Key takeaways: sleep more and drink water."
+        ],
+        "pass": [
+          "The key takeaway from the talk was simple."
+        ]
+      }
+    },
+    {
+      "id": "en-in-an-era",
+      "name": "\"In an era where\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bin\\s+an\\s+(era|age|world)\\s+(where|when|of)\\b",
+      "flags": "i",
+      "message": "\"In an era where\" reads as AI.",
+      "why": "Sweeping openers about the times we live in are a classic AI way to start a paragraph.",
+      "fix": "Start with a specific fact about now instead.",
+      "examples": {
+        "flag": [
+          "In an era where attention is scarce, brands must adapt.",
+          "In an age of noise, focus wins."
+        ],
+        "pass": [
+          "The house was built in the era of steam."
+        ]
+      }
+    },
+    {
+      "id": "en-ultimate-guide",
+      "name": "\"The ultimate guide\"",
+      "category": "phrase",
+      "severity": "low",
+      "pattern": "\\b(comprehensive|ultimate|definitive|complete)\\s+guide\\b",
+      "flags": "i",
+      "message": "\"The ultimate guide\" reads as AI.",
+      "why": "AI-written posts often call themselves the ultimate or comprehensive guide. Readers have learned to expect thin content.",
+      "fix": "Describe what the reader gets: \"7 steps to set up your shop\".",
+      "examples": {
+        "flag": [
+          "This is the ultimate guide to email marketing.",
+          "A comprehensive guide to baking bread."
+        ],
+        "pass": [
+          "The guide covers three trails near town."
+        ]
+      }
+    },
+    {
+      "id": "en-the-landscape",
+      "name": "\"The digital landscape\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\bthe\\s+(digital|business|marketing|tech|technology|ai|competitive|media|content|modern)\\s+landscape\\b",
+      "flags": "i",
+      "message": "\"The digital landscape\" reads as AI.",
+      "why": "Calling a field a \"landscape\" is a favorite AI filler. It sounds big but points at nothing.",
+      "fix": "Name the actual market, tool or trend you mean.",
+      "examples": {
+        "flag": [
+          "Brands must adapt to the digital landscape.",
+          "The competitive landscape is shifting."
+        ],
+        "pass": [
+          "The landscape painting hangs in the hall."
+        ]
+      }
+    }
+  ]
+}

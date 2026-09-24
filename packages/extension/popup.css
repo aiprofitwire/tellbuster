@@ -1,0 +1,13 @@
+/* Makes the web demo's layout fit the extension popup. Loaded after style.css. */
+html { overflow-x: hidden; }
+body { width: 420px; font-size: 16px; }
+.top, .layout, .bottom { padding-left: 16px; padding-right: 16px; }
+.top { padding-top: 14px; padding-bottom: 10px; }
+.brand { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 700; }
+.mark { color: var(--accent); flex: none; }
+.layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.panel { position: static; }
+.list { max-height: none; overflow: visible; }
+.backdrop, textarea { padding: 14px; }
+textarea { min-height: 9rem; }
+.bottom { padding-top: 8px; padding-bottom: 14px; }
