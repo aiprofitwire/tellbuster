@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tellbuster</title>
+  <meta name="description" content="Find the phrases that make your writing sound like AI. Free, open source, and nothing leaves your browser.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Tellbuster</h1>
+    <p class="tagline">Find the phrases that make your writing sound like AI. Free, open source, and nothing leaves your browser.</p>
+  </header>
+
+  <main class="layout">
+    <section class="writing" aria-label="Your writing">
+      <div class="toolbar">
+        <label for="text" class="label">Your writing</label>
+        <div class="actions">
+          <button type="button" id="copy" class="btn">Copy text</button>
+          <button type="button" id="clear" class="btn">Clear</button>
+        </div>
+      </div>
+      <div class="editor" id="editor">
+        <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+        <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here."></textarea>
+        <div class="popover" id="popover" hidden></div>
+      </div>
+    </section>
+
+    <aside class="panel" aria-label="Results">
+      <div class="empty" id="empty">
+        <p>Paste or type some writing to see which phrases might read as AI.</p>
+        <button type="button" id="example" class="btn btn-accent">Try an example</button>
+      </div>
+      <div id="results" hidden>
+        <p class="summary" id="summary" aria-live="polite"></p>
+        <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
+        <ul class="legend" aria-label="Legend">
+          <li><span class="sample sev-high">High</span> strong tell</li>
+          <li><span class="sample sev-medium">Medium</span> common tell</li>
+          <li><span class="sample sev-low">Low</span> style note</li>
+        </ul>
+        <p class="turned-off" id="turned-off" hidden></p>
+        <ol class="list" id="list"></ol>
+      </div>
+      <p class="status" id="status" hidden></p>
+    </aside>
+  </main>
+
+  <footer class="bottom">
+    <p>Tellbuster is free and open source (MIT license). Your text stays in this browser tab. <a href="https://github.com/aiprofitwire/tellbuster">See the code on GitHub</a>.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
