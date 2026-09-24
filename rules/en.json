@@ -1456,6 +1456,25 @@
       }
     },
     {
+      "id": "en-treasure-trove",
+      "name": "\"A treasure trove of\"",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "\\btreasure\\s+trove\\s+of\\b",
+      "flags": "i",
+      "message": "\"A treasure trove of\" reads as AI.",
+      "why": "AI uses \"treasure trove\" to make any collection sound exciting, from data to recipes.",
+      "fix": "Say what is in it: \"The archive has 400 letters from the 1920s.\"",
+      "examples": {
+        "flag": [
+          "The archive is a treasure trove of insights."
+        ],
+        "pass": [
+          "The kids found a toy treasure chest."
+        ]
+      }
+    },
+    {
       "id": "en-without-further-ado",
       "name": "\"Without further ado\"",
       "category": "filler",
