@@ -1454,6 +1454,25 @@
           "The knife has a double edge."
         ]
       }
+    },
+    {
+      "id": "en-without-further-ado",
+      "name": "\"Without further ado\"",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "\\bwithout\\s+further\\s+ado\\b",
+      "flags": "i",
+      "message": "\"Without further ado\" reads as AI.",
+      "why": "A throat-clearing line before a list or reveal. AI drafts use it to fill space.",
+      "fix": "Cut it. Start the list.",
+      "examples": {
+        "flag": [
+          "Without further ado, here is the list."
+        ],
+        "pass": [
+          "We started without further delay."
+        ]
+      }
     }
   ]
 }
