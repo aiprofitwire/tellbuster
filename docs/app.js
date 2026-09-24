@@ -56,6 +56,12 @@ function highlightHtml(text) {
   return text.endsWith('\n') ? html + ' ' : html;
 }
 
+// Opens the "Report a wrong flag" form on GitHub. Only the rule id goes in the link, never the user's text.
+function reportUrl(ruleId) {
+  const id = encodeURIComponent(ruleId);
+  return `https://github.com/aiprofitwire/tellbuster/issues/new?template=false-positive.yml&title=Wrong+flag%3A+${id}&rule=${id}`;
+}
+
 function cardHtml(f, i, { jump }) {
   const sevLabel = f.severity[0].toUpperCase() + f.severity.slice(1);
   // Show the exact words only when the rule name does not already say them.
@@ -68,7 +74,8 @@ function cardHtml(f, i, { jump }) {
     <p>${escapeHtml(f.message)}</p>
     <p class="card-why">${escapeHtml(f.why)}</p>
     <p class="card-fix"><strong>Try this:</strong> ${escapeHtml(f.fix)}</p>
-    <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">Turn off this rule</button>`;
+    <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">Turn off this rule</button>
+    <a class="link" href="${escapeHtml(reportUrl(f.ruleId))}" target="_blank" rel="noopener">Report a wrong flag</a>`;
 }
 
 // With rules in more than one language and no language picked, say which one the text was checked as.
