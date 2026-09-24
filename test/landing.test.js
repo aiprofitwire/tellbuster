@@ -10,7 +10,7 @@ const html = read('docs/index.html');
 test('the rule count on the page matches the default rules (English and French)', () => {
   const count = ['en', 'fr'].reduce((n, f) => n + JSON.parse(read(`rules/${f}.json`)).rules.length, 0);
   const shown = html.match(/id="rule-count">(\d+)</)?.[1];
-  assert.equal(Number(shown), count, `docs/index.html says ${shown}, the rules have ${count}: update the number in id="rule-count"`);
+  assert.equal(Number(shown), count, `docs/index.html says ${shown}, the rules have ${count}: run node scripts/sync-docs.js`);
 });
 
 test('the page loads no scripts, styles or fonts from other sites', () => {
