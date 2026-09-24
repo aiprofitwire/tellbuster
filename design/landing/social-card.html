@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tellbuster social preview card</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=Hanken+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:"Hanken Grotesk",system-ui,sans-serif}
+.t-high{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:#E0654F;text-decoration-thickness:4px;text-underline-offset:9px}
+.t-med{text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:#E3B04B;text-decoration-thickness:3px;text-underline-offset:9px}
+</style>
+</helmet>
+<div style="width: 1200px; height: 630px; box-sizing: border-box; padding: 64px 72px; background: #16181B; color: #F6F4EF; display: flex; flex-direction: column; justify-content: space-between;">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<div style="display: flex; align-items: center; gap: 14px;">
+<svg width="44" height="44" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="#9FD3C1" stroke-width="2.5"></rect><path d="M10 24l-2 5 7-5" fill="none" stroke="#9FD3C1" stroke-width="2.5" stroke-linejoin="round"></path><path d="M8 14.5h16" stroke="#E0654F" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"></path></svg>
+<span style="font-family: Fraunces, Georgia, serif; font-size: 34px; font-weight: 600;">Tellbuster</span>
+</div>
+<span style="font-size: 22px; font-weight: 600; color: #9FD3C1;">Free and open source</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 26px;">
+<p style="margin: 0; font-size: 44px; line-height: 1.5; color: #D8DBE0;"><span class="t-high">Certainly!</span> <span class="t-med">Let's delve into</span> this <span class="t-med">game-changer</span>. <span class="t-high">Let that sink in.</span></p>
+<h1 style="margin: 0; font-family: Fraunces, Georgia, serif; font-size: 76px; font-weight: 600; line-height: 1.05; letter-spacing: -0.02em;">Does your writing sound like AI?</h1>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; font-size: 22px; color: #B9BDC4;">
+<span>Find the phrases. Know why. Fix them.</span>
+<span>Nothing leaves your browser</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":630}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
