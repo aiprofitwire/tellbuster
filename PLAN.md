@@ -55,7 +55,8 @@ How Moe tests: open the pull request, click **Checks** or read the test output C
 How Moe tests: open `rules/en.json` on GitHub and skim 5 random rules. Each should read like a friendly note, not a scolding.
 
 ## Step 3: Web demo page
-- [ ] Build `docs/index.html`, a one-page demo anyone can use without installing anything.
+- [x] Build `docs/index.html`, a one-page demo anyone can use without installing anything.
+  - Done 2026-09-24. Added docs/index.html, app.js and style.css (underlines behind a see-through text box, hover or tap cards, side list, turn off a rule for the visit, light and dark mode), scripts/sync-docs.js with copies in docs/vendor/, and a test that keeps the copies in sync. Count line follows the CLAUDE.md design rules ("3 phrases might read as AI"). Checked in Chromium at 1280px and 375px.
 
 - A big text box. As the user types or pastes, tells are underlined in place (use a highlight layer behind a transparent textarea, or a contenteditable div; pick the simpler reliable option).
 - A side panel lists each finding: name, the message, the why, the fix. Clicking a finding scrolls to it.
