@@ -185,11 +185,25 @@ How to test: click the link on any card. A GitHub issue form opens with the rule
 
 How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
 
-## Step 13: More languages
-- [ ] Add Spanish (`rules/es.json`), then German and Portuguese if credit allows, about 15 careful rules each, same schema and tests. Update the language guess to cover them.
-- Translate the `why` and `fix` text of the French rules into French, and show the interface in French when the browser language is French (popup, badge panel, settings, web demo). Plain Quebec-friendly French.
+## Step 13: French interface, and room for more languages
+- [ ] Make Tellbuster fully French for French speakers, and open the door for native speakers to add Spanish, German and Portuguese.
 
-How to test: paste a Spanish sample into the demo. Spanish tells should show.
+Why this shape: a tell in Spanish is not a translated English tell. Rules written by someone who does not speak the language will flag normal writing. Native speakers write better rules, and every one of them is a new outside contributor. So this step builds the French side fully, and for the other languages only the setup plus a few careful starter rules.
+
+Part A, French (do this first):
+- Rewrite the `message`, `why` and `fix` of every rule in `rules/fr.json` in French (most are in English today). Plain, Quebec-friendly French. Keep ids, patterns and examples as they are.
+- Show the interface in French when the browser language is French: web demo, popup, badge panel and settings page. Keep all interface strings in one small file per language (for example `docs/i18n.js`, copied to the extension by the sync script), so a contributor can add a language by copying one file. English stays the default.
+- The landing page (`docs/index.html`) stays English for now.
+
+Part B, setup for Spanish, German and Portuguese:
+- Create `rules/es.json`, `rules/de.json` and `rules/pt.json` with 3 to 5 rules each. Pick only tells that are well known in that language (for example direct translations of chatbot openers like "¡Por supuesto!" or "Zusammenfassend lässt sich sagen"), with conservative patterns and full examples. Mark each file's intro in `rules/schema.md` or CONTRIBUTING.md as "starter set, native speakers welcome".
+- Add the common words for es, de and pt to the language guess, and add the three languages to the extension settings and the web demo, like French.
+- Update the sync scripts, the npm bundle and the tests so the new files are covered the same way as en and fr.
+- Write 3 issue drafts in `docs/first-issues.md`, one per language, titled like "Add 5 Spanish rules (native speakers wanted)". Each explains what makes a good tell in that language, links CONTRIBUTING.md, and asks for a flag and a pass example per rule. Do not add those rules yourself. Open the 3 issues on GitHub with the labels `good first issue`, `new rule` and `hacktoberfest` if you can, otherwise leave the drafts for the maintainer to post.
+
+If the step starts to sprawl, finish Part A, write down what is left of Part B, and stop.
+
+How to test: set the browser language to French (or open the demo with `?lang=fr`) and check that the demo, popup, badge panel and settings are in French, and that French findings show French text. Then paste "¡Por supuesto! Aquí tienes un resumen." into the demo: at least one Spanish tell should show.
 
 ## Step 14: Command-line tool
 - [ ] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
