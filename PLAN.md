@@ -120,7 +120,8 @@ How to test: right-click the Tellbuster icon > **Options**. Turn off "Em dash". 
 How to test: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il est important de noter que..." The French tells should show.
 
 ## Step 8: Contributor setup and automatic tests
-- [ ] Make contributing easy and safe.
+- [x] Make contributing easy and safe.
+  - Done 2026-09-24. The test workflow already existed, so kept it. Added the "Suggest a new tell" and "Report a wrong flag" issue forms, a pull request checklist, a "Your first rule in 5 minutes" walkthrough in CONTRIBUTING.md (with a test that keeps its example rule valid), and docs/first-issues.md with 10 checked rule ideas to paste as `good first issue` issues. Issues were not created on GitHub: the maintainer posts them after merge. All 154 tests pass.
 
 - `.github/workflows/test.yml`: run `node --test` on every pull request.
 - `.github/ISSUE_TEMPLATE/new-rule.yml`: a form to suggest a new tell (phrase, why, example) for people who do not code.
