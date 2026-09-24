@@ -2162,6 +2162,25 @@ export const packs = {
             "Mise en place rapide 🚀\nAucun code"
           ]
         }
+      },
+      {
+        "id": "fr-double-tranchant",
+        "name": "« Un couteau à double tranchant »",
+        "category": "phrase",
+        "severity": "low",
+        "pattern": "\\sdouble\\s+tranchant",
+        "flags": "i",
+        "message": "« À double tranchant » donne une impression d'IA.",
+        "why": "« Couteau à double tranchant » est une métaphore usée pour dire qu'une chose a des avantages et des inconvénients, sans préciser lesquels.",
+        "fix": "Nommez le bon et le mauvais côté : « Le télétravail évite les trajets, mais isole les équipes. »",
+        "examples": {
+          "flag": [
+            "Le télétravail est un couteau à double tranchant pour la cohésion d'équipe."
+          ],
+          "pass": [
+            "Le chef utilise un couteau avec une lame tranchante."
+          ]
+        }
       }
     ]
   }
