@@ -170,7 +170,8 @@ How to test: open the GitHub Pages site on a computer and a phone. It should loo
 How to test: open `README.md` on GitHub and check that the GIF plays and reads clearly. Then watch both MP4 files with the sound off: they should play smoothly and every caption should be readable.
 
 ## Step 11: Feedback link
-- [ ] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
+- [x] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
+  - Done 2026-09-24. Every card in the web demo, the popup and the badge panel now has "Report a wrong flag" next to "Turn off this rule". It opens the wrong flag form with the rule id in the title and the "Which rule?" field, and nothing else. New test/report-link.test.js. Checked the link in Chromium on the web demo at 1280px and 375px. All 182 tests pass.
 
 How to test: click the link on any card. A GitHub issue form opens with the rule name filled in.
 

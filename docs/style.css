@@ -88,6 +88,8 @@ a { color: var(--accent); }
   text-decoration: underline;
   cursor: pointer;
 }
+a.link { display: inline-flex; align-items: center; }
+.link + .link { margin-left: 16px; }
 
 /* The editor: a transparent textarea on top of a layer that draws the underlines.
    Both must share the exact same font, padding and wrapping so the text lines up. */

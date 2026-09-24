@@ -75,6 +75,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .card-fix { font-size: 14px; }
 .sev { flex: none; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration-line: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .link { min-height: 44px; padding: 0; border: 0; background: none; color: var(--accent); font-size: 13px; text-decoration: underline; }
+a.link { display: inline-flex; align-items: center; }
+.link + .link { margin-left: 16px; }
 `;
 
   const ctrl = new AbortController();
@@ -255,6 +257,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
     return `${plural(findings.length, 'phrase might', 'phrases might')} read as AI (${counts.join(', ')})`;
   }
 
+  // Opens the "Report a wrong flag" form on GitHub. Only the rule id goes in the link, never the user's text.
+  function reportUrl(ruleId) {
+    const id = encodeURIComponent(ruleId);
+    return `https://github.com/aiprofitwire/tellbuster/issues/new?template=false-positive.yml&title=Wrong+flag%3A+${id}&rule=${id}`;
+  }
+
   function card(f) {
     const sevLabel = f.severity[0].toUpperCase() + f.severity.slice(1);
     const norm = (t) => t.toLowerCase().replace(/[^a-z0-9À-ſ]+/g, ' ').trim();
@@ -263,13 +271,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
     const fix = make('p', { class: 'card-fix' }, make('strong', { textContent: 'Try this:' }), ` ${f.fix}`);
     const offBtn = make('button', { type: 'button', class: 'link', textContent: 'Turn off this rule on this page' });
     offBtn.dataset.off = f.ruleId;
+    const report = make('a', { class: 'link', href: reportUrl(f.ruleId), target: '_blank', rel: 'noopener', textContent: 'Report a wrong flag' });
     return make('li', { class: 'card' },
       make('p', { class: 'card-name' }, make('span', { textContent: f.name }), make('span', { class: `sev sev-${f.severity}`, textContent: sevLabel })),
       showMatch && make('p', { class: 'card-match', textContent: `“${match}”` }),
       make('p', { textContent: f.message }),
       make('p', { class: 'card-why', textContent: f.why }),
       fix,
-      offBtn);
+      offBtn,
+      report);
   }
 
   function siteButton() {
