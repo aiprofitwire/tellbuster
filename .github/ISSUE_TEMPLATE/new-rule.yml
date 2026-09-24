@@ -1,0 +1,53 @@
+name: Suggest a new tell
+description: Tell us about a phrase that makes writing read like AI. No coding needed.
+title: "New tell: "
+labels: ["new rule"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping. Fill in what you can. We will turn it into a rule.
+        Please do not paste private text. A short made-up example is enough.
+  - type: input
+    id: phrase
+    attributes:
+      label: The phrase
+      description: The words that give it away.
+      placeholder: "shed light on"
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - English
+        - French
+        - Other (say which below)
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it read as AI?
+      description: One or two plain sentences. Where do you see it a lot?
+    validations:
+      required: true
+  - type: textarea
+    id: flag-example
+    attributes:
+      label: An example that should be flagged
+      placeholder: "This report sheds light on the key trends."
+    validations:
+      required: true
+  - type: textarea
+    id: pass-example
+    attributes:
+      label: A similar example that should NOT be flagged (optional)
+      description: A normal use of the same words. This helps us avoid false alarms.
+      placeholder: "The lamp sheds light on the desk."
+  - type: textarea
+    id: fix
+    attributes:
+      label: What would a person write instead? (optional)
+      placeholder: "explains, shows"

@@ -1,0 +1,41 @@
+name: Report a wrong flag
+description: Tellbuster flagged a phrase that reads fine. Tell us so we can fix the rule.
+title: "Wrong flag: "
+labels: ["false positive"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please do not paste private text. Retype just the sentence, or a made-up one that shows the same problem.
+  - type: input
+    id: rule
+    attributes:
+      label: Which rule?
+      description: The name on the card, or its id if you know it.
+      placeholder: "\"Foster a sense of\" (en-foster)"
+    validations:
+      required: true
+  - type: textarea
+    id: sentence
+    attributes:
+      label: The sentence that was flagged
+    validations:
+      required: true
+  - type: textarea
+    id: why-fine
+    attributes:
+      label: Why is this a normal use?
+      description: For example, "it is a technical term in my field" or "it is a quote".
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did you see it?
+      options:
+        - Web demo
+        - Extension popup
+        - Extension badge while typing
+        - npm package
+    validations:
+      required: true
