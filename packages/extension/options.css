@@ -1,0 +1,46 @@
+/* The settings page. Loaded after style.css, so it reuses the web demo's colors and buttons. */
+.top, .settings, .bottom { max-width: 720px; }
+.settings { margin: 0 auto; padding: 0 24px; }
+.top .brand { font-size: 1.3rem; margin-bottom: 8px; }
+.box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 20px 16px; margin-bottom: 20px; }
+.box h2 { margin: 16px 0 4px; font-size: 1.15rem; }
+.hint { margin: 0 0 12px; color: var(--muted); font-size: 0.94rem; }
+.row .hint { margin: 0; }
+.warn { margin: 8px 0 0; color: var(--text); font-size: 0.94rem; border-left: 3px solid var(--medium); padding-left: 10px; }
+.saved { min-height: 1.6em; margin: 0 0 8px; color: var(--muted); font-size: 0.9rem; }
+
+.row { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px 0; cursor: pointer; }
+.row input { flex: none; width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+.row input:disabled, .row input:disabled + span { cursor: default; }
+.row input:disabled + span { color: var(--muted); }
+
+.group { border-top: 1px solid var(--border); }
+.group:first-child { border-top: 0; }
+.group-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.group-head .row { flex: 1; }
+.count { color: var(--muted); font-weight: 400; font-size: 0.9rem; }
+.group details { margin: 0 0 8px 32px; }
+.group summary { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-size: 0.9rem; cursor: pointer; }
+.group details .row { padding: 6px 0; min-height: 44px; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 0.75rem; font-weight: 600; vertical-align: 1px; }
+.rule-why { display: block; color: var(--muted); font-size: 0.88rem; }
+
+.sub { margin: 12px 0 8px; font-size: 1rem; }
+.label { display: block; margin-bottom: 4px; }
+.add-row { display: flex; gap: 8px; }
+.add-row input {
+  flex: 1; min-width: 0; min-height: 44px; padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg); color: var(--text); font: inherit;
+}
+.add-row input:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.add-site { margin-bottom: 12px; }
+.sites { margin: 0; padding: 0; list-style: none; }
+.sites li { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--border); }
+.sites li span { overflow-wrap: anywhere; }
+
+@media (max-width: 480px) {
+  .settings { padding: 0 16px; }
+  .box { padding: 4px 16px 12px; }
+  .group details { margin-left: 0; }
+}

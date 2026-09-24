@@ -97,6 +97,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
   let lastPlaced = '';
   const changes = new MutationObserver(() => schedule('the text changed'));
 
+  // Sites where the badge is turned off in settings. A frame also checks the pages around it.
+  const hostOf = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } };
+  const hosts = [location.href, ...Array.from(location.ancestorOrigins || [])].map(hostOf).filter(Boolean);
+  const topHost = hosts[hosts.length - 1] || '';
+  let siteOff = false;
+
   // Debug log, off by default. Turn it on for a site by running this in its console, then reload:
   //   localStorage.setItem('tellbusterDebug', '1')
   // It writes to this browser's console only. It logs lengths and rule ids, never your words.
@@ -228,9 +234,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
     on(wrap, 'mousedown', (e) => e.preventDefault());
     on(badge, 'click', () => (panel.hidden ? openPanel(false) : closePanel()));
     on(wrap, 'click', (e) => {
-      const btn = e.target.closest('[data-off], [data-on], .close');
+      const btn = e.target.closest('[data-off], [data-on], [data-site-off], .close');
       if (!btn) return;
       if (btn.classList.contains('close')) { closePanel(); field?.focus(); return; }
+      if (btn.dataset.siteOff) { turnOffSite(); return; }
       if (btn.dataset.off) off.add(btn.dataset.off); else off.clear();
       runNow();
     });
@@ -265,6 +272,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
       offBtn);
   }
 
+  function siteButton() {
+    const btn = make('button', { type: 'button', class: 'link', textContent: `Turn off the badge on ${topHost}` });
+    btn.dataset.siteOff = '1';
+    return btn;
+  }
+
   function fillPanel() {
     const { panel, root } = ui;
     const hadFocus = panel.contains(root.activeElement); // keyboard users keep their place
@@ -286,6 +299,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       turnedOff,
       make('ol', { class: 'list' }, ...findings.map(card)),
       make('p', { class: 'foot', textContent: 'Checked on your device. Nothing is sent anywhere.' }),
+      topHost && siteButton(),
     ];
     panel.replaceChildren(...parts.filter(Boolean));
     if (hadFocus) panel.focus();
@@ -469,6 +483,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   function shutdown() {
     stop('the extension was reloaded or removed');
     ctrl.abort();
+    try { chrome.storage.onChanged.removeListener(settingsChanged); } catch { /* already gone */ }
     host?.remove();
     globalThis.tellbusterWatching = false;
   }
@@ -477,7 +492,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   function syncFocus(reason) {
     const now = focused();
     if (host && now === host) return; // focus is in the panel
-    const el = editableOf(now);
+    const el = siteOff ? null : editableOf(now);
     if (el === field) return;
     if (el) watch(el, reason);
     else if (field) stop(`focus moved to ${describe(now)}`);
@@ -519,8 +534,40 @@ button { font: inherit; color: inherit; cursor: pointer; }
   on(window, 'scroll', placeSoon, { capture: true, passive: true });
   on(window, 'resize', placeSoon, { passive: true });
 
+  // ---- Settings ----
+
+  function readSites(sites) {
+    const list = Array.isArray(sites) ? sites : [];
+    siteOff = list.some((site) => hosts.some((h) => h === site || h.endsWith(`.${site}`)));
+    log(siteOff ? 'the badge is turned off on this site in settings' : 'the badge is on for this site');
+    if (siteOff) stop('the badge is turned off on this site'); else syncFocus('settings read');
+  }
+
+  // Any other change (a rule or strict mode) checks the text again with the new settings.
+  function settingsChanged(changed, area) {
+    if (area !== 'sync') return;
+    if (changed.offSites) readSites(changed.offSites.newValue);
+    else if (field) runNow();
+  }
+
+  async function turnOffSite() {
+    try {
+      const { offSites } = await chrome.storage.sync.get({ offSites: [] });
+      const list = Array.isArray(offSites) ? offSites : [];
+      if (!list.includes(topHost)) await chrome.storage.sync.set({ offSites: [...list, topHost] });
+      // The change above reaches readSites through settingsChanged, which hides the badge.
+    } catch {
+      shutdown(); // the extension was reloaded or removed
+    }
+  }
+
   // The page may have opened with the cursor already in a text box.
   readDebug();
   log(`ready on ${location.host}`);
-  syncFocus('already focused at load');
+  try {
+    chrome.storage.onChanged.addListener(settingsChanged);
+    chrome.storage.sync.get({ offSites: [] }).then(({ offSites }) => readSites(offSites), () => readSites([]));
+  } catch {
+    readSites([]);
+  }
 })();

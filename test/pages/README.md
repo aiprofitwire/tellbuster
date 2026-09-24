@@ -12,4 +12,4 @@ The extension only runs on web addresses, not on files, so serve them first. Fro
 node scripts/serve-test-pages.js
 ```
 
-Then open `http://localhost:8080/x-style.html` (or another page) in Chrome with the extension loaded. Type `Let's delve into this game-changer.` and the badge should show **3 tells**.
+Then, in Chrome with the extension loaded, open its settings and tick **Check as I type** (Chrome asks for site access once). Open `http://localhost:8080/x-style.html` (or another page). Type `Let's delve into this game-changer.` and the badge should show **3 tells**.

@@ -20,7 +20,7 @@ Early build. See [PLAN.md](PLAN.md) for progress.
 
 - No servers, no accounts, no tracking.
 - Your text is checked on your own device and never sent anywhere.
-- The Chrome extension asks to read all websites only so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
+- The Chrome extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
 - The rules are plain, readable data in [`rules/`](rules/). No hidden AI model making guesses.
 
 ## Help build the list

@@ -98,7 +98,8 @@ How to test: reload the extension on `chrome://extensions` (circular arrow on th
   - Done 2026-09-24. Tiers A and B: 28 new rules in rules/en.json (69 total) and 9 existing rules widened (for example "harness the potential of", "navigate uncertainty", "plays a paramount role"). Tier C: new rules/en-strict.json with 8 low-severity rules, off by default. The engine skips strict rules unless `strictStyle` is on; the extension reads `strictStyle` from chrome.storage.sync (default off) and only loads the strict file then. Tier D skipped. Step 6 still needs the switch: "Strict mode: also flag common filler words". All 108 tests pass.
 
 ## Step 6: Settings
-- [ ] Add an options page.
+- [x] Add an options page.
+  - Done 2026-09-24. Added packages/extension/options.html, options.js, options.css and settings.js (languages, strict mode switch, rule groups and single rules, sites where the badge is off, reset). Saved in chrome.storage.sync. The popup, the badge and background.js all read it, and the badge checks again when a setting changes. The badge panel gained "Turn off the badge on this site" and the popup a Settings link. New test/settings.test.js. Checked in Chromium: Em dash turned off stops being flagged in the popup and the badge. Also, at the maintainer's request, check as you type is now opt in: installing asks for no site access. Site access moved to optional_host_permissions, and content.js is only registered (with the new `scripting` permission) after the user ticks "Check as I type" and Chrome allows it. The popup and right-click menu work without it. Checked in Chromium. All 120 tests pass.
 
 - Turn individual rules on and off. Turn whole categories on and off. Pick languages (English now, French after Step 7).
 - Turn the as-you-type badge off for specific sites.
