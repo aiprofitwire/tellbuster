@@ -133,7 +133,8 @@ How to test: in the web demo or popup, paste "Dans le monde d'aujourd'hui, il es
 How to test: open the repo's **Issues > New issue**. The "Suggest a new tell" form should appear.
 
 ## Step 9: Publish prep
-- [ ] Get everything ready to go public.
+- [x] Get everything ready to go public.
+  - Done 2026-09-24. packages/core/package.json gained keywords, homepage, repository and bugs. Added docs/PUBLISHING.md (Pages, npm, Chrome Web Store, later releases), scripts/zip-extension.js (no packages, runs the sync first), docs/privacy.html, docs/store-listing.md (short description is the manifest one, 115 characters, plus permission answers for the store form) and test/publish.test.js. README now has a Get it table, screenshot placeholders and a privacy link. The name tellbuster was free on npm today. Open question for the maintainer: the npm package has no rule files in it (see PUBLISHING.md, Part 2). All 158 tests pass.
 
 - `packages/core`: confirm package.json fields (description, keywords, repository, homepage). Write the exact commands the maintainer runs to publish to npm in `docs/PUBLISHING.md`.
 - `scripts/zip-extension.js`: creates `tellbuster-extension.zip` for the Chrome Web Store.
