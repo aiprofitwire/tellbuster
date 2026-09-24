@@ -1,0 +1,16 @@
+{
+  "name": "tellbuster-video",
+  "private": true,
+  "type": "module",
+  "description": "The Tellbuster launch video, made with Remotion. Not part of the extension or the npm package.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "node render.js"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.528",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.528"
+  }
+}
