@@ -2215,11 +2215,11 @@ export const packs = {
         "id": "de-wichtig-zu-beachten",
         "name": "„Es ist wichtig zu beachten“",
         "category": "filler",
-        "severity": "medium",
+        "severity": "low",
         "pattern": "(?<!\\p{L})(es ist wichtig,? (zu (beachten|betonen|erwähnen|bedenken)|hervorzuheben)|es ist erwähnenswert, dass)(?!\\p{L})",
         "flags": "iu",
         "message": "Diese Füllformel klingt nach KI.",
-        "why": "KI-Texte kündigen an, dass etwas wichtig ist, statt es einfach zu sagen. Die Formel macht den Satz länger, ohne etwas hinzuzufügen.",
+        "why": "KI-Texte kündigen mit dieser Formel ständig an, dass etwas wichtig ist, statt es zu sagen. In Anleitungen und Verwaltungstexten schreiben Menschen sie auch, darum ist sie hier nur ein Stilhinweis: Sie macht den Satz länger, ohne etwas hinzuzufügen.",
         "fix": "Streichen Sie sie und nennen Sie die Sache direkt.",
         "examples": {
           "flag": [
@@ -2236,12 +2236,12 @@ export const packs = {
         "id": "de-eintauchen",
         "name": "„Tauchen wir ein“",
         "category": "phrase",
-        "severity": "medium",
+        "severity": "high",
         "pattern": "(?<!\\p{L})(tauchen wir (gemeinsam |nun |jetzt )?(tiefer |direkt )?(in [^.!?]{1,40}? )?ein|(lass|lasst|lassen sie) uns [^.!?]{0,40}?eintauchen)(?!\\p{L})",
         "flags": "iu",
         "message": "„Eintauchen“ in ein Thema klingt nach KI.",
         "why": "KI-Modelle „tauchen“ ständig in Themen „ein“. Die übertragene Bedeutung taucht in KI-Texten viel öfter auf als bei Menschen.",
-        "fix": "Schreiben Sie einfach „Schauen wir uns an“ oder fangen Sie direkt mit dem Thema an.",
+        "fix": "Schreiben Sie „Werfen wir einen Blick auf“ oder steigen Sie direkt ins Thema ein.",
         "examples": {
           "flag": [
             "Tauchen wir tiefer in das Thema ein.",
@@ -2264,10 +2264,10 @@ export const packs = {
         "name": "«¡Por supuesto!» al empezar",
         "category": "phrase",
         "severity": "medium",
-        "pattern": "¡\\s*(por supuesto|claro que sí|desde luego|con mucho gusto)\\s*!",
+        "pattern": "(?<=^|\\n)[ \\t]*¡\\s*(por supuesto|claro que sí|desde luego)\\s*!",
         "flags": "iu",
         "message": "Esta exclamación de entrada suena a IA.",
-        "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Al principio de un texto, suena a respuesta de chatbot.",
+        "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Como primera línea de un texto o un correo, suena a respuesta de chatbot.",
         "fix": "Quítala y empieza directamente con lo que quieres decir.",
         "examples": {
           "flag": [
@@ -2276,7 +2276,9 @@ export const packs = {
           ],
           "pass": [
             "Por supuesto que iré a la reunión.",
-            "Claro que sí lo vi, estaba allí."
+            "Claro que sí lo vi, estaba allí.",
+            "Gracias por escribir. ¡Por supuesto! Nos vemos el lunes.",
+            "¡Con mucho gusto! Enseguida le envío la cotización."
           ]
         }
       },
@@ -2284,8 +2286,8 @@ export const packs = {
         "id": "es-aqui-tienes",
         "name": "«Aquí tienes un resumen»",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene|te dejo|le dejo) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
         "flags": "iu",
         "message": "Esta forma de presentar el texto suena a IA.",
         "why": "«Aquí tienes un resumen» es como un chatbot entrega lo que le pidieron. Dentro de un correo o un artículo, deja ver que el texto viene de un chat.",
@@ -2293,11 +2295,12 @@ export const packs = {
         "examples": {
           "flag": [
             "¡Por supuesto! Aquí tienes un resumen.",
-            "Aquí te dejo algunas ideas para el viernes."
+            "Aquí tienes algunas ideas para tu publicación."
           ],
           "pass": [
             "Aquí tienes las llaves del coche.",
-            "El resumen está en la página dos."
+            "El resumen está en la página dos.",
+            "Aquí te dejo el borrador con los cambios que me pediste."
           ]
         }
       },
@@ -2305,20 +2308,21 @@ export const packs = {
         "id": "es-importante-destacar",
         "name": "«Es importante destacar que»",
         "category": "filler",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|cabe (destacar|señalar|resaltar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
         "flags": "iu",
         "message": "Esta frase de relleno suena a IA.",
-        "why": "Los textos de IA anuncian lo que es importante en vez de decirlo. La frase alarga la oración y no añade nada.",
+        "why": "Los textos de IA usan mucho esta fórmula para anunciar lo importante en vez de decirlo. La gente también la usa en textos formales, por eso es solo una nota de estilo: alarga la oración sin añadir nada.",
         "fix": "Bórrala y di el dato directamente.",
         "examples": {
           "flag": [
             "Es importante destacar que los precios subieron.",
-            "Cabe señalar que el plazo termina el lunes."
+            "Vale la pena mencionar que el plazo termina el lunes."
           ],
           "pass": [
             "Es importante llegar temprano.",
-            "Los precios subieron un 5 %."
+            "Los precios subieron un 5 %.",
+            "Cabe señalar que la ley entra en vigor el próximo mes."
           ]
         }
       },
@@ -2353,8 +2357,8 @@ export const packs = {
         "id": "pt-aqui-esta",
         "name": "“Aqui está um resumo”",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})aqui (está|estão|vai|vão|segue|seguem) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqui (está|estão) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
         "flags": "iu",
         "message": "Esta forma de apresentar o texto soa como IA.",
         "why": "“Aqui está um resumo” é o jeito como um chatbot entrega o que pediram. Num e-mail ou num artigo, mostra que o texto veio de um chat.",
@@ -2362,11 +2366,13 @@ export const packs = {
         "examples": {
           "flag": [
             "Claro! Aqui está um resumo do relatório.",
-            "Aqui vão algumas dicas para a reunião."
+            "Aqui estão algumas dicas para o seu post."
           ],
           "pass": [
             "Aqui está a chave do carro.",
-            "O resumo está na página dois."
+            "O resumo está na página dois.",
+            "Aqui vão algumas dicas para a reunião.",
+            "Bom dia, equipe. Segue uma lista com as pendências do projeto."
           ]
         }
       },
@@ -2374,20 +2380,21 @@ export const packs = {
         "id": "pt-importante-destacar",
         "name": "“É importante destacar que”",
         "category": "filler",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})(é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que|vale (a pena )?(destacar|ressaltar|salientar|mencionar) que|cabe (destacar|ressaltar|salientar) que)(?!\\p{L})",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que(?!\\p{L})",
         "flags": "iu",
         "message": "Esta frase de enchimento soa como IA.",
-        "why": "Textos de IA anunciam o que é importante em vez de simplesmente dizer. A frase deixa a oração mais longa e não acrescenta nada.",
+        "why": "Textos de IA usam muito esta fórmula para anunciar o que é importante em vez de dizer. Pessoas também a usam em textos formais, então aqui é só uma nota de estilo: a frase fica mais longa e não acrescenta nada.",
         "fix": "Apague a frase e diga o fato diretamente.",
         "examples": {
           "flag": [
             "É importante destacar que os preços subiram.",
-            "Vale ressaltar que o prazo termina na segunda."
+            "É importante notar que o prazo termina na segunda."
           ],
           "pass": [
             "É importante chegar cedo.",
-            "Os preços subiram 5 %."
+            "Os preços subiram 5 %.",
+            "Vale ressaltar que os dados referem-se ao primeiro semestre."
           ]
         }
       },
@@ -2416,20 +2423,21 @@ export const packs = {
         "id": "pt-espero-ter-ajudado",
         "name": "“Espero ter ajudado”",
         "category": "phrase",
-        "severity": "high",
-        "pattern": "(?<!\\p{L})espero (ter ajudado|que (isso|isto) (te |lhe )?(ajude|tenha ajudado|seja útil)( a você)?)(?!\\p{L})",
+        "severity": "medium",
+        "pattern": "(?<!\\p{L})espero ter ajudado(?!\\p{L})",
         "flags": "iu",
         "message": "Este fecho soa como IA.",
-        "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. No fim de um e-mail ou de um post, mostra que o texto veio de um chat.",
+        "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. Em artigos, posts e relatórios, mostra que o texto veio de um chat. Numa resposta de suporte, pode ser normal.",
         "fix": "Apague a frase. Se quiser, termine com uma pergunta real ou com o próximo passo.",
         "examples": {
           "flag": [
             "Espero ter ajudado!",
-            "Espero que isso te ajude com o projeto."
+            "Esses são os pontos principais. Espero ter ajudado."
           ],
           "pass": [
             "Espero que você venha amanhã.",
-            "Ele me ajudou com o projeto."
+            "Ele me ajudou com o projeto.",
+            "Fiz os ajustes no código. Espero que isso te ajude com o projeto!"
           ]
         }
       }

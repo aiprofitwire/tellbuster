@@ -48,11 +48,11 @@
       "id": "de-wichtig-zu-beachten",
       "name": "„Es ist wichtig zu beachten“",
       "category": "filler",
-      "severity": "medium",
+      "severity": "low",
       "pattern": "(?<!\\p{L})(es ist wichtig,? (zu (beachten|betonen|erwähnen|bedenken)|hervorzuheben)|es ist erwähnenswert, dass)(?!\\p{L})",
       "flags": "iu",
       "message": "Diese Füllformel klingt nach KI.",
-      "why": "KI-Texte kündigen an, dass etwas wichtig ist, statt es einfach zu sagen. Die Formel macht den Satz länger, ohne etwas hinzuzufügen.",
+      "why": "KI-Texte kündigen mit dieser Formel ständig an, dass etwas wichtig ist, statt es zu sagen. In Anleitungen und Verwaltungstexten schreiben Menschen sie auch, darum ist sie hier nur ein Stilhinweis: Sie macht den Satz länger, ohne etwas hinzuzufügen.",
       "fix": "Streichen Sie sie und nennen Sie die Sache direkt.",
       "examples": {
         "flag": [
@@ -69,12 +69,12 @@
       "id": "de-eintauchen",
       "name": "„Tauchen wir ein“",
       "category": "phrase",
-      "severity": "medium",
+      "severity": "high",
       "pattern": "(?<!\\p{L})(tauchen wir (gemeinsam |nun |jetzt )?(tiefer |direkt )?(in [^.!?]{1,40}? )?ein|(lass|lasst|lassen sie) uns [^.!?]{0,40}?eintauchen)(?!\\p{L})",
       "flags": "iu",
       "message": "„Eintauchen“ in ein Thema klingt nach KI.",
       "why": "KI-Modelle „tauchen“ ständig in Themen „ein“. Die übertragene Bedeutung taucht in KI-Texten viel öfter auf als bei Menschen.",
-      "fix": "Schreiben Sie einfach „Schauen wir uns an“ oder fangen Sie direkt mit dem Thema an.",
+      "fix": "Schreiben Sie „Werfen wir einen Blick auf“ oder steigen Sie direkt ins Thema ein.",
       "examples": {
         "flag": [
           "Tauchen wir tiefer in das Thema ein.",

@@ -6,8 +6,8 @@
       "id": "pt-aqui-esta",
       "name": "“Aqui está um resumo”",
       "category": "phrase",
-      "severity": "medium",
-      "pattern": "(?<!\\p{L})aqui (está|estão|vai|vão|segue|seguem) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})aqui (está|estão) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
       "flags": "iu",
       "message": "Esta forma de apresentar o texto soa como IA.",
       "why": "“Aqui está um resumo” é o jeito como um chatbot entrega o que pediram. Num e-mail ou num artigo, mostra que o texto veio de um chat.",
@@ -15,11 +15,13 @@
       "examples": {
         "flag": [
           "Claro! Aqui está um resumo do relatório.",
-          "Aqui vão algumas dicas para a reunião."
+          "Aqui estão algumas dicas para o seu post."
         ],
         "pass": [
           "Aqui está a chave do carro.",
-          "O resumo está na página dois."
+          "O resumo está na página dois.",
+          "Aqui vão algumas dicas para a reunião.",
+          "Bom dia, equipe. Segue uma lista com as pendências do projeto."
         ]
       }
     },
@@ -27,20 +29,21 @@
       "id": "pt-importante-destacar",
       "name": "“É importante destacar que”",
       "category": "filler",
-      "severity": "medium",
-      "pattern": "(?<!\\p{L})(é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que|vale (a pena )?(destacar|ressaltar|salientar|mencionar) que|cabe (destacar|ressaltar|salientar) que)(?!\\p{L})",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que(?!\\p{L})",
       "flags": "iu",
       "message": "Esta frase de enchimento soa como IA.",
-      "why": "Textos de IA anunciam o que é importante em vez de simplesmente dizer. A frase deixa a oração mais longa e não acrescenta nada.",
+      "why": "Textos de IA usam muito esta fórmula para anunciar o que é importante em vez de dizer. Pessoas também a usam em textos formais, então aqui é só uma nota de estilo: a frase fica mais longa e não acrescenta nada.",
       "fix": "Apague a frase e diga o fato diretamente.",
       "examples": {
         "flag": [
           "É importante destacar que os preços subiram.",
-          "Vale ressaltar que o prazo termina na segunda."
+          "É importante notar que o prazo termina na segunda."
         ],
         "pass": [
           "É importante chegar cedo.",
-          "Os preços subiram 5 %."
+          "Os preços subiram 5 %.",
+          "Vale ressaltar que os dados referem-se ao primeiro semestre."
         ]
       }
     },
@@ -69,20 +72,21 @@
       "id": "pt-espero-ter-ajudado",
       "name": "“Espero ter ajudado”",
       "category": "phrase",
-      "severity": "high",
-      "pattern": "(?<!\\p{L})espero (ter ajudado|que (isso|isto) (te |lhe )?(ajude|tenha ajudado|seja útil)( a você)?)(?!\\p{L})",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})espero ter ajudado(?!\\p{L})",
       "flags": "iu",
       "message": "Este fecho soa como IA.",
-      "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. No fim de um e-mail ou de um post, mostra que o texto veio de um chat.",
+      "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. Em artigos, posts e relatórios, mostra que o texto veio de um chat. Numa resposta de suporte, pode ser normal.",
       "fix": "Apague a frase. Se quiser, termine com uma pergunta real ou com o próximo passo.",
       "examples": {
         "flag": [
           "Espero ter ajudado!",
-          "Espero que isso te ajude com o projeto."
+          "Esses são os pontos principais. Espero ter ajudado."
         ],
         "pass": [
           "Espero que você venha amanhã.",
-          "Ele me ajudou com o projeto."
+          "Ele me ajudou com o projeto.",
+          "Fiz os ajustes no código. Espero que isso te ajude com o projeto!"
         ]
       }
     }

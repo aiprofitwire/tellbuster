@@ -7,10 +7,10 @@
       "name": "«¡Por supuesto!» al empezar",
       "category": "phrase",
       "severity": "medium",
-      "pattern": "¡\\s*(por supuesto|claro que sí|desde luego|con mucho gusto)\\s*!",
+      "pattern": "(?<=^|\\n)[ \\t]*¡\\s*(por supuesto|claro que sí|desde luego)\\s*!",
       "flags": "iu",
       "message": "Esta exclamación de entrada suena a IA.",
-      "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Al principio de un texto, suena a respuesta de chatbot.",
+      "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Como primera línea de un texto o un correo, suena a respuesta de chatbot.",
       "fix": "Quítala y empieza directamente con lo que quieres decir.",
       "examples": {
         "flag": [
@@ -19,7 +19,9 @@
         ],
         "pass": [
           "Por supuesto que iré a la reunión.",
-          "Claro que sí lo vi, estaba allí."
+          "Claro que sí lo vi, estaba allí.",
+          "Gracias por escribir. ¡Por supuesto! Nos vemos el lunes.",
+          "¡Con mucho gusto! Enseguida le envío la cotización."
         ]
       }
     },
@@ -27,8 +29,8 @@
       "id": "es-aqui-tienes",
       "name": "«Aquí tienes un resumen»",
       "category": "phrase",
-      "severity": "medium",
-      "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene|te dejo|le dejo) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
       "flags": "iu",
       "message": "Esta forma de presentar el texto suena a IA.",
       "why": "«Aquí tienes un resumen» es como un chatbot entrega lo que le pidieron. Dentro de un correo o un artículo, deja ver que el texto viene de un chat.",
@@ -36,11 +38,12 @@
       "examples": {
         "flag": [
           "¡Por supuesto! Aquí tienes un resumen.",
-          "Aquí te dejo algunas ideas para el viernes."
+          "Aquí tienes algunas ideas para tu publicación."
         ],
         "pass": [
           "Aquí tienes las llaves del coche.",
-          "El resumen está en la página dos."
+          "El resumen está en la página dos.",
+          "Aquí te dejo el borrador con los cambios que me pediste."
         ]
       }
     },
@@ -48,20 +51,21 @@
       "id": "es-importante-destacar",
       "name": "«Es importante destacar que»",
       "category": "filler",
-      "severity": "medium",
-      "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|cabe (destacar|señalar|resaltar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
       "flags": "iu",
       "message": "Esta frase de relleno suena a IA.",
-      "why": "Los textos de IA anuncian lo que es importante en vez de decirlo. La frase alarga la oración y no añade nada.",
+      "why": "Los textos de IA usan mucho esta fórmula para anunciar lo importante en vez de decirlo. La gente también la usa en textos formales, por eso es solo una nota de estilo: alarga la oración sin añadir nada.",
       "fix": "Bórrala y di el dato directamente.",
       "examples": {
         "flag": [
           "Es importante destacar que los precios subieron.",
-          "Cabe señalar que el plazo termina el lunes."
+          "Vale la pena mencionar que el plazo termina el lunes."
         ],
         "pass": [
           "Es importante llegar temprano.",
-          "Los precios subieron un 5 %."
+          "Los precios subieron un 5 %.",
+          "Cabe señalar que la ley entra en vigor el próximo mes."
         ]
       }
     },

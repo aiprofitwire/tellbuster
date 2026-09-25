@@ -239,6 +239,8 @@ Tellbuster has a small starter set of Spanish rules in `rules/es.json` (4 rules)
 
 **Already covered, so pick something else:** "¡Por supuesto!" and "¡Claro que sí!" as openers, "Aquí tienes un resumen", "Es importante destacar que", "En el mundo actual".
 
+**Ideas to start from (check them, you know the language better than we do):** "desempeña un papel fundamental / crucial / clave", "navegar por el complejo panorama de", "es un recordatorio de que".
+
 **For each rule, please include:**
 
 - At least one `flag` sentence: normal Spanish that the rule must catch.
@@ -266,6 +268,8 @@ Tellbuster has a small starter set of German rules in `rules/de.json` (4 rules).
 
 **Already covered, so pick something else:** "Zusammenfassend lässt sich sagen", "In der heutigen Welt", "Es ist wichtig zu beachten", "Tauchen wir ein".
 
+**Ideas to start from (check them, you know the language better than we do):** "spielt eine entscheidende / zentrale / wesentliche Rolle", "Landschaft" used for business ("die digitale Landschaft", "durch die Landschaft navigieren"), "Es liegt an uns, sicherzustellen, dass".
+
 **For each rule, please include:**
 
 - At least one `flag` sentence: normal German that the rule must catch.
@@ -292,6 +296,8 @@ Tellbuster has a small starter set of Portuguese rules in `rules/pt.json` (4 rul
 **What makes a good Portuguese tell:** a phrase that chatbots write in Portuguese far more often than people do. Good places to look: stock openers and closers of chatbot replies, filler that announces a point instead of making it, and vague intros. Rules should work for both Brazilian and European Portuguese, or say which one they target. A tell is not a translated English tell: if people use the phrase every day, it does not belong here.
 
 **Already covered, so pick something else:** "Aqui está um resumo", "É importante destacar que", "No mundo atual", "Espero ter ajudado".
+
+**Ideas to start from (check them, you know the language better than we do):** "desempenha um papel fundamental / crucial", "serve como um lembrete de que", "vamos mergulhar em" (for a topic).
 
 **For each rule, please include:**
 
