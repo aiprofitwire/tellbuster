@@ -240,7 +240,8 @@ Then use the Action on this repo as its first user: a workflow that checks `READ
 How to test: open a pull request that adds "Certainly! Let's delve into this." to `README.md` outside a code block. The Action should add an annotation on that line. Then wrap it in disable comments and check that it passes.
 
 ## Step 16: Tellbuster for AI agents (MCP server and Claude Code skill)
-- [ ] Let AI agents check their own writing before showing it.
+- [x] Let AI agents check their own writing before showing it.
+  - Done 2026-09-25. New packages/mcp (npm name tellbuster-mcp, stdio, one tool check_writing with text, strict and lang; depends only on the MCP SDK and tellbuster). The tool code in src/tool.js has no imports so tests run without installing the SDK; the server was also tested end to end with a real MCP client. New skills/tellbuster/SKILL.md, setup for Claude Code, Claude Desktop and Cursor in packages/mcp/README.md, Part 7 in docs/PUBLISHING.md. The skill needs a new tellbuster release on npm (0.1.0 has no command). New test/mcp.test.js.
 
 - `packages/mcp`: a small MCP server (npm name `tellbuster-mcp`, stdio transport) with one tool, `check_writing(text, strict?, lang?)`, returning findings with the why and the fix. Keep dependencies to the official MCP SDK only.
 - `skills/tellbuster/SKILL.md`: a Claude Code skill that tells the agent to run `npx tellbuster` on any draft it writes for publishing and to rewrite flagged phrases.
