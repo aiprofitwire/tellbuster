@@ -78,7 +78,7 @@ In a terminal in the repo folder:
 node scripts/zip-extension.js
 ```
 
-It prints `Made tellbuster-extension.zip (version 0.1.0, 19 files).` The zip is in the repo folder. It is not committed to git (the repo ignores zip files).
+It prints a line like `Made tellbuster-extension.zip (version 1.0.0, 23 files).` The zip is in the repo folder. It is not committed to git (the repo ignores zip files).
 
 ### 3b. Make a developer account (once)
 
@@ -145,7 +145,7 @@ In a terminal in the repo folder:
 node scripts/zip-firefox.js
 ```
 
-It prints `Made tellbuster-firefox.zip (version 0.1.0, 19 files).` It needs Firefox 140 or newer (the current version is fine).
+It prints a line like `Made tellbuster-firefox.zip (version 1.0.0, 23 files).` It needs Firefox 140 or newer (the current version is fine).
 
 ### 5b. Try it in Firefox first (5 minutes)
 
@@ -168,7 +168,7 @@ A temporary add-on is removed when you close Firefox. That is normal: load it ag
 2. Pick **On this site** (so it is listed on addons.mozilla.org), then **Continue**.
 3. Upload `tellbuster-firefox.zip`. For compatibility, tick **Firefox** only. Firefox for Android has not been tried yet.
 4. When asked whether you need to submit source code, answer **No**: the code in the zip is the real source, not minified or built.
-5. Fill in the listing. The summary is filled in from the manifest. Paste the long description from store-listing.md. Category: **Other** or **Productivity**, whichever the form offers. License: **MIT**. Homepage: `https://aiprofitwire.github.io/tellbuster/`. Privacy policy: paste the text of `https://aiprofitwire.github.io/tellbuster/privacy.html` if the form asks for it.
+5. Fill in the listing. The summary is filled in from the manifest. Paste the long description from store-listing.md. Categories (up to 3): tick **Language Support** and **Social & Communication**. The form does not offer Other or Productivity. License: **MIT**. Homepage: `https://aiprofitwire.github.io/tellbuster/`. Privacy policy: paste the text of `https://aiprofitwire.github.io/tellbuster/privacy.html` if the form asks for it.
 6. In **Notes to reviewer**, paste this:
 
    ```
