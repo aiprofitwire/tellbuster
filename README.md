@@ -35,7 +35,7 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 | Piece | What it does | Get it |
 |---|---|---|
 | Web demo | Paste text, see the tells. Nothing to install. | [Open the demo](https://aiprofitwire.github.io/tellbuster/) |
-| Browser extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | Coming soon to the Chrome Web Store, Edge Add-ons and Firefox Add-ons. [Try it now from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
+| Browser extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | [Add to Chrome](https://chromewebstore.google.com/detail/tellbuster/bimmaggflhidgaepfogeohffkjcfboph), free. Edge Add-ons and Firefox Add-ons coming soon. [Or load it from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
 | `tellbuster` on npm | The rule engine, for developers to use in their own tools | `npm install tellbuster`. [How to use it](packages/core/README.md) |
 
 ![With Check as I type on, the Tellbuster badge counts 3 tells in a post box, and its panel explains each one](docs/media/badge.png)
