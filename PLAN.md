@@ -221,14 +221,21 @@ How to test: set the browser language to French (or open the demo with `?lang=fr
 How to test: in the repo folder, run `echo "Let's delve into this." | node packages/core/bin/tellbuster.js`. It should list the tell.
 
 ## Step 15: GitHub Action
-- [ ] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action that runs the command-line tool with `npx tellbuster@latest`).
+- [ ] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action).
 
-- Inputs: `files` (glob, default `**/*.md`), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).
-- Posts findings as GitHub annotations (`::warning file=...,line=...::message`) so they show on the pull request's changed lines.
-- An example workflow in `docs/github-action.md` that anyone can copy. Use it on this repo's own docs as the first user.
-- Check that it runs green on this repo.
+- Run the command-line tool from the Action's own copy of this repo: `node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js"`. Do not use `npx tellbuster@latest`: the version on npm may not have the command yet, and running the copy that ships with the Action keeps the Action and the tool on the same version. Needs only Node, which GitHub runners have.
+- Inputs: `files` (default: every tracked `.md` file, listed with `git ls-files '*.md'`, since the tool does not expand globs itself), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).
+- Posts findings as GitHub annotations (`::warning file=...,line=...::message`, or `::error` for findings at or above `fail-on`) so they show on the pull request's changed lines.
 
-How to test: open a pull request that adds "Let's delve into this" to a markdown file. The Action should add a warning on that line.
+Our own docs quote AI tells on purpose (rule examples, CONTRIBUTING.md, the issue drafts), so the tool needs a way to skip them. Add to the command-line tool:
+- In Markdown files, skip fenced code blocks and inline code. Examples usually live there.
+- Skip everything between `<!-- tellbuster-disable -->` and `<!-- tellbuster-enable -->`, and the line after `<!-- tellbuster-disable-next-line -->`. Document these in `packages/core/README.md`.
+- Tests for each.
+
+Then use the Action on this repo as its first user: a workflow that checks `README.md` and `docs/*.md` with `fail-on: high`, leaving out files whose job is to quote tells (`CONTRIBUTING.md`, `rules/`, `docs/first-issues.md`, `docs/store-listing.md`). Add disable comments around any example that still trips it. It must run green on `main`.
+- An example workflow in `docs/github-action.md` that anyone can copy.
+
+How to test: open a pull request that adds "Certainly! Let's delve into this." to `README.md` outside a code block. The Action should add an annotation on that line. Then wrap it in disable comments and check that it passes.
 
 ## Step 16: Tellbuster for AI agents (MCP server and Claude Code skill)
 - [ ] Let AI agents check their own writing before showing it.
