@@ -196,6 +196,29 @@ When you want it, the steps are:
 4. Test the popup, the right-click menu and check as you type. Safari handles site access in its own way, so the settings page may need small changes.
 5. Submit the app from Xcode to the App Store through App Store Connect.
 
+## Part 7: the MCP server on npm (for AI agents)
+
+This publishes `tellbuster-mcp`, so people can connect Tellbuster to Claude Code, Claude Desktop or Cursor. Do Part 2 first, and log in the same way.
+
+**Before this part:** the Claude Code skill in `skills/tellbuster` runs `npx tellbuster`, and the `tellbuster` command is not in version `0.1.0` on npm. Publish a new engine version first: follow **Later releases** below (set `packages/core/package.json` to `"version": "0.2.0"`), then come back here.
+
+1. In a terminal in the repo folder, go into the package folder:
+
+   ```
+   cd packages/mcp
+   ```
+
+2. See what will be published:
+
+   ```
+   npm pack --dry-run
+   ```
+
+   It must show exactly 4 files: `README.md`, `package.json`, `src/server.js` and `src/tool.js`. The name must be `tellbuster-mcp` and the version `0.1.0`.
+3. Publish: `npm publish`. It ends with a line like `+ tellbuster-mcp@0.1.0`.
+4. Check it: in any folder, run `claude mcp add tellbuster -- npx -y tellbuster-mcp`, start Claude Code and type `/mcp`. `tellbuster` should show as connected.
+5. Go back to the repo folder: `cd ../..`
+
 ## Later releases
 
 For each new version:
