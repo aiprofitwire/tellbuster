@@ -14,6 +14,7 @@ const pairs = [
   ['rules/en-strict.json', 'packages/extension/vendor/en-strict.json', 'sync-extension'],
   ['rules/fr.json', 'packages/extension/vendor/fr.json', 'sync-extension'],
   ['docs/app.js', 'packages/extension/app.js', 'sync-extension'],
+  ['docs/i18n.js', 'packages/extension/i18n.js', 'sync-extension'],
   ['docs/style.css', 'packages/extension/style.css', 'sync-extension'],
 ];
 

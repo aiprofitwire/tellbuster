@@ -75,19 +75,19 @@
           </div>
           <div class="editor" id="editor">
             <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-            <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here.">Certainly! In today's fast-paced world, it's not just about posting more, it's about posting smarter. Let's delve into how you can harness the power of storytelling. Here's the thing: consistency plays a crucial role. Let that sink in.</textarea>
+            <textarea id="text" spellcheck="true" data-i18n-placeholder="placeholder" placeholder="Paste or type your writing here.">Certainly! In today's fast-paced world, it's not just about posting more, it's about posting smarter. Let's delve into how you can harness the power of storytelling. Here's the thing: consistency plays a crucial role. Let that sink in.</textarea>
             <div class="popover" id="popover" hidden></div>
           </div>
           <div class="post-foot">
             <div class="foot-empty" id="empty" hidden>
-              <span>Paste or type some writing to check it.</span>
-              <button type="button" id="example" class="pill pill-dark pill-xs">Try an example</button>
+              <span data-i18n="emptyHintShort">Paste or type some writing to check it.</span>
+              <button type="button" id="example" class="pill pill-dark pill-xs" data-i18n="tryExample">Try an example</button>
             </div>
             <div class="foot-results" id="results">
               <p class="summary" id="summary" aria-live="polite">9 phrases might read as AI</p>
               <div class="foot-actions">
-                <button type="button" id="copy" class="quiet">Copy text</button>
-                <button type="button" id="clear" class="quiet">Clear</button>
+                <button type="button" id="copy" class="quiet" data-i18n="copy">Copy text</button>
+                <button type="button" id="clear" class="quiet" data-i18n="clear">Clear</button>
                 <button type="button" id="badge" class="badge" aria-controls="all">
                   <svg width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="28" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M8 14.5h16" stroke="var(--badge-dash)" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 3"/></svg>
                   <span id="badge-text">9 tells</span>
@@ -99,11 +99,11 @@
 
         <details class="all" id="all">
           <summary id="all-label">See all 9 notes</summary>
-          <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
-          <ul class="legend" aria-label="Legend">
-            <li><span class="sample sev-high">High</span> strong tell</li>
-            <li><span class="sample sev-medium">Medium</span> common tell</li>
-            <li><span class="sample sev-low">Low</span> style note</li>
+          <p class="note" data-i18n="note">These are style notes, not proof of anything. People use these phrases too.</p>
+          <ul class="legend" aria-label="Legend" data-i18n-aria-label="legend">
+            <li><span class="sample sev-high" data-i18n="severity.high">High</span> <span data-i18n="legendHigh">strong tell</span></li>
+            <li><span class="sample sev-medium" data-i18n="severity.medium">Medium</span> <span data-i18n="legendMedium">common tell</span></li>
+            <li><span class="sample sev-low" data-i18n="severity.low">Low</span> <span data-i18n="legendLow">style note</span></li>
           </ul>
           <p class="turned-off" id="turned-off" hidden></p>
           <ol class="list" id="list"></ol>
@@ -228,6 +228,7 @@
     </p>
   </footer>
 
+  <script src="i18n.js"></script>
   <script type="module" src="app.js"></script>
   <script type="module" src="landing.js"></script>
 </body>

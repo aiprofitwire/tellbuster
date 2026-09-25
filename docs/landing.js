@@ -5,6 +5,8 @@ const ta = $('text');
 const beforeBtn = $('show-before');
 const afterBtn = $('show-after');
 const all = $('all');
+// The checker's words follow ?lang= like app.js does. The rest of the landing page stays English.
+const T = globalThis.tellbusterI18n.strings(globalThis.tellbusterI18n.pick());
 
 // The "Before" text is the one written in the page, so it shows even before the rules load.
 const BEFORE = ta.defaultValue;
@@ -31,8 +33,8 @@ function openSampleCard() {
 document.addEventListener('tellbuster:checked', ({ detail }) => {
   const { count, hasText, ruleCount } = detail;
   if (ruleCount) $('rule-count').textContent = String(ruleCount);
-  $('badge-text').textContent = count ? `${count} ${count === 1 ? 'tell' : 'tells'}` : 'No tells';
-  $('all-label').textContent = `See all ${count} ${count === 1 ? 'note' : 'notes'}`;
+  $('badge-text').textContent = T.tells(count);
+  $('all-label').textContent = T.seeAll(count);
   all.hidden = !hasText || !count;
   beforeBtn.setAttribute('aria-pressed', String(ta.value === BEFORE));
   afterBtn.setAttribute('aria-pressed', String(ta.value === AFTER));

@@ -2,13 +2,11 @@
 import { LANGUAGES, DEFAULTS, readSettings, allRules, siteFromInput } from './settings.js';
 
 const $ = (id) => document.getElementById(id);
-const CATEGORY_NAMES = {
-  phrase: 'Stock phrases',
-  filler: 'Filler and hedges',
-  structure: 'Sentence patterns',
-  'word-choice': 'Word choice',
-  punctuation: 'Punctuation',
-};
+// i18n.js (a plain script loaded first) holds the words. This page follows the browser's language.
+const I18N = globalThis.tellbusterI18n;
+const T = I18N.strings(I18N.pick({ followBrowser: true }));
+I18N.translatePage(T);
+const CATEGORY_NAMES = T.categories;
 const categoryName = (c) => CATEGORY_NAMES[c] || c[0].toUpperCase() + c.slice(1).replace(/-/g, ' ');
 
 let settings = { ...DEFAULTS };
@@ -21,7 +19,7 @@ function say(note) {
   savedTimer = setTimeout(() => { saved.textContent = ''; }, 2500);
 }
 
-async function save(changes, note = 'Saved.') {
+async function save(changes, note = T.saved) {
   Object.assign(settings, changes);
   await chrome.storage.sync.set(changes);
   say(note);
@@ -53,10 +51,11 @@ function drawLanguages() {
       await save({ languages: toggle(settings.languages, l.code, box.checked) });
       $('no-lang').hidden = settings.languages.length > 0;
     });
-    return checkRow(box, l.name);
+    const name = T.languageNames[l.code] || l.name;
+    return checkRow(box, name[0].toUpperCase() + name.slice(1));
   }));
   $('no-lang').hidden = settings.languages.length > 0;
-  const choices = [['auto', 'Guess from the text (recommended)'], ...LANGUAGES.map((l) => [l.code, `Always ${l.name}`])];
+  const choices = [['auto', T.guess], ...LANGUAGES.map((l) => [l.code, T.always(T.languageNames[l.code] || l.name)])];
   $('language-mode').replaceChildren(...choices.map(([code, label]) => {
     const radio = make('input', { type: 'radio', name: 'language-mode', value: code, checked: settings.language === code });
     radio.addEventListener('change', () => save({ language: code }));
@@ -74,16 +73,17 @@ function drawRules(rules) {
   }
   const order = Object.keys(CATEGORY_NAMES);
   const cats = [...groups.keys()].sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+  const byName = new Intl.Collator(T.code).compare;
 
   $('rules').replaceChildren(...cats.map((cat) => {
-    const list = groups.get(cat).sort((a, b) => a.name.localeCompare(b.name));
+    const list = groups.get(cat).sort((a, b) => byName(a.name, b.name));
     const catOn = () => !settings.disabledCategories.includes(cat);
 
     const ruleBoxes = list.map((r) => {
       const box = make('input', { type: 'checkbox', checked: !settings.disabledRules.includes(r.id), disabled: !catOn() });
       box.dataset.rule = r.id;
       box.addEventListener('change', () => save({ disabledRules: toggle(settings.disabledRules, r.id, !box.checked) }));
-      return checkRow(box, r.name, r.strict && make('span', { class: 'tag', textContent: 'Strict mode' }),
+      return checkRow(box, r.name, r.strict && make('span', { class: 'tag', textContent: T.strictTag }),
         make('span', { class: 'rule-why', textContent: r.message }));
     });
 
@@ -96,9 +96,9 @@ function drawRules(rules) {
 
     return make('div', { class: 'group' },
       make('div', { class: 'group-head' },
-        checkRow(catBox, make('strong', { textContent: categoryName(cat) }), ' ', make('span', { class: 'count', textContent: `(${list.length} rules)` }))),
+        checkRow(catBox, make('strong', { textContent: categoryName(cat) }), ' ', make('span', { class: 'count', textContent: T.ruleCount(list.length) }))),
       make('details', {},
-        make('summary', { textContent: `Show the ${categoryName(cat).toLowerCase()} rules` }),
+        make('summary', { textContent: T.showGroup(categoryName(cat)) }),
         ...ruleBoxes));
   }));
 }
@@ -108,9 +108,9 @@ function drawRules(rules) {
 function drawSites() {
   $('no-sites').hidden = settings.offSites.length > 0;
   $('sites').replaceChildren(...settings.offSites.map((site) => {
-    const btn = make('button', { type: 'button', class: 'link', textContent: 'Turn the badge back on', 'aria-label': `Turn the badge back on for ${site}` });
+    const btn = make('button', { type: 'button', class: 'link', textContent: T.badgeBackOn, 'aria-label': T.badgeBackOnFor(site) });
     btn.addEventListener('click', async () => {
-      await save({ offSites: settings.offSites.filter((s) => s !== site) }, `The badge is back on for ${site}.`);
+      await save({ offSites: settings.offSites.filter((s) => s !== site) }, T.badgeIsBackOn(site));
       drawSites();
       $('site').focus();
     });
@@ -125,7 +125,7 @@ $('add-site').addEventListener('submit', async (e) => {
   if (!site) return;
   $('site').value = '';
   if (!settings.offSites.includes(site)) {
-    await save({ offSites: [...settings.offSites, site].sort() }, `The badge is off on ${site}.`);
+    await save({ offSites: [...settings.offSites, site].sort() }, T.badgeIsOff(site));
   }
   drawSites();
 });
@@ -148,10 +148,10 @@ $('as-you-type').addEventListener('change', async () => {
     // Chrome only shows its question during a click, so ask before anything else.
     const allowed = await chrome.permissions.request(ALL_SITES).catch(() => false);
     $('type-denied').hidden = allowed;
-    if (allowed) say('Check as I type is on.');
+    if (allowed) say(T.typeOn);
   } else {
     await chrome.permissions.remove(ALL_SITES).catch(() => false);
-    say('Check as I type is off.');
+    say(T.typeOff);
   }
   await drawAsYouType();
 });
@@ -165,7 +165,7 @@ $('strict').addEventListener('change', () => save({ strictStyle: $('strict').che
 
 $('reset').addEventListener('click', async () => {
   await chrome.storage.sync.clear();
-  await save({ ...DEFAULTS }, 'All settings are back to how they started.');
+  await save({ ...DEFAULTS }, T.resetDone);
   await start();
 });
 
@@ -180,7 +180,7 @@ async function start() {
   try {
     drawRules(await allRules());
   } catch (err) {
-    $('rules').replaceChildren(make('p', { class: 'hint', textContent: 'The rules could not load. Please reload this page.' }));
+    $('rules').replaceChildren(make('p', { class: 'hint', textContent: T.rulesError }));
     console.error(err);
   }
 }

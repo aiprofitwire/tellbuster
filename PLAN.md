@@ -188,6 +188,8 @@ How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it tempora
 
 ## Step 13: French interface, and room for more languages
 - [ ] Make Tellbuster fully French for French speakers, and open the door for native speakers to add Spanish, German and Portuguese.
+  - Part A done 2026-09-25. The message, why and fix of all 24 rules in rules/fr.json are now in French (ids, patterns and examples unchanged). New docs/i18n.js holds every interface word, English and French, one block per language (copied to the extension by sync-extension.js). The popup, the settings page, the badge panel and the right-click menu follow the browser's language. The landing page stays English, but `?lang=fr` switches its checker to French, with a French "Try an example". New test/i18n.test.js. Checked in Chromium with a French browser. All 189 tests pass.
+  - Left for the next session (Part B, not started): rules/es.json, de.json and pt.json with 3 to 5 starter rules each, their common words in guessLanguage, the three languages in settings.js LANGUAGES, the web demo's rule list in app.js and both sync scripts, their language names are already in docs/i18n.js, tests, and the 3 issue drafts in docs/first-issues.md. Tick this box when Part B is done.
 
 Why this shape: a tell in Spanish is not a translated English tell. Rules written by someone who does not speak the language will flag normal writing. Native speakers write better rules, and every one of them is a new outside contributor. So this step builds the French side fully, and for the other languages only the setup plus a few careful starter rules.
 
