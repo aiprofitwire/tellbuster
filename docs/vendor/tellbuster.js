@@ -151,9 +151,11 @@ export function check(text, options = {}) {
 }
 
 const SEVERITY_RANK = { high: 0, medium: 1, low: 2 };
+// The fields that say which rule a finding is about (its position stays when another rule takes the lead).
+const LEAD_FIELDS = ['ruleId', 'name', 'category', 'severity', 'message', 'why', 'fix'];
 
-// When two rules underline the same words (or one sits fully inside the other), keep one finding for
-// the widest match and list the other rules on it as "alsoMatched". Partly overlapping findings stay
+// When two rules underline the same words (or one sits fully inside the other), keep one finding over
+// the widest match, led by the most serious of those rules, and list the others on it as "alsoMatched". Partly overlapping findings stay
 // separate. Returns the findings sorted by position.
 function mergeSameWords(findings) {
   findings.sort((a, b) => a.start - b.start || b.end - a.end
@@ -164,7 +166,14 @@ function mergeSameWords(findings) {
     // Sorted by start, so f starts at or after widest. Ending no later means it sits inside.
     if (widest && f.end <= widest.end) {
       if (f.ruleId !== widest.ruleId && !widest.alsoMatched?.some((o) => o.ruleId === f.ruleId)) {
-        (widest.alsoMatched ||= []).push({ ruleId: f.ruleId, name: f.name, severity: f.severity, why: f.why });
+        if (SEVERITY_RANK[f.severity] < SEVERITY_RANK[widest.severity]) {
+          // The more serious rule leads the card, so the underline shows its color. The span stays
+          // the widest one, and the milder rule moves to "alsoMatched".
+          (widest.alsoMatched ||= []).push({ ruleId: widest.ruleId, name: widest.name, severity: widest.severity, why: widest.why });
+          for (const key of LEAD_FIELDS) widest[key] = f[key];
+        } else {
+          (widest.alsoMatched ||= []).push({ ruleId: f.ruleId, name: f.name, severity: f.severity, why: f.why });
+        }
       }
       continue;
     }

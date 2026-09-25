@@ -79,14 +79,16 @@ test('rules on the same words give one finding, with the others listed on it', (
   assert.equal(summarize(found).total, 1);
 });
 
-test('the widest match wins, and the same span keeps the higher severity first', () => {
+test('overlaps merge into one finding over the widest span, led by the most serious rule', () => {
   const wide = { ...goodRule(), id: 'en-wide', pattern: 'big cat' };
   const inner = { ...goodRule(), id: 'en-inner', pattern: 'cat', severity: 'high' };
   const twin = { ...goodRule(), id: 'en-twin', pattern: 'big cat', severity: 'medium' };
   const [f, ...rest] = check('a big cat', { rules: [wide, inner, twin] });
   assert.deepEqual(rest, []);
-  assert.equal(f.ruleId, 'en-twin');
-  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId), ['en-wide', 'en-inner']);
+  assert.equal(f.ruleId, 'en-inner');
+  assert.equal(f.severity, 'high');
+  assert.equal(f.match, 'big cat');
+  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId).sort(), ['en-twin', 'en-wide']);
 });
 
 test('separate phrases still give separate findings, with no alsoMatched', () => {
@@ -190,4 +192,15 @@ test('findings start at the phrase, not at the break or punctuation before it', 
   const found = check(text, { rules }).filter((f) => f.ruleId === 'en-certainly-opener');
   assert.deepEqual(found.map((f) => f.match), ['Certainly!', 'Certainly!']);
   for (const f of found) assert.equal(text.slice(f.start, f.end), 'Certainly!');
+});
+
+test('overlapping findings: the most serious rule leads, the widest span stays', () => {
+  const rule = (id, severity, pattern) => ({ id, name: id, category: 'phrase', severity, pattern, flags: 'i', message: `${id} reads as AI.`, why: 'w', fix: 'f', examples: { flag: ['x'], pass: ['y'] } });
+  const rules = loadRules({ language: 'en', rules: [rule('en-wide', 'low', 'a big bold claim'), rule('en-narrow', 'high', 'bold')] });
+  const [f, ...rest] = check('It is a big bold claim.', { rules });
+  assert.equal(rest.length, 0);
+  assert.equal(f.ruleId, 'en-narrow');
+  assert.equal(f.severity, 'high');
+  assert.equal(f.match, 'a big bold claim');
+  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId), ['en-wide']);
 });
