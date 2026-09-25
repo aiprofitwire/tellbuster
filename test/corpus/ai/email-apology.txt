@@ -1,0 +1,29 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write an email apologizing to customers for a service outage." License: MIT, like this repo.
+
+Subject: We're sorry about yesterday's outage
+
+Dear valued customer,
+
+Yesterday, between 2:15 PM and 5:40 PM Eastern Time, many of you were unable to access your accounts. We want to sincerely apologize for the disruption this caused. We know how much you rely on our service, and we fell short of your expectations.
+
+**What happened**
+
+A routine update to our servers caused an unexpected error in our login system. Our engineering team identified the issue quickly and worked to restore service as fast as possible.
+
+**What we're doing about it**
+
+We take this incident very seriously. To prevent it from happening again, we are:
+- Adding additional testing before all future updates
+- Improving our monitoring so we can detect problems sooner
+- Updating our status page more frequently during incidents
+
+**Your data is safe**
+
+Please rest assured that no customer data was lost or compromised during the outage.
+
+As a small token of our appreciation for your patience, we've added a one-month credit to your account. No action is needed on your part.
+
+Thank you for your understanding and continued trust. If you have any questions or concerns, our support team is here to help 24/7.
+
+Sincerely,
+The Clearline Team

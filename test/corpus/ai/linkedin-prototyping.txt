@@ -1,0 +1,28 @@
+# Source: written by an AI model for this test (style: LinkedIn post). Prompt: "Write a LinkedIn post about the value of prototyping." License: MIT, like this repo.
+
+Stop building. Start prototyping.
+
+Last quarter, my team was about to spend 8 weeks building a new onboarding flow.
+
+Instead, we spent 2 days on a clickable prototype.
+
+We tested it with 6 users.
+
+The result? 4 of them got stuck on the very first screen.
+
+That prototype saved us roughly 7 weeks of engineering time and a painful launch.
+
+Here's why prototyping is one of the most underrated skills in product development:
+
+→ It turns opinions into evidence.
+→ It makes ideas tangible for stakeholders.
+→ It fails fast and cheap, before the stakes are high.
+→ It gets everyone aligned around something real.
+
+The goal isn't perfection. A paper sketch can be enough to spark the right conversation.
+
+Remember: the most expensive way to test an idea is to build it.
+
+How does your team prototype? Paper, Figma, code? Let me know below. 👇
+
+#ProductDesign #UX #Prototyping #Agile

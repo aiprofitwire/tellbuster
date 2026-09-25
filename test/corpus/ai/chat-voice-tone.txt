@@ -1,0 +1,24 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "What's the difference between voice and tone in writing?" License: MIT, like this repo.
+
+Voice and tone are closely related, but they're not the same thing. Here's a simple way to think about it:
+
+**Voice is who you are.** It's the consistent personality of your writing. A brand's voice might be friendly, confident, and a little playful, and that stays the same whether you're writing a homepage or an error message.
+
+**Tone is how you adapt.** Tone shifts depending on the situation and the reader's emotional state. You wouldn't use the same tone to celebrate a customer's first purchase as you would to explain that their account has been locked.
+
+**An analogy**
+
+Think of how you speak. Your voice is consistent: your friends would recognize it anywhere. But your tone changes depending on whether you're at a birthday party or comforting someone at a funeral.
+
+**Examples**
+
+- **Celebratory tone:** "You did it! Your application is complete."
+- **Serious tone:** "We couldn't process your payment. Please check your card details and try again."
+
+Both examples can share the same underlying voice: clear, human, and helpful.
+
+**Why it matters**
+
+Defining your voice creates consistency and builds trust across every touchpoint. Adjusting your tone shows empathy and ensures your message resonates with readers in the moment.
+
+Would you like help creating a voice and tone guide for your organization?

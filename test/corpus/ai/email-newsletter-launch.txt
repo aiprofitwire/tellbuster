@@ -1,0 +1,29 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write a short newsletter announcing a new feature." License: MIT, like this repo.
+
+Hello friends,
+
+We've got some big news to share, and we couldn't be more excited!
+
+Starting today, you can now save drafts in Notewell and pick up right where you left off, on any device. Whether you're jotting down ideas on your phone during your commute or polishing a report on your laptop at home, your work will be waiting for you.
+
+**Why we built it**
+
+Over the past few months, we've heard from so many of you that losing work in progress was one of your biggest frustrations. We listened. Drafts was designed from the ground up with your feedback in mind.
+
+**What you can do with Drafts**
+
+✨ Save automatically every few seconds
+📱 Sync seamlessly across all your devices
+🗂️ Organize drafts into folders
+🔒 Keep everything private and secure
+
+**How to get started**
+
+Drafts is available now for all users. Simply open Notewell and look for the new Drafts tab in the sidebar.
+
+As always, we'd love to hear what you think. Just hit reply and let us know. Your feedback helps us make Notewell better every day.
+
+Thank you for being part of our community. We can't wait to see what you create!
+
+Warmly,
+The Notewell Team

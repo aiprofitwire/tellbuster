@@ -2,7 +2,7 @@
 
 Ten starter issues, each proposing one missing English rule, plus three issues asking native speakers for Spanish, German and Portuguese rules (at the end). Every idea was checked: none of them is caught by the current rules, and each suggested pattern catches its flag example and skips its pass example.
 
-**To post them:** on GitHub go to **Issues > New issue > Open a blank issue**. Copy the title and the body of one issue below, add the labels `good first issue` and `new rule` (issues 11 to 13 also get `hacktoberfest`), and click **Submit new issue**. Repeat for each one.
+**To post them:** on GitHub go to **Issues > New issue > Open a blank issue**. Copy the title and the body of one issue below, add the labels `good first issue` and `new rule` (issues 11 to 13 also get `hacktoberfest`; issue 15 gets `good first issue` and `hacktoberfest` only, since it adds a text, not a rule), and click **Submit new issue**. Repeat for each one.
 
 ## 1. Add a rule for "Pave the way for"
 
@@ -336,4 +336,31 @@ Tellbuster has 20 French rules in `rules/fr.json`. We would love a native speake
 You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 rule is welcome too.
 
 New here? Follow "Your first rule in 5 minutes" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
+
+## 15. Add a paragraph you wrote before 2022 to the test set
+
+**Title:** Add a paragraph you wrote before 2022 to the test set
+
+**Labels:** `good first issue`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster keeps a small test set of human and AI texts in `test/corpus/`. It tells us how often each side gets a note, and a test fails if a rule flags too much normal human writing. Right now every human text comes from one source (the US government's 18F guides), so we need more voices.
+
+**What we need:** one text you wrote yourself before 2022, 100 to 400 words. An old email to a friend, a school essay, a work memo, a forum post, a journal entry. Plain everyday writing is perfect. Remove names and anything private first.
+
+**The license:** by adding it, you agree to share it under the MIT license, like the rest of this repo. Only add text you wrote yourself. Please do not copy blog posts, news articles or anything written by someone else.
+
+**How to add it:**
+
+1. Create a new file in `test/corpus/human/`, for example `donated-your-github-name.txt`.
+2. Make the first line: `# Source: written by @your-github-name in 2019, donated to Tellbuster. License: MIT, like this repo.`
+3. Leave one blank line, then paste your text.
+4. Open a pull request. The tests check the first line and the length for you.
+
+If your text gets a high severity note, that is useful too: it may show a rule that needs work. Say so in the pull request.
+
+New here? The steps to open a pull request on the GitHub website are in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md).
 ```

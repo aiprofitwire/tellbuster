@@ -1,0 +1,33 @@
+# Source: 18F Content Guide, "Inclusive language", https://github.com/18F/content-guide (commit ab38d55, 2021). License: US government work, public domain (CC0 1.0).
+
+The words we use can make the difference between forging positive connections or creating distance in our personal and professional lives. Particularly in writing, impact is more important than intent.
+
+As we build government services, we want to ensure they are accessible and welcoming to everyone who needs to use them. Inclusive language helps us to be more accurate and build trust with our users.
+
+This guidance is influenced by the Conscious Style Guide, which is an excellent resource for learning more about the conversations behind terms, categories, and concepts. Other resources we used:
+
+- Diversity Style Guide
+- Disability Language Style Guide
+- Associated Press Stylebook
+- Syracuse University Disability Cultural Center Language Guide
+
+This page is not exhaustive, but aims to provide principles, resources, and specific suggestions for writing and talking about diverse groups of people.
+
+Ability and disability
+
+Every person is a whole person — no matter how they interact with the world. Focus on what they need to do, what tools they use, and avoid making assumptions. If a person’s situation, medical condition, illness, or injury is relevant to the content, be as specific as possible and avoid inserting value judgements about their circumstance (for example, use has multiple sclerosis, not is afflicted with or suffers from).
+
+Just like with language around race, gender, or other identities, it’s always best to ask people how they identify rather than assuming. For help finding appropriate or accurate language, see the Disability Language Style Guide from the National Center on Disability and Journalism.
+
+- Avoid describing people as disabled, handicapped, or confined to a wheelchair.
+- Avoid terms that contribute to stigmas around disability or mental illness: crazy, dumb, lame, insane, psycho, schizophrenic, or stupid.
+- Avoid terms that contribute to stigmas around sensory disabilities: blind spot or tone deaf.
+
+Age
+
+Avoid referring to someone’s age, unless it’s relevant to what you're writing about (for example, when referring to benefits that are available to people of certain ages).
+
+- Don’t use women or older relatives as substitute for novice or beginner. For example, don’t say something is so simple your mother can use it.
+- We prefer older person or senior to elderly.
+
+Gender and sexuality

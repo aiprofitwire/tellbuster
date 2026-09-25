@@ -1,0 +1,29 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write an email inviting customers to a research session." License: MIT, like this repo.
+
+Subject: Help us improve [Product], and get a $50 gift card
+
+Hi Jordan,
+
+I hope this email finds you well!
+
+My name is Alex, and I'm part of the design team at Brightpath. We're working on some exciting improvements to our scheduling tool, and we'd love to hear from people like you who use it every day.
+
+We're inviting a small group of customers to take part in a 45-minute video call where we'll ask a few questions about how you use the product and show you some early ideas. There are no right or wrong answers. We're simply interested in your honest thoughts.
+
+**Here are the details:**
+- **When:** Any weekday between March 4 and March 15
+- **Where:** Online, via Zoom
+- **Time commitment:** 45 minutes
+- **Thank you gift:** A $50 Amazon gift card
+
+If you're interested, simply click the link below to choose a time that works for you:
+
+[Schedule your session]
+
+Your feedback will directly shape the future of Brightpath, and we truly appreciate your time and insights.
+
+Please don't hesitate to reach out if you have any questions.
+
+Best regards,
+Alex Rivera
+Product Designer, Brightpath

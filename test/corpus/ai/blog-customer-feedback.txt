@@ -1,0 +1,20 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post intro about collecting customer feedback." License: MIT, like this repo.
+
+Customer feedback is the lifeblood of any successful business. Whether you're a small startup or a large enterprise, understanding what your customers think about your products and services is essential for growth. Yet many organizations struggle to collect feedback in a meaningful way.
+
+In this article, we'll delve into the most effective methods for gathering customer feedback, explore common pitfalls to avoid, and share practical tips for turning insights into action.
+
+**Why feedback matters**
+
+Customers who feel heard are more likely to stay loyal. According to various industry studies, businesses that actively seek and act on feedback see higher retention rates and stronger word-of-mouth referrals. Beyond loyalty, feedback helps you spot problems early, before they turn into costly issues.
+
+**Popular methods**
+
+- **Surveys:** Quick to deploy and easy to analyze, surveys are great for measuring satisfaction at scale.
+- **Interviews:** One-on-one conversations offer rich, detailed insights that numbers alone can't capture.
+- **Reviews and social media:** Monitoring what people say publicly can reveal honest, unfiltered opinions.
+- **Support tickets:** Your support team is sitting on a goldmine of information about where customers get stuck.
+
+Each method has its strengths and weaknesses, and the most effective strategies often combine several approaches.
+
+Ready to unlock the full potential of your customer feedback? Let's dive in.

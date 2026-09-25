@@ -1,0 +1,27 @@
+# Source: written by an AI model for this test (style: LinkedIn post). Prompt: "Write a LinkedIn post about why teams should talk to users." License: MIT, like this repo.
+
+I used to think I knew what our users wanted.
+
+I was wrong.
+
+Early in my career, I spent six months building a feature I was sure would be a game-changer. We launched it with a big announcement.
+
+Nobody used it. 📉
+
+Here's what I learned:
+
+🔍 Assumptions are not insights. Your gut is a starting point, not a strategy.
+
+🗣️ Talk to users early. Not after launch. Not "when we have time." Now.
+
+👂 Listen more than you pitch. The best research sessions are the ones where you barely speak.
+
+🔁 Test, learn, repeat. Every conversation makes the next decision a little less of a guess.
+
+Today, my team talks to at least five users every sprint. It's not glamorous. But it's the single biggest reason our products actually get used.
+
+The truth is, your users are already telling you what they need. The question is whether you're listening.
+
+What's one thing a user taught you that changed how you work? Drop it in the comments. 👇
+
+#UXResearch #ProductManagement #UserCentered #Leadership

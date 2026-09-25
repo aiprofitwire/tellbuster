@@ -1,0 +1,21 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about agile in government." License: MIT, like this repo.
+
+For decades, government technology projects followed a familiar pattern: years of planning, massive requirements documents, and a single "big bang" launch. Too often, the result was a system that was over budget, behind schedule, and out of touch with what users actually needed.
+
+Agile development offers a different path.
+
+At its heart, agile is about delivering value in small increments, getting feedback early, and adapting as you learn. Rather than trying to predict every requirement up front, agile teams build a small working piece of the product, test it with real users, and improve it continuously.
+
+**Why agile is a good fit for government**
+
+- **Reduced risk:** Smaller releases mean smaller failures, which are easier and cheaper to fix.
+- **Better outcomes for the public:** Frequent user testing ensures services meet people's real needs.
+- **Greater transparency:** Regular demos let stakeholders see progress instead of waiting years for results.
+
+**The challenges**
+
+Of course, adopting agile in government isn't without hurdles. Procurement rules, budget cycles, and compliance requirements were often designed with traditional approaches in mind. Cultural change can be the hardest part of all.
+
+**Moving forward**
+
+Many agencies have already shown that agile can work in the public sector. By starting with small pilot projects, building internal skills, and partnering with procurement teams, governments can unlock the benefits of agile while navigating the unique complexities of the public sector landscape.

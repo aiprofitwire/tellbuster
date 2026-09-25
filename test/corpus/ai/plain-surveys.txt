@@ -1,0 +1,17 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain how to write a good survey. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Decide what you will do with the answers before you write a single question. If an answer won't change a decision, drop the question.
+
+Keep it short. Ten questions is plenty for most surveys. Every extra question means fewer people finish.
+
+Ask one thing at a time. "How satisfied are you with our prices and service?" is two questions. Split it.
+
+Avoid leading words. "How much did you enjoy the event?" assumes they enjoyed it. "How was the event?" does not.
+
+Give balanced answer choices, with as many bad options as good ones, and a way to say "I don't know" or "Doesn't apply."
+
+Put easy questions first and personal ones, like age or income, at the end. Make those optional.
+
+Add one open question, like "What is one thing we should change?" It often gives you the most useful answers.
+
+Try the survey on three or four people before you send it. Watch where they hesitate or ask what you mean. Rewrite those questions, then send it out.

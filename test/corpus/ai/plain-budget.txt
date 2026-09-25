@@ -1,0 +1,15 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain how a small nonprofit should make a yearly budget. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Start with last year's actual numbers, not last year's budget. Look at what you really spent and what really came in.
+
+List your fixed costs first: rent, salaries, insurance, software. These are hard to change during the year.
+
+Then list your program costs. Tie each one to something you plan to do, like the number of classes or meals you will offer.
+
+For income, be careful. Count grants you have been awarded, not ones you have applied for. Base donations on what you raised in the last two or three years, not on your best year.
+
+If costs are higher than income, decide now what you will cut or raise. Don't plan to close the gap later.
+
+Try to keep three to six months of expenses in reserve. If you don't have that yet, add a small line each year to build it.
+
+Share the budget with your board and staff in plain terms. Then compare actual numbers to the budget every month. A budget you only look at once a year won't help you steer.

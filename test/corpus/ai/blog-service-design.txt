@@ -1,0 +1,21 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post introducing service design." License: MIT, like this repo.
+
+When most people think about design, they picture logos, websites, or physical products. But some of the most impactful design work happens behind the scenes, in the systems and processes that shape how services are delivered. This is the realm of service design.
+
+Service design is a holistic approach to improving the experience of both the people who use a service and the people who provide it. It looks beyond a single screen or touchpoint to consider the entire journey, including the policies, staff, and technology that make it possible.
+
+**Why service design matters**
+
+Imagine applying for a business license. The website might be beautiful, but if the form requires documents you can't easily get, or if your application sits in a queue for weeks without an update, the overall experience still feels broken. Service design addresses these root causes rather than just the surface.
+
+**Key tools**
+
+- **Service blueprints** map the front-stage actions a customer sees alongside the back-stage processes that support them.
+- **Journey maps** capture how people think and feel at each step.
+- **Co-design workshops** bring users and staff together to shape solutions.
+
+**The bigger picture**
+
+At its core, service design is about aligning an organization around the needs of the people it serves. It requires collaboration across departments, a willingness to question long-standing processes, and a commitment to continuous improvement.
+
+As organizations strive to deliver better experiences, service design is quickly becoming an indispensable discipline.

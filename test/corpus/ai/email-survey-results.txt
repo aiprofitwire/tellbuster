@@ -1,0 +1,26 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write an email sharing the results of a customer survey with the team." License: MIT, like this repo.
+
+Subject: Key takeaways from our Q2 customer survey
+
+Hi team,
+
+I'm excited to share the results of our Q2 customer survey! We received 1,248 responses, our highest ever, which gives us a rich picture of how customers feel about our service.
+
+**The headlines**
+- **Overall satisfaction** rose to 82%, up from 76% last quarter.
+- **Ease of use** remains our strongest area, with 88% of respondents rating it "good" or "excellent."
+- **Billing** is our biggest pain point. Nearly one in three customers said they found their invoice confusing.
+
+**What customers are saying**
+> "The app is so easy to use, but I never understand what I'm being charged for."
+> "Support was fast and friendly. Thank you!"
+
+**What this means for us**
+These results highlight a clear opportunity to improve the billing experience. I'd like to propose a small working group with members from design, finance, and support to explore solutions over the next quarter.
+
+I'll be sharing the full report in our team drive later today. In the meantime, I'd love to hear your thoughts. What stands out to you?
+
+Thank you all for your continued dedication to our customers. These results are a testament to your hard work!
+
+Best,
+Morgan

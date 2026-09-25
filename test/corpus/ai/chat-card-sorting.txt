@@ -1,0 +1,19 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "What is card sorting and how do I run one?" License: MIT, like this repo.
+
+Great question! Card sorting is a user research method that helps you understand how people naturally group and label information. It's especially useful when you're designing or reorganizing the navigation of a website or app.
+
+**How it works**
+
+1. **Write your topics on cards.** Each card should represent a single piece of content or feature, such as "Billing history" or "Contact support."
+2. **Ask participants to group the cards.** In an open sort, participants create and name their own categories. In a closed sort, you provide the categories in advance.
+3. **Look for patterns.** Once you've run several sessions, compare the groupings to see where participants agree and where they diverge.
+
+**Tips for success**
+
+- Aim for 15 to 20 participants to get reliable patterns.
+- Keep the number of cards manageable, usually between 30 and 60.
+- Use online tools like OptimalSort if your participants are remote.
+
+It's important to note that card sorting tells you how users think about your content, but it doesn't tell you whether they can actually find things. For that, you'll want to follow up with tree testing.
+
+By leveraging card sorting early in the design process, you can create an information architecture that feels intuitive and aligns with your users' mental models. Let me know if you'd like a sample script for running a session!

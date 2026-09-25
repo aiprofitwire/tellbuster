@@ -1,0 +1,16 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "What should a small business plan include?" License: MIT, like this repo.
+
+Certainly! A solid business plan serves as a roadmap for your business and can be essential when seeking funding. While formats vary, most traditional business plans include the following sections:
+
+1. **Executive summary:** A brief overview of your business, what you do, and why you'll succeed. Although it comes first, many people write it last.
+2. **Company description:** Details about your business, the problems it solves, and your target customers.
+3. **Market analysis:** Research on your industry, your competitors, and your target market.
+4. **Organization and management:** Your business structure and the key people on your team.
+5. **Products or services:** What you sell and how it benefits customers.
+6. **Marketing and sales strategy:** How you'll attract and retain customers.
+7. **Funding request:** If you're seeking investment, explain how much you need and how you'll use it.
+8. **Financial projections:** Forecasts for revenue, expenses, and profitability over the next three to five years.
+
+If you're just starting out, you might prefer a lean business plan, which condenses these elements into a single page. This format is ideal for testing ideas quickly and adapting as you learn.
+
+Whichever format you choose, remember that a business plan is a living document. Revisit it regularly as your business grows and evolves. Would you like a template to get started?

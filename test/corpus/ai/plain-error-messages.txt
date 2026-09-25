@@ -1,0 +1,15 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain how to write good error messages. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+A good error message says what went wrong and what to do next. It does both in words the user already knows.
+
+Don't blame the user. "You entered an invalid date" feels like a scolding. "Enter the date as month, day, year, like 04/15/2024" tells them how to fix it.
+
+Don't show codes unless support needs them. If you must include one, put it at the end, after the part a person can act on.
+
+Put the message next to the problem. If a form has an error in the phone field, show the message right under that field, not only at the top of the page.
+
+Keep what the user already typed. Clearing the whole form because of one mistake makes people give up.
+
+Say it once. A red box, an icon, a popup and a line of text for the same problem is too much. One clear line is enough.
+
+Test your messages. Ask a few people to fill in the form wrong on purpose and see if they can recover without help.

@@ -1,0 +1,17 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "Why does plain language matter for government websites?" License: MIT, like this repo.
+
+Plain language matters for government websites because it directly impacts whether people can access the services and information they need. Here are some key reasons:
+
+1. **Accessibility for everyone.** Government services are meant for the entire public, including people with limited literacy, non-native speakers, and people with cognitive disabilities. Clear writing ensures no one is left behind.
+
+2. **Fewer errors and calls.** When forms and instructions are easy to understand, people make fewer mistakes. This reduces the burden on call centers and caseworkers.
+
+3. **Trust and transparency.** Jargon-heavy language can make government feel distant or even intimidating. Plain language fosters trust by showing respect for the reader's time.
+
+4. **It's the law.** In the United States, the Plain Writing Act of 2010 requires federal agencies to use clear communication that the public can understand and use.
+
+5. **Better outcomes.** Studies consistently show that plain language improves comprehension for all readers, including experts, who appreciate being able to find information quickly.
+
+In short, plain language isn't about "dumbing down" content. It's about respecting your audience and making sure your message lands. By prioritizing clarity, government agencies can deliver more effective, equitable, and user-centered services.
+
+If you'd like, I can share some practical tips for rewriting common government phrases in plain language!

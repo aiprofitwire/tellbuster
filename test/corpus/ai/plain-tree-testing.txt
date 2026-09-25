@@ -1,0 +1,11 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain tree testing. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Tree testing checks whether people can find things in your site's structure. You show them only the menu labels, with no design or content, and give them tasks like "Where would you go to renew a permit?"
+
+You watch which path they take. If most people go to the right place on the first try, that part of your structure works. If they wander or give up, the labels or the grouping need work.
+
+Run it before you build pages. Changing a menu in a spreadsheet costs almost nothing. Changing it after launch means redirects, new training and confused users.
+
+You need a list of your menu items, eight to ten tasks, and about 30 to 50 people. Online tools can run the test for you and show where people went wrong. Write tasks in the words your users would use, not the words in your labels, or you will only test whether people can match words.
+
+Tree testing pairs well with card sorting. Card sorting helps you draft a structure. Tree testing tells you if the draft holds up.
