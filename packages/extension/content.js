@@ -73,7 +73,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px 0; margin-bottom: 10px; }
 .card p { margin: 0 0 6px; }
 .card-name { display: flex; align-items: baseline; gap: 8px; font-weight: 600; }
-.card-match, .card-why { color: var(--muted); font-size: 14px; }
+.card-match, .card-why, .card-also { color: var(--muted); font-size: 14px; }
 .card-fix { font-size: 14px; }
 .sev { flex: none; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration-line: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .link { min-height: 44px; padding: 0; border: 0; background: none; color: var(--accent); font-size: 13px; text-decoration: underline; }
@@ -279,6 +279,7 @@ a.link { display: inline-flex; align-items: center; }
       make('p', { textContent: f.message }),
       make('p', { class: 'card-why', textContent: f.why }),
       fix,
+      f.alsoMatched?.length > 0 && make('p', { class: 'card-also', textContent: `${T.also} ${f.alsoMatched.map((o) => o.name).join(', ')}` }),
       offBtn,
       report);
   }

@@ -12,7 +12,7 @@ test('package: bundled rule packs match the rules folder (run node scripts/sync-
 });
 
 test('package: lint works with no setup, in English and French', () => {
-  assert.ok(lint("Let's delve into the numbers.").some((f) => f.ruleId === 'en-delve'));
+  assert.ok(lint('We delve into the numbers.').some((f) => f.ruleId === 'en-delve'));
   assert.ok(lint("Dans le monde d'aujourd'hui, il est important de noter que le travail change.").some((f) => f.ruleId.startsWith('fr-')));
   assert.equal(lint('We paid the invoice this morning.').length, 0);
 });

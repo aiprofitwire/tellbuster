@@ -18,7 +18,7 @@ test('the tool is described with a JSON schema that needs only text', () => {
 });
 
 test('findings come back as text and as data, with the why and the fix', () => {
-  const text = "Hello.\nLet's delve into this.";
+  const text = 'Hello.\nWe will delve into this. We will delve deeper.';
   const result = checkWriting(lint, { text });
   assert.equal(result.isError, undefined);
   assert.equal(result.content[0].type, 'text');
@@ -33,9 +33,19 @@ test('findings come back as text and as data, with the why and the fix', () => {
   }
   assert.equal(delve.match, 'delve');
   assert.equal(delve.line, 2);
-  assert.equal(delve.column, 7);
+  assert.equal(delve.column, 9);
   assert.equal(text.slice(delve.start, delve.end), 'delve');
   assert.ok(result.content[0].text.includes(delve.fix));
+});
+
+test('two rules on the same words give one finding that names the other rule', () => {
+  const result = checkWriting(lint, { text: "Let's delve into this." });
+  assert.equal(result.structuredContent.count, 1);
+  const [f] = result.structuredContent.findings;
+  assert.equal(f.ruleId, 'en-dive-in');
+  assert.deepEqual(f.alsoMatched, [{ ruleId: 'en-delve', name: '"Delve"' }]);
+  assert.match(result.content[0].text, /^1 phrase might read as AI/);
+  assert.match(result.content[0].text, /Also: "Delve"\.$/);
 });
 
 test('one finding reads "phrase", clean text reads "No tells found."', () => {

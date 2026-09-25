@@ -55,6 +55,7 @@ export function checkWriting(lint, args = {}) {
     message: f.message,
     why: f.why,
     fix: f.fix,
+    ...(f.alsoMatched ? { alsoMatched: f.alsoMatched.map(({ ruleId, name }) => ({ ruleId, name })) } : {}),
   }));
 
   const count = findings.length;
@@ -65,7 +66,7 @@ export function checkWriting(lint, args = {}) {
           `${count} ${count === 1 ? 'phrase might' : 'phrases might'} read as AI. Rewrite them in your own words, then check again.`,
           ...findings.map(
             (f, i) =>
-              `${i + 1}. "${f.match}" (line ${f.line}, column ${f.column}, ${f.severity}) ${f.name}: ${f.why} Fix: ${f.fix}`
+              `${i + 1}. "${f.match}" (line ${f.line}, column ${f.column}, ${f.severity}) ${f.name}: ${f.why} Fix: ${f.fix}${f.alsoMatched ? ` Also: ${f.alsoMatched.map((o) => o.name).join(', ')}.` : ''}`
           ),
         ];
 

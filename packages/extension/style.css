@@ -159,7 +159,7 @@ mark.flash, mark.is-open { background: var(--accent-soft); }
 .card p { margin: 0 0 6px; }
 .card-name { display: flex; align-items: baseline; gap: 8px; font-weight: 600; }
 .card-match { color: var(--muted); font-size: 0.9rem; }
-.card-why { color: var(--muted); font-size: 0.94rem; }
+.card-why, .card-also { color: var(--muted); font-size: 0.94rem; }
 .card-fix { font-size: 0.94rem; }
 .sev {
   flex: none;

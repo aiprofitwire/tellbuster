@@ -251,7 +251,8 @@ How to test: open a pull request that adds "Certainly! Let's delve into this." t
 How to test: follow the Claude Code setup in `packages/mcp/README.md`, ask Claude to write a LinkedIn post, and ask it to check the post with Tellbuster.
 
 ## Step 17: One card per phrase
-- [ ] When two or more rules underline the same words, show one card and count them once.
+- [x] When two or more rules underline the same words, show one card and count them once.
+  - Done 2026-09-25. check() in packages/core now keeps one finding for the widest match and lists the other rules on it as alsoMatched (ruleId, name, severity, why); on the same words the higher severity comes first. Partly overlapping findings stay separate. The web demo and the extension cards show an "Also:" line, and the MCP tool returns alsoMatched too. Tests that looked for en-delve inside "Let's delve into" now use text where it stands alone.
 
 - Today "Let's delve into" is flagged by both `en-delve` and `en-dive-in`, so the count says one tell too many and the user sees two cards for the same words.
 - In `packages/core`: when findings cover the same text (same start and end, or one fully inside the other), keep one finding for the widest match and attach the other rules to it (for example `alsoMatched: [{ ruleId, name, why }]`). Keep the result shape backward compatible: existing fields stay as they are.
