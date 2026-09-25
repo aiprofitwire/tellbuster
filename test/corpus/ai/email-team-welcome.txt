@@ -1,0 +1,32 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write a welcome email to a new team member." License: MIT, like this repo.
+
+Subject: Welcome to the team, Chris!
+
+Hi Chris,
+
+On behalf of the entire content design team, I'm thrilled to welcome you aboard! We've been looking forward to your first day, and we're so excited to have you join us.
+
+Here's a quick overview of what to expect during your first week:
+
+**Monday**
+- 9:00 AM: Welcome coffee with the team (virtual)
+- 10:30 AM: IT setup and account access
+- 2:00 PM: One-on-one with me to talk about your goals
+
+**Tuesday to Thursday**
+- Meet with your onboarding buddy, Leah, who will help you get settled
+- Review our style guide and current projects
+- Sit in on a few user research sessions
+
+**Friday**
+- Team retro and a casual lunch
+
+Please don't worry about getting everything right away. The first few weeks are all about learning, asking questions, and getting to know the people you'll be working with.
+
+If you have any questions before Monday, feel free to reach out to me anytime. We can't wait to see the unique perspective and skills you'll bring to the team.
+
+Welcome again, and see you soon!
+
+Warm regards,
+Taylor
+Content Design Lead

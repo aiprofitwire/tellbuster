@@ -1,0 +1,22 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about why every organization needs a style guide." License: MIT, like this repo.
+
+Have you ever read a website where one page says "e-mail," another says "email," and a third says "E-Mail"? Small inconsistencies like these might seem harmless, but they add up. Over time, they can erode trust and make your organization look disorganized.
+
+That's why every organization, regardless of size, can benefit from a content style guide.
+
+**What is a style guide?**
+
+A style guide is a set of standards for writing and formatting content. It typically covers grammar and punctuation, word choices, capitalization, voice and tone, and how to refer to your products and services.
+
+**The benefits**
+
+- **Consistency:** Everyone writes the same way, so your content feels unified.
+- **Efficiency:** Writers spend less time debating small decisions.
+- **Onboarding:** New team members can quickly learn how your organization communicates.
+- **Brand identity:** A clear voice helps your audience recognize you.
+
+**How to create one**
+
+You don't have to start from scratch. Many organizations build on established guides like the AP Stylebook or the Chicago Manual of Style and then document their own exceptions. Start with the questions your team asks most often, and grow the guide over time.
+
+A style guide is never truly finished. As your organization evolves, so will your content. Treat it as a living resource, and you'll reap the rewards of clearer, more consistent communication for years to come.

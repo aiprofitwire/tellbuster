@@ -1,0 +1,15 @@
+# Source: 18F Methods, "Visual preference testing", https://github.com/18F/methods (commit d66b6fc, 2021). License: US government work, public domain (CC0 1.0).
+
+A method that allows potential users to review and provide feedback on a solution's visual direction.
+
+To align the established branding guidelines and attributes of a solution with the way end users view the overall brand and emotional feel.
+
+How to do it
+
+1. Create iterations of a style tile that represent directions a final visual design may follow. If branding guidelines or attributes don’t exist, establish them with stakeholders beforehand.
+1. Interview participants about their reaction to the style tiles.
+  - Ask questions as objectively as possible.
+  - Align questions with the branding guidelines and attributes your project must incorporate.
+  - As far as possible, allow participants to provide their feedback unmoderated or at the end of your research.
+1. Compare the results of your research with the agency's published branding guidelines and attributes.
+1. Publish the results to the complete product team and decide which direction will guide future design efforts.

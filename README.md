@@ -51,6 +51,25 @@ It checks English and French, with more than 100 rules in all, plus small starte
 - The extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
 - The rules are plain, readable data in [`rules/`](rules/). No hidden AI model making guesses.
 
+## How accurate is it?
+
+Tellbuster gives phrase-level style notes. It is not an AI detector, and these numbers do not say whether a text was written by AI. They say how often a text gets at least one note.
+
+We keep a small test set in [`test/corpus/`](test/corpus/): 46 texts people wrote before 2022 (public domain guides from the US government's 18F team) and 50 texts an AI model wrote for this test in five styles. Numbers from September 25, 2026:
+
+| | At least one note | A high severity note |
+|---|---|---|
+| AI texts | 22 of 50 (44%) | 6 of 50 (12%) |
+| Human texts | 10 of 46 (22%) | 0 of 46 (0%) |
+
+What this means:
+
+- Most notes on human text are the long dash (a low severity note). People use it too, which is why it is low.
+- When the AI was asked to write plainly, none of its 10 texts got a note. The notes follow the style, not the author. LinkedIn-style posts got the most (8 of 10).
+- The test set is small and all the AI texts come from one model, so treat these numbers as a rough guide.
+
+To see the numbers yourself, run `npm run accuracy` in the repo folder. A test fails if more than 10% of the human texts get a high severity note, so a rule that flags normal writing is caught before it ships.
+
 ## Publishing
 
 The steps to put Tellbuster on npm, the Chrome Web Store, Edge Add-ons and Firefox Add-ons are in [docs/PUBLISHING.md](docs/PUBLISHING.md).

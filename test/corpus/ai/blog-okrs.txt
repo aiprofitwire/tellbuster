@@ -1,0 +1,24 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about setting goals with OKRs." License: MIT, like this repo.
+
+Setting goals is easy. Achieving them is another story. That's why so many companies, from tech giants to small nonprofits, have turned to Objectives and Key Results, or OKRs, to bring focus and alignment to their work.
+
+**What are OKRs?**
+
+An OKR has two parts. The objective is a clear, inspiring statement of what you want to achieve. The key results are measurable outcomes that show whether you've achieved it.
+
+For example:
+
+- **Objective:** Make our help center the first place customers go for answers.
+- **Key results:** Increase help center visits by 40%, reduce support tickets by 20%, and raise article satisfaction scores to 4.5 out of 5.
+
+**Why OKRs work**
+
+OKRs encourage teams to focus on outcomes rather than outputs. Instead of measuring how many articles you publish, you measure whether those articles actually help people. They also create transparency, since everyone can see what other teams are working toward.
+
+**Common mistakes**
+
+- Setting too many OKRs. Three to five objectives per quarter is plenty.
+- Confusing tasks with key results. "Launch a new website" is a task, not a result.
+- Treating OKRs as a performance review tool, which discourages ambitious goals.
+
+When implemented thoughtfully, OKRs can transform the way your team works. They provide a framework for clarity, accountability, and growth, helping you turn big ambitions into tangible results.

@@ -1,0 +1,19 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a short blog post about why teams build design systems." License: MIT, like this repo.
+
+In today's fast-paced digital landscape, consistency is more important than ever. As products grow and teams expand, maintaining a cohesive user experience can quickly become a challenge. That's where design systems come in.
+
+A design system is a collection of reusable components, guidelines, and principles that help teams build products more efficiently. Think of it as a shared language between designers and developers, one that ensures every button, form, and color choice feels like part of the same family.
+
+**Why design systems matter**
+
+First and foremost, design systems save time. Instead of reinventing the wheel for every new feature, teams can draw on a library of tested, accessible components. This frees designers to focus on solving real user problems rather than debating the shade of a button.
+
+Second, they improve quality. Components in a design system are typically reviewed for accessibility, performance, and usability, so every product that uses them benefits from that work.
+
+Finally, design systems foster collaboration. When everyone works from the same source of truth, handoffs become smoother and misunderstandings become less common.
+
+**Getting started**
+
+You don't need a massive team to build a design system. Start small by documenting the components you already use, and grow from there.
+
+In the end, a design system isn't just a set of tools. It's an investment in the future of your product and your team.

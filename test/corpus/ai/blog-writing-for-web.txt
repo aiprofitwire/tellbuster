@@ -1,0 +1,25 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about writing for the web." License: MIT, like this repo.
+
+Writing for the web is fundamentally different from writing for print. Online readers don't read, they scan. Studies have shown that users often read only 20 to 28 percent of the words on a page. So how do you create content that actually gets through?
+
+**Put the most important information first**
+
+Journalists call this the inverted pyramid. Start with the conclusion, then add supporting details. If a reader leaves after the first paragraph, they should still walk away with the key message.
+
+**Use meaningful headings**
+
+Headings act as signposts that help readers find what they need. Instead of vague labels like "Overview" or "Details," use headings that tell the reader exactly what's in each section.
+
+**Keep it short**
+
+Short sentences and short paragraphs are easier to scan, especially on mobile devices. Aim for one idea per paragraph.
+
+**Use lists**
+
+Bulleted and numbered lists break up dense text and make steps easy to follow.
+
+**Write like you talk**
+
+Use everyday words and address the reader directly as "you." A conversational tone makes content feel more approachable and human.
+
+Mastering these techniques won't happen overnight, but the payoff is worth it. When your content is easy to scan and understand, readers are more likely to stay, engage, and take action. And in the crowded world of online content, that makes all the difference.

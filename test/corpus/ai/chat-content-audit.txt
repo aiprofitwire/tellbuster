@@ -1,0 +1,26 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "How do I do a content audit of my website?" License: MIT, like this repo.
+
+A content audit is a systematic review of all the content on your website. It helps you understand what you have, how it's performing, and what needs to change. Here's a step-by-step guide:
+
+**Step 1: Define your goals**
+Are you preparing for a redesign, improving SEO, or cutting outdated pages? Your goals will shape what you measure.
+
+**Step 2: Create an inventory**
+Use a crawler like Screaming Frog to list every URL on your site. Export the results to a spreadsheet.
+
+**Step 3: Gather data**
+For each page, add columns for things like page views, last updated date, owner, and word count. Tools like Google Analytics can help you fill these in.
+
+**Step 4: Evaluate the content**
+Review each page against your goals. A common approach is to label each page as:
+- **Keep:** Accurate and useful
+- **Update:** Valuable but outdated
+- **Merge:** Overlaps with another page
+- **Remove:** No longer needed
+
+**Step 5: Make a plan**
+Prioritize the changes based on impact and effort, and assign owners.
+
+A content audit can feel overwhelming at first, especially for large sites, but it's one of the most valuable exercises you can do. It provides a clear picture of your content landscape and lays the groundwork for a more effective, user-friendly website.
+
+Would you like a spreadsheet template to help you get started?

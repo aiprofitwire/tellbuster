@@ -1,0 +1,68 @@
+# Source: 18F Content Guide, "Technical and interface writing", https://github.com/18F/content-guide (commit ab38d55, 2021). License: US government work, public domain (CC0 1.0).
+
+At 18F, we often write technical documentation, guides, forms, and interface messages. In most of these cases, it’s safe to say the reader is learning something new or troubleshooting. These guidelines will help you write clear, concise instructions, which will provide your reader with the best possible experience.
+
+Basics
+
+Do the hard work to make it simple
+
+Help the reader follow along. Break instructions or processes down into individual steps. Use short, simple sentences with words people use in everyday conversation.
+
+Refer to navigation labels, buttons, and menus as they appear in the app or website. Verify the spelling and capitalization as you write. Be specific.
+
+Instead of:
+
+> Open a new meeting invitation.
+
+Use:
+
+> In Google Calendar, click Create.
+
+Direct the reader
+
+Start your sentences with active verbs or clear objectives.
+
+Instead of:
+
+> Help us understand what kind of help you need by creating an issue in GitHub.
+
+Use:
+
+> Create an issue with details about your request.
+
+Or:
+
+> To get started, create an issue in GitHub with details about your request.
+
+Focus on what the reader can do rather than what they can’t. (This is known as using positive language.)
+
+Instead of:
+
+> You cannot continue without signing in.
+
+Use:
+
+> Sign in to continue.
+
+Guidelines
+
+Titles and headings
+
+Be consistent with how you phrase titles. If your guide or tutorial has several pages, stick to the same naming convention for scannability, such as:
+
+ Nouns: Policies, Teams, Offices_
+ Verbs: Create an account, File a report, Download our data_
+
+Use sentence case for headings. (If you’re writing articles for the 18F Handbook or 18F Pages, the table of contents will auto-generate based on your ``, ``, and `` tags or Markdown headings.)
+
+Introduction
+
+Include a short two- or three-sentence summary about the document to help the reader confirm whether they’re in the right place, and improve search engine indexing.
+
+Code
+
+Use backticks to style text and code snippets readers may want to copy and paste. For example:
+
+>  Use the `legend` element to offer a label within each form element.
+
+> Copy and paste `mkdir /home/foo/doc/bar && cd $_` into Terminal.

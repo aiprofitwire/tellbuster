@@ -1,0 +1,30 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write a recap email after a team workshop." License: MIT, like this repo.
+
+Subject: Recap: Journey Mapping Workshop
+
+Hi all,
+
+Thank you to everyone who joined yesterday's journey mapping workshop! The energy in the room was fantastic, and I'm genuinely impressed by the insights we uncovered together.
+
+Here's a quick summary of what we accomplished:
+
+**What we mapped**
+We mapped the end-to-end experience of a first-time applicant, from discovering our program to receiving their first payment.
+
+**Key insights**
+- **The waiting is the hardest part.** Applicants often wait two to three weeks without hearing anything, which leads to anxiety and repeat calls.
+- **Documents are a major barrier.** Many people don't have the paperwork we ask for and aren't sure where to get it.
+- **Staff are working around the system.** Caseworkers have created their own spreadsheets to track applications because the current tool doesn't meet their needs.
+
+**Top opportunities**
+1. Send automatic status updates at each stage.
+2. Create a simple checklist of required documents.
+3. Explore improvements to the caseworker tool.
+
+**Next steps**
+I'll clean up the map and share it by Friday. Please add any additional thoughts to the shared board before then.
+
+Thanks again for your time, creativity, and collaboration. This is a great step toward creating a more seamless experience for the people we serve.
+
+Best,
+Jamie

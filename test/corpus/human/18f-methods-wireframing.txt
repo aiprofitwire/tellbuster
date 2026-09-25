@@ -1,0 +1,12 @@
+# Source: 18F Methods, "Wireframing", https://github.com/18F/methods (commit d66b6fc, 2021). License: US government work, public domain (CC0 1.0).
+
+A simple visual representation of a product or service interface.
+
+To prioritize substance and relationships over decoration as you begin defining the solution. Wireframing also gives designers a great opportunity to start asking developers early questions about feasibility and structure.
+
+How to do it
+
+1. Build preliminary blueprints that show structure, placement, and hierarchy for your product. Steer clear of font choices, color, or other elements that would distract both the researcher and the reviewer. Lightweight designs are conceptually easier to reconfigure. A few helpful tools for building wireframes are OmniGraffle and Balsamiq, which purposefully keep the wireframe looking like rough sketches.
+1. Use this opportunity to start listing what UX/UI patterns you will need.
+1. Review your wireframes with specific user scenarios and personas in mind. Can users accomplish their task with the wireframe you are sketching out?
+1. Use the wireframes to get the team's feedback on feasibility and structure.

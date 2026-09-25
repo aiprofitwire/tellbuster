@@ -1,0 +1,32 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "What is the difference between active and passive voice?" License: MIT, like this repo.
+
+Great question! Understanding the difference between active and passive voice can significantly improve the clarity of your writing.
+
+**Active voice**
+
+In the active voice, the subject of the sentence performs the action.
+
+- *The team reviewed the proposal.*
+- *Maria submitted the form.*
+
+**Passive voice**
+
+In the passive voice, the subject receives the action. The person or thing doing the action is often moved to the end of the sentence or left out entirely.
+
+- *The proposal was reviewed by the team.*
+- *The form was submitted.*
+
+**Why it matters**
+
+Active voice is generally clearer, more direct, and easier to read. It makes it obvious who is responsible for what, which is particularly important in instructions, policies, and legal documents.
+
+**When passive voice is okay**
+
+That said, passive voice isn't always wrong. It can be useful when:
+
+- The person performing the action is unknown or unimportant ("The building was constructed in 1920").
+- You want to emphasize the result rather than the actor.
+
+**Quick tip:** If you can add "by zombies" after the verb and the sentence still makes sense, it's probably passive! For example, "The form was submitted (by zombies)."
+
+I hope this helps! Let me know if you'd like me to review a piece of your writing for passive constructions.

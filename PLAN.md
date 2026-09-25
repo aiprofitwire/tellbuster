@@ -262,7 +262,8 @@ How to test: follow the Claude Code setup in `packages/mcp/README.md`, ask Claud
 How to test: paste "Let's delve into this." into the web demo. It should say 1 phrase, with one card.
 
 ## Step 18: Measure accuracy
-- [ ] Add a small test set of human and AI texts and a command that reports how often Tellbuster flags each.
+- [x] Add a small test set of human and AI texts and a command that reports how often Tellbuster flags each.
+  - Done 2026-09-25. test/corpus/human has 46 texts from the 18F Methods and 18F Content Guide repos (US government work, public domain, taken from their last commits of 2021), because sba.gov could not be reached from the cloud session. test/corpus/ai has 50 texts written by one AI model for this test in five styles (chatbot answer, LinkedIn post, blog article, email or newsletter, and plain when asked to avoid filler), each with its prompt in the first line. New scripts/accuracy.js (`npm run accuracy`, reads rules/*.json directly), test/accuracy.test.js (fails if more than 10 percent of human texts get a high severity note, and checks each file's source line and length), a "How accurate is it?" section in README.md, and issue draft 15 in docs/first-issues.md. Today: AI 22 of 50 with a note, human 10 of 46, human high 0. All 242 tests pass.
 
 - `test/corpus/human/`: about 50 short texts (100 to 400 words) written by people before 2022. Use only text that is safe to copy into an MIT repo: US federal government pages (public domain, for example small business guides from sba.gov), or text the maintainer writes and donates. Every file starts with a comment line giving its source and license. Never copy blog posts or news articles.
 - `test/corpus/ai/`: about 50 texts on the same kinds of topics, written by AI models on purpose for this test. Use at least 3 different models or styles if you can, and note in each file which one (or "generated for this test").

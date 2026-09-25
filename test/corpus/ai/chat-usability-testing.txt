@@ -1,0 +1,21 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "How many users do I need for a usability test?" License: MIT, like this repo.
+
+The short answer is: often fewer than you think! Research by the Nielsen Norman Group suggests that testing with just five users can uncover around 85% of the usability problems in a design. However, the right number depends on a few factors.
+
+**When five users is enough**
+
+- You're running qualitative, think-aloud tests.
+- You plan to test iteratively, fixing issues and testing again.
+- Your users are relatively similar in their goals and behaviors.
+
+**When you need more**
+
+- **Multiple user groups:** If you're designing for distinct audiences, such as patients and doctors, aim for three to five users per group.
+- **Quantitative goals:** If you want to measure success rates or time on task with statistical confidence, you'll typically need 20 or more participants.
+- **High-stakes products:** For complex or safety-critical systems, more testing reduces risk.
+
+**A practical approach**
+
+Rather than running one large study, consider running several small rounds. Test with five users, fix the biggest problems, and then test again. This iterative approach tends to yield better results than a single large test, because each round builds on what you learned.
+
+Remember, the goal of usability testing isn't to prove a design works. It's to find out where it doesn't, so you can make it better. Happy testing!
