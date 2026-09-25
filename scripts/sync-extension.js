@@ -11,6 +11,7 @@ const COPIES = [
   ['rules/en-strict.json', 'packages/extension/vendor/en-strict.json'],
   ['rules/fr.json', 'packages/extension/vendor/fr.json'],
   ['docs/app.js', 'packages/extension/app.js'],
+  ['docs/i18n.js', 'packages/extension/i18n.js'],
   ['docs/style.css', 'packages/extension/style.css'],
 ];
 

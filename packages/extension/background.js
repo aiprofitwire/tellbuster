@@ -6,11 +6,14 @@
 //    The text arrives here from the page, is checked on your device, and is not kept.
 import { check } from './vendor/tellbuster.js';
 import { readSettings, activeRules } from './settings.js';
+import './i18n.js'; // the menu's words, in the browser's language
+
+const T = globalThis.tellbusterI18n.strings(globalThis.tellbusterI18n.pick({ followBrowser: true }));
 
 const MENU_ID = 'tellbuster-check';
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: MENU_ID, title: 'Check with Tellbuster', contexts: ['selection'] });
+  chrome.contextMenus.create({ id: MENU_ID, title: T.menuCheck, contexts: ['selection'] });
   syncBadge(false);
 });
 chrome.runtime.onStartup.addListener(() => syncBadge(false));
@@ -35,13 +38,13 @@ async function updateBadgeScript(injectOpenTabs) {
   if (current) await chrome.scripting.unregisterContentScripts({ ids: [SCRIPT_ID] });
   if (!matches.length) return;
   await chrome.scripting.registerContentScripts([
-    { id: SCRIPT_ID, js: ['content.js'], matches, runAt: 'document_idle', allFrames: true },
+    { id: SCRIPT_ID, js: ['i18n.js', 'content.js'], matches, runAt: 'document_idle', allFrames: true },
   ]);
   // Tabs that were already open get the badge too, so there is no need to reload them.
   if (!injectOpenTabs) return;
   const tabs = await chrome.tabs.query({ url: matches });
   for (const tab of tabs) {
-    chrome.scripting.executeScript({ target: { tabId: tab.id, allFrames: true }, files: ['content.js'] }).catch(() => {});
+    chrome.scripting.executeScript({ target: { tabId: tab.id, allFrames: true }, files: ['i18n.js', 'content.js'] }).catch(() => {});
   }
 }
 

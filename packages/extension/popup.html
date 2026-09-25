@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-follow-browser>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,33 +16,33 @@
   </header>
 
   <main class="layout">
-    <section class="writing" aria-label="Your writing">
+    <section class="writing" aria-label="Your writing" data-i18n-aria-label="yourWriting">
       <div class="toolbar">
-        <label for="text" class="label">Your writing</label>
+        <label for="text" class="label" data-i18n="yourWriting">Your writing</label>
         <div class="actions">
-          <button type="button" id="copy" class="btn">Copy text</button>
-          <button type="button" id="clear" class="btn">Clear</button>
+          <button type="button" id="copy" class="btn" data-i18n="copy">Copy text</button>
+          <button type="button" id="clear" class="btn" data-i18n="clear">Clear</button>
         </div>
       </div>
       <div class="editor" id="editor">
         <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-        <textarea id="text" spellcheck="true" placeholder="Paste or type your writing here." autofocus></textarea>
+        <textarea id="text" spellcheck="true" data-i18n-placeholder="placeholder" placeholder="Paste or type your writing here." autofocus></textarea>
         <div class="popover" id="popover" hidden></div>
       </div>
     </section>
 
-    <section class="panel" aria-label="Results">
+    <section class="panel" aria-label="Results" data-i18n-aria-label="results">
       <div class="empty" id="empty">
-        <p>Paste some writing to see which phrases might read as AI.</p>
-        <button type="button" id="example" class="btn btn-accent">Try an example</button>
+        <p data-i18n="emptyHint">Paste some writing to see which phrases might read as AI.</p>
+        <button type="button" id="example" class="btn btn-accent" data-i18n="tryExample">Try an example</button>
       </div>
       <div id="results" hidden>
         <p class="summary" id="summary" aria-live="polite"></p>
-        <p class="note">These are style notes, not proof of anything. People use these phrases too.</p>
-        <ul class="legend" aria-label="Legend">
-          <li><span class="sample sev-high">High</span> strong tell</li>
-          <li><span class="sample sev-medium">Medium</span> common tell</li>
-          <li><span class="sample sev-low">Low</span> style note</li>
+        <p class="note" data-i18n="note">These are style notes, not proof of anything. People use these phrases too.</p>
+        <ul class="legend" aria-label="Legend" data-i18n-aria-label="legend">
+          <li><span class="sample sev-high" data-i18n="severity.high">High</span> <span data-i18n="legendHigh">strong tell</span></li>
+          <li><span class="sample sev-medium" data-i18n="severity.medium">Medium</span> <span data-i18n="legendMedium">common tell</span></li>
+          <li><span class="sample sev-low" data-i18n="severity.low">Low</span> <span data-i18n="legendLow">style note</span></li>
         </ul>
         <p class="turned-off" id="turned-off" hidden></p>
         <ol class="list" id="list"></ol>
@@ -52,9 +52,10 @@
   </main>
 
   <footer class="bottom">
-    <p>Nothing leaves your device. <a href="options.html" id="settings">Settings</a> · <a href="https://github.com/aiprofitwire/tellbuster" target="_blank" rel="noopener">About Tellbuster</a></p>
+    <p><span data-i18n="nothingLeaves">Nothing leaves your device.</span> <a href="options.html" id="settings" data-i18n="settings">Settings</a> · <a href="https://github.com/aiprofitwire/tellbuster" target="_blank" rel="noopener" data-i18n="about">About Tellbuster</a></p>
   </footer>
 
+  <script src="i18n.js"></script>
   <script type="module" src="popup.js"></script>
   <script type="module" src="app.js"></script>
 </body>
