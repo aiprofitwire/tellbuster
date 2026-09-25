@@ -75,8 +75,8 @@ test('settings: a picked language is kept, an unknown one falls back to guessing
 
 test('settings: French text gets the French rules', async () => {
   const rules = await activeRules({ ...DEFAULTS });
-  const ids = check("Dans le monde d'aujourd'hui, n'h\u00e9sitez pas \u00e0 innover.", { rules, language: 'auto' }).map((f) => f.ruleId);
-  assert.ok(ids.includes('fr-monde-aujourdhui') && ids.includes('fr-nhesitez-pas'));
+  const ids = check("Dans le monde d'aujourd'hui, il est important de noter que tout change.", { rules, language: 'auto' }).map((f) => f.ruleId);
+  assert.ok(ids.includes('fr-monde-aujourdhui') && ids.includes('fr-important-de-noter'));
 });
 
 test('settings: website names are cleaned up', () => {
