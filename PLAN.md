@@ -176,7 +176,8 @@ How to test: open `README.md` on GitHub and check that the GIF plays and reads c
 How to test: click the link on any card. A GitHub issue form opens with the rule name filled in.
 
 ## Step 12: More browsers
-- [ ] Make the extension work in Firefox and Edge.
+- [x] Make the extension work in Firefox and Edge.
+  - Done 2026-09-24. Added scripts/zip-firefox.js (same files, Firefox manifest: background script instead of service worker, gecko id, data_collection_permissions none, Firefox 140+) with the zip code shared in scripts/zip-tools.js, and a test. docs/PUBLISHING.md gained Edge (Part 4), Firefox (Part 5) and Safari as a later option (Part 6). READMEs list Chrome, Edge, Firefox, Brave, Opera, Vivaldi and Arc. Mozilla's addons-linter passes with 0 errors (4 innerHTML warnings in app.js, all escaped, explained in the reviewer note). Not run in a real Firefox: Firefox could not be downloaded in the cloud session, so the maintainer's Firefox test in Part 5b is the first real run. All 183 tests pass.
 
 - Edge runs Chrome extensions as they are: write the Edge Add-ons publishing steps in `docs/PUBLISHING.md`.
 - Firefox: add what Manifest V3 on Firefox needs (for example `browser_specific_settings`), test in Firefox, add a zip script for addons.mozilla.org.
