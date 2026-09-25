@@ -156,3 +156,11 @@ test('language guess: short texts are placed by their letters and marks', () => 
   assert.equal(guessLanguage('The café was naïve about it.', all), 'en');
   assert.equal(guessLanguage('Delve!', all), 'en');
 });
+
+test('findings start at the phrase, not at the break or punctuation before it', () => {
+  const rules = loadRules(JSON.parse(readFileSync(new URL('../rules/en.json', import.meta.url), 'utf8')));
+  const text = '# Title\n\nCertainly! Let us go. Certainly! Again.';
+  const found = check(text, { rules }).filter((f) => f.ruleId === 'en-certainly-opener');
+  assert.deepEqual(found.map((f) => f.match), ['Certainly!', 'Certainly!']);
+  for (const f of found) assert.equal(text.slice(f.start, f.end), 'Certainly!');
+});
