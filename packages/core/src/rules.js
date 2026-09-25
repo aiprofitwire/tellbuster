@@ -2164,5 +2164,283 @@ export const packs = {
         }
       }
     ]
+  },
+  "de": {
+    "language": "de",
+    "version": 1,
+    "rules": [
+      {
+        "id": "de-zusammenfassend",
+        "name": "„Zusammenfassend lässt sich sagen“",
+        "category": "filler",
+        "severity": "medium",
+        "pattern": "(?<!\\p{L})(zusammenfassend|abschlie(ß|ss)end) (lässt sich|kann man) (sagen|festhalten|feststellen)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Dieser Schlusssatz klingt nach KI.",
+        "why": "KI-Texte enden oft mit „Zusammenfassend lässt sich sagen“ und wiederholen dann, was schon gesagt wurde. Leser merken das schnell.",
+        "fix": "Streichen Sie die Floskel und sagen Sie direkt, was hängen bleiben soll.",
+        "examples": {
+          "flag": [
+            "Zusammenfassend lässt sich sagen, dass der Plan funktioniert.",
+            "Abschließend kann man festhalten, dass alles klappt."
+          ],
+          "pass": [
+            "Zusammenfassend: Der Plan funktioniert.",
+            "Abschließend gingen wir essen."
+          ]
+        }
+      },
+      {
+        "id": "de-heutige-welt",
+        "name": "„In der heutigen Welt“",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(in (der|unserer) heutigen (\\p{L}+ )?welt|in einer sich (ständig|stetig|schnell|rasant) (wandelnden|verändernden|entwickelnden) welt)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Dieser Einstieg klingt nach KI.",
+        "why": "Ein vager Satz über „die heutige Welt“ ist einer der häufigsten Anfänge von KI-Texten. Er sagt nichts über Ihr Thema.",
+        "fix": "Streichen Sie den Einstieg und beginnen Sie mit etwas Konkretem.",
+        "examples": {
+          "flag": [
+            "In der heutigen digitalen Welt ist Technik überall.",
+            "In einer sich ständig wandelnden Welt müssen wir flexibel sein."
+          ],
+          "pass": [
+            "In der Welt des Weins steigen die Preise.",
+            "Er ist um die ganze Welt gereist."
+          ]
+        }
+      },
+      {
+        "id": "de-wichtig-zu-beachten",
+        "name": "„Es ist wichtig zu beachten“",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(es ist wichtig,? (zu (beachten|betonen|erwähnen|bedenken)|hervorzuheben)|es ist erwähnenswert, dass)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Diese Füllformel klingt nach KI.",
+        "why": "KI-Texte kündigen mit dieser Formel ständig an, dass etwas wichtig ist, statt es zu sagen. In Anleitungen und Verwaltungstexten schreiben Menschen sie auch, darum ist sie hier nur ein Stilhinweis: Sie macht den Satz länger, ohne etwas hinzuzufügen.",
+        "fix": "Streichen Sie sie und nennen Sie die Sache direkt.",
+        "examples": {
+          "flag": [
+            "Es ist wichtig zu beachten, dass die Frist am Montag endet.",
+            "Es ist erwähnenswert, dass die Preise gestiegen sind."
+          ],
+          "pass": [
+            "Es ist wichtig, pünktlich zu sein.",
+            "Die Frist endet am Montag."
+          ]
+        }
+      },
+      {
+        "id": "de-eintauchen",
+        "name": "„Tauchen wir ein“",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(tauchen wir (gemeinsam |nun |jetzt )?(tiefer |direkt )?(in [^.!?]{1,40}? )?ein|(lass|lasst|lassen sie) uns [^.!?]{0,40}?eintauchen)(?!\\p{L})",
+        "flags": "iu",
+        "message": "„Eintauchen“ in ein Thema klingt nach KI.",
+        "why": "KI-Modelle „tauchen“ ständig in Themen „ein“. Die übertragene Bedeutung taucht in KI-Texten viel öfter auf als bei Menschen.",
+        "fix": "Schreiben Sie „Werfen wir einen Blick auf“ oder steigen Sie direkt ins Thema ein.",
+        "examples": {
+          "flag": [
+            "Tauchen wir tiefer in das Thema ein.",
+            "Lassen Sie uns in die Welt der KI eintauchen."
+          ],
+          "pass": [
+            "Morgen tauchen wir in der Ostsee.",
+            "Schauen wir uns die Zahlen an."
+          ]
+        }
+      }
+    ]
+  },
+  "es": {
+    "language": "es",
+    "version": 1,
+    "rules": [
+      {
+        "id": "es-por-supuesto",
+        "name": "«¡Por supuesto!» al empezar",
+        "category": "phrase",
+        "severity": "medium",
+        "pattern": "(?<=^|\\n)[ \\t]*¡\\s*(por supuesto|claro que sí|desde luego)\\s*!",
+        "flags": "iu",
+        "message": "Esta exclamación de entrada suena a IA.",
+        "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Como primera línea de un texto o un correo, suena a respuesta de chatbot.",
+        "fix": "Quítala y empieza directamente con lo que quieres decir.",
+        "examples": {
+          "flag": [
+            "¡Por supuesto! Aquí tienes un resumen.",
+            "¡Claro que sí! Te explico cómo funciona."
+          ],
+          "pass": [
+            "Por supuesto que iré a la reunión.",
+            "Claro que sí lo vi, estaba allí.",
+            "Gracias por escribir. ¡Por supuesto! Nos vemos el lunes.",
+            "¡Con mucho gusto! Enseguida le envío la cotización."
+          ]
+        }
+      },
+      {
+        "id": "es-aqui-tienes",
+        "name": "«Aquí tienes un resumen»",
+        "category": "phrase",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta forma de presentar el texto suena a IA.",
+        "why": "«Aquí tienes un resumen» es como un chatbot entrega lo que le pidieron. Dentro de un correo o un artículo, deja ver que el texto viene de un chat.",
+        "fix": "Bórrala y pon el contenido directamente, o di para qué sirve: «Estos son los puntos clave».",
+        "examples": {
+          "flag": [
+            "¡Por supuesto! Aquí tienes un resumen.",
+            "Aquí tienes algunas ideas para tu publicación."
+          ],
+          "pass": [
+            "Aquí tienes las llaves del coche.",
+            "El resumen está en la página dos.",
+            "Aquí te dejo el borrador con los cambios que me pediste."
+          ]
+        }
+      },
+      {
+        "id": "es-importante-destacar",
+        "name": "«Es importante destacar que»",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta frase de relleno suena a IA.",
+        "why": "Los textos de IA usan mucho esta fórmula para anunciar lo importante en vez de decirlo. La gente también la usa en textos formales, por eso es solo una nota de estilo: alarga la oración sin añadir nada.",
+        "fix": "Bórrala y di el dato directamente.",
+        "examples": {
+          "flag": [
+            "Es importante destacar que los precios subieron.",
+            "Vale la pena mencionar que el plazo termina el lunes."
+          ],
+          "pass": [
+            "Es importante llegar temprano.",
+            "Los precios subieron un 5 %.",
+            "Cabe señalar que la ley entra en vigor el próximo mes."
+          ]
+        }
+      },
+      {
+        "id": "es-mundo-actual",
+        "name": "«En el mundo actual»",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})en (el|un|nuestro) mundo (actual|de hoy|moderno|en constante (cambio|evolución|transformación)|cada vez más (digital|conectado|interconectado|globalizado|competitivo))(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta introducción suena a IA.",
+        "why": "Empezar con una frase vaga sobre «el mundo actual» es una de las formas más comunes de abrir un texto de IA. No dice nada sobre tu tema.",
+        "fix": "Quita la introducción y empieza por lo concreto.",
+        "examples": {
+          "flag": [
+            "En el mundo actual, la tecnología está en todas partes.",
+            "En un mundo en constante cambio, hay que adaptarse."
+          ],
+          "pass": [
+            "En el mundo del vino, los precios suben.",
+            "Viajó por todo el mundo el año pasado."
+          ]
+        }
+      }
+    ]
+  },
+  "pt": {
+    "language": "pt",
+    "version": 1,
+    "rules": [
+      {
+        "id": "pt-aqui-esta",
+        "name": "“Aqui está um resumo”",
+        "category": "phrase",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqui (está|estão) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta forma de apresentar o texto soa como IA.",
+        "why": "“Aqui está um resumo” é o jeito como um chatbot entrega o que pediram. Num e-mail ou num artigo, mostra que o texto veio de um chat.",
+        "fix": "Apague a frase e comece pelo conteúdo, ou diga para que serve: “Estes são os pontos principais”.",
+        "examples": {
+          "flag": [
+            "Claro! Aqui está um resumo do relatório.",
+            "Aqui estão algumas dicas para o seu post."
+          ],
+          "pass": [
+            "Aqui está a chave do carro.",
+            "O resumo está na página dois.",
+            "Aqui vão algumas dicas para a reunião.",
+            "Bom dia, equipe. Segue uma lista com as pendências do projeto."
+          ]
+        }
+      },
+      {
+        "id": "pt-importante-destacar",
+        "name": "“É importante destacar que”",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta frase de enchimento soa como IA.",
+        "why": "Textos de IA usam muito esta fórmula para anunciar o que é importante em vez de dizer. Pessoas também a usam em textos formais, então aqui é só uma nota de estilo: a frase fica mais longa e não acrescenta nada.",
+        "fix": "Apague a frase e diga o fato diretamente.",
+        "examples": {
+          "flag": [
+            "É importante destacar que os preços subiram.",
+            "É importante notar que o prazo termina na segunda."
+          ],
+          "pass": [
+            "É importante chegar cedo.",
+            "Os preços subiram 5 %.",
+            "Vale ressaltar que os dados referem-se ao primeiro semestre."
+          ]
+        }
+      },
+      {
+        "id": "pt-mundo-atual",
+        "name": "“No mundo atual”",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(no|num|em um|neste|nesse) mundo (atual|de hoje|moderno|contemporâneo|em constante (mudança|evolução|transformação)|cada vez mais (digital|conectado|globalizado|competitivo))(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta introdução soa como IA.",
+        "why": "Começar com uma frase vaga sobre “o mundo atual” é uma das formas mais comuns de abrir um texto de IA. Não diz nada sobre o seu tema.",
+        "fix": "Tire a introdução e comece pelo que é concreto.",
+        "examples": {
+          "flag": [
+            "No mundo atual, a tecnologia está em toda parte.",
+            "Num mundo em constante mudança, é preciso se adaptar."
+          ],
+          "pass": [
+            "No mundo do vinho, os preços sobem.",
+            "Ela viajou pelo mundo todo no ano passado."
+          ]
+        }
+      },
+      {
+        "id": "pt-espero-ter-ajudado",
+        "name": "“Espero ter ajudado”",
+        "category": "phrase",
+        "severity": "medium",
+        "pattern": "(?<!\\p{L})espero ter ajudado(?!\\p{L})",
+        "flags": "iu",
+        "message": "Este fecho soa como IA.",
+        "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. Em artigos, posts e relatórios, mostra que o texto veio de um chat. Numa resposta de suporte, pode ser normal.",
+        "fix": "Apague a frase. Se quiser, termine com uma pergunta real ou com o próximo passo.",
+        "examples": {
+          "flag": [
+            "Espero ter ajudado!",
+            "Esses são os pontos principais. Espero ter ajudado."
+          ],
+          "pass": [
+            "Espero que você venha amanhã.",
+            "Ele me ajudou com o projeto.",
+            "Fiz os ajustes no código. Espero que isso te ajude com o projeto!"
+          ]
+        }
+      }
+    ]
   }
 };

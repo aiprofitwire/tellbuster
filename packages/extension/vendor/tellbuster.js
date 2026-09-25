@@ -56,10 +56,13 @@ export function loadRules(json) {
   return json.strict ? json.rules.map((rule) => ({ ...rule, strict: true })) : json.rules;
 }
 
-// Short, common words that are frequent in one language and rare in the other.
+// Short, common words that are frequent in one language and rare in the others.
 const COMMON_WORDS = {
   en: 'the and is are of to that this it with for you your was were what have has not be but they we',
   fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais',
+  es: 'de la un que el los las del y es una por muy pero también esto aquí hay sí cómo qué más lo sus al ser tiene puede',
+  de: 'der die das und ist nicht ein eine zu mit sich auf für den dem von sie wir ich auch aber wird sind oder dass kann',
+  pt: 'de que o os da dos das um uma em na é não com mais você isso isto são ao pelo pela também muito já seu sua aqui ele ela foi tem ter',
 };
 const WORD_SETS = Object.fromEntries(Object.entries(COMMON_WORDS).map(([code, words]) => [code, new Set(words.split(' '))]));
 

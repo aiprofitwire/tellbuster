@@ -20,7 +20,7 @@ Everything runs on your device. The extension makes no network calls and keeps n
 
 Right-click the Tellbuster icon and pick **Options**, or click **Settings** at the bottom of the popup. Changes save on their own.
 
-- **Languages:** which languages to check: English and French. Tellbuster guesses the language of each text from its common words. If it guesses wrong, pick **Always English** or **Always French**.
+- **Languages:** which languages to check: English, French, Spanish, German and Portuguese (the last three are small starter sets). Tellbuster guesses the language of each text from its common words. If it guesses wrong, pick **Always** plus your language, for example **Always French**.
 - **Strict mode: also flag common filler words:** off by default. Adds everyday words like "crucial" that show up a lot in AI writing.
 - **Rules:** turn off a whole group (like Punctuation), or open a group and turn off single rules (like Em dash).
 - **Check as I type:** off at install. Turning it on asks Chrome for site access (see Permissions).

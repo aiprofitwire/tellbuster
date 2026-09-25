@@ -253,14 +253,14 @@ addEventListener('resize', () => {
 
 try {
   // The extension popup hands over the rules picked in its settings.
-  // The web demo uses English and French, and guesses which one the text is in.
+  // The web demo uses every language, and guesses which one the text is in.
   const picked = await globalThis.tellbusterRules?.();
   if (picked) {
     ({ rules, strictStyle } = picked);
     savedOff = picked.disabled;
     language = picked.language || 'auto';
   } else {
-    const files = await Promise.all(['en.json', 'fr.json'].map(async (f) => (await fetch(`./vendor/${f}`)).json()));
+    const files = await Promise.all(['en.json', 'fr.json', 'es.json', 'de.json', 'pt.json'].map(async (f) => (await fetch(`./vendor/${f}`)).json()));
     rules = files.flatMap(loadRules);
   }
   // The extension popup can hand over starting text (from the right-click menu).

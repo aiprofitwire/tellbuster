@@ -33,7 +33,7 @@ WHAT IT DOES
 - Click the Tellbuster icon, paste your writing, and see each phrase underlined with a short note: why it stands out and what to write instead.
 - Select text on any page, right-click, and pick "Check with Tellbuster".
 - Optional: turn on "Check as I type" in the settings. A small badge shows up in text boxes on LinkedIn, X, Gmail and most sites when it finds something. Click it to see the notes.
-- English and French, with more than 90 rules.
+- English and French, plus starter rules for Spanish, German and Portuguese. More than 100 rules in all.
 - Turn off any rule or group of rules, add a strict mode for filler words, and turn the badge off on sites you pick.
 
 PRIVATE BY DESIGN

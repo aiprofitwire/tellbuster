@@ -41,7 +41,7 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 
 The extension works in **Chrome**, **Edge** and **Firefox** (version 140 or newer). **Brave**, **Opera**, **Vivaldi** and **Arc** run Chrome extensions, so they install it from the Chrome Web Store too. Safari is not supported yet.
 
-It checks English and French, with more than 90 rules. You can turn off any rule, and add a strict mode for common filler words.
+It checks English and French, with more than 100 rules in all, plus small starter sets for Spanish, German and Portuguese. You can turn off any rule, and add a strict mode for common filler words.
 
 ## Private by design
 
@@ -56,7 +56,7 @@ The steps to put Tellbuster on npm, the Chrome Web Store, Edge Add-ons and Firef
 
 ## Help build the list
 
-Spotted a tell we miss? Adding one takes a few minutes and no real coding. See [CONTRIBUTING.md](CONTRIBUTING.md). French and other languages are very welcome.
+Spotted a tell we miss? Adding one takes a few minutes and no real coding. See [CONTRIBUTING.md](CONTRIBUTING.md). Native speakers of Spanish, German, Portuguese or any other language are very welcome.
 
 ## Credits
 
