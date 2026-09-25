@@ -8,7 +8,7 @@ const manifest = JSON.parse(readFileSync(new URL('manifest.json', dir), 'utf8'))
 
 test('extension: Manifest V3 named Tellbuster', () => {
   assert.equal(manifest.manifest_version, 3);
-  assert.equal(manifest.name, 'Tellbuster');
+  assert.equal(manifest.name, 'Tellbuster: AI Writing Checker');
 });
 
 test('extension: only the allowed permissions', () => {
