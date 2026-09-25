@@ -17,6 +17,15 @@ test('package: lint works with no setup, in English and French', () => {
   assert.equal(lint('We paid the invoice this morning.').length, 0);
 });
 
+test('package: lint checks the Spanish, German and Portuguese starter rules', () => {
+  const ids = (text) => lint(text).map((f) => f.ruleId);
+  assert.deepEqual(ids('¡Por supuesto! Aquí tienes un resumen.'), ['es-por-supuesto', 'es-aqui-tienes']);
+  assert.ok(ids('In der heutigen digitalen Welt ist Technik überall.').includes('de-heutige-welt'));
+  assert.ok(ids('Espero que isso te ajude com o projeto.').includes('pt-espero-ter-ajudado'));
+  // Text with no clue about its language is checked as English.
+  assert.deepEqual(ids('Delve!'), ['en-delve']);
+});
+
 test('package: strict rules stay off unless asked', () => {
   const strictIds = new Set(defaultRules().filter((r) => r.strict).map((r) => r.id));
   assert.ok(strictIds.size > 0);

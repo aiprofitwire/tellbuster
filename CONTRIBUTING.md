@@ -60,6 +60,10 @@ Create `rules/<code>.json` (for example `rules/es.json`) with the same format. S
 
 To let Tellbuster guess your language, add a line of short common words for it to `COMMON_WORDS` in `packages/core/src/index.js`. Pick words that are frequent in your language and rare in the others. Then add the file to `LANGUAGES` in `packages/extension/settings.js` and to the web demo in `docs/app.js`, and run `node scripts/sync-docs.js` and `node scripts/sync-extension.js` if you work on your own computer. If you edit on the GitHub website, skip that: the copies update themselves after your change is merged.
 
+## Spanish, German and Portuguese: starter sets, native speakers welcome
+
+[`rules/es.json`](rules/es.json), [`rules/de.json`](rules/de.json) and [`rules/pt.json`](rules/pt.json) hold only 4 careful rules each. A tell in Spanish is not a translated English tell, and rules written by someone who does not speak the language flag normal writing. If you are a native speaker, you are the best person to add more. Follow "Your first rule in 5 minutes" above, but open your language's file and start the id with its code (`es-`, `de-` or `pt-`). Write the `name`, `message`, `why` and `fix` in your language.
+
 ## House style
 
 - Messages say a phrase "reads as AI". Never that text "is AI".

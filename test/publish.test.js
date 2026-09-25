@@ -49,7 +49,7 @@ function readZip(script) {
   }
 }
 
-const MUST_HAVE = ['manifest.json', 'popup.html', 'background.js', 'content.js', 'options.html', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/fr.json', 'icons/icon128.png'];
+const MUST_HAVE = ['manifest.json', 'popup.html', 'background.js', 'content.js', 'options.html', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/fr.json', 'vendor/es.json', 'vendor/de.json', 'vendor/pt.json', 'icons/icon128.png'];
 
 test('publish: the store zip holds the extension files, byte for byte', () => {
   const files = readZip('scripts/zip-extension.js');

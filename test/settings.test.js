@@ -56,10 +56,10 @@ test('settings: a turned off rule is skipped', async () => {
   assert.equal(check(text, { rules, language: 'auto', disabled: ['en-em-dash'] }).length, 0);
 });
 
-test('settings: English and French are on by default, and the language is guessed', async () => {
+test('settings: every language is on by default, and the language is guessed', async () => {
   stored = {};
   const s = await readSettings();
-  assert.deepEqual(s.languages, ['en', 'fr']);
+  assert.deepEqual(s.languages, ['en', 'fr', 'es', 'de', 'pt']);
   assert.equal(s.language, 'auto');
   const ids = (await activeRules(s)).map((r) => r.id);
   assert.ok(ids.some((id) => id.startsWith('fr-')) && ids.some((id) => id.startsWith('en-')));

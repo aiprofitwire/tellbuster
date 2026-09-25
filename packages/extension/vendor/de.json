@@ -1,0 +1,90 @@
+{
+  "language": "de",
+  "version": 1,
+  "rules": [
+    {
+      "id": "de-zusammenfassend",
+      "name": "„Zusammenfassend lässt sich sagen“",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})(zusammenfassend|abschlie(ß|ss)end) (lässt sich|kann man) (sagen|festhalten|feststellen)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Dieser Schlusssatz klingt nach KI.",
+      "why": "KI-Texte enden oft mit „Zusammenfassend lässt sich sagen“ und wiederholen dann, was schon gesagt wurde. Leser merken das schnell.",
+      "fix": "Streichen Sie die Floskel und sagen Sie direkt, was hängen bleiben soll.",
+      "examples": {
+        "flag": [
+          "Zusammenfassend lässt sich sagen, dass der Plan funktioniert.",
+          "Abschließend kann man festhalten, dass alles klappt."
+        ],
+        "pass": [
+          "Zusammenfassend: Der Plan funktioniert.",
+          "Abschließend gingen wir essen."
+        ]
+      }
+    },
+    {
+      "id": "de-heutige-welt",
+      "name": "„In der heutigen Welt“",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "(?<!\\p{L})(in (der|unserer) heutigen (\\p{L}+ )?welt|in einer sich (ständig|stetig|schnell|rasant) (wandelnden|verändernden|entwickelnden) welt)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Dieser Einstieg klingt nach KI.",
+      "why": "Ein vager Satz über „die heutige Welt“ ist einer der häufigsten Anfänge von KI-Texten. Er sagt nichts über Ihr Thema.",
+      "fix": "Streichen Sie den Einstieg und beginnen Sie mit etwas Konkretem.",
+      "examples": {
+        "flag": [
+          "In der heutigen digitalen Welt ist Technik überall.",
+          "In einer sich ständig wandelnden Welt müssen wir flexibel sein."
+        ],
+        "pass": [
+          "In der Welt des Weins steigen die Preise.",
+          "Er ist um die ganze Welt gereist."
+        ]
+      }
+    },
+    {
+      "id": "de-wichtig-zu-beachten",
+      "name": "„Es ist wichtig zu beachten“",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})(es ist wichtig,? (zu (beachten|betonen|erwähnen|bedenken)|hervorzuheben)|es ist erwähnenswert, dass)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Diese Füllformel klingt nach KI.",
+      "why": "KI-Texte kündigen an, dass etwas wichtig ist, statt es einfach zu sagen. Die Formel macht den Satz länger, ohne etwas hinzuzufügen.",
+      "fix": "Streichen Sie sie und nennen Sie die Sache direkt.",
+      "examples": {
+        "flag": [
+          "Es ist wichtig zu beachten, dass die Frist am Montag endet.",
+          "Es ist erwähnenswert, dass die Preise gestiegen sind."
+        ],
+        "pass": [
+          "Es ist wichtig, pünktlich zu sein.",
+          "Die Frist endet am Montag."
+        ]
+      }
+    },
+    {
+      "id": "de-eintauchen",
+      "name": "„Tauchen wir ein“",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})(tauchen wir (gemeinsam |nun |jetzt )?(tiefer |direkt )?(in [^.!?]{1,40}? )?ein|(lass|lasst|lassen sie) uns [^.!?]{0,40}?eintauchen)(?!\\p{L})",
+      "flags": "iu",
+      "message": "„Eintauchen“ in ein Thema klingt nach KI.",
+      "why": "KI-Modelle „tauchen“ ständig in Themen „ein“. Die übertragene Bedeutung taucht in KI-Texten viel öfter auf als bei Menschen.",
+      "fix": "Schreiben Sie einfach „Schauen wir uns an“ oder fangen Sie direkt mit dem Thema an.",
+      "examples": {
+        "flag": [
+          "Tauchen wir tiefer in das Thema ein.",
+          "Lassen Sie uns in die Welt der KI eintauchen."
+        ],
+        "pass": [
+          "Morgen tauchen wir in der Ostsee.",
+          "Schauen wir uns die Zahlen an."
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "language": "es",
+  "version": 1,
+  "rules": [
+    {
+      "id": "es-por-supuesto",
+      "name": "«¡Por supuesto!» al empezar",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "¡\\s*(por supuesto|claro que sí|desde luego|con mucho gusto)\\s*!",
+      "flags": "iu",
+      "message": "Esta exclamación de entrada suena a IA.",
+      "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Al principio de un texto, suena a respuesta de chatbot.",
+      "fix": "Quítala y empieza directamente con lo que quieres decir.",
+      "examples": {
+        "flag": [
+          "¡Por supuesto! Aquí tienes un resumen.",
+          "¡Claro que sí! Te explico cómo funciona."
+        ],
+        "pass": [
+          "Por supuesto que iré a la reunión.",
+          "Claro que sí lo vi, estaba allí."
+        ]
+      }
+    },
+    {
+      "id": "es-aqui-tienes",
+      "name": "«Aquí tienes un resumen»",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene|te dejo|le dejo) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta forma de presentar el texto suena a IA.",
+      "why": "«Aquí tienes un resumen» es como un chatbot entrega lo que le pidieron. Dentro de un correo o un artículo, deja ver que el texto viene de un chat.",
+      "fix": "Bórrala y pon el contenido directamente, o di para qué sirve: «Estos son los puntos clave».",
+      "examples": {
+        "flag": [
+          "¡Por supuesto! Aquí tienes un resumen.",
+          "Aquí te dejo algunas ideas para el viernes."
+        ],
+        "pass": [
+          "Aquí tienes las llaves del coche.",
+          "El resumen está en la página dos."
+        ]
+      }
+    },
+    {
+      "id": "es-importante-destacar",
+      "name": "«Es importante destacar que»",
+      "category": "filler",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|cabe (destacar|señalar|resaltar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta frase de relleno suena a IA.",
+      "why": "Los textos de IA anuncian lo que es importante en vez de decirlo. La frase alarga la oración y no añade nada.",
+      "fix": "Bórrala y di el dato directamente.",
+      "examples": {
+        "flag": [
+          "Es importante destacar que los precios subieron.",
+          "Cabe señalar que el plazo termina el lunes."
+        ],
+        "pass": [
+          "Es importante llegar temprano.",
+          "Los precios subieron un 5 %."
+        ]
+      }
+    },
+    {
+      "id": "es-mundo-actual",
+      "name": "«En el mundo actual»",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "(?<!\\p{L})en (el|un|nuestro) mundo (actual|de hoy|moderno|en constante (cambio|evolución|transformación)|cada vez más (digital|conectado|interconectado|globalizado|competitivo))(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta introducción suena a IA.",
+      "why": "Empezar con una frase vaga sobre «el mundo actual» es una de las formas más comunes de abrir un texto de IA. No dice nada sobre tu tema.",
+      "fix": "Quita la introducción y empieza por lo concreto.",
+      "examples": {
+        "flag": [
+          "En el mundo actual, la tecnología está en todas partes.",
+          "En un mundo en constante cambio, hay que adaptarse."
+        ],
+        "pass": [
+          "En el mundo del vino, los precios suben.",
+          "Viajó por todo el mundo el año pasado."
+        ]
+      }
+    }
+  ]
+}

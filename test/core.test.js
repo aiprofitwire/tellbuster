@@ -117,6 +117,14 @@ test('guessLanguage tells English from French', () => {
   assert.equal(guessLanguage('', ['fr', 'en']), 'fr');
 });
 
+test('guessLanguage tells Spanish, German and Portuguese apart', () => {
+  assert.equal(guessLanguage('¡Por supuesto! Aquí tienes un resumen de la reunión.'), 'es');
+  assert.equal(guessLanguage('Zusammenfassend lässt sich sagen, dass der Plan gut ist und funktioniert.'), 'de');
+  assert.equal(guessLanguage('É importante destacar que você não precisa de mais nada.'), 'pt');
+  assert.equal(guessLanguage('En el mundo actual, la tecnología está en todas partes y es muy útil.'), 'es');
+  assert.equal(guessLanguage('No mundo atual, a tecnologia está em toda parte e é muito útil.'), 'pt');
+});
+
 test('language "auto" uses the rules of the guessed language only', () => {
   const both = [...rules, ...fr];
   const frText = "Dans le monde d'aujourd'hui, il est important de noter que tout change \u2014 vite.";

@@ -8,7 +8,7 @@ export { packs };
 
 let cached = null;
 
-/** Every bundled rule (English, French and the English strict pack), validated once. */
+/** Every bundled rule (English, French, Spanish, German, Portuguese and the English strict pack), validated once. */
 export function defaultRules() {
   if (!cached) cached = Object.values(packs).flatMap((pack) => loadRules(pack));
   return cached;
@@ -16,7 +16,7 @@ export function defaultRules() {
 
 /**
  * Checks text with the bundled rules. The language is guessed unless you pass one.
- * Options: disabled, strictStyle, language ('auto', 'en', 'fr'), rules (to use your own).
+ * Options: disabled, strictStyle, language ('auto', 'en', 'fr', 'es', 'de', 'pt'), rules (to use your own).
  */
 export function lint(text, options = {}) {
   return check(text, { rules: defaultRules(), language: 'auto', ...options });
