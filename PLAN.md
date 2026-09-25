@@ -239,6 +239,28 @@ How to test: open a pull request that adds "Let's delve into this" to a markdown
 
 How to test: follow the Claude Code setup in `packages/mcp/README.md`, ask Claude to write a LinkedIn post, and ask it to check the post with Tellbuster.
 
+## Step 17: One card per phrase
+- [ ] When two or more rules underline the same words, show one card and count them once.
+
+- Today "Let's delve into" is flagged by both `en-delve` and `en-dive-in`, so the count says one tell too many and the user sees two cards for the same words.
+- In `packages/core`: when findings cover the same text (same start and end, or one fully inside the other), keep one finding for the widest match and attach the other rules to it (for example `alsoMatched: [{ ruleId, name, why }]`). Keep the result shape backward compatible: existing fields stay as they are.
+- The count, the badge and the underlines use the merged findings. The card shows the first rule, then a short "Also:" line with the other rule names. "Turn off this rule" and "Report a wrong flag" keep working for the main rule.
+- Tests: overlapping rules give one finding, separate phrases still give separate findings, and the existing rule examples all still pass.
+
+How to test: paste "Let's delve into this." into the web demo. It should say 1 phrase, with one card.
+
+## Step 18: Measure accuracy
+- [ ] Add a small test set of human and AI texts and a command that reports how often Tellbuster flags each.
+
+- `test/corpus/human/`: about 50 short texts (100 to 400 words) written by people before 2022. Use only text that is safe to copy into an MIT repo: US federal government pages (public domain, for example small business guides from sba.gov), or text the maintainer writes and donates. Every file starts with a comment line giving its source and license. Never copy blog posts or news articles.
+- `test/corpus/ai/`: about 50 texts on the same kinds of topics, written by AI models on purpose for this test. Use at least 3 different models or styles if you can, and note in each file which one (or "generated for this test").
+- `scripts/accuracy.js`, run with `npm run accuracy`: checks every file with the default rules and prints a plain report: the share of AI texts with at least one finding, the share of human texts with at least one finding, and the rules that fire most on human text. No dependencies.
+- A test (`test/accuracy.test.js`) that fails if more than 10 percent of human texts get a high severity finding, so a rule that is too eager gets caught before it ships. Print the numbers, do not hide them.
+- Add a short "How accurate is it?" section to README.md with the current numbers, the date, and a plain note that these are phrase-level style notes, not AI detection.
+- Add a "good first issue" draft in `docs/first-issues.md`: "Add a paragraph you wrote before 2022 to the test set", with the license note.
+
+How to test: run `npm run accuracy` and read the report. Then add "Let's delve into" to one human file on a test branch and check that the human number goes up.
+
 ---
 
 ## After the build (done by the maintainer outside Claude Code)
