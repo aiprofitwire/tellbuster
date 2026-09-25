@@ -2096,9 +2096,9 @@ export const packs = {
         "name": "« Un couteau à double tranchant »",
         "category": "phrase",
         "severity": "low",
-        "pattern": "\\sdouble\\s+tranchant",
+        "pattern": "à\\sdouble\\s+tranchant\\b",
         "flags": "i",
-        "message": "« À double tranchant » donne une impression d'IA.",
+        "message": "« À double tranchant » fait penser à une IA.",
         "why": "« Couteau à double tranchant » est une métaphore usée pour dire qu'une chose a des avantages et des inconvénients, sans préciser lesquels.",
         "fix": "Nommez le bon et le mauvais côté : « Le télétravail évite les trajets, mais isole les équipes. »",
         "examples": {
