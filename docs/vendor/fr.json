@@ -49,8 +49,8 @@
       "pattern": "(?<!\\p{L})dans (le|un|notre) monde (d['’]aujourd['’]hui|actuel|moderne|en (constante|perpétuelle|rapide) (évolution|mutation)|qui (change|évolue) (sans cesse|vite|rapidement))",
       "flags": "iu",
       "message": "Cette entrée en matière fait penser à une IA.",
-      "why": "Les ouvertures vagues qui plantent le décor sont une des façons les plus courantes de commencer un texte d’IA. Elles ne disent rien sur votre sujet.",
-      "fix": "Coupez-la et commencez par votre vrai propos.",
+      "why": "Les ouvertures vagues qui plantent le décor sont l’une des façons les plus courantes de commencer un texte d’IA. Elles ne disent rien sur votre sujet.",
+      "fix": "Supprimez cette introduction et allez droit au but.",
       "examples": {
         "flag": [
           "Dans le monde d'aujourd'hui, la technologie est partout.",
@@ -131,7 +131,7 @@
       "pattern": "(?<!\\p{L})(il ne s['’]agit pas|ce n['’]est pas|ce ne sont pas) (seulement|simplement|uniquement|juste|qu['’]une? (simple )?)[^.!?\\n]{1,80}?[,;:]\\s*(mais|c['’]est|il s['’]agit)(?!\\p{L})",
       "flags": "iu",
       "message": "La tournure « pas seulement X, mais Y » fait penser à une IA.",
-      "why": "Poser un contraste juste pour le démolir est une des formes de phrase les plus courantes chez les IA, en français comme en anglais.",
+      "why": "Poser un contraste juste pour le démolir est l’une des formes de phrase les plus courantes chez les IA, en français comme en anglais.",
       "fix": "Dites le point directement : gardez la partie Y et laissez tomber la partie X.",
       "examples": {
         "flag": [
@@ -213,7 +213,7 @@
       "flags": "iu",
       "message": "Cette entrée en matière fait penser à une IA.",
       "why": "Ouvrir un texte sur « l’ère du numérique » est un réflexe typique des IA. À noter : au Québec, on dit surtout « numérique », alors que le marketing en France dit aussi « digital ». Les deux versions sont signalées.",
-      "fix": "Coupez-la. Votre lecteur sait déjà en quelle année on est.",
+      "fix": "Supprimez-la. Votre lecteur sait déjà en quelle année on est.",
       "examples": {
         "flag": [
           "À l'ère du numérique, tout va plus vite.",
