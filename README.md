@@ -21,6 +21,7 @@
 
 **Find the phrases that make your writing sound like AI.** Free, open source, and nothing leaves your device.
 
+<!-- tellbuster-disable-next-line -->
 Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, it's Y" or "In today's fast-paced world" that readers now link to machine writing. For each one it explains why it stands out and suggests a plainer way to say it.
 
 > Tellbuster is a linter, not a detector. It never claims your text "is AI". People use these phrases too. It shows you what readers notice, so you can decide.

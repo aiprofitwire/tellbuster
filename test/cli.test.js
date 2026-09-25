@@ -95,3 +95,64 @@ test('cli: unknown options are a usage error, --help and --version work', () => 
   assert.match(help.stdout, /Usage: tellbuster/);
   assert.match(run(['--version']).stdout, /^\d+\.\d+\.\d+/);
 });
+
+// Writes one file to a temp folder, checks it with --json, and returns the rule ids and lines found.
+function checkFile(name, text, args = []) {
+  const dir = mkdtempSync(join(tmpdir(), 'tellbuster-skip-'));
+  try {
+    const file = join(dir, name);
+    writeFileSync(file, text);
+    return JSON.parse(run(['--json', ...args, file]).stdout).map((f) => `${f.ruleId}@${f.line}`);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('cli: Markdown code blocks are skipped, text after them is still checked', () => {
+  const md = 'Intro.\n\n```\nWe delve in.\n```\n\n~~~~\nWe delve in.\n~~~~\n\nWe delve in.\n';
+  assert.deepEqual(checkFile('a.md', md), ['en-delve@11']);
+  // Outside Markdown, the same text is checked in full.
+  assert.equal(checkFile('a.txt', md).filter((f) => f.startsWith('en-delve')).length, 3);
+});
+
+test('cli: Markdown inline code is skipped', () => {
+  assert.deepEqual(checkFile('a.md', 'The rule catches `delve` and ``delve``.\nWe delve in.\n'), ['en-delve@2']);
+});
+
+test('cli: disable and enable comments skip the text between them', () => {
+  const text = 'We delve in.\n<!-- tellbuster-disable -->\nWe delve in.\n<!-- tellbuster-enable -->\nWe delve in.\n';
+  assert.deepEqual(checkFile('a.md', text), ['en-delve@1', 'en-delve@5']);
+  assert.deepEqual(checkFile('a.txt', text), ['en-delve@1', 'en-delve@5']);
+  // No enable comment: skipped to the end of the file.
+  assert.deepEqual(checkFile('a.md', 'We delve in.\n<!-- tellbuster-disable -->\nWe delve in.\n'), ['en-delve@1']);
+});
+
+test('cli: the disable-next-line comment skips only the next line', () => {
+  const text = '<!-- tellbuster-disable-next-line -->\nWe delve in.\nWe delve in.\n';
+  assert.deepEqual(checkFile('a.md', text), ['en-delve@3']);
+});
+
+test('cli: --github prints annotations, errors at or above the level', () => {
+  const r = run(['--github', '--fail-on', 'high'], "Let's delve into this.\nIn today's fast-paced world, we ship.");
+  assert.match(r.stdout, /^::warning file=<stdin>,line=1,col=7,title=Tellbuster%3A "Delve"::"Delve" reads as AI\. Why: .+ Fix: /m);
+  assert.match(r.stdout, /^::error file=<stdin>,line=2,col=1,/m);
+  assert.equal(r.status, 1);
+  assert.equal(run(['--github', '--fail-on', 'high'], "Let's delve into this.").status, 0);
+});
+
+test('cli: the GitHub Action runs the bundled tool with its inputs', () => {
+  const action = readFileSync(new URL('../action.yml', import.meta.url), 'utf8');
+  assert.match(action, /using: composite/);
+  assert.ok(action.includes('node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js"'));
+  assert.ok(!action.includes('npx'), 'the Action must not download the tool from npm');
+  for (const input of ['files', 'strict', 'lang', 'disable', 'fail-on']) assert.match(action, new RegExp(`^  ${input}:`, 'm'));
+  assert.match(action, /git ls-files '\*\.md'/);
+});
+
+test('cli: the files this repo checks with its own Action pass at fail-on high', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/tellbuster.yml', import.meta.url), 'utf8');
+  const files = workflow.match(/files: (.+)/)[1].trim().split(/\s+/);
+  const root = fileURLToPath(new URL('..', import.meta.url));
+  const r = spawnSync(process.execPath, [bin, '--fail-on', 'high', ...files], { cwd: root, encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stdout);
+});

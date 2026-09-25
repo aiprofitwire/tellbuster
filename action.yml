@@ -1,0 +1,55 @@
+name: Tellbuster
+description: Point out phrases that might read as AI in your Markdown files, with a reason and a fix for each.
+author: aiprofitwire
+branding:
+  icon: edit-3
+  color: gray-dark
+inputs:
+  files:
+    description: Files to check, separated by spaces or new lines. Patterns like docs/*.md work. Default is every tracked .md file.
+    required: false
+    default: ''
+  strict:
+    description: Set to true to also use the strict style rules.
+    required: false
+    default: 'false'
+  lang:
+    description: auto, en, fr, es, de or pt. auto guesses from the text.
+    required: false
+    default: auto
+  disable:
+    description: Rule ids to skip, separated by commas.
+    required: false
+    default: ''
+  fail-on:
+    description: The run fails when a finding is at or above this level (low, medium or high). Findings below it show as warnings.
+    required: false
+    default: high
+runs:
+  using: composite
+  steps:
+    - name: Check the writing with Tellbuster
+      shell: bash
+      env:
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_STRICT: ${{ inputs.strict }}
+        INPUT_LANG: ${{ inputs.lang }}
+        INPUT_DISABLE: ${{ inputs.disable }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+      run: |
+        shopt -s globstar
+        args=(--github --lang "$INPUT_LANG" --fail-on "$INPUT_FAIL_ON")
+        if [ "$INPUT_STRICT" = "true" ]; then args+=(--strict); fi
+        if [ -n "$INPUT_DISABLE" ]; then args+=(--disable "$INPUT_DISABLE"); fi
+        if [ -n "$INPUT_FILES" ]; then
+          # Split on spaces and new lines, and let the shell expand patterns like docs/*.md.
+          files=($INPUT_FILES)
+        else
+          mapfile -t files < <(git ls-files '*.md')
+        fi
+        if [ "${#files[@]}" -eq 0 ]; then
+          echo "No files to check."
+          exit 0
+        fi
+        # Run the copy of the tool that ships with this Action, so both stay on the same version.
+        node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js" "${args[@]}" -- "${files[@]}"

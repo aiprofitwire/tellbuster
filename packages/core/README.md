@@ -48,9 +48,17 @@ Options:
 - `--lang auto|en|fr|es|de|pt`: which language's rules to use. `auto` (the default) guesses from the text.
 - `--disable id1,id2`: skip these rule ids.
 - `--json`: print the findings as JSON (each one also has `file`, `line` and `column`).
+- `--github`: print the findings as GitHub annotations, so they show on a pull request's lines. Findings at or above the level are errors, the others are warnings. The [GitHub Action](https://github.com/aiprofitwire/tellbuster/blob/main/docs/github-action.md) uses this.
 - `--max-severity low|medium|high`: fail only when a finding is at or above this level. The default is `low`, so any finding fails. `--fail-on` does the same thing.
 
 Exit code: `1` when a finding is at or above the level, `0` otherwise, `2` when an option or file is wrong. That makes it easy to use in scripts and CI.
+
+### Skipping text on purpose
+
+Docs that explain a tell have to quote it. Tellbuster skips:
+
+- In Markdown files (`.md` or `.markdown`): fenced code blocks and `inline code`.
+- In any file: everything between `<!-- tellbuster-disable -->` and `<!-- tellbuster-enable -->` (or the end of the file if there is no enable comment), and the line right after `<!-- tellbuster-disable-next-line -->`.
 
 ## API
 

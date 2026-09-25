@@ -222,7 +222,8 @@ How to test: set the browser language to French (or open the demo with `?lang=fr
 How to test: in the repo folder, run `echo "Let's delve into this." | node packages/core/bin/tellbuster.js`. It should list the tell.
 
 ## Step 15: GitHub Action
-- [ ] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action).
+- [x] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action).
+  - Done 2026-09-25. New root action.yml (composite, runs the Action's own copy of the tool, inputs files, strict, lang, disable, fail-on). The tool gains --github (annotations: error at or above the level, warning below) and skips Markdown code blocks, inline code and the tellbuster-disable comments. New workflow .github/workflows/tellbuster.yml checks README.md, docs/PUBLISHING.md and docs/github-action.md at fail-on high (one disable-next-line comment added in README.md). Example in docs/github-action.md. All 226 tests pass.
 
 - Run the command-line tool from the Action's own copy of this repo: `node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js"`. Do not use `npx tellbuster@latest`: the version on npm may not have the command yet, and running the copy that ships with the Action keeps the Action and the tool on the same version. Needs only Node, which GitHub runners have.
 - Inputs: `files` (default: every tracked `.md` file, listed with `git ls-files '*.md'`, since the tool does not expand globs itself), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).

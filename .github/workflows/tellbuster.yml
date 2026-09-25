@@ -1,0 +1,16 @@
+name: Tellbuster
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Uses the Action from this repo. CONTRIBUTING.md, rules/, docs/first-issues.md and
+      # docs/store-listing.md are left out because their job is to quote tells.
+      - uses: ./
+        with:
+          files: README.md docs/PUBLISHING.md docs/github-action.md
+          fail-on: high
