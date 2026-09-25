@@ -12,4 +12,6 @@ The extension only runs on web addresses, not on files, so serve them first. Fro
 node scripts/serve-test-pages.js
 ```
 
-Then, in Chrome with the extension loaded, open its settings and tick **Check as I type** (Chrome asks for site access once). Open `http://localhost:8080/x-style.html` (or another page). Type `Let's delve into this game-changer.` and the badge should show **3 tells**.
+Then, in Chrome with the extension loaded, open its settings and tick **Check as I type** (Chrome asks for site access once). Open `http://localhost:8080/x-style.html` (or another page). Type `Let's delve into this game-changer.` and the badge should show **2 tells**.
+
+Three rules match that sentence, but the badge counts phrases, not rules. "Let's delve into" and "Delve" both point at the same phrase, so they share one card: the more serious rule leads and the other shows under **Also**. "game-changer" is the second phrase.
