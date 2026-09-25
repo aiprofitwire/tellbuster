@@ -144,3 +144,15 @@ test('a manual language wins over the guess, and no language means every rule', 
   assert.deepEqual(check(text, { rules: both, language: 'en' }).map((f) => f.ruleId), ['en-em-dash']);
   assert.deepEqual(check(text, { rules: both }).map((f) => f.ruleId), ['en-em-dash', 'fr-em-dash']);
 });
+
+test('language guess: short texts are placed by their letters and marks', () => {
+  const all = ['en', 'fr', 'es', 'de', 'pt'];
+  assert.equal(guessLanguage('Bien sûr ! Voici trois idées.', all), 'fr');
+  assert.equal(guessLanguage('Très bonne question !', all), 'fr');
+  assert.equal(guessLanguage('¿Qué opinas?', all), 'es');
+  assert.equal(guessLanguage('Schöne Grüße aus Köln.', all), 'de');
+  assert.equal(guessLanguage('Não sei.', all), 'pt');
+  // English with a loanword stays English.
+  assert.equal(guessLanguage('The café was naïve about it.', all), 'en');
+  assert.equal(guessLanguage('Delve!', all), 'en');
+});

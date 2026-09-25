@@ -59,12 +59,22 @@ export function loadRules(json) {
 // Short, common words that are frequent in one language and rare in the others.
 const COMMON_WORDS = {
   en: 'the and is are of to that this it with for you your was were what have has not be but they we',
-  fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais',
+  fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais voici très merci aussi être avez',
   es: 'de la un que el los las del y es una por muy pero también esto aquí hay sí cómo qué más lo sus al ser tiene puede',
   de: 'der die das und ist nicht ein eine zu mit sich auf für den dem von sie wir ich auch aber wird sind oder dass kann',
   pt: 'de que o os da dos das um uma em na é não com mais você isso isto são ao pelo pela também muito já seu sua aqui ele ela foi tem ter',
 };
 const WORD_SETS = Object.fromEntries(Object.entries(COMMON_WORDS).map(([code, words]) => [code, new Set(words.split(' '))]));
+
+// Letters and marks that almost only one of these languages uses. They help most with short texts,
+// where there are too few common words to tell ("Bien sûr ! Voici trois idées."). Letters that also
+// show up in English loanwords (é, ï, ë as in café, naïve, Zoë) are left out on purpose.
+const MARKS = {
+  fr: /[èùûœ]| [!?;:»]|« /gu,
+  es: /[ñ¿¡]/gu,
+  de: /[ßäöü]|„/gu,
+  pt: /[ãõ]/gu,
+};
 
 // A rule's language is the start of its id: "fr-plongeons" is French.
 const languageOf = (rule) => String(rule.id).split('-')[0];
@@ -77,6 +87,10 @@ export function guessLanguage(text, candidates = Object.keys(COMMON_WORDS)) {
   const counts = new Map(candidates.map((code) => [code, 0]));
   for (const word of String(text).toLowerCase().match(/\p{L}+/gu) || []) {
     for (const code of candidates) if (WORD_SETS[code]?.has(word)) counts.set(code, counts.get(code) + 1);
+  }
+  for (const code of candidates) {
+    const marks = MARKS[code] && String(text).match(MARKS[code]);
+    if (marks) counts.set(code, counts.get(code) + marks.length);
   }
   let best = candidates[0];
   for (const code of candidates) if (counts.get(code) > counts.get(best)) best = code;
