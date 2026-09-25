@@ -76,6 +76,10 @@ const MARKS = {
   pt: /[ãõ]/gu,
 };
 
+// Spaces and sentence punctuation that a pattern may match around a phrase without being part of it.
+const EDGE_START = /^[\s.!?…:;,]+/u;
+const EDGE_END = /\s+$/u;
+
 // A rule's language is the start of its id: "fr-plongeons" is French.
 const languageOf = (rule) => String(rule.id).split('-')[0];
 
@@ -121,14 +125,22 @@ export function check(text, options = {}) {
     if (lang && languageOf(rule) !== lang) continue;
     for (const m of text.matchAll(compile(rule))) {
       if (m[0].length === 0) continue;
+      // Some patterns also match the line break or punctuation in front of a phrase, to check that it
+      // starts a sentence. Leave those out of the finding, so the underline and the line number
+      // point at the phrase itself.
+      const lead = m[0].length - m[0].replace(EDGE_START, '').length;
+      const trail = m[0].length - m[0].replace(EDGE_END, '').length;
+      const keep = lead + trail < m[0].length;
+      const start = m.index + (keep ? lead : 0);
+      const end = m.index + m[0].length - (keep ? trail : 0);
       findings.push({
         ruleId: rule.id,
         name: rule.name,
         category: rule.category,
         severity: rule.severity,
-        start: m.index,
-        end: m.index + m[0].length,
-        match: m[0],
+        start,
+        end,
+        match: text.slice(start, end),
         message: rule.message,
         why: rule.why,
         fix: rule.fix,
