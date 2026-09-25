@@ -18,10 +18,10 @@ test('cli: the npm package lists the command and ships the bin folder', () => {
 });
 
 test('cli: checks standard input and exits 1 on a finding', () => {
-  const r = run([], "Let's delve into this.");
+  const r = run([], 'We will delve into this.');
   assert.equal(r.status, 1);
-  assert.match(r.stdout, /^<stdin>:1:7 {2}medium {2}"Delve": /m);
-  assert.match(r.stdout, /phrases might read as AI/);
+  assert.match(r.stdout, /^<stdin>:1:9 {2}medium {2}"Delve": /m);
+  assert.match(r.stdout, /phrase might read as AI/);
 });
 
 test('cli: clean text exits 0 with a friendly line', () => {
@@ -48,10 +48,10 @@ test('cli: checks files and reports file, line and column', () => {
 });
 
 test('cli: --json prints findings with file, line and column', () => {
-  const r = run(['--json'], "Let's delve into this.");
+  const r = run(['--json'], 'We will delve into this.');
   const findings = JSON.parse(r.stdout);
   const delve = findings.find((f) => f.ruleId === 'en-delve');
-  assert.deepEqual([delve.file, delve.line, delve.column, delve.severity], ['<stdin>', 1, 7, 'medium']);
+  assert.deepEqual([delve.file, delve.line, delve.column, delve.severity], ['<stdin>', 1, 9, 'medium']);
   for (const key of ['why', 'fix', 'message', 'start', 'end']) assert.ok(key in delve, `missing ${key}`);
   assert.equal(r.status, 1);
 });
@@ -133,11 +133,11 @@ test('cli: the disable-next-line comment skips only the next line', () => {
 });
 
 test('cli: --github prints annotations, errors at or above the level', () => {
-  const r = run(['--github', '--fail-on', 'high'], "Let's delve into this.\nIn today's fast-paced world, we ship.");
-  assert.match(r.stdout, /^::warning file=<stdin>,line=1,col=7,title=Tellbuster%3A "Delve"::"Delve" reads as AI\. Why: .+ Fix: /m);
+  const r = run(['--github', '--fail-on', 'high'], "We will delve into this.\nIn today's fast-paced world, we ship.");
+  assert.match(r.stdout, /^::warning file=<stdin>,line=1,col=9,title=Tellbuster%3A "Delve"::"Delve" reads as AI\. Why: .+ Fix: /m);
   assert.match(r.stdout, /^::error file=<stdin>,line=2,col=1,/m);
   assert.equal(r.status, 1);
-  assert.equal(run(['--github', '--fail-on', 'high'], "Let's delve into this.").status, 0);
+  assert.equal(run(['--github', '--fail-on', 'high'], 'We will delve into this.').status, 0);
 });
 
 test('cli: the GitHub Action runs the bundled tool with its inputs', () => {

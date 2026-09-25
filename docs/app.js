@@ -65,7 +65,8 @@ function cardHtml(f, i, { jump }) {
   return `${jump ? `<button type="button" class="jump" data-jump="${i}">${head}</button>` : head}
     <p>${escapeHtml(f.message)}</p>
     <p class="card-why">${escapeHtml(f.why)}</p>
-    <p class="card-fix"><strong>${escapeHtml(T.tryThis)}</strong> ${escapeHtml(f.fix)}</p>
+    <p class="card-fix"><strong>${escapeHtml(T.tryThis)}</strong> ${escapeHtml(f.fix)}</p>${
+    f.alsoMatched?.length ? `\n    <p class="card-also">${escapeHtml(T.also)} ${escapeHtml(f.alsoMatched.map((o) => o.name).join(', '))}</p>` : ''}
     <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">${escapeHtml(T.turnOffRule)}</button>
     <a class="link" href="${escapeHtml(reportUrl(f.ruleId))}" target="_blank" rel="noopener">${escapeHtml(T.report)}</a>`;
 }

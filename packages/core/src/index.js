@@ -147,7 +147,31 @@ export function check(text, options = {}) {
       });
     }
   }
-  return findings.sort((a, b) => a.start - b.start || a.end - b.end || a.ruleId.localeCompare(b.ruleId));
+  return mergeSameWords(findings);
+}
+
+const SEVERITY_RANK = { high: 0, medium: 1, low: 2 };
+
+// When two rules underline the same words (or one sits fully inside the other), keep one finding for
+// the widest match and list the other rules on it as "alsoMatched". Partly overlapping findings stay
+// separate. Returns the findings sorted by position.
+function mergeSameWords(findings) {
+  findings.sort((a, b) => a.start - b.start || b.end - a.end
+    || SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity] || a.ruleId.localeCompare(b.ruleId));
+  const kept = [];
+  let widest = null; // the kept finding that reaches furthest to the right
+  for (const f of findings) {
+    // Sorted by start, so f starts at or after widest. Ending no later means it sits inside.
+    if (widest && f.end <= widest.end) {
+      if (f.ruleId !== widest.ruleId && !widest.alsoMatched?.some((o) => o.ruleId === f.ruleId)) {
+        (widest.alsoMatched ||= []).push({ ruleId: f.ruleId, name: f.name, severity: f.severity, why: f.why });
+      }
+      continue;
+    }
+    kept.push(f);
+    if (!widest || f.end > widest.end) widest = f;
+  }
+  return kept.sort((a, b) => a.start - b.start || a.end - b.end || a.ruleId.localeCompare(b.ruleId));
 }
 
 /**
