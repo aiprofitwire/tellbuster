@@ -33,6 +33,7 @@ jobs:
 All of them are optional.
 
 - `files`: the files to check, separated by spaces or new lines. Patterns like `docs/*.md` and `**/*.md` work. Leave it out to check every `.md` file in the repo.
+- `exclude`: files to leave out, separated by spaces or new lines. Patterns work here too, for example `docs/drafts/*.md`. Handy for files that quote AI phrases on purpose.
 - `fail-on`: `low`, `medium` or `high` (the default). A finding at or above this level shows as an error and fails the check. Findings below it show as warnings and do not fail it.
 - `strict`: `true` also uses the strict style rules (words with normal everyday uses).
 - `lang`: `auto` (the default), `en`, `fr`, `es`, `de` or `pt`.

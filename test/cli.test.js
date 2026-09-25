@@ -2,9 +2,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import path, { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const bin = fileURLToPath(new URL('../packages/core/bin/tellbuster.js', import.meta.url));
@@ -145,14 +145,25 @@ test('cli: the GitHub Action runs the bundled tool with its inputs', () => {
   assert.match(action, /using: composite/);
   assert.ok(action.includes('node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js"'));
   assert.ok(!action.includes('npx'), 'the Action must not download the tool from npm');
-  for (const input of ['files', 'strict', 'lang', 'disable', 'fail-on']) assert.match(action, new RegExp(`^  ${input}:`, 'm'));
+  for (const input of ['files', 'exclude', 'strict', 'lang', 'disable', 'fail-on']) assert.match(action, new RegExp(`^  ${input}:`, 'm'));
   assert.match(action, /git ls-files '\*\.md'/);
 });
 
 test('cli: the files this repo checks with its own Action pass at fail-on high', () => {
   const workflow = readFileSync(new URL('../.github/workflows/tellbuster.yml', import.meta.url), 'utf8');
-  const files = workflow.match(/files: (.+)/)[1].trim().split(/\s+/);
   const root = fileURLToPath(new URL('..', import.meta.url));
+  const list = (key) => (workflow.match(new RegExp(`${key}: (.+)`)) || [, ''])[1].trim().split(/\s+/).filter(Boolean);
+  // Expand simple patterns like docs/*.md the way the shell does in the Action, then drop the excluded files.
+  const toRegExp = (glob) => new RegExp(`^${glob.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[^/]*')}$`);
+  const expand = (glob) => {
+    if (!glob.includes('*')) return [glob];
+    const dir = path.posix.dirname(glob);
+    return readdirSync(path.join(root, dir)).map((name) => path.posix.join(dir, name)).filter((f) => toRegExp(glob).test(f));
+  };
+  const skip = list('exclude').map(toRegExp);
+  const files = list('files').flatMap(expand).filter((f) => !skip.some((re) => re.test(f)));
+  assert.ok(files.includes('README.md') && files.length > 1);
+  assert.ok(!files.includes('docs/first-issues.md'));
   const r = spawnSync(process.execPath, [bin, '--fail-on', 'high', ...files], { cwd: root, encoding: 'utf8' });
   assert.equal(r.status, 0, r.stdout);
 });

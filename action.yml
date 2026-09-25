@@ -9,6 +9,10 @@ inputs:
     description: Files to check, separated by spaces or new lines. Patterns like docs/*.md work. Default is every tracked .md file.
     required: false
     default: ''
+  exclude:
+    description: Files to leave out, separated by spaces or new lines. Patterns like docs/drafts/*.md work.
+    required: false
+    default: ''
   strict:
     description: Set to true to also use the strict style rules.
     required: false
@@ -32,6 +36,7 @@ runs:
       shell: bash
       env:
         INPUT_FILES: ${{ inputs.files }}
+        INPUT_EXCLUDE: ${{ inputs.exclude }}
         INPUT_STRICT: ${{ inputs.strict }}
         INPUT_LANG: ${{ inputs.lang }}
         INPUT_DISABLE: ${{ inputs.disable }}
@@ -46,6 +51,19 @@ runs:
           files=($INPUT_FILES)
         else
           mapfile -t files < <(git ls-files '*.md')
+        fi
+        if [ -n "$INPUT_EXCLUDE" ]; then
+          # Drop every file that matches one of the exclude patterns.
+          read -r -a skip <<< "$(echo $INPUT_EXCLUDE)"
+          kept=()
+          for f in "${files[@]}"; do
+            drop=false
+            for pattern in "${skip[@]}"; do
+              if [[ "$f" == $pattern ]]; then drop=true; break; fi
+            done
+            if [ "$drop" = false ]; then kept+=("$f"); fi
+          done
+          files=("${kept[@]}")
         fi
         if [ "${#files[@]}" -eq 0 ]; then
           echo "No files to check."
