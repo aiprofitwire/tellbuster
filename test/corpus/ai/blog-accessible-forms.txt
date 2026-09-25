@@ -1,0 +1,27 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about designing accessible forms." License: MIT, like this repo.
+
+Forms are everywhere. From signing up for a newsletter to applying for benefits, they're often the most critical point of interaction between a user and a service. Unfortunately, they're also one of the most common sources of frustration, especially for people with disabilities.
+
+Designing accessible forms isn't just about compliance. It's about making sure everyone can complete essential tasks independently and with confidence.
+
+**Use clear, visible labels**
+
+Every input should have a label that stays visible. Placeholder text that disappears when someone starts typing can leave users unsure of what they're supposed to enter.
+
+**Group related fields**
+
+Use fieldsets and legends to group related questions, such as parts of an address. This helps screen reader users understand the structure of the form.
+
+**Write helpful error messages**
+
+Instead of "Invalid input," tell users exactly what went wrong and how to fix it. For example: "Enter a date in the format MM/DD/YYYY."
+
+**Don't rely on color alone**
+
+If you highlight errors in red, add an icon or text as well, so people with color blindness don't miss them.
+
+**Test with real users**
+
+Automated tools can catch many issues, but nothing replaces testing with people who use assistive technologies every day.
+
+By following these principles, you can create forms that are not only accessible but also easier for everyone to use. After all, a better form means fewer errors, fewer abandoned applications, and happier users.

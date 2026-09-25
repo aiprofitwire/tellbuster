@@ -9,6 +9,8 @@
   const PAUSE_MS = 500; // check after you stop typing for this long
   const MAX_CHARS = 100000; // very long documents are cut here to keep things fast
   const SEVERITY_ORDER = ['high', 'medium', 'low'];
+  // i18n.js runs just before this file and holds the words. The badge follows the browser's language.
+  const T = globalThis.tellbusterI18n.strings(globalThis.tellbusterI18n.pick({ followBrowser: true, useAddress: false }));
 
   const CSS = `
 :host { all: initial; }
@@ -71,10 +73,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px 0; margin-bottom: 10px; }
 .card p { margin: 0 0 6px; }
 .card-name { display: flex; align-items: baseline; gap: 8px; font-weight: 600; }
-.card-match, .card-why { color: var(--muted); font-size: 14px; }
+.card-match, .card-why, .card-also { color: var(--muted); font-size: 14px; }
 .card-fix { font-size: 14px; }
 .sev { flex: none; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration-line: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .link { min-height: 44px; padding: 0; border: 0; background: none; color: var(--accent); font-size: 13px; text-decoration: underline; }
+a.link { display: inline-flex; align-items: center; }
+.link + .link { margin-left: 16px; }
 `;
 
   const ctrl = new AbortController();
@@ -224,7 +228,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       root.append(make('style', { textContent: CSS }));
     }
     const count = make('span', { class: 'count' });
-    const badge = make('button', { type: 'button', class: 'badge', hidden: true, title: 'Tellbuster (Alt+Shift+T)', 'aria-expanded': 'false', 'aria-haspopup': 'dialog' }, logo(), count);
+    const badge = make('button', { type: 'button', class: 'badge', hidden: true, title: T.badgeTitle, 'aria-expanded': 'false', 'aria-haspopup': 'dialog' }, logo(), count);
     const panel = make('div', { class: 'panel', role: 'dialog', 'aria-label': 'Tellbuster', tabIndex: -1, hidden: true });
     const wrap = make('div', { class: 'ui' }, badge, panel);
     root.append(wrap);
@@ -247,33 +251,41 @@ button { font: inherit; color: inherit; cursor: pointer; }
   }
 
   function summaryText() {
-    if (!findings.length) return 'No tells found. Nice work.';
+    if (!findings.length) return T.summaryNone;
     const counts = SEVERITY_ORDER
       .map((s) => [s, findings.filter((f) => f.severity === s).length])
-      .filter(([, n]) => n)
-      .map(([s, n]) => `${n} ${s}`);
-    return `${plural(findings.length, 'phrase might', 'phrases might')} read as AI (${counts.join(', ')})`;
+      .filter(([, n]) => n);
+    return T.summary(findings.length, counts);
+  }
+
+  // Opens the "Report a wrong flag" form on GitHub. Only the rule id goes in the link, never the user's text.
+  function reportUrl(ruleId) {
+    const id = encodeURIComponent(ruleId);
+    return `https://github.com/aiprofitwire/tellbuster/issues/new?template=false-positive.yml&title=Wrong+flag%3A+${id}&rule=${id}`;
   }
 
   function card(f) {
-    const sevLabel = f.severity[0].toUpperCase() + f.severity.slice(1);
+    const sevLabel = T.severity[f.severity];
     const norm = (t) => t.toLowerCase().replace(/[^a-z0-9À-ſ]+/g, ' ').trim();
     const match = f.match.trim() || f.match;
     const showMatch = !norm(f.name).includes(norm(match));
-    const fix = make('p', { class: 'card-fix' }, make('strong', { textContent: 'Try this:' }), ` ${f.fix}`);
-    const offBtn = make('button', { type: 'button', class: 'link', textContent: 'Turn off this rule on this page' });
+    const fix = make('p', { class: 'card-fix' }, make('strong', { textContent: T.tryThis }), ` ${f.fix}`);
+    const offBtn = make('button', { type: 'button', class: 'link', textContent: T.turnOffRuleOnPage });
     offBtn.dataset.off = f.ruleId;
+    const report = make('a', { class: 'link', href: reportUrl(f.ruleId), target: '_blank', rel: 'noopener', textContent: T.report });
     return make('li', { class: 'card' },
       make('p', { class: 'card-name' }, make('span', { textContent: f.name }), make('span', { class: `sev sev-${f.severity}`, textContent: sevLabel })),
       showMatch && make('p', { class: 'card-match', textContent: `“${match}”` }),
       make('p', { textContent: f.message }),
       make('p', { class: 'card-why', textContent: f.why }),
       fix,
-      offBtn);
+      f.alsoMatched?.length > 0 && make('p', { class: 'card-also', textContent: `${T.also} ${f.alsoMatched.map((o) => o.name).join(', ')}` }),
+      offBtn,
+      report);
   }
 
   function siteButton() {
-    const btn = make('button', { type: 'button', class: 'link', textContent: `Turn off the badge on ${topHost}` });
+    const btn = make('button', { type: 'button', class: 'link', textContent: T.badgeOffOn(topHost) });
     btn.dataset.siteOff = '1';
     return btn;
   }
@@ -283,22 +295,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
     const hadFocus = panel.contains(root.activeElement); // keyboard users keep their place
     let turnedOff = null;
     if (off.size) {
-      const onBtn = make('button', { type: 'button', class: 'link', textContent: `Turn ${off.size === 1 ? 'it' : 'them'} back on` });
+      const onBtn = make('button', { type: 'button', class: 'link', textContent: T.turnBackOn(off.size) });
       onBtn.dataset.on = '1';
-      turnedOff = make('p', { class: 'turned-off' }, `${plural(off.size, 'rule is', 'rules are')} turned off on this page. `, onBtn);
+      turnedOff = make('p', { class: 'turned-off' }, `${T.turnedOffPage(off.size)} `, onBtn);
     }
-    const legend = make('ul', { class: 'legend', 'aria-label': 'Legend' },
-      ...[['high', 'strong tell'], ['medium', 'common tell'], ['low', 'style note']].map(([s, label]) =>
-        make('li', {}, make('span', { class: `sample sev-${s}`, textContent: s[0].toUpperCase() + s.slice(1) }), ` ${label}`)));
+    const legend = make('ul', { class: 'legend', 'aria-label': T.legend },
+      ...[['high', T.legendHigh], ['medium', T.legendMedium], ['low', T.legendLow]].map(([s, label]) =>
+        make('li', {}, make('span', { class: `sample sev-${s}`, textContent: T.severity[s] }), ` ${label}`)));
     const parts = [
       make('div', { class: 'head' },
         make('p', { class: 'summary', textContent: summaryText(), 'aria-live': 'polite' }),
-        make('button', { type: 'button', class: 'close', textContent: 'Close' })),
-      make('p', { class: 'note', textContent: 'These are style notes, not proof of anything. People use these phrases too.' }),
+        make('button', { type: 'button', class: 'close', textContent: T.close })),
+      make('p', { class: 'note', textContent: T.note }),
       findings.length ? legend : null,
       turnedOff,
       make('ol', { class: 'list' }, ...findings.map(card)),
-      make('p', { class: 'foot', textContent: 'Checked on your device. Nothing is sent anywhere.' }),
+      make('p', { class: 'foot', textContent: T.checkedOnDevice }),
       topHost && siteButton(),
     ];
     panel.replaceChildren(...parts.filter(Boolean));
@@ -312,8 +324,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
     if (!ui) build();
     const top = SEVERITY_ORDER.find((s) => findings.some((f) => f.severity === s));
     ui.count.className = `count${top ? ` sev-${top}` : ''}`;
-    ui.count.textContent = findings.length ? plural(findings.length, 'tell', 'tells') : 'No tells';
-    ui.badge.setAttribute('aria-label', `${findings.length ? summaryText() : 'No tells found'}. Show details.`);
+    ui.count.textContent = T.tells(findings.length);
+    ui.badge.setAttribute('aria-label', T.showDetails(findings.length ? summaryText() : T.noTellsFound));
     ui.badge.hidden = false;
     if (!ui.panel.hidden) fillPanel();
     place();

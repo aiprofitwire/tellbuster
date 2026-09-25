@@ -1,0 +1,24 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about remote user research." License: MIT, like this repo.
+
+The shift to remote work has transformed nearly every aspect of how teams operate, and user research is no exception. What once required conference rooms, one-way mirrors, and travel budgets can now happen from a laptop anywhere in the world.
+
+But remote research isn't simply in-person research over video. It comes with its own unique opportunities and challenges.
+
+**The benefits**
+
+Remote research opens the door to a far more diverse pool of participants. You're no longer limited to people who live near your office or can take an afternoon off to visit. This can lead to richer, more representative insights.
+
+It's also often faster and more cost-effective. Without travel and facility costs, teams can run more sessions and iterate more quickly.
+
+**The challenges**
+
+That said, remote sessions can make it harder to build rapport. Technical issues like poor connections or unfamiliar software can eat into valuable time. And you lose some of the subtle context you'd get from seeing someone in their own environment.
+
+**Best practices**
+
+- Send clear instructions and test the technology in advance.
+- Keep sessions shorter than you would in person.
+- Build in a few minutes of small talk to help participants feel at ease.
+- Record sessions (with consent) so teammates can watch later.
+
+As remote work continues to evolve, remote research is here to stay. By embracing its strengths and planning for its challenges, teams can gather insights that are every bit as valuable as those collected face to face.

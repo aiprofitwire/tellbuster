@@ -1,0 +1,24 @@
+# Source: written by an AI model for this test (style: LinkedIn post). Prompt: "Write a LinkedIn post about accessibility in design." License: MIT, like this repo.
+
+Accessibility is not a feature. It's a foundation.
+
+Let that sink in.
+
+Over 1 billion people worldwide live with some form of disability. That's roughly 1 in 6 people.
+
+Yet so many products still treat accessibility as an afterthought, something to "fix later" if there's time.
+
+Here's the thing: when you design for accessibility, everyone benefits.
+
+📱 Captions help people watching videos on a noisy train.
+🔠 Clear contrast helps people reading in bright sunlight.
+⌨️ Keyboard navigation helps power users move faster.
+🧠 Plain language helps people who are tired, stressed, or distracted.
+
+This is called the curb-cut effect. Designs that remove barriers for some people end up making life easier for all of us.
+
+Accessibility isn't just the right thing to do. It's good business, good design, and in many cases, the law.
+
+If your team hasn't made accessibility a priority yet, today is a great day to start.
+
+#Accessibility #A11y #InclusiveDesign #UX

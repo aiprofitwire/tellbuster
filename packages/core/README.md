@@ -16,7 +16,7 @@ npm install tellbuster
 import { lint, summarize } from 'tellbuster';
 
 const text = "Let's delve into the numbers.";
-const findings = lint(text); // English and French rules are included, the language is guessed
+const findings = lint(text); // every language's rules are included, the language is guessed
 
 for (const f of findings) console.log(`${f.start}-${f.end} ${f.name}: ${f.message} ${f.fix}`);
 console.log(summarize(findings, text)); // { total, bySeverity: { low, medium, high }, perHundredWords }
@@ -26,14 +26,48 @@ Options: `lint(text, { disabled: ['en-em-dash'], strictStyle: true, language: 'f
 
 Want only the engine, with your own rules? `import { check, loadRules } from 'tellbuster/engine'`. The rule files are also in the `rules/` folder of the [Tellbuster repo](https://github.com/aiprofitwire/tellbuster).
 
+## Command line
+
+Check files (the shell expands the `*`):
+
+```sh
+npx tellbuster README.md docs/*.md
+```
+
+Or pipe text in:
+
+```sh
+echo "Let's delve into this." | npx tellbuster
+```
+
+Each finding prints as `file:line:column  severity  name: message`, then a count. Text from standard input shows as `<stdin>`.
+
+Options:
+
+- `--strict`: also use the strict style rules.
+- `--lang auto|en|fr|es|de|pt`: which language's rules to use. `auto` (the default) guesses from the text.
+- `--disable id1,id2`: skip these rule ids.
+- `--json`: print the findings as JSON (each one also has `file`, `line` and `column`).
+- `--github`: print the findings as GitHub annotations, so they show on a pull request's lines. Findings at or above the level are errors, the others are warnings. The [GitHub Action](https://github.com/aiprofitwire/tellbuster/blob/main/docs/github-action.md) uses this.
+- `--max-severity low|medium|high`: fail only when a finding is at or above this level. The default is `low`, so any finding fails. `--fail-on` does the same thing.
+
+Exit code: `1` when a finding is at or above the level, `0` otherwise, `2` when an option or file is wrong. That makes it easy to use in scripts and CI.
+
+### Skipping text on purpose
+
+Docs that explain a tell have to quote it. Tellbuster skips:
+
+- In Markdown files (`.md` or `.markdown`): fenced code blocks and `inline code`.
+- In any file: everything between `<!-- tellbuster-disable -->` and `<!-- tellbuster-enable -->` (or the end of the file if there is no enable comment), and the line right after `<!-- tellbuster-disable-next-line -->`.
+
 ## API
 
 - `lint(text, options)`: checks text with the bundled rules (`language: 'auto'` by default). Same options and findings as `check`.
 - `defaultRules()`: every bundled rule, validated.
-- `packs`: the raw bundled rule files, keyed by name (`en`, `en-strict`, `fr`).
+- `packs`: the raw bundled rule files, keyed by name (`en`, `en-strict`, `fr`, `es`, `de`, `pt`).
 - `loadRules(json)`: checks a parsed rules file and returns its rules. Rules from a file with `"strict": true` come back marked strict. Throws an error naming the rule and the problem if something is wrong, including a bad pattern.
 - `check(text, { rules, disabled, strictStyle, language })`: returns findings sorted by position. With `language: 'auto'`, it guesses the language of the text and uses only that language's rules (a rule's language is the start of its id, like `fr-`). With a code like `language: 'fr'`, it always uses that language. Left out, every rule runs. Rules marked strict (from `rules/en-strict.json`) only run when `strictStyle` is `true`. It is `false` by default. Each finding has `ruleId`, `name`, `category`, `severity`, `start`, `end`, `match`, `message`, `why` and `fix`.
-- `guessLanguage(text, candidates)`: guesses the language by counting common words. Returns one of the candidate codes (`['en', 'fr']` by default), or the first one when it cannot tell.
+- `guessLanguage(text, candidates)`: guesses the language by counting common words. Returns one of the candidate codes (`['en', 'fr', 'es', 'de', 'pt']` by default), or the first one when it cannot tell.
 - `summarize(findings, text)`: returns `{ total, bySeverity, perHundredWords }`.
 
 ## License

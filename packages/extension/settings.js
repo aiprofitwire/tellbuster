@@ -6,10 +6,13 @@ import { loadRules } from './vendor/tellbuster.js';
 export const LANGUAGES = [
   { code: 'en', name: 'English', file: 'en.json', strictFile: 'en-strict.json' },
   { code: 'fr', name: 'French', file: 'fr.json' },
+  { code: 'es', name: 'Spanish', file: 'es.json' },
+  { code: 'de', name: 'German', file: 'de.json' },
+  { code: 'pt', name: 'Portuguese', file: 'pt.json' },
 ];
 
 export const DEFAULTS = {
-  languages: ['en', 'fr'],
+  languages: ['en', 'fr', 'es', 'de', 'pt'],
   language: 'auto', // "auto" guesses the language of each text; a code like "fr" always uses that language
   strictStyle: false,
   disabledRules: [],

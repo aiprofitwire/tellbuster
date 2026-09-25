@@ -1,0 +1,23 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write a follow-up email after a meeting with a potential client." License: MIT, like this repo.
+
+Subject: Great connecting today!
+
+Hi Priya,
+
+Thank you so much for taking the time to meet with me today. I really enjoyed learning more about Greenleaf's goals for the upcoming year, and I was especially inspired by your vision for making your services more accessible to rural customers.
+
+As promised, I wanted to follow up with a quick recap of what we discussed:
+
+1. **Your main challenge:** Customers are dropping off during the online sign-up process, particularly on mobile devices.
+2. **Our proposed approach:** A two-week discovery phase, including interviews with recent customers and a review of your current analytics.
+3. **Next steps:** I'll send over a detailed proposal and timeline by Friday.
+
+I've also attached a short case study from a similar project we completed last year, which I think you'll find helpful.
+
+In the meantime, please don't hesitate to reach out if you have any questions or if there's anything else you'd like us to consider. I'm confident that together we can create a sign-up experience your customers will love.
+
+Looking forward to continuing the conversation!
+
+Best regards,
+Daniel Kim
+Senior Consultant, Northstar Digital

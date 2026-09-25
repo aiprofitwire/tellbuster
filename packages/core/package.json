@@ -1,6 +1,6 @@
 {
   "name": "tellbuster",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Find the phrases that make writing read like AI, with a reason and a fix for each. Runs on your device.",
   "keywords": [
     "ai-writing",
@@ -28,7 +28,11 @@
     "./engine": "./src/index.js"
   },
   "main": "./src/main.js",
+  "bin": {
+    "tellbuster": "./bin/tellbuster.js"
+  },
   "files": [
+    "bin",
     "src"
   ]
 }

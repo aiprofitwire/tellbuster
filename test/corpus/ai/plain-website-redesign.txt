@@ -1,0 +1,15 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Give advice to a city about redesigning its website. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Find out what people come to the site to do. Look at search terms, the most visited pages and the questions the call center gets. For most cities, the top tasks are things like paying a bill, reporting a problem, finding trash pickup days and checking meeting times.
+
+Build the new site around those tasks. Put them on the home page. Make each one work well on a phone.
+
+Cut pages nobody visits. Many city sites have thousands of pages that are out of date. Every page needs an owner and a review date, or it will go stale again.
+
+Write in plain words. Say "Pay your water bill," not "Utility Billing Services."
+
+Test with residents before you launch. Watch five people try to do the top tasks. Fix what trips them up. Test again.
+
+Don't launch everything at once. Start with a few sections, learn from them, and move the rest over in stages.
+
+Plan for the work after launch. A website is never finished. Someone has to keep it accurate, week after week.

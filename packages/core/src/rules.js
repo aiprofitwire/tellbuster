@@ -1685,37 +1685,18 @@ export const packs = {
         "name": "Tiret cadratin",
         "category": "punctuation",
         "severity": "low",
-        "pattern": "—",
-        "flags": "",
-        "message": "The long dash reads as AI to many readers.",
-        "why": "French uses the long dash for dialogue, but AI models drop it into the middle of sentences far more often than people do. Many readers now notice it.",
-        "fix": "Use a comma, a colon or parentheses, or split the sentence in two.",
+        "pattern": "(?<!^[ \\t]*)—",
+        "flags": "mu",
+        "message": "Le tiret long fait penser à une IA pour beaucoup de lecteurs.",
+        "why": "En français, le tiret long est normal pour les dialogues et les incises. Les IA, elles, en glissent partout au milieu des phrases, et beaucoup de lecteurs le remarquent. C’est seulement une note de style : si vous l’utilisez selon les règles de la typographie, gardez-le.",
+        "fix": "Mettez une virgule, un deux-points ou des parenthèses, ou coupez la phrase en deux.",
         "examples": {
           "flag": [
             "Le plan a fonctionné — en partie."
           ],
           "pass": [
-            "Le plan a fonctionné, en partie."
-          ]
-        }
-      },
-      {
-        "id": "fr-guillemets-anglais",
-        "name": "Guillemets anglais “ ”",
-        "category": "punctuation",
-        "severity": "low",
-        "pattern": "[“”]",
-        "flags": "",
-        "message": "English style curly quotes in French text read as AI.",
-        "why": "French writing uses « » (in France and in Quebec). Curly English quotes in a French text often come from pasted AI output.",
-        "fix": "Use « » with a space inside, for example « comme ceci ».",
-        "examples": {
-          "flag": [
-            "Il a parlé d’une “révolution” dans le secteur."
-          ],
-          "pass": [
-            "Il a parlé d’une « révolution » dans le secteur.",
-            "Il a dit \"oui\"."
+            "Le plan a fonctionné, en partie.",
+            "— Bonjour, dit-elle."
           ]
         }
       },
@@ -1726,9 +1707,9 @@ export const packs = {
         "severity": "high",
         "pattern": "(?<!\\p{L})dans (le|un|notre) monde (d['’]aujourd['’]hui|actuel|moderne|en (constante|perpétuelle|rapide) (évolution|mutation)|qui (change|évolue) (sans cesse|vite|rapidement))",
         "flags": "iu",
-        "message": "This opener reads as AI.",
-        "why": "Generic scene-setting openers like this are one of the most common ways AI texts start. They say nothing about your topic.",
-        "fix": "Cut it and start with your actual point.",
+        "message": "Cette entrée en matière fait penser à une IA.",
+        "why": "Les ouvertures vagues qui plantent le décor sont l’une des façons les plus courantes de commencer un texte d’IA. Elles ne disent rien sur votre sujet.",
+        "fix": "Supprimez cette introduction et allez droit au but.",
         "examples": {
           "flag": [
             "Dans le monde d'aujourd'hui, la technologie est partout.",
@@ -1743,21 +1724,22 @@ export const packs = {
         "id": "fr-important-de-noter",
         "name": "« Il est important de noter que »",
         "category": "filler",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})il (est|convient|faut) (important |essentiel |crucial |primordial |intéressant )?(de )?(noter|souligner|rappeler|mentionner|garder à l['’]esprit) que",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})il est (important|essentiel|crucial|primordial|fondamental) de (noter|souligner|rappeler|mentionner|garder à l['’]esprit) que",
         "flags": "iu",
-        "message": "This setup reads as AI.",
-        "why": "Announcing that something is important before saying it is filler. AI models use this opener a lot.",
-        "fix": "Delete the setup and state the point. If it matters, the reader will see it.",
+        "message": "Cette mise en place fait penser à une IA.",
+        "why": "Annoncer qu’une chose est importante avant de la dire, c’est du remplissage, et les IA ouvrent souvent leurs phrases comme ça. On l’écrit aussi dans les textes administratifs, donc c’est une note de style.",
+        "fix": "Supprimez l’annonce et dites la chose. Si elle compte, le lecteur le verra.",
         "examples": {
           "flag": [
             "Il est important de noter que les prix ont baissé.",
-            "Il convient de souligner que le projet avance.",
-            "Il faut garder à l’esprit que rien n’est sûr."
+            "Il est essentiel de rappeler que rien n’est sûr."
           ],
           "pass": [
             "C'est important de bien dormir.",
-            "Il faut noter les heures chaque jour."
+            "Il faut noter les heures chaque jour.",
+            "Il convient de souligner que le projet avance.",
+            "Il faut garder à l’esprit que rien n’est sûr."
           ]
         }
       },
@@ -1768,9 +1750,9 @@ export const packs = {
         "severity": "high",
         "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)plong(eons|ez)(\\s+(ensemble|sans plus attendre|maintenant))?\\s+(dans|au c(œ|oe)ur)",
         "flags": "imu",
-        "message": "\"Plongeons dans\" reads as AI.",
-        "why": "This is the French twin of \"Let's dive in\". AI models use it to open almost every section.",
-        "fix": "Skip the warm-up and start with the first real point.",
+        "message": "« Plongeons dans » fait penser à une IA.",
+        "why": "C’est le jumeau français de « Let’s dive in ». Les IA l’utilisent pour ouvrir presque chaque section.",
+        "fix": "Sautez l’échauffement et commencez par le premier vrai point.",
         "examples": {
           "flag": [
             "Plongeons dans les chiffres.",
@@ -1785,19 +1767,21 @@ export const packs = {
         "id": "fr-en-conclusion",
         "name": "« En conclusion »",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)(en conclusion|pour conclure|en somme|en définitive|en résumé|en fin de compte)\\s*,",
+        "severity": "low",
+        "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)(en conclusion|pour conclure|en résumé)\\s*,",
         "flags": "imu",
-        "message": "This closing line reads as AI.",
-        "why": "AI texts almost always end with a labeled wrap-up that repeats what was just said. It is common in school essays too, but in a post or an email it sounds automatic.",
-        "fix": "End on your strongest point or a clear next step, without the label.",
+        "message": "Cette phrase de fin fait penser à une IA.",
+        "why": "Les textes d’IA finissent presque toujours par un résumé annoncé qui répète ce qu’on vient de lire. C’est courant dans les dissertations aussi, mais dans une publication ou un courriel, ça sonne automatique.",
+        "fix": "Finissez sur votre meilleur point ou sur une prochaine étape claire, sans l’étiquette.",
         "examples": {
           "flag": [
             "En conclusion, ce projet est un succès.",
-            "Voilà. En somme, tout va bien."
+            "Voilà. En résumé, tout va bien."
           ],
           "pass": [
-            "La conclusion du rapport est claire."
+            "La conclusion du rapport est claire.",
+            "Voilà. En somme, tout va bien.",
+            "En définitive, nous préférons le plan B."
           ]
         }
       },
@@ -1805,12 +1789,12 @@ export const packs = {
         "id": "fr-pas-seulement",
         "name": "« Il ne s’agit pas seulement de X, mais de Y »",
         "category": "structure",
-        "severity": "high",
+        "severity": "medium",
         "pattern": "(?<!\\p{L})(il ne s['’]agit pas|ce n['’]est pas|ce ne sont pas) (seulement|simplement|uniquement|juste|qu['’]une? (simple )?)[^.!?\\n]{1,80}?[,;:]\\s*(mais|c['’]est|il s['’]agit)(?!\\p{L})",
         "flags": "iu",
-        "message": "The \"not only X, but Y\" setup reads as AI.",
-        "why": "Setting up a contrast just to knock it down is one of the most common AI sentence shapes, in French as in English.",
-        "fix": "Say the point directly: keep the Y part and drop the X part.",
+        "message": "La tournure « pas seulement X, mais Y » fait penser à une IA.",
+        "why": "Poser un contraste juste pour le démolir est l’une des formes de phrase les plus courantes chez les IA, en français comme en anglais.",
+        "fix": "Dites le point directement : gardez la partie Y et laissez tomber la partie X.",
         "examples": {
           "flag": [
             "Il ne s'agit pas seulement d'argent, mais de confiance.",
@@ -1827,58 +1811,20 @@ export const packs = {
         "name": "« Un véritable levier »",
         "category": "phrase",
         "severity": "medium",
-        "pattern": "(?<!\\p{L})(un|une|de) (véritables?|réels?|vrais?) (leviers?|atouts?|piliers?|catalyseurs?|tremplins?|game[- ]changers?|mines? d['’]or)(?!\\p{L})",
+        "pattern": "(?<!\\p{L})(un|une|de|des) (véritables?|réels?|vrais?) (leviers?|atouts?|piliers?|catalyseurs?|tremplins?|game[- ]changers?|mines? d['’]or)(?!\\p{L})",
         "flags": "iu",
-        "message": "This praise phrase reads as AI.",
-        "why": "AI models like to call things \"un véritable levier\" or \"un véritable atout\". The phrase sounds big but says little.",
-        "fix": "Say what the thing actually does, with a fact or a number.",
+        "message": "Cette formule élogieuse fait penser à une IA.",
+        "why": "Les IA aiment dire qu’une chose est « un véritable levier » ou « un véritable atout ». Ça sonne fort, mais ça dit peu.",
+        "fix": "Dites ce que la chose fait vraiment, avec un fait ou un chiffre.",
         "examples": {
           "flag": [
             "Cet outil est un véritable levier de croissance.",
-            "La formation est un réel atout."
+            "La formation est un réel atout.",
+            "Ces outils sont des véritables atouts."
           ],
           "pass": [
             "Ce levier permet de soulever la pierre.",
             "Un vrai plaisir de vous voir."
-          ]
-        }
-      },
-      {
-        "id": "fr-incontournable",
-        "name": "« Incontournable »",
-        "category": "word-choice",
-        "severity": "low",
-        "pattern": "(?<!\\p{L})incontournables?(?!\\p{L})",
-        "flags": "iu",
-        "message": "\"Incontournable\" can read as AI.",
-        "why": "People use this word too, but AI and marketing texts lean on it so much that it has lost its punch.",
-        "fix": "Say why it matters instead: \"utile\", \"populaire\", or a concrete reason.",
-        "examples": {
-          "flag": [
-            "Un outil incontournable pour votre équipe."
-          ],
-          "pass": [
-            "Un outil utile pour votre équipe."
-          ]
-        }
-      },
-      {
-        "id": "fr-force-est-de-constater",
-        "name": "« Force est de constater »",
-        "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})force (est|était|sera) de (constater|reconnaître|admettre)",
-        "flags": "iu",
-        "message": "This formal setup reads as AI.",
-        "why": "This old-fashioned opener sounds serious but only delays the point. AI models use it much more than people do today.",
-        "fix": "Start with the fact itself, or use \"On voit que\".",
-        "examples": {
-          "flag": [
-            "Force est de constater que les ventes baissent."
-          ],
-          "pass": [
-            "On voit que les ventes baissent.",
-            "La force du vent a baissé."
           ]
         }
       },
@@ -1889,9 +1835,9 @@ export const packs = {
         "severity": "high",
         "pattern": "(?<!\\p{L})(à|a|en cette) l?['’]?ère (du numérique|du digital|numérique|digitale|de l['’]ia|de l['’]intelligence artificielle|des réseaux sociaux|moderne|de la technologie)",
         "flags": "iu",
-        "message": "This opener reads as AI.",
-        "why": "Framing a text with \"the digital age\" is a stock AI opener. Note: in Quebec \"numérique\" is the usual word, while France marketing also uses \"digital\"; both versions are flagged.",
-        "fix": "Cut it. Your reader already knows what year it is.",
+        "message": "Cette entrée en matière fait penser à une IA.",
+        "why": "Ouvrir un texte sur « l’ère du numérique » est un réflexe typique des IA. À noter : au Québec, on dit surtout « numérique », alors que le marketing en France dit aussi « digital ». Les deux versions sont signalées.",
+        "fix": "Supprimez-la. Votre lecteur sait déjà en quelle année on est.",
         "examples": {
           "flag": [
             "À l'ère du numérique, tout va plus vite.",
@@ -1904,39 +1850,20 @@ export const packs = {
         }
       },
       {
-        "id": "fr-nhesitez-pas",
-        "name": "« N’hésitez pas à »",
-        "category": "phrase",
-        "severity": "low",
-        "pattern": "(?<!\\p{L})n['’]h[ée]sitez pas (à|a)(?!\\p{L})",
-        "flags": "iu",
-        "message": "\"N'hésitez pas à\" can read as AI.",
-        "why": "It is a normal polite phrase in emails in France and Quebec, but chatbots end almost every answer with it, so it stands out in posts and articles.",
-        "fix": "Make a direct offer, for example \"Écrivez-moi si vous avez des questions.\"",
-        "examples": {
-          "flag": [
-            "N'hésitez pas à me contacter.",
-            "N’hésitez pas à partager vos idées."
-          ],
-          "pass": [
-            "Il n’hésite jamais à aider."
-          ]
-        }
-      },
-      {
         "id": "fr-role-crucial",
         "name": "« Joue un rôle crucial »",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})jou(e|ent|ait|aient|er|era|eront) un rôle (crucial|clé|essentiel|déterminant|central|primordial|majeur|prépondérant|fondamental)",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(jou(e|ent|ait|aient|er|era|eront|erait|eraient|ant)|(a|ont|avait|avaient|aura|auront) joué) un rôle (crucial|clé|essentiel|déterminant|central|primordial|majeur|prépondérant|fondamental)",
         "flags": "iu",
-        "message": "This phrase reads as AI.",
-        "why": "AI models use \"joue un rôle crucial\" to sound important without saying how something matters.",
-        "fix": "Say what it does: \"permet de\", \"sert à\", or give the effect.",
+        "message": "Cette formule fait penser à une IA.",
+        "why": "Les IA écrivent « joue un rôle crucial » pour avoir l’air important sans dire en quoi la chose compte.",
+        "fix": "Dites ce qu’elle fait : « permet de », « sert à », ou donnez l’effet.",
         "examples": {
           "flag": [
             "La confiance joue un rôle crucial dans la vente.",
-            "Les données jouent un rôle clé."
+            "Les données jouent un rôle clé.",
+            "La météo a joué un rôle déterminant."
           ],
           "pass": [
             "Elle joue un rôle dans la pièce de théâtre."
@@ -1950,9 +1877,9 @@ export const packs = {
         "severity": "medium",
         "pattern": "(?<!\\p{L})(bien |beaucoup )?plus qu['’]une? simples?(?!\\p{L})",
         "flags": "iu",
-        "message": "This inflation phrase reads as AI.",
-        "why": "Saying something is \"more than a simple X\" is a favorite AI way to hype a product or idea.",
-        "fix": "Say what it is and what it does.",
+        "message": "Cette formule qui gonfle les choses fait penser à une IA.",
+        "why": "Dire qu’une chose est « plus qu’un simple X » est une façon favorite des IA de vanter un produit ou une idée.",
+        "fix": "Dites ce que c’est et ce que ça fait.",
         "examples": {
           "flag": [
             "C'est bien plus qu'un simple outil.",
@@ -1970,9 +1897,9 @@ export const packs = {
         "severity": "high",
         "pattern": "(?<!\\p{L})(excellente|très bonne|bonne|superbe|belle) question\\s*!",
         "flags": "iu",
-        "message": "This opener reads as AI.",
-        "why": "Praising the question before answering is a classic chatbot habit.",
-        "fix": "Just answer the question.",
+        "message": "Cette entrée en matière fait penser à une IA.",
+        "why": "Féliciter la personne pour sa question avant de répondre est une habitude classique des robots conversationnels.",
+        "fix": "Répondez simplement à la question.",
         "examples": {
           "flag": [
             "Excellente question ! Voici la réponse.",
@@ -1988,16 +1915,17 @@ export const packs = {
         "id": "fr-bien-sur-opener",
         "name": "« Bien sûr ! » en ouverture",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<=^\\s*)(bien sûr|absolument|certainement|avec plaisir)\\s*!",
-        "flags": "iu",
-        "message": "Opening with \"Bien sûr !\" reads as AI.",
-        "why": "Chatbots start many answers with an eager \"Bien sûr !\" or \"Absolument !\". At the very top of a text it gives away where it came from.",
-        "fix": "Delete it and start with the answer.",
+        "severity": "high",
+        "pattern": "(?<=^[\\s#*>-]*)(bien sûr|absolument|certainement|avec plaisir)\\s*!",
+        "flags": "imu",
+        "message": "Commencer par « Bien sûr ! » fait penser à une IA.",
+        "why": "Les robots conversationnels commencent beaucoup de réponses par un « Bien sûr ! » ou un « Absolument ! » plein d’entrain. Tout en haut d’un texte, ça trahit d’où il vient.",
+        "fix": "Supprimez-le et commencez par la réponse.",
         "examples": {
           "flag": [
             "Bien sûr ! Voici trois idées.",
-            "Absolument ! Commençons."
+            "Absolument ! Commençons.",
+            "**Bien sûr !** Voici un résumé."
           ],
           "pass": [
             "Il viendra bien sûr demain.",
@@ -2012,9 +1940,9 @@ export const packs = {
         "severity": "high",
         "pattern": "(?<!\\p{L})j['’]esp[èe]re que (cela|ceci|ça|ces (informations|conseils|idées|pistes)|cette (réponse|explication)) (vous |t['’]|te )?(aide|aidera|aideront|sera utile|seront utiles|a aidé|ont aidé|répond)",
         "flags": "iu",
-        "message": "This sign-off reads as AI.",
-        "why": "Chatbots close almost every answer with this line. In a post or an email it sounds pasted.",
-        "fix": "End on your last useful point, or ask a real follow-up question.",
+        "message": "Cette formule de fin fait penser à une IA.",
+        "why": "Les robots conversationnels finissent presque chaque réponse par cette phrase. Dans une publication ou un courriel, elle sonne copiée-collée.",
+        "fix": "Finissez sur votre dernier point utile, ou posez une vraie question de suivi.",
         "examples": {
           "flag": [
             "J'espère que cela vous aide !",
@@ -2030,11 +1958,11 @@ export const packs = {
         "name": "« Le paysage numérique »",
         "category": "phrase",
         "severity": "medium",
-        "pattern": "(?<!\\p{L})(le|du|au|ce|un) paysage (numérique|digital|actuel|concurrentiel|économique|médiatique|technologique|professionnel|complexe)",
+        "pattern": "(?<!\\p{L})(le|du|au|ce|un|notre|votre) paysage (numérique|digital|actuel|concurrentiel|économique|médiatique|technologique|professionnel|complexe)",
         "flags": "iu",
-        "message": "This abstract \"landscape\" reads as AI.",
-        "why": "AI texts turn every field into a \"paysage\". It sounds grand but stays vague.",
-        "fix": "Name the actual market, field or situation.",
+        "message": "Ce « paysage » abstrait fait penser à une IA.",
+        "why": "Les textes d’IA transforment chaque domaine en « paysage ». Ça sonne grand, mais ça reste flou.",
+        "fix": "Nommez le vrai marché, le vrai domaine ou la vraie situation.",
         "examples": {
           "flag": [
             "Dans le paysage numérique actuel, il faut se démarquer.",
@@ -2052,9 +1980,9 @@ export const packs = {
         "severity": "medium",
         "pattern": "(?<!\\p{L})(embarqu\\p{L}*|partons|partez|lancez-vous|lançons-nous)\\s+(pour|dans)\\s+(un|une|cette|ce)\\s+(\\p{L}+\\s+)?(voyage|aventure|odyssée|périple|exploration)",
         "flags": "iu",
-        "message": "This journey metaphor reads as AI.",
-        "why": "AI texts turn simple topics into a \"voyage\" or an \"aventure\". The metaphor is so common now that readers skip it.",
-        "fix": "Say plainly what the reader will learn or do.",
+        "message": "Cette image du voyage fait penser à une IA.",
+        "why": "Les textes d’IA transforment des sujets simples en « voyage » ou en « aventure ». L’image est si courante que les lecteurs la sautent.",
+        "fix": "Dites simplement ce que le lecteur va apprendre ou faire.",
         "examples": {
           "flag": [
             "Embarquez pour un voyage fascinant au cœur de l’IA.",
@@ -2072,9 +2000,9 @@ export const packs = {
         "severity": "medium",
         "pattern": "(?<!\\p{L})(libér|exploit|révél|débloqu|déclench|maximis)\\p{L}*\\s+(pleinement\\s+|tout\\s+)?(le|son|sa|votre|vos|leur|leurs|ton|notre)\\s+(plein\\s+)?potentiel",
         "flags": "iu",
-        "message": "This hype phrase reads as AI.",
-        "why": "\"Libérer votre potentiel\" is a stock AI and coaching line. It promises a lot and says nothing specific.",
-        "fix": "Say what the reader will be able to do, in concrete terms.",
+        "message": "Cette formule accrocheuse fait penser à une IA.",
+        "why": "« Libérer votre potentiel » est une phrase toute faite des IA et du coaching. Elle promet beaucoup et ne dit rien de précis.",
+        "fix": "Dites ce que le lecteur pourra faire, en termes concrets.",
         "examples": {
           "flag": [
             "Libérez tout votre potentiel avec cette méthode.",
@@ -2090,12 +2018,12 @@ export const packs = {
         "id": "fr-constante-evolution",
         "name": "« En constante évolution »",
         "category": "phrase",
-        "severity": "medium",
+        "severity": "low",
         "pattern": "(?<!\\p{L})en (constante|perpétuelle|permanente|pleine) (évolution|mutation)",
         "flags": "iu",
-        "message": "This phrase reads as AI.",
-        "why": "Saying a field is \"en constante évolution\" is filler. Nearly everything changes, and AI texts say it about every topic.",
-        "fix": "Say what changed and when, or cut the phrase.",
+        "message": "Cette formule fait penser à une IA.",
+        "why": "Dire qu’un domaine est « en constante évolution », c’est du remplissage. Presque tout change, et les textes d’IA le disent de tous les sujets.",
+        "fix": "Dites ce qui a changé et quand, ou coupez la formule.",
         "examples": {
           "flag": [
             "Le marketing est un domaine en constante évolution."
@@ -2112,9 +2040,9 @@ export const packs = {
         "severity": "low",
         "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)que (vous soyez|tu sois) [^,.!?\\n]{1,40} ou [^,.!?\\n]{1,40},",
         "flags": "imu",
-        "message": "This opener reads as AI.",
-        "why": "Starting with \"Que vous soyez débutant ou expert,\" tries to speak to everyone at once. AI marketing texts open this way all the time.",
-        "fix": "Pick the reader you are really writing for and speak to them.",
+        "message": "Cette entrée en matière fait penser à une IA.",
+        "why": "Commencer par « Que vous soyez débutant ou expert, » essaie de parler à tout le monde à la fois. Les textes de marketing écrits par IA commencent souvent comme ça.",
+        "fix": "Choisissez le lecteur à qui vous écrivez vraiment et parlez-lui.",
         "examples": {
           "flag": [
             "Que vous soyez débutant ou expert, ce guide est pour vous."
@@ -2128,12 +2056,12 @@ export const packs = {
         "id": "fr-cle-du-succes",
         "name": "« La clé du succès »",
         "category": "phrase",
-        "severity": "medium",
+        "severity": "low",
         "pattern": "(?<!\\p{L})(la|une|les) clés? (du succès|de la réussite|pour réussir|d['’]une stratégie réussie)",
         "flags": "iu",
-        "message": "This phrase reads as AI.",
-        "why": "Calling something \"la clé du succès\" is a stock line in AI and marketing texts. It sounds sure but proves nothing.",
-        "fix": "Say what works and why, with an example.",
+        "message": "Cette formule fait penser à une IA.",
+        "why": "Dire qu’une chose est « la clé du succès » est une phrase toute faite des textes d’IA et de marketing. Ça sonne sûr, mais ça ne prouve rien.",
+        "fix": "Dites ce qui marche et pourquoi, avec un exemple.",
         "examples": {
           "flag": [
             "La constance est la clé du succès.",
@@ -2151,9 +2079,9 @@ export const packs = {
         "severity": "low",
         "pattern": "^[ \\t]*\\p{Extended_Pictographic}\\uFE0F?[ \\t]+[^\\n]+\\n(?:[ \\t]*\\n)?[ \\t]*\\p{Extended_Pictographic}",
         "flags": "mu",
-        "message": "Lines that start with emoji bullets read as AI.",
-        "why": "Stacks of lines that each begin with an emoji (🚀, ✅, 💡) are a common look in AI social posts, in French as in English.",
-        "fix": "Use plain bullets or short sentences. Keep an emoji only where it adds something.",
+        "message": "Des lignes qui commencent par des émojis font penser à une IA.",
+        "why": "Des séries de lignes qui commencent chacune par un émoji (🚀, ✅, 💡) sont une présentation courante des publications écrites par IA, en français comme en anglais.",
+        "fix": "Utilisez des puces simples ou des phrases courtes. Gardez un émoji seulement là où il apporte quelque chose.",
         "examples": {
           "flag": [
             "🚀 Mise en place rapide\n✅ Aucun code"
@@ -2179,6 +2107,284 @@ export const packs = {
           ],
           "pass": [
             "Le chef utilise un couteau avec une lame tranchante."
+          ]
+        }
+      }
+    ]
+  },
+  "de": {
+    "language": "de",
+    "version": 1,
+    "rules": [
+      {
+        "id": "de-zusammenfassend",
+        "name": "„Zusammenfassend lässt sich sagen“",
+        "category": "filler",
+        "severity": "medium",
+        "pattern": "(?<!\\p{L})(zusammenfassend|abschlie(ß|ss)end) (lässt sich|kann man) (sagen|festhalten|feststellen)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Dieser Schlusssatz klingt nach KI.",
+        "why": "KI-Texte enden oft mit „Zusammenfassend lässt sich sagen“ und wiederholen dann, was schon gesagt wurde. Leser merken das schnell.",
+        "fix": "Streichen Sie die Floskel und sagen Sie direkt, was hängen bleiben soll.",
+        "examples": {
+          "flag": [
+            "Zusammenfassend lässt sich sagen, dass der Plan funktioniert.",
+            "Abschließend kann man festhalten, dass alles klappt."
+          ],
+          "pass": [
+            "Zusammenfassend: Der Plan funktioniert.",
+            "Abschließend gingen wir essen."
+          ]
+        }
+      },
+      {
+        "id": "de-heutige-welt",
+        "name": "„In der heutigen Welt“",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(in (der|unserer) heutigen (\\p{L}+ )?welt|in einer sich (ständig|stetig|schnell|rasant) (wandelnden|verändernden|entwickelnden) welt)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Dieser Einstieg klingt nach KI.",
+        "why": "Ein vager Satz über „die heutige Welt“ ist einer der häufigsten Anfänge von KI-Texten. Er sagt nichts über Ihr Thema.",
+        "fix": "Streichen Sie den Einstieg und beginnen Sie mit etwas Konkretem.",
+        "examples": {
+          "flag": [
+            "In der heutigen digitalen Welt ist Technik überall.",
+            "In einer sich ständig wandelnden Welt müssen wir flexibel sein."
+          ],
+          "pass": [
+            "In der Welt des Weins steigen die Preise.",
+            "Er ist um die ganze Welt gereist."
+          ]
+        }
+      },
+      {
+        "id": "de-wichtig-zu-beachten",
+        "name": "„Es ist wichtig zu beachten“",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(es ist wichtig,? (zu (beachten|betonen|erwähnen|bedenken)|hervorzuheben)|es ist erwähnenswert, dass)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Diese Füllformel klingt nach KI.",
+        "why": "KI-Texte kündigen mit dieser Formel ständig an, dass etwas wichtig ist, statt es zu sagen. In Anleitungen und Verwaltungstexten schreiben Menschen sie auch, darum ist sie hier nur ein Stilhinweis: Sie macht den Satz länger, ohne etwas hinzuzufügen.",
+        "fix": "Streichen Sie sie und nennen Sie die Sache direkt.",
+        "examples": {
+          "flag": [
+            "Es ist wichtig zu beachten, dass die Frist am Montag endet.",
+            "Es ist erwähnenswert, dass die Preise gestiegen sind."
+          ],
+          "pass": [
+            "Es ist wichtig, pünktlich zu sein.",
+            "Die Frist endet am Montag."
+          ]
+        }
+      },
+      {
+        "id": "de-eintauchen",
+        "name": "„Tauchen wir ein“",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(tauchen wir (gemeinsam |nun |jetzt )?(tiefer |direkt )?(in [^.!?]{1,40}? )?ein|(lass|lasst|lassen sie) uns [^.!?]{0,40}?eintauchen)(?!\\p{L})",
+        "flags": "iu",
+        "message": "„Eintauchen“ in ein Thema klingt nach KI.",
+        "why": "KI-Modelle „tauchen“ ständig in Themen „ein“. Die übertragene Bedeutung taucht in KI-Texten viel öfter auf als bei Menschen.",
+        "fix": "Schreiben Sie „Werfen wir einen Blick auf“ oder steigen Sie direkt ins Thema ein.",
+        "examples": {
+          "flag": [
+            "Tauchen wir tiefer in das Thema ein.",
+            "Lassen Sie uns in die Welt der KI eintauchen."
+          ],
+          "pass": [
+            "Morgen tauchen wir in der Ostsee.",
+            "Schauen wir uns die Zahlen an."
+          ]
+        }
+      }
+    ]
+  },
+  "es": {
+    "language": "es",
+    "version": 1,
+    "rules": [
+      {
+        "id": "es-por-supuesto",
+        "name": "«¡Por supuesto!» al empezar",
+        "category": "phrase",
+        "severity": "medium",
+        "pattern": "(?<=^|\\n)[ \\t]*¡\\s*(por supuesto|claro que sí|desde luego)\\s*!",
+        "flags": "iu",
+        "message": "Esta exclamación de entrada suena a IA.",
+        "why": "Los asistentes de chat empiezan muchas respuestas con «¡Por supuesto!» o «¡Claro que sí!». Como primera línea de un texto o un correo, suena a respuesta de chatbot.",
+        "fix": "Quítala y empieza directamente con lo que quieres decir.",
+        "examples": {
+          "flag": [
+            "¡Por supuesto! Aquí tienes un resumen.",
+            "¡Claro que sí! Te explico cómo funciona."
+          ],
+          "pass": [
+            "Por supuesto que iré a la reunión.",
+            "Claro que sí lo vi, estaba allí.",
+            "Gracias por escribir. ¡Por supuesto! Nos vemos el lunes.",
+            "¡Con mucho gusto! Enseguida le envío la cotización."
+          ]
+        }
+      },
+      {
+        "id": "es-aqui-tienes",
+        "name": "«Aquí tienes un resumen»",
+        "category": "phrase",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqu[ií] (tienes|tiene) (un|una|unos|unas|algunos|algunas)( \\p{L}+)? (resumen|lista|versión|borrador|propuesta|ejemplos?|ideas|opciones|consejos|sugerencias)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta forma de presentar el texto suena a IA.",
+        "why": "«Aquí tienes un resumen» es como un chatbot entrega lo que le pidieron. Dentro de un correo o un artículo, deja ver que el texto viene de un chat.",
+        "fix": "Bórrala y pon el contenido directamente, o di para qué sirve: «Estos son los puntos clave».",
+        "examples": {
+          "flag": [
+            "¡Por supuesto! Aquí tienes un resumen.",
+            "Aquí tienes algunas ideas para tu publicación."
+          ],
+          "pass": [
+            "Aquí tienes las llaves del coche.",
+            "El resumen está en la página dos.",
+            "Aquí te dejo el borrador con los cambios que me pediste."
+          ]
+        }
+      },
+      {
+        "id": "es-importante-destacar",
+        "name": "«Es importante destacar que»",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(es importante (destacar|señalar|resaltar|subrayar|mencionar) que|vale la pena (destacar|señalar|resaltar|mencionar) que)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta frase de relleno suena a IA.",
+        "why": "Los textos de IA usan mucho esta fórmula para anunciar lo importante en vez de decirlo. La gente también la usa en textos formales, por eso es solo una nota de estilo: alarga la oración sin añadir nada.",
+        "fix": "Bórrala y di el dato directamente.",
+        "examples": {
+          "flag": [
+            "Es importante destacar que los precios subieron.",
+            "Vale la pena mencionar que el plazo termina el lunes."
+          ],
+          "pass": [
+            "Es importante llegar temprano.",
+            "Los precios subieron un 5 %.",
+            "Cabe señalar que la ley entra en vigor el próximo mes."
+          ]
+        }
+      },
+      {
+        "id": "es-mundo-actual",
+        "name": "«En el mundo actual»",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})en (el|un|nuestro) mundo (actual|de hoy|moderno|en constante (cambio|evolución|transformación)|cada vez más (digital|conectado|interconectado|globalizado|competitivo))(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta introducción suena a IA.",
+        "why": "Empezar con una frase vaga sobre «el mundo actual» es una de las formas más comunes de abrir un texto de IA. No dice nada sobre tu tema.",
+        "fix": "Quita la introducción y empieza por lo concreto.",
+        "examples": {
+          "flag": [
+            "En el mundo actual, la tecnología está en todas partes.",
+            "En un mundo en constante cambio, hay que adaptarse."
+          ],
+          "pass": [
+            "En el mundo del vino, los precios suben.",
+            "Viajó por todo el mundo el año pasado."
+          ]
+        }
+      }
+    ]
+  },
+  "pt": {
+    "language": "pt",
+    "version": 1,
+    "rules": [
+      {
+        "id": "pt-aqui-esta",
+        "name": "“Aqui está um resumo”",
+        "category": "phrase",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})aqui (está|estão) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta forma de apresentar o texto soa como IA.",
+        "why": "“Aqui está um resumo” é o jeito como um chatbot entrega o que pediram. Num e-mail ou num artigo, mostra que o texto veio de um chat.",
+        "fix": "Apague a frase e comece pelo conteúdo, ou diga para que serve: “Estes são os pontos principais”.",
+        "examples": {
+          "flag": [
+            "Claro! Aqui está um resumo do relatório.",
+            "Aqui estão algumas dicas para o seu post."
+          ],
+          "pass": [
+            "Aqui está a chave do carro.",
+            "O resumo está na página dois.",
+            "Aqui vão algumas dicas para a reunião.",
+            "Bom dia, equipe. Segue uma lista com as pendências do projeto."
+          ]
+        }
+      },
+      {
+        "id": "pt-importante-destacar",
+        "name": "“É importante destacar que”",
+        "category": "filler",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta frase de enchimento soa como IA.",
+        "why": "Textos de IA usam muito esta fórmula para anunciar o que é importante em vez de dizer. Pessoas também a usam em textos formais, então aqui é só uma nota de estilo: a frase fica mais longa e não acrescenta nada.",
+        "fix": "Apague a frase e diga o fato diretamente.",
+        "examples": {
+          "flag": [
+            "É importante destacar que os preços subiram.",
+            "É importante notar que o prazo termina na segunda."
+          ],
+          "pass": [
+            "É importante chegar cedo.",
+            "Os preços subiram 5 %.",
+            "Vale ressaltar que os dados referem-se ao primeiro semestre."
+          ]
+        }
+      },
+      {
+        "id": "pt-mundo-atual",
+        "name": "“No mundo atual”",
+        "category": "phrase",
+        "severity": "high",
+        "pattern": "(?<!\\p{L})(no|num|em um|neste|nesse) mundo (atual|de hoje|moderno|contemporâneo|em constante (mudança|evolução|transformação)|cada vez mais (digital|conectado|globalizado|competitivo))(?!\\p{L})",
+        "flags": "iu",
+        "message": "Esta introdução soa como IA.",
+        "why": "Começar com uma frase vaga sobre “o mundo atual” é uma das formas mais comuns de abrir um texto de IA. Não diz nada sobre o seu tema.",
+        "fix": "Tire a introdução e comece pelo que é concreto.",
+        "examples": {
+          "flag": [
+            "No mundo atual, a tecnologia está em toda parte.",
+            "Num mundo em constante mudança, é preciso se adaptar."
+          ],
+          "pass": [
+            "No mundo do vinho, os preços sobem.",
+            "Ela viajou pelo mundo todo no ano passado."
+          ]
+        }
+      },
+      {
+        "id": "pt-espero-ter-ajudado",
+        "name": "“Espero ter ajudado”",
+        "category": "phrase",
+        "severity": "medium",
+        "pattern": "(?<!\\p{L})espero ter ajudado(?!\\p{L})",
+        "flags": "iu",
+        "message": "Este fecho soa como IA.",
+        "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. Em artigos, posts e relatórios, mostra que o texto veio de um chat. Numa resposta de suporte, pode ser normal.",
+        "fix": "Apague a frase. Se quiser, termine com uma pergunta real ou com o próximo passo.",
+        "examples": {
+          "flag": [
+            "Espero ter ajudado!",
+            "Esses são os pontos principais. Espero ter ajudado."
+          ],
+          "pass": [
+            "Espero que você venha amanhã.",
+            "Ele me ajudou com o projeto.",
+            "Fiz os ajustes no código. Espero que isso te ajude com o projeto!"
           ]
         }
       }

@@ -1,0 +1,27 @@
+# Source: written by an AI model for this test (style: email or newsletter). Prompt: "Write a project status update email to stakeholders." License: MIT, like this repo.
+
+Subject: Website Redesign: Weekly Update (Week 6)
+
+Hi everyone,
+
+I wanted to share a quick update on the progress of the website redesign project.
+
+**Highlights from this week**
+- We completed usability testing with eight participants. Overall feedback on the new navigation was very positive, with most users able to find key information in under a minute.
+- The content team finished rewriting the top 20 most visited pages.
+- Development of the new homepage is on track for the end of the month.
+
+**Challenges**
+- The search feature is taking longer than expected due to issues with our current content management system. We're exploring a few options and will have a recommendation by next Friday.
+
+**Next steps**
+- Share the testing findings with the leadership team on Tuesday.
+- Begin work on the second round of page rewrites.
+- Finalize the launch plan.
+
+Overall, the project remains on schedule and within budget. I want to take a moment to thank everyone for their hard work and collaboration. It's been great to see the team come together to deliver such meaningful progress.
+
+As always, please feel free to reach out if you have any questions or concerns.
+
+Best,
+Sam

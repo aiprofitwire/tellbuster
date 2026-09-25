@@ -4,7 +4,11 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { writeIfChanged } from './write-if-changed.js';
 
 const root = new URL('../', import.meta.url);
-const files = readdirSync(new URL('rules/', root)).filter((f) => f.endsWith('.json')).sort();
+const rank = (file) => ({ en: 0, fr: 1 })[file.split(/[-.]/)[0]] ?? 2;
+const files = readdirSync(new URL('rules/', root)).filter((f) => f.endsWith('.json'))
+  // English, then French, then the rest, like the web demo and the extension.
+  // Order matters: when the language guess has no clue or a tie, it picks the first language it sees.
+  .sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
 const packs = {};
 for (const f of files) packs[f.replace(/\.json$/, '')] = JSON.parse(readFileSync(new URL(`rules/${f}`, root), 'utf8'));
 

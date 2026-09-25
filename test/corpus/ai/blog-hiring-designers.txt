@@ -1,0 +1,23 @@
+# Source: written by an AI model for this test (style: blog article). Prompt: "Write a blog post about hiring your first designer." License: MIT, like this repo.
+
+Hiring your first designer is a pivotal moment for any growing company. The right person can elevate your product, sharpen your brand, and bring a user-centered mindset to the whole team. The wrong hire, on the other hand, can lead to frustration on both sides.
+
+So how do you get it right?
+
+**Know what you need**
+
+"Designer" is a broad title. Do you need someone focused on user experience, visual design, research, or all three? For a first hire, a generalist who is comfortable across the product design process is often the best fit.
+
+**Look beyond the portfolio**
+
+A polished portfolio is important, but it only tells part of the story. Ask candidates to walk you through their process. How did they understand the problem? How did they work with engineers? What would they do differently next time?
+
+**Give them a seat at the table**
+
+A first designer can only make an impact if they're involved early, not brought in at the end to "make it pretty." Make sure they have access to users, data, and decision-makers.
+
+**Set realistic expectations**
+
+One person can't fix every design problem overnight. Agree on a few clear priorities for the first six months.
+
+Bringing on your first designer is more than just filling a role. It's an opportunity to shape your company's culture around the people you serve. Approach it thoughtfully, and it can be one of the best investments you'll ever make.

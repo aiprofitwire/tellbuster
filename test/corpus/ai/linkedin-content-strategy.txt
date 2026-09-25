@@ -1,0 +1,28 @@
+# Source: written by an AI model for this test (style: LinkedIn post). Prompt: "Write a LinkedIn post about deleting old website content." License: MIT, like this repo.
+
+We deleted 60% of our website.
+
+Traffic went up.
+
+It sounds counterintuitive, but hear me out.
+
+Our site had grown to over 2,000 pages. Many were outdated, duplicated, or written for audiences we no longer served. Users couldn't find what they needed, and neither could search engines.
+
+So we ran a full content audit. Every page got one of four labels: keep, update, merge, or remove.
+
+The results after six months:
+
+📈 Organic traffic up 34%
+⏱️ Time to find key information cut in half
+📞 Support calls down 18%
+😌 A content team that can finally keep up
+
+The lesson? More content is not better content.
+
+Every page you publish is a promise to maintain it. If you can't keep that promise, it might be time to let it go.
+
+Less, but better. That's the goal.
+
+Has your team ever done a major content cleanup? I'd love to hear how it went.
+
+#ContentStrategy #UX #SEO #DigitalTransformation

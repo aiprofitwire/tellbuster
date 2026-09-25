@@ -1,0 +1,13 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Give advice for running user interviews. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Decide what you need to learn before you book anyone. Write it down in two or three questions. Everything you ask in the session should help answer one of them.
+
+Ask about what people did, not what they would do. "Tell me about the last time you paid a bill online" gets you a real story. "Would you use a feature that reminds you to pay?" gets you a polite guess.
+
+Keep your questions open. Start with how, what or tell me about. If you catch yourself asking a yes or no question, follow it with "Can you say more?"
+
+Stay quiet longer than feels normal. People often add the useful part after a pause.
+
+Bring a second person to take notes. You cannot listen well and type at the same time.
+
+Right after each session, spend ten minutes writing down what surprised you. After five or six interviews, compare notes and look for things that came up more than once. Those are the findings worth sharing.

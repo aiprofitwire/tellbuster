@@ -8,7 +8,7 @@ const manifest = JSON.parse(readFileSync(new URL('manifest.json', dir), 'utf8'))
 
 test('extension: Manifest V3 named Tellbuster', () => {
   assert.equal(manifest.manifest_version, 3);
-  assert.equal(manifest.name, 'Tellbuster');
+  assert.equal(manifest.name, 'Tellbuster: AI Writing Checker');
 });
 
 test('extension: only the allowed permissions', () => {
@@ -23,7 +23,7 @@ test('extension: check as you type is opt in, with no content script until the u
   assert.equal(manifest.content_scripts, undefined, 'content.js must not run on pages at install');
   assert.equal(manifest.web_accessible_resources, undefined, 'pages cannot see extension files');
   const bg = readFileSync(new URL('background.js', dir), 'utf8');
-  assert.match(bg, /registerContentScripts\(\[\s*\{ id: SCRIPT_ID, js: \['content\.js'\], matches,/, 'only content.js is registered, on the granted sites');
+  assert.match(bg, /registerContentScripts\(\[\s*\{ id: SCRIPT_ID, js: \['i18n\.js', 'content\.js'\], matches,/, 'only content.js (and its words) is registered, on the granted sites');
   assert.match(bg, /chrome\.permissions\.getAll\(\)/, 'the sites come from what the user allowed');
   assert.match(bg, /chrome\.permissions\.onRemoved\.addListener/, 'taking access back removes the script');
   const opts = readFileSync(new URL('options.js', dir), 'utf8');
@@ -41,9 +41,11 @@ test('extension: the popup and right-click menu do not need site access', () => 
 });
 
 test('extension: the as-you-type checker makes no network calls and never writes HTML into pages', () => {
-  const src = readFileSync(new URL('content.js', dir), 'utf8');
-  for (const bad of ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket', 'EventSource', 'innerHTML', 'outerHTML', 'insertAdjacentHTML', 'eval(']) {
-    assert.ok(!src.includes(bad), `content.js must not use ${bad}`);
+  for (const f of ['content.js', 'i18n.js']) {
+    const src = readFileSync(new URL(f, dir), 'utf8');
+    for (const bad of ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket', 'EventSource', 'innerHTML', 'outerHTML', 'insertAdjacentHTML', 'eval(']) {
+      assert.ok(!src.includes(bad), `${f} must not use ${bad}`);
+    }
   }
 });
 
@@ -53,6 +55,7 @@ test('extension: every file the manifest and popup point to exists', () => {
     manifest.options_ui.page,
     manifest.background.service_worker,
     'content.js',
+    'i18n.js',
     ...Object.values(manifest.icons),
     ...Object.values(manifest.action.default_icon),
     'popup.js', 'popup.css', 'options.js', 'options.css', 'settings.js', 'app.js', 'style.css', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/en-strict.json',

@@ -1,0 +1,13 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain how to take useful meeting notes. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Useful notes answer three questions: what did we decide, who is doing what, and by when. Everything else is optional.
+
+Put decisions and action items at the top. People who missed the meeting will read the first few lines and stop.
+
+Write each action item with a name and a date. "Look into vendor options" will not happen. "Dana compares three vendors and shares a list by May 3" might.
+
+You don't need a transcript. If a long discussion ended in a decision, write the decision and one line on why. If it ended without one, write that too, along with the open question.
+
+Share the notes the same day, while people still remember the meeting. Ask them to reply with corrections within a day.
+
+Keep all notes for a project in one place, in order, with the date in the title. Months later, someone will need to know when and why a choice was made, and a searchable list of notes will answer that in a minute.

@@ -1,8 +1,8 @@
 # First issues
 
-Ten starter issues, each proposing one missing English rule. Every idea was checked: none of them is caught by the current rules, and each suggested pattern catches its flag example and skips its pass example.
+Ten starter issues, each proposing one missing English rule, plus three issues asking native speakers for Spanish, German and Portuguese rules (at the end). Every idea was checked: none of them is caught by the current rules, and each suggested pattern catches its flag example and skips its pass example.
 
-**To post them:** on GitHub go to **Issues > New issue > Open a blank issue**. Copy the title and the body of one issue below, add the labels `good first issue` and `new rule`, and click **Submit new issue**. Repeat for each one.
+**To post them:** on GitHub go to **Issues > New issue > Open a blank issue**. Copy the title and the body of one issue below, add the labels `good first issue` and `new rule` (issues 11 to 13 also get `hacktoberfest`; issue 15 gets `good first issue` and `hacktoberfest` only, since it adds a text, not a rule), and click **Submit new issue**. Repeat for each one.
 
 ## 1. Add a rule for "Pave the way for"
 
@@ -222,4 +222,145 @@ Add a rule to `rules/en.json` for "A double-edged sword".
 - Must not flag: "The knife has a double edge."
 
 New here? Follow "Your first rule in 5 minutes" in CONTRIBUTING.md. You can do it all on the GitHub website.
+```
+
+## 11. Add 5 Spanish rules (native speakers wanted)
+
+**Title:** Add 5 Spanish rules (native speakers wanted)
+
+**Labels:** `good first issue`, `new rule`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster has a small starter set of Spanish rules in `rules/es.json` (4 rules). We need a native speaker to add about 5 more.
+
+**What makes a good Spanish tell:** a phrase that chatbots write in Spanish far more often than people do. Good places to look: stock openers and closers of chatbot replies, filler that announces a point instead of making it, and vague intros. A tell is not a translated English tell: if people use the phrase every day, it does not belong here.
+
+**Already covered, so pick something else:** "¡Por supuesto!" and "¡Claro que sí!" as openers, "Aquí tienes un resumen", "Es importante destacar que", "En el mundo actual".
+
+**Ideas to start from (check them, you know the language better than we do):** "desempeña un papel fundamental / crucial / clave", "navegar por el complejo panorama de", "es un recordatorio de que".
+
+**For each rule, please include:**
+
+- At least one `flag` sentence: normal Spanish that the rule must catch.
+- At least one `pass` sentence: a close, normal sentence that the rule must not catch.
+- The `name`, `message`, `why` and `fix` written in Spanish. The message says the phrase reads as AI, never that the text is AI.
+- An id that starts with `es-`.
+
+You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 or 2 rules is welcome too.
+
+New here? Follow "Your first rule in 5 minutes" and "Spanish, German and Portuguese" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
+
+## 12. Add 5 German rules (native speakers wanted)
+
+**Title:** Add 5 German rules (native speakers wanted)
+
+**Labels:** `good first issue`, `new rule`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster has a small starter set of German rules in `rules/de.json` (4 rules). We need a native speaker to add about 5 more.
+
+**What makes a good German tell:** a phrase that chatbots write in German far more often than people do. Good places to look: stock openers and closers of chatbot replies, filler that announces a point instead of making it, vague intros, and English phrases translated word for word. A tell is not a translated English tell: if people use the phrase every day, it does not belong here.
+
+**Already covered, so pick something else:** "Zusammenfassend lässt sich sagen", "In der heutigen Welt", "Es ist wichtig zu beachten", "Tauchen wir ein".
+
+**Ideas to start from (check them, you know the language better than we do):** "spielt eine entscheidende / zentrale / wesentliche Rolle", "Landschaft" used for business ("die digitale Landschaft", "durch die Landschaft navigieren"), "Es liegt an uns, sicherzustellen, dass".
+
+**For each rule, please include:**
+
+- At least one `flag` sentence: normal German that the rule must catch.
+- At least one `pass` sentence: a close, normal sentence that the rule must not catch.
+- The `name`, `message`, `why` and `fix` written in German. The message says the phrase reads as AI, never that the text is AI.
+- An id that starts with `de-`.
+
+You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 or 2 rules is welcome too.
+
+New here? Follow "Your first rule in 5 minutes" and "Spanish, German and Portuguese" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
+
+## 13. Add 5 Portuguese rules (native speakers wanted)
+
+**Title:** Add 5 Portuguese rules (native speakers wanted)
+
+**Labels:** `good first issue`, `new rule`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster has a small starter set of Portuguese rules in `rules/pt.json` (4 rules). We need a native speaker to add about 5 more.
+
+**What makes a good Portuguese tell:** a phrase that chatbots write in Portuguese far more often than people do. Good places to look: stock openers and closers of chatbot replies, filler that announces a point instead of making it, and vague intros. Rules should work for both Brazilian and European Portuguese, or say which one they target. A tell is not a translated English tell: if people use the phrase every day, it does not belong here.
+
+**Already covered, so pick something else:** "Aqui está um resumo", "É importante destacar que", "No mundo atual", "Espero ter ajudado".
+
+**Ideas to start from (check them, you know the language better than we do):** "desempenha um papel fundamental / crucial", "serve como um lembrete de que", "vamos mergulhar em" (for a topic).
+
+**For each rule, please include:**
+
+- At least one `flag` sentence: normal Portuguese that the rule must catch.
+- At least one `pass` sentence: a close, normal sentence that the rule must not catch.
+- The `name`, `message`, `why` and `fix` written in Portuguese. The message says the phrase reads as AI, never that the text is AI.
+- An id that starts with `pt-`.
+
+You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 or 2 rules is welcome too.
+
+New here? Follow "Your first rule in 5 minutes" and "Spanish, German and Portuguese" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
+
+## 14. Add French rules (native speakers wanted)
+
+**Title:** Add French rules (native speakers wanted)
+
+**Labels:** `good first issue`, `new rule`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster has 20 French rules in `rules/fr.json`. We would love a native speaker (France, Quebec, Belgium, Switzerland or anywhere else) to add a few more.
+
+**What makes a good French tell:** a phrase that chatbots write in French far more often than people do, often a word-for-word translation of an English chatbot habit. If people use the phrase every day in normal emails or articles, it does not belong here. We removed "N'hésitez pas à", "incontournable" and "Force est de constater" for that reason.
+
+**Ideas to start from (check them, you know the language better than we do):** "est un véritable témoignage de" (from "is a testament to"), "naviguer les défis / les complexités" (used without "dans"), "Sans plus tarder," as a transition, "Que vous cherchiez à ... ou simplement à ...". Some of these are also normal French in some contexts, so a careful pattern and a good "pass" example matter.
+
+**For each rule, please include:**
+
+- At least one `flag` sentence: text the rule must catch.
+- At least one `pass` sentence: a close, normal sentence that the rule must not catch.
+- The `name`, `message`, `why` and `fix` written in French. The message says the phrase reads as AI (« fait penser à une IA »), never that the text is AI.
+- An id that starts with `fr-`.
+
+You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 rule is welcome too.
+
+New here? Follow "Your first rule in 5 minutes" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
+
+## 15. Add a paragraph you wrote before 2022 to the test set
+
+**Title:** Add a paragraph you wrote before 2022 to the test set
+
+**Labels:** `good first issue`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster keeps a small test set of human and AI texts in `test/corpus/`. It tells us how often each side gets a note, and a test fails if a rule flags too much normal human writing. Right now every human text comes from one source (the US government's 18F guides), so we need more voices.
+
+**What we need:** one text you wrote yourself before 2022, 100 to 400 words. An old email to a friend, a school essay, a work memo, a forum post, a journal entry. Plain everyday writing is perfect. Remove names and anything private first.
+
+**The license:** by adding it, you agree to share it under the MIT license, like the rest of this repo. Only add text you wrote yourself. Please do not copy blog posts, news articles or anything written by someone else.
+
+**How to add it:**
+
+1. Create a new file in `test/corpus/human/`, for example `donated-your-github-name.txt`.
+2. Make the first line: `# Source: written by @your-github-name in 2019, donated to Tellbuster. License: MIT, like this repo.`
+3. Leave one blank line, then paste your text.
+4. Open a pull request. The tests check the first line and the length for you.
+
+If your text gets a high severity note, that is useful too: it may show a rule that needs work. Say so in the pull request.
+
+New here? The steps to open a pull request on the GitHub website are in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md).
 ```

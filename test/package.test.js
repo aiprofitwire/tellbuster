@@ -12,9 +12,20 @@ test('package: bundled rule packs match the rules folder (run node scripts/sync-
 });
 
 test('package: lint works with no setup, in English and French', () => {
-  assert.ok(lint("Let's delve into the numbers.").some((f) => f.ruleId === 'en-delve'));
+  assert.ok(lint('We delve into the numbers.').some((f) => f.ruleId === 'en-delve'));
   assert.ok(lint("Dans le monde d'aujourd'hui, il est important de noter que le travail change.").some((f) => f.ruleId.startsWith('fr-')));
   assert.equal(lint('We paid the invoice this morning.').length, 0);
+});
+
+test('package: lint checks the Spanish, German and Portuguese starter rules', () => {
+  const ids = (text) => lint(text).map((f) => f.ruleId);
+  assert.deepEqual(ids('¡Por supuesto! Aquí tienes un resumen.'), ['es-por-supuesto', 'es-aqui-tienes']);
+  assert.ok(ids('In der heutigen digitalen Welt ist Technik überall.').includes('de-heutige-welt'));
+  assert.ok(ids('Esses são os pontos principais. Espero ter ajudado.').includes('pt-espero-ter-ajudado'));
+  // A warm sign-off between colleagues is normal Portuguese, not a tell.
+  assert.ok(!ids('Fiz os ajustes no código. Espero que isso te ajude com o projeto!').includes('pt-espero-ter-ajudado'));
+  // Text with no clue about its language is checked as English.
+  assert.deepEqual(ids('Delve!'), ['en-delve']);
 });
 
 test('package: strict rules stay off unless asked', () => {

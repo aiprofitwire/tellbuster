@@ -1,0 +1,17 @@
+name: Tellbuster
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Uses the Action from this repo. Every doc is checked, so new ones are covered too.
+      # The excluded files quote tells on purpose: that is their job.
+      - uses: ./
+        with:
+          files: README.md docs/*.md
+          exclude: docs/first-issues.md docs/store-listing.md
+          fail-on: high

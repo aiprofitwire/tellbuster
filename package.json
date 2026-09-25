@@ -1,5 +1,5 @@
 {
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test" }
+  "scripts": { "test": "node --test", "accuracy": "node scripts/accuracy.js" }
 }

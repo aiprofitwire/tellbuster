@@ -1,0 +1,11 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain what a heuristic review is. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+A heuristic review is when a few people look through a product and check it against a list of known usability principles. A common list says, for example, that a system should show people what is happening, use words they know, and help them recover from mistakes.
+
+It is fast and cheap. Two or three reviewers can go through the main tasks in a day and list the problems they see, with a note on how serious each one is.
+
+It is not a replacement for testing with users. Reviewers are experts, not your users. They will find obvious problems, like a missing back button or an unclear label. They will miss problems that come from how real people think about the task.
+
+Use it early to clean up the easy problems before you test. That way, your user sessions can focus on the harder questions.
+
+Have each reviewer work alone first, then combine the lists. People working alone find more problems than a group looking at the same screen together.

@@ -1,0 +1,13 @@
+# Source: 18F Content Guide, "Names", https://github.com/18F/content-guide (commit ab38d55, 2021). License: US government work, public domain (CC0 1.0).
+
+Personal names
+
+Use full names on first reference. On second reference, use first names when writing about our teams or our work, and otherwise follow AP style (which is to mostly use last names on second reference).
+
+If the context means that there’s a chance of confusion on second reference when using only first or last names, use full names.
+
+State names
+
+- Spell out state names, such as Mississippi.
+- When referring to a number of states, “state” should be lowercase. For example, All 50 states responded.
+- When used with a city, spell out the name of the state. For example, Atlanta, Georgia.

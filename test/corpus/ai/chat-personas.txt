@@ -1,0 +1,21 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "Should my team use personas? What are the pros and cons?" License: MIT, like this repo.
+
+Personas can be a powerful tool for keeping your team focused on real user needs, but they also come with some potential pitfalls. Here's a balanced overview to help you decide.
+
+**Pros**
+
+- **Shared understanding:** Personas give your whole team a common language for talking about users.
+- **Empathy:** Putting a name and a face to research findings helps stakeholders connect with the people they're designing for.
+- **Prioritization:** When you're weighing features, personas can help you ask, "Which of these would actually matter to Maria?"
+
+**Cons**
+
+- **Risk of stereotypes:** If personas aren't grounded in real research, they can reinforce assumptions rather than challenge them.
+- **They can go stale:** User needs evolve over time, and a persona created three years ago may no longer reflect reality.
+- **Overemphasis on demographics:** Details like age or hobbies can distract from what really matters, which is goals, behaviors, and pain points.
+
+**My recommendation**
+
+If you decide to use personas, base them on actual interviews and data, focus on behaviors rather than demographics, and revisit them regularly. Many teams also find success with lighter-weight alternatives like jobs-to-be-done statements.
+
+Ultimately, the right choice depends on your team's size, culture, and goals. Would you like help drafting a persona template?

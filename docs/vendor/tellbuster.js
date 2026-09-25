@@ -56,12 +56,29 @@ export function loadRules(json) {
   return json.strict ? json.rules.map((rule) => ({ ...rule, strict: true })) : json.rules;
 }
 
-// Short, common words that are frequent in one language and rare in the other.
+// Short, common words that are frequent in one language and rare in the others.
 const COMMON_WORDS = {
   en: 'the and is are of to that this it with for you your was were what have has not be but they we',
-  fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais',
+  fr: 'le la les des du de et est une un que qui pour dans pas sur avec nous vous ce cette sont au aux il elle mais voici très merci aussi être avez',
+  es: 'de la un que el los las del y es una por muy pero también esto aquí hay sí cómo qué más lo sus al ser tiene puede',
+  de: 'der die das und ist nicht ein eine zu mit sich auf für den dem von sie wir ich auch aber wird sind oder dass kann',
+  pt: 'de que o os da dos das um uma em na é não com mais você isso isto são ao pelo pela também muito já seu sua aqui ele ela foi tem ter',
 };
 const WORD_SETS = Object.fromEntries(Object.entries(COMMON_WORDS).map(([code, words]) => [code, new Set(words.split(' '))]));
+
+// Letters and marks that almost only one of these languages uses. They help most with short texts,
+// where there are too few common words to tell ("Bien sûr ! Voici trois idées."). Letters that also
+// show up in English loanwords (é, ï, ë as in café, naïve, Zoë) are left out on purpose.
+const MARKS = {
+  fr: /[èùûœ]| [!?;:»]|« /gu,
+  es: /[ñ¿¡]/gu,
+  de: /[ßäöü]|„/gu,
+  pt: /[ãõ]/gu,
+};
+
+// Spaces and sentence punctuation that a pattern may match around a phrase without being part of it.
+const EDGE_START = /^[\s.!?…:;,]+/u;
+const EDGE_END = /\s+$/u;
 
 // A rule's language is the start of its id: "fr-plongeons" is French.
 const languageOf = (rule) => String(rule.id).split('-')[0];
@@ -74,6 +91,10 @@ export function guessLanguage(text, candidates = Object.keys(COMMON_WORDS)) {
   const counts = new Map(candidates.map((code) => [code, 0]));
   for (const word of String(text).toLowerCase().match(/\p{L}+/gu) || []) {
     for (const code of candidates) if (WORD_SETS[code]?.has(word)) counts.set(code, counts.get(code) + 1);
+  }
+  for (const code of candidates) {
+    const marks = MARKS[code] && String(text).match(MARKS[code]);
+    if (marks) counts.set(code, counts.get(code) + marks.length);
   }
   let best = candidates[0];
   for (const code of candidates) if (counts.get(code) > counts.get(best)) best = code;
@@ -104,21 +125,62 @@ export function check(text, options = {}) {
     if (lang && languageOf(rule) !== lang) continue;
     for (const m of text.matchAll(compile(rule))) {
       if (m[0].length === 0) continue;
+      // Some patterns also match the line break or punctuation in front of a phrase, to check that it
+      // starts a sentence. Leave those out of the finding, so the underline and the line number
+      // point at the phrase itself.
+      const lead = m[0].length - m[0].replace(EDGE_START, '').length;
+      const trail = m[0].length - m[0].replace(EDGE_END, '').length;
+      const keep = lead + trail < m[0].length;
+      const start = m.index + (keep ? lead : 0);
+      const end = m.index + m[0].length - (keep ? trail : 0);
       findings.push({
         ruleId: rule.id,
         name: rule.name,
         category: rule.category,
         severity: rule.severity,
-        start: m.index,
-        end: m.index + m[0].length,
-        match: m[0],
+        start,
+        end,
+        match: text.slice(start, end),
         message: rule.message,
         why: rule.why,
         fix: rule.fix,
       });
     }
   }
-  return findings.sort((a, b) => a.start - b.start || a.end - b.end || a.ruleId.localeCompare(b.ruleId));
+  return mergeSameWords(findings);
+}
+
+const SEVERITY_RANK = { high: 0, medium: 1, low: 2 };
+// The fields that say which rule a finding is about (its position stays when another rule takes the lead).
+const LEAD_FIELDS = ['ruleId', 'name', 'category', 'severity', 'message', 'why', 'fix'];
+
+// When two rules underline the same words (or one sits fully inside the other), keep one finding over
+// the widest match, led by the most serious of those rules, and list the others on it as "alsoMatched". Partly overlapping findings stay
+// separate. Returns the findings sorted by position.
+function mergeSameWords(findings) {
+  findings.sort((a, b) => a.start - b.start || b.end - a.end
+    || SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity] || a.ruleId.localeCompare(b.ruleId));
+  const kept = [];
+  let widest = null; // the kept finding that reaches furthest to the right
+  for (const f of findings) {
+    // Sorted by start, so f starts at or after widest. Ending no later means it sits inside.
+    if (widest && f.end <= widest.end) {
+      if (f.ruleId !== widest.ruleId && !widest.alsoMatched?.some((o) => o.ruleId === f.ruleId)) {
+        if (SEVERITY_RANK[f.severity] < SEVERITY_RANK[widest.severity]) {
+          // The more serious rule leads the card, so the underline shows its color. The span stays
+          // the widest one, and the milder rule moves to "alsoMatched".
+          (widest.alsoMatched ||= []).push({ ruleId: widest.ruleId, name: widest.name, severity: widest.severity, why: widest.why });
+          for (const key of LEAD_FIELDS) widest[key] = f[key];
+        } else {
+          (widest.alsoMatched ||= []).push({ ruleId: f.ruleId, name: f.name, severity: f.severity, why: f.why });
+        }
+      }
+      continue;
+    }
+    kept.push(f);
+    if (!widest || f.end > widest.end) widest = f;
+  }
+  return kept.sort((a, b) => a.start - b.start || a.end - b.end || a.ruleId.localeCompare(b.ruleId));
 }
 
 /**

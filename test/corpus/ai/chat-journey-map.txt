@@ -1,0 +1,21 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "Explain customer journey mapping." License: MIT, like this repo.
+
+Customer journey mapping is a visual way to represent the end-to-end experience a customer has with your organization, from their first interaction to long after they've made a purchase or used a service.
+
+**Key components of a journey map**
+
+- **Stages:** The major phases of the experience, such as awareness, consideration, purchase, and support.
+- **Actions:** What the customer is doing at each stage.
+- **Thoughts and emotions:** How the customer feels, often shown as a line that rises and falls.
+- **Touchpoints:** Every place the customer interacts with you, including websites, phone calls, and physical locations.
+- **Pain points and opportunities:** Moments of friction and ideas for improving them.
+
+**Why it's valuable**
+
+Journey maps help teams step outside their own silos and see the experience holistically. A billing team, for example, may not realize that customers are already frustrated by the time they reach a payment screen. By making these moments visible, journey mapping fosters cross-functional collaboration and helps organizations prioritize improvements that truly matter.
+
+**Getting started**
+
+Begin with research. Interviews, surveys, and support logs will give you a realistic picture of the customer's experience. Then map one persona and one scenario at a time to keep things focused.
+
+In essence, a journey map is more than just a diagram. It's a tool for building empathy and driving meaningful change across your organization.

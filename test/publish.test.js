@@ -21,18 +21,18 @@ test('publish: npm package has the fields npm shows', () => {
   assert.equal(pkg.dependencies, undefined, 'the engine has no dependencies');
 });
 
-// Reads every file back out of the zip and compares it with the extension folder.
-test('publish: the store zip holds the extension files, byte for byte', () => {
+// Runs a zip script into a temporary folder and reads every file back out of the zip.
+function readZip(script) {
   const dir = mkdtempSync(join(tmpdir(), 'tellbuster-'));
   try {
     const out = join(dir, 'ext.zip');
-    execFileSync(process.execPath, [join(root, 'scripts/zip-extension.js'), out]);
+    execFileSync(process.execPath, [join(root, script), out]);
     const zip = readFileSync(out);
     const endAt = zip.length - 22;
     assert.equal(zip.readUInt32LE(endAt), 0x06054b50, 'zip must end with an end record');
     const count = zip.readUInt16LE(endAt + 10);
     let at = zip.readUInt32LE(endAt + 16);
-    const names = [];
+    const files = new Map();
     for (let i = 0; i < count; i++) {
       assert.equal(zip.readUInt32LE(at), 0x02014b50);
       const size = zip.readUInt32LE(at + 20);
@@ -40,18 +40,46 @@ test('publish: the store zip holds the extension files, byte for byte', () => {
       const localAt = zip.readUInt32LE(at + 42);
       const name = zip.toString('utf8', at + 46, at + 46 + nameLen);
       const dataAt = localAt + 30 + zip.readUInt16LE(localAt + 26);
-      const data = inflateRawSync(zip.subarray(dataAt, dataAt + size));
-      assert.ok(data.equals(readFileSync(join(root, 'packages/extension', name))), `${name} differs`);
-      names.push(name);
+      files.set(name, inflateRawSync(zip.subarray(dataAt, dataAt + size)));
       at += 46 + nameLen;
     }
-    for (const f of ['manifest.json', 'popup.html', 'background.js', 'content.js', 'options.html', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/fr.json', 'icons/icon128.png']) {
-      assert.ok(names.includes(f), `zip is missing ${f}`);
-    }
-    assert.ok(!names.includes('README.md'), 'README.md stays out of the store package');
+    return files;
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+}
+
+const MUST_HAVE = ['manifest.json', 'popup.html', 'background.js', 'content.js', 'options.html', 'vendor/tellbuster.js', 'vendor/en.json', 'vendor/fr.json', 'vendor/es.json', 'vendor/de.json', 'vendor/pt.json', 'icons/icon128.png'];
+
+test('publish: the store zip holds the extension files, byte for byte', () => {
+  const files = readZip('scripts/zip-extension.js');
+  for (const [name, data] of files) {
+    assert.ok(data.equals(readFileSync(join(root, 'packages/extension', name))), `${name} differs`);
+  }
+  for (const f of MUST_HAVE) assert.ok(files.has(f), `zip is missing ${f}`);
+  assert.ok(!files.has('README.md'), 'README.md stays out of the store package');
+});
+
+test('publish: the Firefox zip has the same files and a Firefox manifest', () => {
+  const files = readZip('scripts/zip-firefox.js');
+  for (const [name, data] of files) {
+    if (name === 'manifest.json') continue;
+    assert.ok(data.equals(readFileSync(join(root, 'packages/extension', name))), `${name} differs`);
+  }
+  for (const f of MUST_HAVE) assert.ok(files.has(f), `zip is missing ${f}`);
+  assert.ok(!files.has('README.md'), 'README.md stays out of the store package');
+
+  const chrome = JSON.parse(read('packages/extension/manifest.json'));
+  const firefox = JSON.parse(files.get('manifest.json'));
+  // Firefox runs the same background file as a background script (it has no service worker).
+  assert.deepEqual(firefox.background, { scripts: [chrome.background.service_worker], type: chrome.background.type });
+  const gecko = firefox.browser_specific_settings.gecko;
+  assert.equal(gecko.id, 'tellbuster@aiprofitwire.github.io', 'never change the id after the first upload');
+  assert.deepEqual(gecko.data_collection_permissions, { required: ['none'] }, 'Tellbuster collects no data');
+  // Everything else, permissions included, stays exactly as in the Chrome manifest.
+  const { background: _b, browser_specific_settings: _s, ...rest } = firefox;
+  const { background: _c, ...chromeRest } = chrome;
+  assert.deepEqual(rest, chromeRest);
 });
 
 test('publish: privacy page loads nothing from elsewhere and keeps the linter wording', () => {

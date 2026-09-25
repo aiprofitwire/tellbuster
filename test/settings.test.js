@@ -56,10 +56,10 @@ test('settings: a turned off rule is skipped', async () => {
   assert.equal(check(text, { rules, language: 'auto', disabled: ['en-em-dash'] }).length, 0);
 });
 
-test('settings: English and French are on by default, and the language is guessed', async () => {
+test('settings: every language is on by default, and the language is guessed', async () => {
   stored = {};
   const s = await readSettings();
-  assert.deepEqual(s.languages, ['en', 'fr']);
+  assert.deepEqual(s.languages, ['en', 'fr', 'es', 'de', 'pt']);
   assert.equal(s.language, 'auto');
   const ids = (await activeRules(s)).map((r) => r.id);
   assert.ok(ids.some((id) => id.startsWith('fr-')) && ids.some((id) => id.startsWith('en-')));
@@ -75,8 +75,8 @@ test('settings: a picked language is kept, an unknown one falls back to guessing
 
 test('settings: French text gets the French rules', async () => {
   const rules = await activeRules({ ...DEFAULTS });
-  const ids = check("Dans le monde d'aujourd'hui, n'h\u00e9sitez pas \u00e0 innover.", { rules, language: 'auto' }).map((f) => f.ruleId);
-  assert.ok(ids.includes('fr-monde-aujourdhui') && ids.includes('fr-nhesitez-pas'));
+  const ids = check("Dans le monde d'aujourd'hui, il est important de noter que tout change.", { rules, language: 'auto' }).map((f) => f.ruleId);
+  assert.ok(ids.includes('fr-monde-aujourdhui') && ids.includes('fr-important-de-noter'));
 });
 
 test('settings: website names are cleaned up', () => {

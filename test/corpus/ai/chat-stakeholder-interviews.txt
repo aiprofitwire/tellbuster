@@ -1,0 +1,20 @@
+# Source: written by an AI model for this test (style: chatbot answer). Prompt: "Give me tips for interviewing stakeholders at the start of a project." License: MIT, like this repo.
+
+Absolutely! Stakeholder interviews are a crucial first step in any project. They help you understand the business goals, constraints, and history that will shape your work. Here are some tips to make them as effective as possible:
+
+**Before the interview**
+- **Do your homework.** Review any existing documents so you don't waste time on questions you could answer yourself.
+- **Prepare an interview guide.** Have a list of open-ended questions, but be ready to follow interesting threads.
+- **Talk to a range of people.** Include executives, front-line staff, and anyone who will maintain the product.
+
+**During the interview**
+- **Start broad.** Ask about their role, their goals, and what success looks like to them.
+- **Listen more than you talk.** Resist the urge to propose solutions.
+- **Ask "why" often.** It helps uncover the underlying motivations behind requests.
+- **Take notes, or bring a note-taker.** This lets you stay present in the conversation.
+
+**After the interview**
+- **Synthesize quickly.** Review your notes while they're fresh and look for themes.
+- **Share back.** Summarizing what you heard builds trust and helps catch misunderstandings early.
+
+Remember, stakeholders are not just sources of requirements. They're partners whose buy-in will be essential for the project's success. Investing time in these conversations up front can save you a great deal of rework later on.

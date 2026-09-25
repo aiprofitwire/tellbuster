@@ -7,15 +7,15 @@ Everything to paste into the Chrome Web Store form, in the order the form asks f
 The store takes the title from the `name` in `packages/extension/manifest.json`, so it is:
 
 ```
-Tellbuster
+Tellbuster: AI Writing Checker
 ```
 
 ## Short description
 
-115 characters (the limit is 132). The store takes this from the `description` in `manifest.json`, so it is already filled in. If you change one, change the other.
+126 characters (the limit is 132). The store takes this from the `description` in `manifest.json`, so it is already filled in. If you change one, change the other.
 
 ```
-Underlines phrases that read as AI, explains why, and suggests a plainer way to say it. Nothing leaves your device.
+Find the AI writing tells in your text. Underlines the phrases, explains why, and suggests a plainer fix. Runs on your device.
 ```
 
 ## Long description
@@ -33,7 +33,7 @@ WHAT IT DOES
 - Click the Tellbuster icon, paste your writing, and see each phrase underlined with a short note: why it stands out and what to write instead.
 - Select text on any page, right-click, and pick "Check with Tellbuster".
 - Optional: turn on "Check as I type" in the settings. A small badge shows up in text boxes on LinkedIn, X, Gmail and most sites when it finds something. Click it to see the notes.
-- English and French, with more than 90 rules.
+- English and French, plus starter rules for Spanish, German and Portuguese. More than 100 rules in all.
 - Turn off any rule or group of rules, add a strict mode for filler words, and turn the badge off on sites you pick.
 
 PRIVATE BY DESIGN

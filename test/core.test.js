@@ -18,7 +18,7 @@ test('loadRules accepts the English rules', () => {
 });
 
 test('finds known tells', () => {
-  const ids = check("Let's delve into it. The plan worked — mostly.", { rules }).map((f) => f.ruleId);
+  const ids = check('We delve into it. The plan worked — mostly.', { rules }).map((f) => f.ruleId);
   assert.ok(ids.includes('en-delve'));
   assert.ok(ids.includes('en-em-dash'));
 });
@@ -69,6 +69,34 @@ test('keeps overlapping matches from different rules', () => {
   assert.deepEqual(check('a big cat nap', { rules: [a, b] }).map((f) => f.ruleId), ['en-a', 'en-b']);
 });
 
+test('rules on the same words give one finding, with the others listed on it', () => {
+  const found = check("Let's delve into this.", { rules });
+  assert.equal(found.length, 1);
+  const [f] = found;
+  assert.deepEqual([f.ruleId, f.match, f.start, f.end], ['en-dive-in', "Let's delve into", 0, 16]);
+  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId), ['en-delve']);
+  for (const key of ['ruleId', 'name', 'severity', 'why']) assert.ok(key in f.alsoMatched[0], `alsoMatched missing ${key}`);
+  assert.equal(summarize(found).total, 1);
+});
+
+test('overlaps merge into one finding over the widest span, led by the most serious rule', () => {
+  const wide = { ...goodRule(), id: 'en-wide', pattern: 'big cat' };
+  const inner = { ...goodRule(), id: 'en-inner', pattern: 'cat', severity: 'high' };
+  const twin = { ...goodRule(), id: 'en-twin', pattern: 'big cat', severity: 'medium' };
+  const [f, ...rest] = check('a big cat', { rules: [wide, inner, twin] });
+  assert.deepEqual(rest, []);
+  assert.equal(f.ruleId, 'en-inner');
+  assert.equal(f.severity, 'high');
+  assert.equal(f.match, 'big cat');
+  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId).sort(), ['en-twin', 'en-wide']);
+});
+
+test('separate phrases still give separate findings, with no alsoMatched', () => {
+  const found = check('We delve here. We delve there.', { rules });
+  assert.deepEqual(found.map((f) => f.ruleId), ['en-delve', 'en-delve']);
+  for (const f of found) assert.ok(!('alsoMatched' in f));
+});
+
 test('ignores zero-length matches', () => {
   const r = { ...goodRule(), pattern: 'x*' };
   assert.deepEqual(check('abc x', { rules: [r] }).map((f) => f.match), ['x']);
@@ -117,6 +145,14 @@ test('guessLanguage tells English from French', () => {
   assert.equal(guessLanguage('', ['fr', 'en']), 'fr');
 });
 
+test('guessLanguage tells Spanish, German and Portuguese apart', () => {
+  assert.equal(guessLanguage('¡Por supuesto! Aquí tienes un resumen de la reunión.'), 'es');
+  assert.equal(guessLanguage('Zusammenfassend lässt sich sagen, dass der Plan gut ist und funktioniert.'), 'de');
+  assert.equal(guessLanguage('É importante destacar que você não precisa de mais nada.'), 'pt');
+  assert.equal(guessLanguage('En el mundo actual, la tecnología está en todas partes y es muy útil.'), 'es');
+  assert.equal(guessLanguage('No mundo atual, a tecnologia está em toda parte e é muito útil.'), 'pt');
+});
+
 test('language "auto" uses the rules of the guessed language only', () => {
   const both = [...rules, ...fr];
   const frText = "Dans le monde d'aujourd'hui, il est important de noter que tout change \u2014 vite.";
@@ -125,7 +161,7 @@ test('language "auto" uses the rules of the guessed language only', () => {
   assert.ok(frIds.includes('fr-important-de-noter'));
   assert.ok(frIds.includes('fr-em-dash'));
   assert.ok(frIds.every((id) => id.startsWith('fr-')));
-  const enIds = check("Let's delve into it \u2014 now.", { rules: both, language: 'auto' }).map((f) => f.ruleId);
+  const enIds = check('We delve into it \u2014 now.', { rules: both, language: 'auto' }).map((f) => f.ruleId);
   assert.ok(enIds.includes('en-delve') && enIds.includes('en-em-dash'));
   assert.ok(enIds.every((id) => id.startsWith('en-')));
 });
@@ -134,5 +170,37 @@ test('a manual language wins over the guess, and no language means every rule', 
   const both = [...rules, ...fr];
   const text = 'Le plan a fonctionné \u2014 en partie.';
   assert.deepEqual(check(text, { rules: both, language: 'en' }).map((f) => f.ruleId), ['en-em-dash']);
-  assert.deepEqual(check(text, { rules: both }).map((f) => f.ruleId), ['en-em-dash', 'fr-em-dash']);
+  const [dash, ...rest] = check(text, { rules: both });
+  assert.deepEqual([dash.ruleId, dash.alsoMatched.map((o) => o.ruleId), rest], ['en-em-dash', ['fr-em-dash'], []]);
+});
+
+test('language guess: short texts are placed by their letters and marks', () => {
+  const all = ['en', 'fr', 'es', 'de', 'pt'];
+  assert.equal(guessLanguage('Bien sûr ! Voici trois idées.', all), 'fr');
+  assert.equal(guessLanguage('Très bonne question !', all), 'fr');
+  assert.equal(guessLanguage('¿Qué opinas?', all), 'es');
+  assert.equal(guessLanguage('Schöne Grüße aus Köln.', all), 'de');
+  assert.equal(guessLanguage('Não sei.', all), 'pt');
+  // English with a loanword stays English.
+  assert.equal(guessLanguage('The café was naïve about it.', all), 'en');
+  assert.equal(guessLanguage('Delve!', all), 'en');
+});
+
+test('findings start at the phrase, not at the break or punctuation before it', () => {
+  const rules = loadRules(JSON.parse(readFileSync(new URL('../rules/en.json', import.meta.url), 'utf8')));
+  const text = '# Title\n\nCertainly! Let us go. Certainly! Again.';
+  const found = check(text, { rules }).filter((f) => f.ruleId === 'en-certainly-opener');
+  assert.deepEqual(found.map((f) => f.match), ['Certainly!', 'Certainly!']);
+  for (const f of found) assert.equal(text.slice(f.start, f.end), 'Certainly!');
+});
+
+test('overlapping findings: the most serious rule leads, the widest span stays', () => {
+  const rule = (id, severity, pattern) => ({ id, name: id, category: 'phrase', severity, pattern, flags: 'i', message: `${id} reads as AI.`, why: 'w', fix: 'f', examples: { flag: ['x'], pass: ['y'] } });
+  const rules = loadRules({ language: 'en', rules: [rule('en-wide', 'low', 'a big bold claim'), rule('en-narrow', 'high', 'bold')] });
+  const [f, ...rest] = check('It is a big bold claim.', { rules });
+  assert.equal(rest.length, 0);
+  assert.equal(f.ruleId, 'en-narrow');
+  assert.equal(f.severity, 'high');
+  assert.equal(f.match, 'a big bold claim');
+  assert.deepEqual(f.alsoMatched.map((o) => o.ruleId), ['en-wide']);
 });

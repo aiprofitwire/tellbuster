@@ -1,0 +1,13 @@
+# Source: written by an AI model for this test (style: plain, asked to avoid filler). Prompt: "Explain how to onboard a new employee. Write plainly. Short sentences, no filler, no headings." License: MIT, like this repo.
+
+Before the first day, get their laptop, accounts and badge ready. Send a short note with the start time, where to go, and who will meet them.
+
+On day one, keep the schedule light. Introduce them to the people they will work with most. Show them where things are, online and in the office. Give them one small task they can finish that week.
+
+Assign a buddy who is not their manager. New people have many small questions they won't want to ask their boss.
+
+Write down what they should know or be able to do at 30, 60 and 90 days. Go over it with them in the first week so they know what good looks like.
+
+Meet with them once a week for the first two months. Ask what is confusing and what is missing. Fix what you can, and add it to the onboarding notes for the next person.
+
+At the end of the third month, ask them what the first weeks were like. New hires notice problems that everyone else has stopped seeing.

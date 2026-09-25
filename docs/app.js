@@ -1,6 +1,11 @@
 // Tellbuster web demo. Everything runs in this tab: no network calls except loading
 // the page's own files, no storage, no tracking.
 import { check, loadRules, guessLanguage } from './vendor/tellbuster.js';
+// i18n.js is a plain script loaded before this one. It holds every word the interface shows.
+const I18N = globalThis.tellbusterI18n;
+// The extension's pages follow the browser's language. The landing page stays English unless the address has ?lang=fr.
+const T = I18N.strings(I18N.pick({ followBrowser: document.documentElement.hasAttribute('data-follow-browser') }));
+I18N.translatePage(T);
 
 const $ = (id) => document.getElementById(id);
 const ta = $('text');
@@ -9,31 +14,18 @@ const backdrop = $('backdrop');
 const popover = $('popover');
 const list = $('list');
 
-// Built from escapes so this file never contains the long dash itself.
-const EXAMPLE = [
-  "Certainly! In today's fast-paced world, small business owners must navigate the complex landscape of social media.",
-  " It's not just a trend, it's a movement.",
-  " Let's dive into how you can harness the power of storytelling to unleash your full potential.",
-  ' This approach is a game-changer: it plays a crucial role in helping you foster a sense of community \u2014 and it stands as a testament to what is possible.',
-  ' Moreover, it brings clarity, alignment, and resilience to your brand.',
-  ' Let that sink in.',
-  '\n\nI hope this helps!',
-].join('');
-
 const SEVERITY_ORDER = ['high', 'medium', 'low'];
 const off = new Set(); // rules turned off for this visit only
 let rules = [];
 let strictStyle = false; // the strict pack of common filler words, off unless a host page turns it on
 let savedOff = []; // rules turned off in the extension's settings (the web demo has none)
 let language = 'auto'; // guess the language of the text, unless the extension's settings pick one
-const LANGUAGE_NAMES = { en: 'English', fr: 'French' };
 let findings = [];
 let hideTimer = 0;
 let shownMark = null;
 
 const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const topSeverity = (list) => SEVERITY_ORDER.find((s) => list.some((f) => f.severity === s));
-const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Splits the text at every finding edge so overlapping findings still get one clean underline each.
@@ -56,8 +48,14 @@ function highlightHtml(text) {
   return text.endsWith('\n') ? html + ' ' : html;
 }
 
+// Opens the "Report a wrong flag" form on GitHub. Only the rule id goes in the link, never the user's text.
+function reportUrl(ruleId) {
+  const id = encodeURIComponent(ruleId);
+  return `https://github.com/aiprofitwire/tellbuster/issues/new?template=false-positive.yml&title=Wrong+flag%3A+${id}&rule=${id}`;
+}
+
 function cardHtml(f, i, { jump }) {
-  const sevLabel = f.severity[0].toUpperCase() + f.severity.slice(1);
+  const sevLabel = T.severity[f.severity];
   // Show the exact words only when the rule name does not already say them.
   const norm = (t) => t.toLowerCase().replace(/[^a-z0-9\u00c0-\u017f]+/g, ' ').trim();
   const match = f.match.trim() || f.match;
@@ -67,8 +65,10 @@ function cardHtml(f, i, { jump }) {
   return `${jump ? `<button type="button" class="jump" data-jump="${i}">${head}</button>` : head}
     <p>${escapeHtml(f.message)}</p>
     <p class="card-why">${escapeHtml(f.why)}</p>
-    <p class="card-fix"><strong>Try this:</strong> ${escapeHtml(f.fix)}</p>
-    <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">Turn off this rule</button>`;
+    <p class="card-fix"><strong>${escapeHtml(T.tryThis)}</strong> ${escapeHtml(f.fix)}</p>${
+    f.alsoMatched?.length ? `\n    <p class="card-also">${escapeHtml(T.also)} ${escapeHtml(f.alsoMatched.map((o) => o.name).join(', '))}</p>` : ''}
+    <button type="button" class="link" data-off="${escapeHtml(f.ruleId)}">${escapeHtml(T.turnOffRule)}</button>
+    <a class="link" href="${escapeHtml(reportUrl(f.ruleId))}" target="_blank" rel="noopener">${escapeHtml(T.report)}</a>`;
 }
 
 // With rules in more than one language and no language picked, say which one the text was checked as.
@@ -76,16 +76,15 @@ function languageNote(text) {
   const codes = [...new Set(rules.map((r) => r.id.split('-')[0]))];
   if (language !== 'auto' || codes.length < 2) return '';
   const code = guessLanguage(text, codes);
-  return ` Checked as ${LANGUAGE_NAMES[code] || code}.`;
+  return ` ${T.checkedAs(T.languageNames[code] || code)}`;
 }
 
 function summaryText() {
-  if (!findings.length) return 'No tells found. Nice work.';
+  if (!findings.length) return T.summaryNone;
   const counts = SEVERITY_ORDER
     .map((s) => [s, findings.filter((f) => f.severity === s).length])
-    .filter(([, n]) => n)
-    .map(([s, n]) => `${n} ${s}`);
-  return `${plural(findings.length, 'phrase might', 'phrases might')} read as AI (${counts.join(', ')})`;
+    .filter(([, n]) => n);
+  return T.summary(findings.length, counts);
 }
 
 function grow() {
@@ -114,7 +113,7 @@ function render() {
   const note = $('turned-off');
   note.hidden = off.size === 0;
   if (off.size) {
-    note.innerHTML = `${plural(off.size, 'rule is', 'rules are')} turned off for this visit. <button type="button" class="link" id="turn-on">Turn ${off.size === 1 ? 'it' : 'them'} back on</button>`;
+    note.innerHTML = `${escapeHtml(T.turnedOffVisit(off.size))} <button type="button" class="link" id="turn-on">${escapeHtml(T.turnBackOn(off.size))}</button>`;
   }
   list.innerHTML = findings.map((f, i) => `<li class="card">${cardHtml(f, i, { jump: true })}</li>`).join('');
 }
@@ -220,7 +219,7 @@ document.addEventListener('click', (e) => {
 });
 
 $('example').addEventListener('click', () => {
-  ta.value = EXAMPLE;
+  ta.value = T.example;
   render();
 });
 
@@ -238,8 +237,8 @@ $('copy').addEventListener('click', async () => {
     ta.select();
     document.execCommand('copy');
   }
-  btn.textContent = 'Copied';
-  setTimeout(() => { btn.textContent = 'Copy text'; }, 1500);
+  btn.textContent = T.copied;
+  setTimeout(() => { btn.textContent = T.copy; }, 1500);
 });
 
 // Phones fire resize when the address bar hides, so only react when the width changes.
@@ -255,14 +254,14 @@ addEventListener('resize', () => {
 
 try {
   // The extension popup hands over the rules picked in its settings.
-  // The web demo uses English and French, and guesses which one the text is in.
+  // The web demo uses every language, and guesses which one the text is in.
   const picked = await globalThis.tellbusterRules?.();
   if (picked) {
     ({ rules, strictStyle } = picked);
     savedOff = picked.disabled;
     language = picked.language || 'auto';
   } else {
-    const files = await Promise.all(['en.json', 'fr.json'].map(async (f) => (await fetch(`./vendor/${f}`)).json()));
+    const files = await Promise.all(['en.json', 'fr.json', 'es.json', 'de.json', 'pt.json'].map(async (f) => (await fetch(`./vendor/${f}`)).json()));
     rules = files.flatMap(loadRules);
   }
   // The extension popup can hand over starting text (from the right-click menu).
@@ -272,6 +271,6 @@ try {
 } catch (err) {
   const status = $('status');
   status.hidden = false;
-  status.textContent = 'The checker could not load its rules. Please reload the page.';
+  status.textContent = T.loadError;
   console.error(err);
 }

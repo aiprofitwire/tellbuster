@@ -1,0 +1,39 @@
+# Source: 18F Content Guide, "Gather feedback", https://github.com/18F/content-guide (commit ab38d55, 2021). License: US government work, public domain (CC0 1.0).
+
+Giving and receiving feedback on writing is hard. Both need your time, energy, and care. That may feel daunting. But we all want our work to be strong and it only gets better with feedback.
+
+The beauty of the writing process is that it’s iterative — everyone (yes, everyone) writes crappy first drafts. The important thing is to share the draft, gather feedback, revise, and repeat. Even published content isn’t really “done.” It’s important to keep refining, and incorporating feedback from your readers is part of that process.
+
+Here are some ways to approach giving and receiving writing feedback.
+
+How to give feedback
+
+Start by reading the piece in its entirety before editing or making comments. Though you may be tempted to give line edits on an early draft, resist this temptation! It’s likely that much of the text will change from draft to draft, so your line-editing work may be lost by the final draft. Focus on the central goal or message of the piece—not specific wording or stylistic decisions. If you find yourself needing to comment on structural issues or key messages, it’s probably worth setting up a meeting to talk through things.
+
+As you read, think about the answers to the following questions:
+
+* Is it clear?
+* Is it easy to follow?
+* Are there any gaps or places you get lost?
+* How might someone feel after reading this?
+* Does it leave you with any questions?
+* Are there any places that could use a story or concrete examples?
+* Does it assume knowledge that the reader might not have?
+
+Respond as a reader and tell the writer:
+
+* What doesn’t feel right
+* What doesn’t make sense
+* What isn’t working — and what is!
+* What you want to know more or less about, and why
+* What questions you have
+* What doesn’t reflect your own experience
+
+Ask questions to help the writer revise:
+
+* Who is the audience?
+* Why does this matter?
+* What does this mean?
+* How does this help the reader?
+* What’s the most important thing for people to understand?
+* What do we want readers to do next?

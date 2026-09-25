@@ -1,0 +1,94 @@
+{
+  "language": "pt",
+  "version": 1,
+  "rules": [
+    {
+      "id": "pt-aqui-esta",
+      "name": "“Aqui está um resumo”",
+      "category": "phrase",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})aqui (está|estão) (um|uma|uns|umas|alguns|algumas)( \\p{L}+)? (resumo|lista|versão|rascunho|proposta|exemplos?|ideias|opções|dicas|sugestões)(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta forma de apresentar o texto soa como IA.",
+      "why": "“Aqui está um resumo” é o jeito como um chatbot entrega o que pediram. Num e-mail ou num artigo, mostra que o texto veio de um chat.",
+      "fix": "Apague a frase e comece pelo conteúdo, ou diga para que serve: “Estes são os pontos principais”.",
+      "examples": {
+        "flag": [
+          "Claro! Aqui está um resumo do relatório.",
+          "Aqui estão algumas dicas para o seu post."
+        ],
+        "pass": [
+          "Aqui está a chave do carro.",
+          "O resumo está na página dois.",
+          "Aqui vão algumas dicas para a reunião.",
+          "Bom dia, equipe. Segue uma lista com as pendências do projeto."
+        ]
+      }
+    },
+    {
+      "id": "pt-importante-destacar",
+      "name": "“É importante destacar que”",
+      "category": "filler",
+      "severity": "low",
+      "pattern": "(?<!\\p{L})é importante (destacar|ressaltar|salientar|notar|observar|mencionar) que(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta frase de enchimento soa como IA.",
+      "why": "Textos de IA usam muito esta fórmula para anunciar o que é importante em vez de dizer. Pessoas também a usam em textos formais, então aqui é só uma nota de estilo: a frase fica mais longa e não acrescenta nada.",
+      "fix": "Apague a frase e diga o fato diretamente.",
+      "examples": {
+        "flag": [
+          "É importante destacar que os preços subiram.",
+          "É importante notar que o prazo termina na segunda."
+        ],
+        "pass": [
+          "É importante chegar cedo.",
+          "Os preços subiram 5 %.",
+          "Vale ressaltar que os dados referem-se ao primeiro semestre."
+        ]
+      }
+    },
+    {
+      "id": "pt-mundo-atual",
+      "name": "“No mundo atual”",
+      "category": "phrase",
+      "severity": "high",
+      "pattern": "(?<!\\p{L})(no|num|em um|neste|nesse) mundo (atual|de hoje|moderno|contemporâneo|em constante (mudança|evolução|transformação)|cada vez mais (digital|conectado|globalizado|competitivo))(?!\\p{L})",
+      "flags": "iu",
+      "message": "Esta introdução soa como IA.",
+      "why": "Começar com uma frase vaga sobre “o mundo atual” é uma das formas mais comuns de abrir um texto de IA. Não diz nada sobre o seu tema.",
+      "fix": "Tire a introdução e comece pelo que é concreto.",
+      "examples": {
+        "flag": [
+          "No mundo atual, a tecnologia está em toda parte.",
+          "Num mundo em constante mudança, é preciso se adaptar."
+        ],
+        "pass": [
+          "No mundo do vinho, os preços sobem.",
+          "Ela viajou pelo mundo todo no ano passado."
+        ]
+      }
+    },
+    {
+      "id": "pt-espero-ter-ajudado",
+      "name": "“Espero ter ajudado”",
+      "category": "phrase",
+      "severity": "medium",
+      "pattern": "(?<!\\p{L})espero ter ajudado(?!\\p{L})",
+      "flags": "iu",
+      "message": "Este fecho soa como IA.",
+      "why": "“Espero ter ajudado” é como um chatbot termina uma resposta. Em artigos, posts e relatórios, mostra que o texto veio de um chat. Numa resposta de suporte, pode ser normal.",
+      "fix": "Apague a frase. Se quiser, termine com uma pergunta real ou com o próximo passo.",
+      "examples": {
+        "flag": [
+          "Espero ter ajudado!",
+          "Esses são os pontos principais. Espero ter ajudado."
+        ],
+        "pass": [
+          "Espero que você venha amanhã.",
+          "Ele me ajudou com o projeto.",
+          "Fiz os ajustes no código. Espero que isso te ajude com o projeto!"
+        ]
+      }
+    }
+  ]
+}

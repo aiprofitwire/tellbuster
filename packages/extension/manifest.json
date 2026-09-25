@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tellbuster",
-  "version": "0.1.0",
-  "description": "Underlines phrases that read as AI, explains why, and suggests a plainer way to say it. Nothing leaves your device.",
+  "name": "Tellbuster: AI Writing Checker",
+  "version": "1.0.0",
+  "description": "Find the AI writing tells in your text. Underlines the phrases, explains why, and suggests a plainer fix. Runs on your device.",
   "permissions": ["storage", "contextMenus", "scripting"],
   "optional_host_permissions": ["https://*/*", "http://*/*"],
   "action": {

@@ -10,7 +10,11 @@ const COPIES = [
   ['rules/en.json', 'packages/extension/vendor/en.json'],
   ['rules/en-strict.json', 'packages/extension/vendor/en-strict.json'],
   ['rules/fr.json', 'packages/extension/vendor/fr.json'],
+  ['rules/es.json', 'packages/extension/vendor/es.json'],
+  ['rules/de.json', 'packages/extension/vendor/de.json'],
+  ['rules/pt.json', 'packages/extension/vendor/pt.json'],
   ['docs/app.js', 'packages/extension/app.js'],
+  ['docs/i18n.js', 'packages/extension/i18n.js'],
   ['docs/style.css', 'packages/extension/style.css'],
 ];
 

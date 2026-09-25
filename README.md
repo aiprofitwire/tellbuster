@@ -21,6 +21,7 @@
 
 **Find the phrases that make your writing sound like AI.** Free, open source, and nothing leaves your device.
 
+<!-- tellbuster-disable-next-line -->
 Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, it's Y" or "In today's fast-paced world" that readers now link to machine writing. For each one it explains why it stands out and suggests a plainer way to say it.
 
 > Tellbuster is a linter, not a detector. It never claims your text "is AI". People use these phrases too. It shows you what readers notice, so you can decide.
@@ -34,27 +35,48 @@ Tellbuster points out "AI tells": phrases like "Let's delve into", "It's not X, 
 | Piece | What it does | Get it |
 |---|---|---|
 | Web demo | Paste text, see the tells. Nothing to install. | [Open the demo](https://aiprofitwire.github.io/tellbuster/) |
-| Chrome extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | Coming soon to the Chrome Web Store. [Try it now from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
+| Browser extension | Check text in a popup, from the right-click menu, or as you type on LinkedIn, X, Gmail and most sites | [Add to Chrome](https://chromewebstore.google.com/detail/tellbuster/bimmaggflhidgaepfogeohffkjcfboph), free. Edge Add-ons and Firefox Add-ons coming soon. [Or load it from this repo](packages/extension/README.md#try-it-without-the-chrome-web-store) |
 | `tellbuster` on npm | The rule engine, for developers to use in their own tools | `npm install tellbuster`. [How to use it](packages/core/README.md) |
 
 ![With Check as I type on, the Tellbuster badge counts 3 tells in a post box, and its panel explains each one](docs/media/badge.png)
 
-It checks English and French, with more than 90 rules. You can turn off any rule, and add a strict mode for common filler words.
+The extension works in **Chrome**, **Edge** and **Firefox** (version 140 or newer). **Brave**, **Opera**, **Vivaldi** and **Arc** run Chrome extensions, so they install it from the Chrome Web Store too. Safari is not supported yet.
+
+It checks English and French, with more than 100 rules in all, plus small starter sets for Spanish, German and Portuguese. You can turn off any rule, and add a strict mode for common filler words.
 
 ## Private by design
 
 - No servers, no accounts, no tracking. Read the [privacy policy](https://aiprofitwire.github.io/tellbuster/privacy.html).
 - Your text is checked on your own device and never sent anywhere.
-- The Chrome extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
+- The extension asks for no website access when you install it. Only if you turn on **Check as I type** does it ask to read the sites you visit, so it can check what you type in text boxes. It never sends or saves that text. See [the extension's README](packages/extension/README.md#permissions).
 - The rules are plain, readable data in [`rules/`](rules/). No hidden AI model making guesses.
+
+## How accurate is it?
+
+Tellbuster gives phrase-level style notes. It is not an AI detector, and these numbers do not say whether a text was written by AI. They say how often a text gets at least one note.
+
+We keep a small test set in [`test/corpus/`](test/corpus/): 46 texts people wrote before 2022 (public domain guides from the US government's 18F team) and 50 texts an AI model wrote for this test in five styles. Numbers from September 25, 2026:
+
+| | At least one note | A high severity note |
+|---|---|---|
+| AI texts | 22 of 50 (44%) | 6 of 50 (12%) |
+| Human texts | 10 of 46 (22%) | 0 of 46 (0%) |
+
+What this means:
+
+- Most notes on human text are the long dash (a low severity note). People use it too, which is why it is low.
+- When the AI was asked to write plainly, none of its 10 texts got a note. The notes follow the style, not the author. LinkedIn-style posts got the most (8 of 10).
+- The test set is small and all the AI texts come from one model, so treat these numbers as a rough guide.
+
+To see the numbers yourself, run `npm run accuracy` in the repo folder. A test fails if more than 10% of the human texts get a high severity note, so a rule that flags normal writing is caught before it ships.
 
 ## Publishing
 
-The steps to put Tellbuster on npm and the Chrome Web Store are in [docs/PUBLISHING.md](docs/PUBLISHING.md).
+The steps to put Tellbuster on npm, the Chrome Web Store, Edge Add-ons and Firefox Add-ons are in [docs/PUBLISHING.md](docs/PUBLISHING.md).
 
 ## Help build the list
 
-Spotted a tell we miss? Adding one takes a few minutes and no real coding. See [CONTRIBUTING.md](CONTRIBUTING.md). French and other languages are very welcome.
+Spotted a tell we miss? Adding one takes a few minutes and no real coding. See [CONTRIBUTING.md](CONTRIBUTING.md). Native speakers of Spanish, German, Portuguese or any other language are very welcome.
 
 ## Credits
 

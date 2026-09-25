@@ -170,12 +170,14 @@ How to test: open the GitHub Pages site on a computer and a phone. It should loo
 How to test: open `README.md` on GitHub and check that the GIF plays and reads clearly. Then watch both MP4 files with the sound off: they should play smoothly and every caption should be readable.
 
 ## Step 11: Feedback link
-- [ ] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
+- [x] Add a "Report a wrong flag" link on every card (web demo and extension) that opens the false-positive issue form on GitHub, pre-filled with the rule id. Only the rule id goes in the link, never the user's text.
+  - Done 2026-09-24. Every card in the web demo, the popup and the badge panel now has "Report a wrong flag" next to "Turn off this rule". It opens the wrong flag form with the rule id in the title and the "Which rule?" field, and nothing else. New test/report-link.test.js. Checked the link in Chromium on the web demo at 1280px and 375px. All 182 tests pass.
 
 How to test: click the link on any card. A GitHub issue form opens with the rule name filled in.
 
 ## Step 12: More browsers
-- [ ] Make the extension work in Firefox and Edge.
+- [x] Make the extension work in Firefox and Edge.
+  - Done 2026-09-24. Added scripts/zip-firefox.js (same files, Firefox manifest: background script instead of service worker, gecko id, data_collection_permissions none, Firefox 140+) with the zip code shared in scripts/zip-tools.js, and a test. docs/PUBLISHING.md gained Edge (Part 4), Firefox (Part 5) and Safari as a later option (Part 6). READMEs list Chrome, Edge, Firefox, Brave, Opera, Vivaldi and Arc. Mozilla's addons-linter passes with 0 errors (4 innerHTML warnings in app.js, all escaped, explained in the reviewer note). Not run in a real Firefox: Firefox could not be downloaded in the cloud session, so the maintainer's Firefox test in Part 5b is the first real run. All 183 tests pass.
 
 - Edge runs Chrome extensions as they are: write the Edge Add-ons publishing steps in `docs/PUBLISHING.md`.
 - Firefox: add what Manifest V3 on Firefox needs (for example `browser_specific_settings`), test in Firefox, add a zip script for addons.mozilla.org.
@@ -184,14 +186,32 @@ How to test: click the link on any card. A GitHub issue form opens with the rule
 
 How to test: follow the Firefox steps in `docs/PUBLISHING.md` to load it temporarily in Firefox and check a LinkedIn post.
 
-## Step 13: More languages
-- [ ] Add Spanish (`rules/es.json`), then German and Portuguese if credit allows, about 15 careful rules each, same schema and tests. Update the language guess to cover them.
-- Translate the `why` and `fix` text of the French rules into French, and show the interface in French when the browser language is French (popup, badge panel, settings, web demo). Plain Quebec-friendly French.
+## Step 13: French interface, and room for more languages
+- [x] Make Tellbuster fully French for French speakers, and open the door for native speakers to add Spanish, German and Portuguese.
+  - Part A done 2026-09-25. The message, why and fix of all 24 rules in rules/fr.json are now in French (ids, patterns and examples unchanged). New docs/i18n.js holds every interface word, English and French, one block per language (copied to the extension by sync-extension.js). The popup, the settings page, the badge panel and the right-click menu follow the browser's language. The landing page stays English, but `?lang=fr` switches its checker to French, with a French "Try an example". New test/i18n.test.js. Checked in Chromium with a French browser. All 189 tests pass.
+  - Left for the next session (Part B, not started): rules/es.json, de.json and pt.json with 3 to 5 starter rules each, their common words in guessLanguage, the three languages in settings.js LANGUAGES, the web demo's rule list in app.js and both sync scripts, their language names are already in docs/i18n.js, tests, and the 3 issue drafts in docs/first-issues.md. Tick this box when Part B is done.
+  - Part B done 2026-09-25. New rules/es.json, de.json and pt.json with 4 starter rules each (openers, filler, vague intros, chatbot closers), text written in each language. Their common words are in guessLanguage, and the npm bundle now lists English, then French, then the rest, so text with no clue is still checked as English. The three languages are in the extension settings (on by default), the web demo, both sync scripts and the tests. The landing page count is now 109 (every language, not the strict pack). CONTRIBUTING.md and rules/schema.md mark them as starter sets. Three issue drafts added to docs/first-issues.md (11 to 13). All 212 tests pass.
 
-How to test: paste a Spanish sample into the demo. Spanish tells should show.
+Why this shape: a tell in Spanish is not a translated English tell. Rules written by someone who does not speak the language will flag normal writing. Native speakers write better rules, and every one of them is a new outside contributor. So this step builds the French side fully, and for the other languages only the setup plus a few careful starter rules.
+
+Part A, French (do this first):
+- Rewrite the `message`, `why` and `fix` of every rule in `rules/fr.json` in French (most are in English today). Plain, Quebec-friendly French. Keep ids, patterns and examples as they are.
+- Show the interface in French when the browser language is French: web demo, popup, badge panel and settings page. Keep all interface strings in one small file per language (for example `docs/i18n.js`, copied to the extension by the sync script), so a contributor can add a language by copying one file. English stays the default.
+- The landing page (`docs/index.html`) stays English for now.
+
+Part B, setup for Spanish, German and Portuguese:
+- Create `rules/es.json`, `rules/de.json` and `rules/pt.json` with 3 to 5 rules each. Pick only tells that are well known in that language (for example direct translations of chatbot openers like "¡Por supuesto!" or "Zusammenfassend lässt sich sagen"), with conservative patterns and full examples. Mark each file's intro in `rules/schema.md` or CONTRIBUTING.md as "starter set, native speakers welcome".
+- Add the common words for es, de and pt to the language guess, and add the three languages to the extension settings and the web demo, like French.
+- Update the sync scripts, the npm bundle and the tests so the new files are covered the same way as en and fr.
+- Write 3 issue drafts in `docs/first-issues.md`, one per language, titled like "Add 5 Spanish rules (native speakers wanted)". Each explains what makes a good tell in that language, links CONTRIBUTING.md, and asks for a flag and a pass example per rule. Do not add those rules yourself. Open the 3 issues on GitHub with the labels `good first issue`, `new rule` and `hacktoberfest` if you can, otherwise leave the drafts for the maintainer to post.
+
+If the step starts to sprawl, finish Part A, write down what is left of Part B, and stop.
+
+How to test: set the browser language to French (or open the demo with `?lang=fr`) and check that the demo, popup, badge panel and settings are in French, and that French findings show French text. Then paste "¡Por supuesto! Aquí tienes un resumen." into the demo: at least one Spanish tell should show.
 
 ## Step 14: Command-line tool
-- [ ] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
+- [x] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
+  - Done 2026-09-25. New packages/core/bin/tellbuster.js (built-in parseArgs only, no dependencies) with a `bin` entry, checks files or standard input, with --strict, --lang (auto, en, fr, es, de, pt), --disable, --json, --max-severity (default low) and --fail-on as a same-meaning name for Step 15. Exit 1 on a finding at or above the level, 2 on a bad option or file. The shell expands globs (no glob code). Documented in packages/core/README.md. New test/cli.test.js. All 218 tests pass.
 
 - `npx tellbuster README.md docs/*.md` checks files and prints each finding as `file:line:column  severity  name: message`.
 - `echo "text" | npx tellbuster` checks text from standard input.
@@ -202,17 +222,26 @@ How to test: paste a Spanish sample into the demo. Spanish tells should show.
 How to test: in the repo folder, run `echo "Let's delve into this." | node packages/core/bin/tellbuster.js`. It should list the tell.
 
 ## Step 15: GitHub Action
-- [ ] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action that runs the command-line tool with `npx tellbuster@latest`).
+- [x] Publish a reusable GitHub Action from this repo (`action.yml` at the root, a composite action).
+  - Done 2026-09-25. New root action.yml (composite, runs the Action's own copy of the tool, inputs files, strict, lang, disable, fail-on). The tool gains --github (annotations: error at or above the level, warning below) and skips Markdown code blocks, inline code and the tellbuster-disable comments. New workflow .github/workflows/tellbuster.yml checks README.md, docs/PUBLISHING.md and docs/github-action.md at fail-on high (one disable-next-line comment added in README.md). Example in docs/github-action.md. All 226 tests pass.
 
-- Inputs: `files` (glob, default `**/*.md`), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).
-- Posts findings as GitHub annotations (`::warning file=...,line=...::message`) so they show on the pull request's changed lines.
-- An example workflow in `docs/github-action.md` that anyone can copy. Use it on this repo's own docs as the first user.
-- Check that it runs green on this repo.
+- Run the command-line tool from the Action's own copy of this repo: `node "$GITHUB_ACTION_PATH/packages/core/bin/tellbuster.js"`. Do not use `npx tellbuster@latest`: the version on npm may not have the command yet, and running the copy that ships with the Action keeps the Action and the tool on the same version. Needs only Node, which GitHub runners have.
+- Inputs: `files` (default: every tracked `.md` file, listed with `git ls-files '*.md'`, since the tool does not expand globs itself), `strict`, `lang`, `disable`, `fail-on` (severity, default `high`).
+- Posts findings as GitHub annotations (`::warning file=...,line=...::message`, or `::error` for findings at or above `fail-on`) so they show on the pull request's changed lines.
 
-How to test: open a pull request that adds "Let's delve into this" to a markdown file. The Action should add a warning on that line.
+Our own docs quote AI tells on purpose (rule examples, CONTRIBUTING.md, the issue drafts), so the tool needs a way to skip them. Add to the command-line tool:
+- In Markdown files, skip fenced code blocks and inline code. Examples usually live there.
+- Skip everything between `<!-- tellbuster-disable -->` and `<!-- tellbuster-enable -->`, and the line after `<!-- tellbuster-disable-next-line -->`. Document these in `packages/core/README.md`.
+- Tests for each.
+
+Then use the Action on this repo as its first user: a workflow that checks `README.md` and `docs/*.md` with `fail-on: high`, leaving out files whose job is to quote tells (`CONTRIBUTING.md`, `rules/`, `docs/first-issues.md`, `docs/store-listing.md`). Add disable comments around any example that still trips it. It must run green on `main`.
+- An example workflow in `docs/github-action.md` that anyone can copy.
+
+How to test: open a pull request that adds "Certainly! Let's delve into this." to `README.md` outside a code block. The Action should add an annotation on that line. Then wrap it in disable comments and check that it passes.
 
 ## Step 16: Tellbuster for AI agents (MCP server and Claude Code skill)
-- [ ] Let AI agents check their own writing before showing it.
+- [x] Let AI agents check their own writing before showing it.
+  - Done 2026-09-25. New packages/mcp (npm name tellbuster-mcp, stdio, one tool check_writing with text, strict and lang; depends only on the MCP SDK and tellbuster). The tool code in src/tool.js has no imports so tests run without installing the SDK; the server was also tested end to end with a real MCP client. New skills/tellbuster/SKILL.md, setup for Claude Code, Claude Desktop and Cursor in packages/mcp/README.md, Part 7 in docs/PUBLISHING.md. The skill needs a new tellbuster release on npm (0.1.0 has no command). New test/mcp.test.js.
 
 - `packages/mcp`: a small MCP server (npm name `tellbuster-mcp`, stdio transport) with one tool, `check_writing(text, strict?, lang?)`, returning findings with the why and the fix. Keep dependencies to the official MCP SDK only.
 - `skills/tellbuster/SKILL.md`: a Claude Code skill that tells the agent to run `npx tellbuster` on any draft it writes for publishing and to rewrite flagged phrases.
@@ -220,6 +249,30 @@ How to test: open a pull request that adds "Let's delve into this" to a markdown
 - Tests for the tool's output shape.
 
 How to test: follow the Claude Code setup in `packages/mcp/README.md`, ask Claude to write a LinkedIn post, and ask it to check the post with Tellbuster.
+
+## Step 17: One card per phrase
+- [x] When two or more rules underline the same words, show one card and count them once.
+  - Done 2026-09-25. check() in packages/core now keeps one finding for the widest match and lists the other rules on it as alsoMatched (ruleId, name, severity, why); on the same words the higher severity comes first. Partly overlapping findings stay separate. The web demo and the extension cards show an "Also:" line, and the MCP tool returns alsoMatched too. Tests that looked for en-delve inside "Let's delve into" now use text where it stands alone.
+
+- Today "Let's delve into" is flagged by both `en-delve` and `en-dive-in`, so the count says one tell too many and the user sees two cards for the same words.
+- In `packages/core`: when findings cover the same text (same start and end, or one fully inside the other), keep one finding for the widest match and attach the other rules to it (for example `alsoMatched: [{ ruleId, name, why }]`). Keep the result shape backward compatible: existing fields stay as they are.
+- The count, the badge and the underlines use the merged findings. The card shows the first rule, then a short "Also:" line with the other rule names. "Turn off this rule" and "Report a wrong flag" keep working for the main rule.
+- Tests: overlapping rules give one finding, separate phrases still give separate findings, and the existing rule examples all still pass.
+
+How to test: paste "Let's delve into this." into the web demo. It should say 1 phrase, with one card.
+
+## Step 18: Measure accuracy
+- [x] Add a small test set of human and AI texts and a command that reports how often Tellbuster flags each.
+  - Done 2026-09-25. test/corpus/human has 46 texts from the 18F Methods and 18F Content Guide repos (US government work, public domain, taken from their last commits of 2021), because sba.gov could not be reached from the cloud session. test/corpus/ai has 50 texts written by one AI model for this test in five styles (chatbot answer, LinkedIn post, blog article, email or newsletter, and plain when asked to avoid filler), each with its prompt in the first line. New scripts/accuracy.js (`npm run accuracy`, reads rules/*.json directly), test/accuracy.test.js (fails if more than 10 percent of human texts get a high severity note, and checks each file's source line and length), a "How accurate is it?" section in README.md, and issue draft 15 in docs/first-issues.md. Today: AI 22 of 50 with a note, human 10 of 46, human high 0. All 242 tests pass.
+
+- `test/corpus/human/`: about 50 short texts (100 to 400 words) written by people before 2022. Use only text that is safe to copy into an MIT repo: US federal government pages (public domain, for example small business guides from sba.gov), or text the maintainer writes and donates. Every file starts with a comment line giving its source and license. Never copy blog posts or news articles.
+- `test/corpus/ai/`: about 50 texts on the same kinds of topics, written by AI models on purpose for this test. Use at least 3 different models or styles if you can, and note in each file which one (or "generated for this test").
+- `scripts/accuracy.js`, run with `npm run accuracy`: checks every file with the default rules and prints a plain report: the share of AI texts with at least one finding, the share of human texts with at least one finding, and the rules that fire most on human text. No dependencies.
+- A test (`test/accuracy.test.js`) that fails if more than 10 percent of human texts get a high severity finding, so a rule that is too eager gets caught before it ships. Print the numbers, do not hide them.
+- Add a short "How accurate is it?" section to README.md with the current numbers, the date, and a plain note that these are phrase-level style notes, not AI detection.
+- Add a "good first issue" draft in `docs/first-issues.md`: "Add a paragraph you wrote before 2022 to the test set", with the license note.
+
+How to test: run `npm run accuracy` and read the report. Then add "Let's delve into" to one human file on a test branch and check that the human number goes up.
 
 ---
 
