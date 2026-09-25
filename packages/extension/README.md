@@ -1,10 +1,12 @@
-# Tellbuster for Chrome
+# The Tellbuster extension
+
+Runs in Chrome, Edge and Firefox.
 
 Click the Tellbuster icon, paste your writing, and see which phrases might read as AI. You can also select text on any page, right-click, and pick **Check with Tellbuster**. Both work right after you install, with no access to any website.
 
 ## Check as you type (off until you turn it on)
 
-To turn it on, open the settings (right-click the Tellbuster icon and pick **Options**) and tick **Check as I type**. Chrome then asks to let Tellbuster read the sites you visit. Say yes and it starts on every site, including tabs that are already open. Untick it to turn it off, and Chrome takes the access back.
+To turn it on, open the settings (right-click the Tellbuster icon and pick **Options**) and tick **Check as I type**. Your browser then asks to let Tellbuster read the sites you visit. Say yes and it starts on every site, including tabs that are already open. Untick it to turn it off, and the browser takes the access back.
 
 When you write in a text box on any site (LinkedIn, X, Gmail and most others), a small badge appears in its bottom right corner once you pause typing, for example **3 tells**. Click it, or press **Alt+Shift+T**, to see each phrase with why it stands out and a plainer way to say it. Press **Esc** to close the panel.
 
@@ -23,22 +25,22 @@ Right-click the Tellbuster icon and pick **Options**, or click **Settings** at t
 - **Languages:** which languages to check: English, French, Spanish, German and Portuguese (the last three are small starter sets). Tellbuster guesses the language of each text from its common words. If it guesses wrong, pick **Always** plus your language, for example **Always French**.
 - **Strict mode: also flag common filler words:** off by default. Adds everyday words like "crucial" that show up a lot in AI writing.
 - **Rules:** turn off a whole group (like Punctuation), or open a group and turn off single rules (like Em dash).
-- **Check as I type:** off at install. Turning it on asks Chrome for site access (see Permissions).
+- **Check as I type:** off at install. Turning it on asks your browser for site access (see Permissions).
 - **Sites where the badge is off:** shows once check as you type is on. Type a site, like linkedin.com, to turn the badge off there. Its subdomains are covered too.
 
-Settings apply to the popup and to the badge. They are saved with `chrome.storage.sync`, so Chrome can carry them to your other computers if you use Chrome sync. Only these choices are stored, never your text.
+Settings apply to the popup and to the badge. They are saved with the browser's own extension storage (`storage.sync`), so your browser can carry them to your other computers if you use browser sync. Only these choices are stored, never your text.
 
 ## Permissions
 
 - `storage`: holds the text you picked with the right-click menu for a moment, in memory only, until the popup opens. It also keeps your settings: languages, strict mode, the rules you turned off, and the sites where the badge is off.
 - `contextMenus`: adds **Check with Tellbuster** to the right-click menu.
-- `scripting`: lets Tellbuster add its badge script to pages, but only after you allow site access below. Chrome shows no warning for it.
+- `scripting`: lets Tellbuster add its badge script to pages, but only after you allow site access below. Browsers show no warning for it.
 
 Installing asks for nothing more. Your text never leaves your device either way.
 
 ### Only if you turn on check as you type
 
-- **Read and change all your data on all websites** (Chrome asks when you tick **Check as I type**, not when you install): this is needed to read what you type in text boxes on any site so the badge can count the tells. Your text is checked inside the extension, on your device, and is never sent anywhere or saved. Tellbuster never changes your text. The only thing it adds to a page is its own badge. You can check this in `content.js`, and the tests fail if that file ever gains a network call. If you say no, or take the access back later in Chrome's extension menu, the badge stops and the popup and right-click menu keep working.
+- **Read and change all your data on all websites** (your browser asks when you tick **Check as I type**, not when you install): this is needed to read what you type in text boxes on any site so the badge can count the tells. Your text is checked inside the extension, on your device, and is never sent anywhere or saved. Tellbuster never changes your text. The only thing it adds to a page is its own badge. You can check this in `content.js`, and the tests fail if that file ever gains a network call. If you say no, or take the access back later in your browser's extension menu, the badge stops and the popup and right-click menu keep working.
 
 ## If the badge does not show up on a site
 
@@ -60,9 +62,9 @@ To try the badge without logging in anywhere, see [test/pages](../../test/pages/
 
 ## Other browsers
 
-- **Edge:** works as it is. Open `edge://extensions`, turn on **Developer mode**, click **Load unpacked** and pick this folder.
+- **Edge:** runs the same package as Chrome. To load it by hand, open `edge://extensions`, turn on **Developer mode**, click **Load unpacked** and pick this folder.
 - **Brave, Opera, Vivaldi and Arc:** they run Chrome extensions. Install from the Chrome Web Store, or load this folder the same way as in Chrome.
-- **Firefox (140 or newer):** Firefox needs a slightly different manifest, so load the Firefox zip instead of this folder. In the repo folder, run `node scripts/zip-firefox.js`. In Firefox, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on...** and pick `tellbuster-firefox.zip`. Firefox forgets it when you close the browser. In Firefox, settings are saved with Firefox Sync instead of Chrome sync.
+- **Firefox (140 or newer):** Firefox needs a slightly different manifest, so load the Firefox zip instead of this folder. In the repo folder, run `node scripts/zip-firefox.js`. In Firefox, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on...** and pick `tellbuster-firefox.zip`. Firefox forgets it when you close the browser. In Firefox, settings are carried by Firefox Sync.
 - **Safari:** not supported yet. See [PUBLISHING.md](../../docs/PUBLISHING.md) (Part 6).
 
 ## Copied files
