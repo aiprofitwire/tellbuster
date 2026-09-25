@@ -7,15 +7,15 @@ Everything to paste into the Chrome Web Store form, in the order the form asks f
 The store takes the title from the `name` in `packages/extension/manifest.json`, so it is:
 
 ```
-Tellbuster
+Tellbuster: AI Writing Checker
 ```
 
 ## Short description
 
-115 characters (the limit is 132). The store takes this from the `description` in `manifest.json`, so it is already filled in. If you change one, change the other.
+126 characters (the limit is 132). The store takes this from the `description` in `manifest.json`, so it is already filled in. If you change one, change the other.
 
 ```
-Underlines phrases that read as AI, explains why, and suggests a plainer way to say it. Nothing leaves your device.
+Find the AI writing tells in your text. Underlines the phrases, explains why, and suggests a plainer fix. Runs on your device.
 ```
 
 ## Long description
