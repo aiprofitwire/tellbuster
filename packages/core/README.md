@@ -26,6 +26,32 @@ Options: `lint(text, { disabled: ['en-em-dash'], strictStyle: true, language: 'f
 
 Want only the engine, with your own rules? `import { check, loadRules } from 'tellbuster/engine'`. The rule files are also in the `rules/` folder of the [Tellbuster repo](https://github.com/aiprofitwire/tellbuster).
 
+## Command line
+
+Check files (the shell expands the `*`):
+
+```sh
+npx tellbuster README.md docs/*.md
+```
+
+Or pipe text in:
+
+```sh
+echo "Let's delve into this." | npx tellbuster
+```
+
+Each finding prints as `file:line:column  severity  name: message`, then a count. Text from standard input shows as `<stdin>`.
+
+Options:
+
+- `--strict`: also use the strict style rules.
+- `--lang auto|en|fr|es|de|pt`: which language's rules to use. `auto` (the default) guesses from the text.
+- `--disable id1,id2`: skip these rule ids.
+- `--json`: print the findings as JSON (each one also has `file`, `line` and `column`).
+- `--max-severity low|medium|high`: fail only when a finding is at or above this level. The default is `low`, so any finding fails. `--fail-on` does the same thing.
+
+Exit code: `1` when a finding is at or above the level, `0` otherwise, `2` when an option or file is wrong. That makes it easy to use in scripts and CI.
+
 ## API
 
 - `lint(text, options)`: checks text with the bundled rules (`language: 'auto'` by default). Same options and findings as `check`.
