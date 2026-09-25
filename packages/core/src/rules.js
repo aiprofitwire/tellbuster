@@ -1685,37 +1685,18 @@ export const packs = {
         "name": "Tiret cadratin",
         "category": "punctuation",
         "severity": "low",
-        "pattern": "—",
-        "flags": "",
+        "pattern": "(?<!^[ \\t]*)—",
+        "flags": "mu",
         "message": "Le tiret long fait penser à une IA pour beaucoup de lecteurs.",
-        "why": "En français, le tiret long sert pour les dialogues, mais les IA en glissent au milieu des phrases bien plus souvent que les gens. Beaucoup de lecteurs le remarquent maintenant.",
+        "why": "En français, le tiret long est normal pour les dialogues et les incises. Les IA, elles, en glissent partout au milieu des phrases, et beaucoup de lecteurs le remarquent. C’est seulement une note de style : si vous l’utilisez selon les règles de la typographie, gardez-le.",
         "fix": "Mettez une virgule, un deux-points ou des parenthèses, ou coupez la phrase en deux.",
         "examples": {
           "flag": [
             "Le plan a fonctionné — en partie."
           ],
           "pass": [
-            "Le plan a fonctionné, en partie."
-          ]
-        }
-      },
-      {
-        "id": "fr-guillemets-anglais",
-        "name": "Guillemets anglais “ ”",
-        "category": "punctuation",
-        "severity": "low",
-        "pattern": "[“”]",
-        "flags": "",
-        "message": "Des guillemets anglais dans un texte français font penser à une IA.",
-        "why": "En français, on écrit « » (en France comme au Québec). Des guillemets anglais courbes dans un texte français viennent souvent d’un texte d’IA copié-collé.",
-        "fix": "Mettez des « » avec une espace à l’intérieur, par exemple « comme ceci ».",
-        "examples": {
-          "flag": [
-            "Il a parlé d’une “révolution” dans le secteur."
-          ],
-          "pass": [
-            "Il a parlé d’une « révolution » dans le secteur.",
-            "Il a dit \"oui\"."
+            "Le plan a fonctionné, en partie.",
+            "— Bonjour, dit-elle."
           ]
         }
       },
@@ -1743,21 +1724,22 @@ export const packs = {
         "id": "fr-important-de-noter",
         "name": "« Il est important de noter que »",
         "category": "filler",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})il (est|convient|faut) (important |essentiel |crucial |primordial |intéressant )?(de )?(noter|souligner|rappeler|mentionner|garder à l['’]esprit) que",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})il est (important|essentiel|crucial|primordial|fondamental) de (noter|souligner|rappeler|mentionner|garder à l['’]esprit) que",
         "flags": "iu",
         "message": "Cette mise en place fait penser à une IA.",
-        "why": "Annoncer qu’une chose est importante avant de la dire, c’est du remplissage. Les IA ouvrent souvent leurs phrases comme ça.",
+        "why": "Annoncer qu’une chose est importante avant de la dire, c’est du remplissage, et les IA ouvrent souvent leurs phrases comme ça. On l’écrit aussi dans les textes administratifs, donc c’est une note de style.",
         "fix": "Supprimez l’annonce et dites la chose. Si elle compte, le lecteur le verra.",
         "examples": {
           "flag": [
             "Il est important de noter que les prix ont baissé.",
-            "Il convient de souligner que le projet avance.",
-            "Il faut garder à l’esprit que rien n’est sûr."
+            "Il est essentiel de rappeler que rien n’est sûr."
           ],
           "pass": [
             "C'est important de bien dormir.",
-            "Il faut noter les heures chaque jour."
+            "Il faut noter les heures chaque jour.",
+            "Il convient de souligner que le projet avance.",
+            "Il faut garder à l’esprit que rien n’est sûr."
           ]
         }
       },
@@ -1785,8 +1767,8 @@ export const packs = {
         "id": "fr-en-conclusion",
         "name": "« En conclusion »",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)(en conclusion|pour conclure|en somme|en définitive|en résumé|en fin de compte)\\s*,",
+        "severity": "low",
+        "pattern": "(?<=^|[.!?…:]\\s*|\\n\\s*)(en conclusion|pour conclure|en résumé)\\s*,",
         "flags": "imu",
         "message": "Cette phrase de fin fait penser à une IA.",
         "why": "Les textes d’IA finissent presque toujours par un résumé annoncé qui répète ce qu’on vient de lire. C’est courant dans les dissertations aussi, mais dans une publication ou un courriel, ça sonne automatique.",
@@ -1794,10 +1776,12 @@ export const packs = {
         "examples": {
           "flag": [
             "En conclusion, ce projet est un succès.",
-            "Voilà. En somme, tout va bien."
+            "Voilà. En résumé, tout va bien."
           ],
           "pass": [
-            "La conclusion du rapport est claire."
+            "La conclusion du rapport est claire.",
+            "Voilà. En somme, tout va bien.",
+            "En définitive, nous préférons le plan B."
           ]
         }
       },
@@ -1805,7 +1789,7 @@ export const packs = {
         "id": "fr-pas-seulement",
         "name": "« Il ne s’agit pas seulement de X, mais de Y »",
         "category": "structure",
-        "severity": "high",
+        "severity": "medium",
         "pattern": "(?<!\\p{L})(il ne s['’]agit pas|ce n['’]est pas|ce ne sont pas) (seulement|simplement|uniquement|juste|qu['’]une? (simple )?)[^.!?\\n]{1,80}?[,;:]\\s*(mais|c['’]est|il s['’]agit)(?!\\p{L})",
         "flags": "iu",
         "message": "La tournure « pas seulement X, mais Y » fait penser à une IA.",
@@ -1827,7 +1811,7 @@ export const packs = {
         "name": "« Un véritable levier »",
         "category": "phrase",
         "severity": "medium",
-        "pattern": "(?<!\\p{L})(un|une|de) (véritables?|réels?|vrais?) (leviers?|atouts?|piliers?|catalyseurs?|tremplins?|game[- ]changers?|mines? d['’]or)(?!\\p{L})",
+        "pattern": "(?<!\\p{L})(un|une|de|des) (véritables?|réels?|vrais?) (leviers?|atouts?|piliers?|catalyseurs?|tremplins?|game[- ]changers?|mines? d['’]or)(?!\\p{L})",
         "flags": "iu",
         "message": "Cette formule élogieuse fait penser à une IA.",
         "why": "Les IA aiment dire qu’une chose est « un véritable levier » ou « un véritable atout ». Ça sonne fort, mais ça dit peu.",
@@ -1835,50 +1819,12 @@ export const packs = {
         "examples": {
           "flag": [
             "Cet outil est un véritable levier de croissance.",
-            "La formation est un réel atout."
+            "La formation est un réel atout.",
+            "Ces outils sont des véritables atouts."
           ],
           "pass": [
             "Ce levier permet de soulever la pierre.",
             "Un vrai plaisir de vous voir."
-          ]
-        }
-      },
-      {
-        "id": "fr-incontournable",
-        "name": "« Incontournable »",
-        "category": "word-choice",
-        "severity": "low",
-        "pattern": "(?<!\\p{L})incontournables?(?!\\p{L})",
-        "flags": "iu",
-        "message": "« Incontournable » peut faire penser à une IA.",
-        "why": "Les gens utilisent ce mot aussi, mais les textes d’IA et de marketing s’en servent tellement qu’il a perdu sa force.",
-        "fix": "Dites plutôt pourquoi la chose compte : « utile », « populaire », ou une raison concrète.",
-        "examples": {
-          "flag": [
-            "Un outil incontournable pour votre équipe."
-          ],
-          "pass": [
-            "Un outil utile pour votre équipe."
-          ]
-        }
-      },
-      {
-        "id": "fr-force-est-de-constater",
-        "name": "« Force est de constater »",
-        "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})force (est|était|sera) de (constater|reconnaître|admettre)",
-        "flags": "iu",
-        "message": "Cette entrée en matière solennelle fait penser à une IA.",
-        "why": "Cette tournure vieillotte a l’air sérieuse, mais elle retarde seulement le propos. Les IA l’emploient bien plus que les gens aujourd’hui.",
-        "fix": "Commencez par le fait lui-même, ou écrivez « On voit que ».",
-        "examples": {
-          "flag": [
-            "Force est de constater que les ventes baissent."
-          ],
-          "pass": [
-            "On voit que les ventes baissent.",
-            "La force du vent a baissé."
           ]
         }
       },
@@ -1904,31 +1850,11 @@ export const packs = {
         }
       },
       {
-        "id": "fr-nhesitez-pas",
-        "name": "« N’hésitez pas à »",
-        "category": "phrase",
-        "severity": "low",
-        "pattern": "(?<!\\p{L})n['’]h[ée]sitez pas (à|a)(?!\\p{L})",
-        "flags": "iu",
-        "message": "« N’hésitez pas à » peut faire penser à une IA.",
-        "why": "C’est une formule polie normale dans les courriels, en France comme au Québec. Mais les robots conversationnels finissent presque chaque réponse avec, alors elle ressort dans les publications et les articles.",
-        "fix": "Faites une offre directe, par exemple « Écrivez-moi si vous avez des questions. »",
-        "examples": {
-          "flag": [
-            "N'hésitez pas à me contacter.",
-            "N’hésitez pas à partager vos idées."
-          ],
-          "pass": [
-            "Il n’hésite jamais à aider."
-          ]
-        }
-      },
-      {
         "id": "fr-role-crucial",
         "name": "« Joue un rôle crucial »",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<!\\p{L})jou(e|ent|ait|aient|er|era|eront) un rôle (crucial|clé|essentiel|déterminant|central|primordial|majeur|prépondérant|fondamental)",
+        "severity": "low",
+        "pattern": "(?<!\\p{L})(jou(e|ent|ait|aient|er|era|eront|erait|eraient|ant)|(a|ont|avait|avaient|aura|auront) joué) un rôle (crucial|clé|essentiel|déterminant|central|primordial|majeur|prépondérant|fondamental)",
         "flags": "iu",
         "message": "Cette formule fait penser à une IA.",
         "why": "Les IA écrivent « joue un rôle crucial » pour avoir l’air important sans dire en quoi la chose compte.",
@@ -1936,7 +1862,8 @@ export const packs = {
         "examples": {
           "flag": [
             "La confiance joue un rôle crucial dans la vente.",
-            "Les données jouent un rôle clé."
+            "Les données jouent un rôle clé.",
+            "La météo a joué un rôle déterminant."
           ],
           "pass": [
             "Elle joue un rôle dans la pièce de théâtre."
@@ -1988,16 +1915,17 @@ export const packs = {
         "id": "fr-bien-sur-opener",
         "name": "« Bien sûr ! » en ouverture",
         "category": "phrase",
-        "severity": "medium",
-        "pattern": "(?<=^\\s*)(bien sûr|absolument|certainement|avec plaisir)\\s*!",
-        "flags": "iu",
+        "severity": "high",
+        "pattern": "(?<=^[\\s#*>-]*)(bien sûr|absolument|certainement|avec plaisir)\\s*!",
+        "flags": "imu",
         "message": "Commencer par « Bien sûr ! » fait penser à une IA.",
         "why": "Les robots conversationnels commencent beaucoup de réponses par un « Bien sûr ! » ou un « Absolument ! » plein d’entrain. Tout en haut d’un texte, ça trahit d’où il vient.",
         "fix": "Supprimez-le et commencez par la réponse.",
         "examples": {
           "flag": [
             "Bien sûr ! Voici trois idées.",
-            "Absolument ! Commençons."
+            "Absolument ! Commençons.",
+            "**Bien sûr !** Voici un résumé."
           ],
           "pass": [
             "Il viendra bien sûr demain.",
@@ -2030,7 +1958,7 @@ export const packs = {
         "name": "« Le paysage numérique »",
         "category": "phrase",
         "severity": "medium",
-        "pattern": "(?<!\\p{L})(le|du|au|ce|un) paysage (numérique|digital|actuel|concurrentiel|économique|médiatique|technologique|professionnel|complexe)",
+        "pattern": "(?<!\\p{L})(le|du|au|ce|un|notre|votre) paysage (numérique|digital|actuel|concurrentiel|économique|médiatique|technologique|professionnel|complexe)",
         "flags": "iu",
         "message": "Ce « paysage » abstrait fait penser à une IA.",
         "why": "Les textes d’IA transforment chaque domaine en « paysage ». Ça sonne grand, mais ça reste flou.",
@@ -2090,7 +2018,7 @@ export const packs = {
         "id": "fr-constante-evolution",
         "name": "« En constante évolution »",
         "category": "phrase",
-        "severity": "medium",
+        "severity": "low",
         "pattern": "(?<!\\p{L})en (constante|perpétuelle|permanente|pleine) (évolution|mutation)",
         "flags": "iu",
         "message": "Cette formule fait penser à une IA.",
@@ -2128,7 +2056,7 @@ export const packs = {
         "id": "fr-cle-du-succes",
         "name": "« La clé du succès »",
         "category": "phrase",
-        "severity": "medium",
+        "severity": "low",
         "pattern": "(?<!\\p{L})(la|une|les) clés? (du succès|de la réussite|pour réussir|d['’]une stratégie réussie)",
         "flags": "iu",
         "message": "Cette formule fait penser à une IA.",
@@ -2152,7 +2080,7 @@ export const packs = {
         "pattern": "^[ \\t]*\\p{Extended_Pictographic}\\uFE0F?[ \\t]+[^\\n]+\\n(?:[ \\t]*\\n)?[ \\t]*\\p{Extended_Pictographic}",
         "flags": "mu",
         "message": "Des lignes qui commencent par des émojis font penser à une IA.",
-        "why": "Des séries de lignes qui commencent chacune par un émoji (🚀, ✅, 💡) sont un look courant des publications écrites par IA, en français comme en anglais.",
+        "why": "Des séries de lignes qui commencent chacune par un émoji (🚀, ✅, 💡) sont une présentation courante des publications écrites par IA, en français comme en anglais.",
         "fix": "Utilisez des puces simples ou des phrases courtes. Gardez un émoji seulement là où il apporte quelque chose.",
         "examples": {
           "flag": [

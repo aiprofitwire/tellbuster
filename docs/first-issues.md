@@ -310,3 +310,30 @@ You do not need to write a perfect pattern. Start simple and say so in your pull
 
 New here? Follow "Your first rule in 5 minutes" and "Spanish, German and Portuguese" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
 ```
+
+## 14. Add French rules (native speakers wanted)
+
+**Title:** Add French rules (native speakers wanted)
+
+**Labels:** `good first issue`, `new rule`, `hacktoberfest`
+
+**Body:**
+
+```markdown
+Tellbuster has 20 French rules in `rules/fr.json`. We would love a native speaker (France, Quebec, Belgium, Switzerland or anywhere else) to add a few more.
+
+**What makes a good French tell:** a phrase that chatbots write in French far more often than people do, often a word-for-word translation of an English chatbot habit. If people use the phrase every day in normal emails or articles, it does not belong here. We removed "N'hésitez pas à", "incontournable" and "Force est de constater" for that reason.
+
+**Ideas to start from (check them, you know the language better than we do):** "est un véritable témoignage de" (from "is a testament to"), "naviguer les défis / les complexités" (used without "dans"), "Sans plus tarder," as a transition, "Que vous cherchiez à ... ou simplement à ...". Some of these are also normal French in some contexts, so a careful pattern and a good "pass" example matter.
+
+**For each rule, please include:**
+
+- At least one `flag` sentence: text the rule must catch.
+- At least one `pass` sentence: a close, normal sentence that the rule must not catch.
+- The `name`, `message`, `why` and `fix` written in French. The message says the phrase reads as AI (« fait penser à une IA »), never that the text is AI.
+- An id that starts with `fr-`.
+
+You do not need to write a perfect pattern. Start simple and say so in your pull request: we will help. A pull request with 1 rule is welcome too.
+
+New here? Follow "Your first rule in 5 minutes" in [CONTRIBUTING.md](https://github.com/aiprofitwire/tellbuster/blob/main/CONTRIBUTING.md). You can do it all on the GitHub website.
+```
