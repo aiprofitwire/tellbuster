@@ -55,7 +55,7 @@ The package includes the engine and all the rule files, so `npm install tellbust
    npm pack --dry-run
    ```
 
-   Check the list under **Tarball Contents**. It must show exactly 5 files: `README.md`, `package.json`, `src/index.js`, `src/main.js` and `src/rules.js`. The name must be `tellbuster` and the version `0.1.0`.
+   Check the list under **Tarball Contents**. It must show exactly 6 files: `README.md`, `bin/tellbuster.js`, `package.json`, `src/index.js`, `src/main.js` and `src/rules.js`. The name must be `tellbuster` and the version `0.1.0`.
 6. Publish:
 
    ```
