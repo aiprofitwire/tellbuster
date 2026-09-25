@@ -28,7 +28,11 @@
     "./engine": "./src/index.js"
   },
   "main": "./src/main.js",
+  "bin": {
+    "tellbuster": "./bin/tellbuster.js"
+  },
   "files": [
+    "bin",
     "src"
   ]
 }

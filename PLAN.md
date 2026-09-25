@@ -210,7 +210,8 @@ If the step starts to sprawl, finish Part A, write down what is left of Part B, 
 How to test: set the browser language to French (or open the demo with `?lang=fr`) and check that the demo, popup, badge panel and settings are in French, and that French findings show French text. Then paste "¡Por supuesto! Aquí tienes un resumen." into the demo: at least one Spanish tell should show.
 
 ## Step 14: Command-line tool
-- [ ] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
+- [x] Add a `tellbuster` command to the npm package (a `bin` entry in `packages/core/package.json`, no dependencies).
+  - Done 2026-09-25. New packages/core/bin/tellbuster.js (built-in parseArgs only, no dependencies) with a `bin` entry, checks files or standard input, with --strict, --lang (auto, en, fr, es, de, pt), --disable, --json, --max-severity (default low) and --fail-on as a same-meaning name for Step 15. Exit 1 on a finding at or above the level, 2 on a bad option or file. The shell expands globs (no glob code). Documented in packages/core/README.md. New test/cli.test.js. All 218 tests pass.
 
 - `npx tellbuster README.md docs/*.md` checks files and prints each finding as `file:line:column  severity  name: message`.
 - `echo "text" | npx tellbuster` checks text from standard input.
